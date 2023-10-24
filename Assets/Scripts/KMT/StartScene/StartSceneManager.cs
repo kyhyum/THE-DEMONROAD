@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +9,11 @@ public class StartSceneManager : MonoBehaviour
 {
     public static StartSceneManager s_instance;
     public CharacterSlot characterSlot;
-    [SerializeField] GameObject selectCanvas, createCanvas;
-    [SerializeField] GameObject[] jobImage;
-    public InputField nameCreate;
+    [SerializeField] GameObject selectCanvas, createCanvas, startCanvas;
+    [SerializeField] CharacterCreate[] job;
+    public int selectJobIndex;
+    public TMP_InputField nameCreate;
+    
     private void Awake()
     {
         if (s_instance == null)
@@ -37,15 +41,31 @@ public class StartSceneManager : MonoBehaviour
         createCanvas.SetActive(true);
         selectCanvas.SetActive(false);
     }
-    public void ChangeJobImage(int index)
+    public void OpenSelectCanvas()
     {
-        for(int i = 0; i < jobImage.Length; i++)
+        selectCanvas.SetActive(true);
+        createCanvas.SetActive(false);
+        startCanvas.SetActive(false);
+    }
+    public void ChangeJob()
+    {
+        for(int i = 0; i < job.Length; i++)
         {
-            jobImage[i].SetActive(false);
-            if(i == index)
+            job[i].jobImage.SetActive(false);
+            job[i].jobCharacter.SetActive(false);
+            if (i == selectJobIndex)
             {
-                jobImage[i].SetActive(true);
+                job[i].jobImage.SetActive(true);
+                job[i].jobCharacter.SetActive(true);
             }
         }
+    }
+    public void CreateCharacter()
+    {
+        string nameText = nameCreate.text;
+        string prefabPath = "Assets/Resources/MyCharacter/" + nameText + ".prefab";
+        GameObject prefab = PrefabUtility.SaveAsPrefabAsset(job[selectJobIndex].jobCharacter, prefabPath);
+        characterSlot.character = prefab;
+        OpenSelectCanvas();
     }
 }
