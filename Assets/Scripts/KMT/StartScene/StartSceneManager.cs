@@ -13,6 +13,7 @@ public class StartSceneManager : MonoBehaviour
     [SerializeField] CharacterCreate[] job;
     public int selectJobIndex;
     public TMP_InputField nameCreate;
+    List<string> playerName = new List<string>();
     
     private void Awake()
     {
@@ -23,6 +24,11 @@ public class StartSceneManager : MonoBehaviour
         else
         {
             Destroy(this);
+        }
+        GameObject[] objs = Resources.LoadAll<GameObject>("MyCharacter/");
+        for(int i = 0; i < objs.Length; i++)
+        {
+            playerName.Add(objs[i].name);
         }
     }
     public void StartButon()
@@ -62,10 +68,17 @@ public class StartSceneManager : MonoBehaviour
     }
     public void CreateCharacter()
     {
-        string nameText = nameCreate.text;
-        string prefabPath = "Assets/Resources/MyCharacter/" + nameText + ".prefab";
-        GameObject prefab = PrefabUtility.SaveAsPrefabAsset(job[selectJobIndex].jobCharacter, prefabPath);
-        characterSlot.character = prefab;
-        OpenSelectCanvas();
+        if (!playerName.Contains(nameCreate.text))
+        {
+            string nameText = nameCreate.text;
+            string prefabPath = "Assets/Resources/MyCharacter/" + nameText + ".prefab";
+            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(job[selectJobIndex].jobCharacter, prefabPath);
+            characterSlot.character = prefab;
+            OpenSelectCanvas();
+        }
+        else
+        {
+            Debug.Log("이미 있는 이름입니다");
+        }
     }
 }
