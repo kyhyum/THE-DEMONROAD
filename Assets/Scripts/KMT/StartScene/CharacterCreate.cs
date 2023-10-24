@@ -5,28 +5,12 @@ using UnityEngine;
 
 public class CharacterCreate : MonoBehaviour
 {
-    [SerializeField] GameObject jobCharacter;
+    public GameObject jobCharacter, jobImage;
     [SerializeField] int jobIndex;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void ChooseJob()
     {
-        Instantiate(jobCharacter);
-        StartSceneManager.s_instance.ChangeJobImage(jobIndex);
-    }
-    public void CreateCharacter()
-    {
-        string nameText = StartSceneManager.s_instance.nameCreate.text;
-        string prefabPath = "Assets/Resources/MyCharacter/" + jobCharacter.name + ".prefab";
-        GameObject prefab = PrefabUtility.SaveAsPrefabAsset(jobCharacter, prefabPath);
-        StartSceneManager.s_instance.characterSlot.character = prefab;
+        jobCharacter.SetActive(true);
+        StartSceneManager.s_instance.selectJobIndex = jobIndex;
+        StartSceneManager.s_instance.ChangeJob();
     }
 }

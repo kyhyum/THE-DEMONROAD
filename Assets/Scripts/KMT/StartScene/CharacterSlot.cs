@@ -7,13 +7,14 @@ public class CharacterSlot : MonoBehaviour
     public Vector3 characterPos;
     public GameObject character;
     [SerializeField] GameObject createButton;
-    private void Start()
+    private void OnEnable()
     {
         if (character != null)
         {
-            character.transform.SetParent(this.transform);
-            character.transform.position = characterPos;
-            //character.transform.LookAt(Camera.main.transform.position);
+            GameObject obj = Instantiate(character);
+            obj.transform.SetParent(this.transform);
+            obj.transform.position = characterPos;
+            obj.transform.LookAt(Camera.main.transform.position);
             createButton.SetActive(false);
         }
     }
