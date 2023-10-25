@@ -24,8 +24,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         rect = itemClone.GetComponent<RectTransform>();
 
         Vector2 mousePosition = Input.mousePosition;
-        mousePosition.x -= Screen.currentResolution.width / 2;
-        mousePosition.y -= Screen.currentResolution.height / 2;
+        mousePosition.x -= Screen.width / 2;
+        mousePosition.y -= Screen.height / 2;
 
         rect.anchoredPosition = mousePosition;
 
