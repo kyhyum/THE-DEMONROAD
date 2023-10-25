@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.AI;
 
 public class PlayerInput : MonoBehaviour
 {
     public PlayerInputAction inputAction;
+
+    NavMeshAgent agent;
 
     private void Awake()
     {
@@ -14,6 +17,8 @@ public class PlayerInput : MonoBehaviour
 
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+
         OnInputEnable();
     }
 
@@ -103,6 +108,13 @@ public class PlayerInput : MonoBehaviour
     private void OnInputMove(InputAction.CallbackContext callbackContext)
     {
         Debug.Log("PlayerInput 클래스 OnInputMove 함수 출력");
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+        {
+            agent.destination = hit.point;
+        }
     }
 
     private void OnInputAttack(InputAction.CallbackContext callbackContext)
@@ -159,5 +171,7 @@ public class PlayerInput : MonoBehaviour
     {
         Debug.Log("PlayerInput 클래스 OnInputQuickSlot5 함수 출력");
     }
+
+    
 }
 
