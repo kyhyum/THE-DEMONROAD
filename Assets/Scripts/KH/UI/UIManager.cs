@@ -9,16 +9,18 @@ public class UIManager : MonoBehaviour
     [field: SerializeField] private Transform canvas;
     private PlayerInputAction inputAction;
     private List<GameObject> EnableUI;
-    private GameObject Inventory;
+    private GameObject inventoryObject;
+    private Inventory inventory;
 
     private void Awake()
     {
         inputAction = new PlayerInputAction();
         EnableUI = new List<GameObject>();
 
-        Inventory = Resources.Load<GameObject>("KH/Prefabs/UI/Inventory");
-        Inventory = Instantiate(Inventory, canvas);
-        Inventory.SetActive(false);
+        inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/Inventory");
+        inventoryObject = Instantiate(inventoryObject, canvas);
+        inventory = inventoryObject.GetComponent<Inventory>();
+        inventoryObject.SetActive(false);
     }
 
     private void Start()
@@ -57,20 +59,25 @@ public class UIManager : MonoBehaviour
         inputAction.Player.Inventory.started -= ActiveInventory;
     }
 
+    public Inventory GetInventory()
+    {
+        return inventory;
+    }
+
 
     private void ActiveInventory(InputAction.CallbackContext context)
     {
         Debug.Log("Active Inventory");
 
-        if (!Inventory.activeSelf)
+        if (!inventoryObject.activeSelf)
         {
-            EnableUI.Add(Inventory);
+            EnableUI.Add(inventoryObject);
         }
         else
         {
-            EnableUI.RemoveAt(EnableUI.IndexOf(Inventory));
+            EnableUI.RemoveAt(EnableUI.IndexOf(inventoryObject));
         }
 
-        Inventory.SetActive(!Inventory.activeSelf);
+        inventoryObject.SetActive(!inventoryObject.activeSelf);
     }
 }
