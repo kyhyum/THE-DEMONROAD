@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InventoryDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class InventoryDragAndDrop : MonoBehaviour, IDragHandler
 {
     [field: SerializeField] private RectTransform rect;
     private Canvas canvas;
-
     private float canvasWidth;
     private float canvasHeight;
     private float width;
@@ -21,11 +20,6 @@ public class InventoryDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHa
         canvasWidth = canvas.GetComponent<RectTransform>().rect.width / 2;
         canvasHeight = canvas.GetComponent<RectTransform>().rect.height / 2;
     }
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-
-    }
-
     public void OnDrag(PointerEventData eventData)
     {
         Debug.Log(rect.anchoredPosition);
@@ -51,9 +45,5 @@ public class InventoryDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHa
         {
             rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -(canvasHeight - height));
         }
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
     }
 }
