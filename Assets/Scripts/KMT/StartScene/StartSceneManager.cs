@@ -14,7 +14,7 @@ public class StartSceneManager : MonoBehaviour
     public int selectJobIndex;
     public TMP_InputField nameCreate;
     List<string> playerName = new List<string>();
-    
+    PlayerData createCharacterData;
     private void Awake()
     {
         if (s_instance == null)
@@ -31,6 +31,10 @@ public class StartSceneManager : MonoBehaviour
             playerName.Add(objs[i].name);
         }
     }
+    private void Start()
+    {
+        
+    }
     public void StartButon()
     {
         if (characterSlot.character != null)
@@ -46,6 +50,8 @@ public class StartSceneManager : MonoBehaviour
     {
         createCanvas.SetActive(true);
         selectCanvas.SetActive(false);
+        characterSlot.character = job[0].jobCharacter;
+        createCharacterData = job[0].playerData;
     }
     public void OpenSelectCanvas()
     {
@@ -63,6 +69,8 @@ public class StartSceneManager : MonoBehaviour
             {
                 job[i].jobImage.SetActive(true);
                 job[i].jobCharacter.SetActive(true);
+                characterSlot.character = job[i].jobCharacter;
+                createCharacterData = job[i].playerData;
             }
         }
     }
@@ -71,9 +79,12 @@ public class StartSceneManager : MonoBehaviour
         if (!playerName.Contains(nameCreate.text))
         {
             string nameText = nameCreate.text;
-            string prefabPath = "Assets/Resources/MyCharacter/" + nameText + ".prefab";
-            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(job[selectJobIndex].jobCharacter, prefabPath);
-            characterSlot.character = prefab;
+            createCharacterData.name = nameText;
+            createCharacterData.playerIndex = characterSlot.slotIndex;
+            createCharacterData.level = 1;
+            string prefabPath = "Assets/Resources/MyCharacter/";
+            GameManager.s_instance.SavePlayerDataToJson(prefabPath, createCharacterData.name, createCharacterData);
+            characterSlot.character.AddComponent<PlayerData_KMT>().playerData = GameManager.s_instance.LoadPlayerDataFromJson(prefabPath, createCharacterData.name, createCharacterData);
             OpenSelectCanvas();
         }
         else

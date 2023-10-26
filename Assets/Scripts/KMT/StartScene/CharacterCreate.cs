@@ -7,9 +7,9 @@ public class CharacterCreate : MonoBehaviour
 {
     public GameObject jobCharacter, jobImage;
     [SerializeField] int jobIndex;
+    public PlayerData playerData;
     public void ChooseJob()
     {
-        jobCharacter.SetActive(true);
         StartSceneManager.s_instance.selectJobIndex = jobIndex;
         StartSceneManager.s_instance.ChangeJob();
     }
