@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
-using UnityEngine.Timeline;
 
 public class SoundManager : MonoBehaviour
 {
