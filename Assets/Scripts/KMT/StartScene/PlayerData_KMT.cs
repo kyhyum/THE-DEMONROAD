@@ -17,10 +17,26 @@ public class PlayerData
     public int level;
     public int sceneIndex;
     public Job job;
-    public List<int> stats;
+    public List<Statss> stats;
     public Vector3 currentPlayerPos;
     public bool isDead;
-    public string[] items;
+    public List<ItemDatata> items;
+}
+[System.Serializable]
+public class ItemDatata
+{
+    public string name;
+    public int itemIndex;
+    public float hp;
+    public int level;
+}
+[System.Serializable]
+public class Statss
+{
+    public int str;
+    public int dex;
+    public int Int;
+    public int con;
 }
 public class PlayerData_KMT : MonoBehaviour
 {
