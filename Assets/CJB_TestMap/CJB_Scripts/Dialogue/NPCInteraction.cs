@@ -10,6 +10,7 @@ public class NPCInteraction : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public Transform player;
     
+    
 
     public float interactionDistance = 5f;
 
@@ -35,8 +36,7 @@ public class NPCInteraction : MonoBehaviour
     };
 
     void Start()
-    {
-        
+    {    
         dialogueUI.SetActive(false);
     }
     void Update()
@@ -71,11 +71,9 @@ public class NPCInteraction : MonoBehaviour
         }
     }
 
-    
 
 
-
-    // NPC와 상호작용하는 메서드
+    //NPC와 상호작용하는 메서드
     public void Interact(NPC npc)
     {
         isUIVisible = true;
@@ -84,13 +82,13 @@ public class NPCInteraction : MonoBehaviour
 
         // UI에 NPC 이름과 대화 텍스트를 설정합니다.
         npcNameText.text = npc.ToString();
-        dialogueText.text = ""; 
+        dialogueText.text = "";
 
-        
+
         StartCoroutine(ShowDialogue(npcDialogues[npc]));
     }
 
-    
+
     IEnumerator ShowDialogue(string[] lines)
     {
         foreach (string line in lines)
@@ -105,7 +103,7 @@ public class NPCInteraction : MonoBehaviour
     public void CloseDialogue()
     {
         isUIVisible = false;
-        isDialogueInProgress = false;
+        isDialogueInProgress = false;        
         dialogueUI.SetActive(false);
     }
 }
