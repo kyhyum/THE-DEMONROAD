@@ -121,7 +121,7 @@ public class PlayerInput : MonoBehaviour
         {
             HitPoint = hit.point;
 
-            Agent.destination = hit.point;
+            Agent.SetDestination(hit.point);
 
             //animator.SetBool("Walk", true);
         }
