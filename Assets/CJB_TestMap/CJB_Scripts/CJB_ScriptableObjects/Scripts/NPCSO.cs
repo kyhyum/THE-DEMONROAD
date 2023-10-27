@@ -4,6 +4,6 @@ using UnityEngine;
 public class NPCSO : ScriptableObject
 {
     [field: SerializeField] public string npcName { get; private set; }
-    [field: SerializeField] public string[] npcTalk { get; private set; } 
+    [field: SerializeField] public string[] npcDialogue { get; private set; } 
     
 }

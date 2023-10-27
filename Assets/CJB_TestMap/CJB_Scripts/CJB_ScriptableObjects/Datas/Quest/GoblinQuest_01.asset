@@ -17,5 +17,6 @@ MonoBehaviour:
   <questType>k__BackingField: 0
   <questDescription>k__BackingField: "\uACE0\uBE14\uB9B0 \uC804\uC0AC 15 \uB9C8\uB9AC\uB97C
     \uCC98\uCE58\uD574\uC8FC\uC138\uC694."
-  <questCondition>k__BackingField: 
+  <questCondition>k__BackingField: "\uACE0\uBE14\uB9B0 \uC804\uC0AC 15\uB9C8\uB9AC
+    \uCC98\uCE58"
   <questReward>k__BackingField: "\uAE08\uD654 3\uAC1C"
