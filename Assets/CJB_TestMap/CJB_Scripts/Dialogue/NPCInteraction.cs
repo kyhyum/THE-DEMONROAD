@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System;
 
 public class NPCInteraction : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class NPCInteraction : MonoBehaviour
     public TextMeshProUGUI npcNameText; 
     public TextMeshProUGUI dialogueText;
     public Transform player;
-    private string currentNPC;
+    
 
     public float interactionDistance = 5f;
 
@@ -69,6 +70,10 @@ public class NPCInteraction : MonoBehaviour
             CloseDialogue();
         }
     }
+
+    
+
+
 
     // NPC와 상호작용하는 메서드
     public void Interact(NPC npc)
