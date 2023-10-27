@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d959fa556359c54bb56448b5ab7c28a, type: 3}
+  m_Name: HeadChiefNPC
+  m_EditorClassIdentifier: 
+  <npcName>k__BackingField: "\uCD0C\uC7A5"
+  <npcDialogue>k__BackingField:
+  - "\uBC18\uAC11\uB124 \uB09C \uCD0C\uC7A5\uC774\uB124"
+  - "\uB9C8\uC744\uC740 \uCC98\uC74C\uC778\uAC00?"
