@@ -27,6 +27,10 @@ public class playermovetemp : MonoBehaviour
 
         // 마우스의 움직임에 따라 플레이어를 회전시킵니다.
         Vector3 currentMousePosition = Input.mousePosition;
+
+        currentMousePosition.x = Mathf.Clamp(currentMousePosition.x, 0, Screen.width);
+        currentMousePosition.y = Mathf.Clamp(currentMousePosition.y, 0, Screen.height);
+
         Vector3 mouseDelta = currentMousePosition - lastMousePosition;
 
         transform.Rotate(Vector3.up, mouseDelta.x * turnSpeed * Time.deltaTime);
