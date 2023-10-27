@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <npcName>k__BackingField: "\uCD0C\uC7A5"
   <npcDialogue>k__BackingField:
-  - Hi, I am the Chief of this town!
+  - "\uBC18\uAC11\uB124 \uB09C \uCD0C\uC7A5\uC774\uB124"
+  - "\uB9C8\uC744\uC740 \uCC98\uC74C\uC778\uAC00?"

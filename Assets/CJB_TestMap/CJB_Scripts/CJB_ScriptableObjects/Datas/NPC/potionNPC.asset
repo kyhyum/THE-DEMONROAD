@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: potionNPC
   m_EditorClassIdentifier: 
   <npcName>k__BackingField: "\uBB3C\uC57D \uC0C1\uC778"
-  <npcTalk>k__BackingField: []
+  <npcDialogue>k__BackingField:
+  - "\uC798\uC624\uC168\uC2B5\uB2C8\uB2E4."
+  - "\uC800\uD76C \uAC00\uAC8C\uC758 \uBB3C\uC57D\uC740 \uCD5C\uACE0\uB77C\uAD6C\uC694!"
