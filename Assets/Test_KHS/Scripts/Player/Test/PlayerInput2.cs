@@ -9,12 +9,8 @@ public class PlayerInput2 : MonoBehaviour
     private NavMeshAgent agent;
     private Camera camera;
 
-    private bool isGrounded = false;
-
     public LayerMask groundLayerMask;
     public float groundCheckDistance = 0.3f;
-
-    private Vector3 calcVelocity;
 
     void Start()
     {
