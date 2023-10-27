@@ -8,23 +8,29 @@ public class PlayerInput : MonoBehaviour
 {
     public PlayerInputAction inputAction;
 
-    NavMeshAgent agent;
+    public NavMeshAgent Agent {  get; private set; }
+
+    public Vector3 HitPoint { get; private set; }
+
+    //Animator animator;
 
     private void Awake()
     {
         inputAction = new PlayerInputAction();
+
+        //animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        Agent = GetComponent<NavMeshAgent>();
 
         OnInputEnable();
     }
 
     public void OnInputEnable()
     {
-        Debug.Log("PlayerInput 클래스 OnInputEnable 함수 출력");
+        //Debug.Log("PlayerInput 클래스 OnInputEnable 함수 출력");
 
         inputAction.Player.Move.Enable();
         inputAction.Player.Move.started += OnInputMove;
@@ -66,7 +72,7 @@ public class PlayerInput : MonoBehaviour
 
     public void OnInputDisable()
     {
-        Debug.Log("PlayerInput 클래스 OnInputDisable 함수 출력");
+        //Debug.Log("PlayerInput 클래스 OnInputDisable 함수 출력");
 
         inputAction.Player.Move.Disable();
         inputAction.Player.Move.started -= OnInputMove;
@@ -107,14 +113,20 @@ public class PlayerInput : MonoBehaviour
 
     private void OnInputMove(InputAction.CallbackContext callbackContext)
     {
-        Debug.Log("PlayerInput 클래스 OnInputMove 함수 출력");
+        //Debug.Log("PlayerInput 클래스 OnInputMove 함수 출력");
 
         RaycastHit hit;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
-            agent.destination = hit.point;
+            HitPoint = hit.point;
+
+            Agent.destination = hit.point;
+
+            //animator.SetBool("Walk", true);
         }
+
+        //StartCoroutine("IdleAnimation", 1f);
     }
 
     private void OnInputAttack(InputAction.CallbackContext callbackContext)
@@ -172,6 +184,10 @@ public class PlayerInput : MonoBehaviour
         Debug.Log("PlayerInput 클래스 OnInputQuickSlot5 함수 출력");
     }
 
-    
+    //IEnumerator IdleAnimation()
+    //{
+    //    animator.SetBool("Idle", true);
+    //    yield return null;
+    //}
 }
 
