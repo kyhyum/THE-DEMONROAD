@@ -31,15 +31,22 @@ public class Moving : BaseState
 
         // 목표지점에 도달하면 아이들 상태
 
-        // playerInput.HitPoint.x, playerInput.HitPoint.z 과 playerInput.Agent.gameObject.transform.position.x, playerInput.Agent.gameObject.transform.position.z 값 비교한다.
-        Vector2 playerVector = new Vector2(playerInput.Agent.gameObject.transform.position.x, playerInput.Agent.gameObject.transform.position.z);
-        Vector2 hitVector = new Vector2(playerInput.HitPoint.x, playerInput.HitPoint.z);
+        Debug.Log($"agent.remainingDistance: {playerInput.Agent.remainingDistance}");
 
-        if (playerVector == hitVector)
+        if (playerInput.Agent.remainingDistance < 5)
         {
             Debug.Log("에이전트가 목적지에 도착했다.");
-            stateMachine.ChangeState(((MovementSM)stateMachine).idleState);
         }
+
+        //// playerInput.HitPoint.x, playerInput.HitPoint.z 과 playerInput.Agent.gameObject.transform.position.x, playerInput.Agent.gameObject.transform.position.z 값 비교한다.
+        //Vector2 playerVector = new Vector2(playerInput.Agent.gameObject.transform.position.x, playerInput.Agent.gameObject.transform.position.z);
+        //Vector2 hitVector = new Vector2(playerInput.HitPoint.x, playerInput.HitPoint.z);
+
+        //if (playerVector == hitVector)
+        //{
+        //    Debug.Log("에이전트가 목적지에 도착했다.");
+        //    stateMachine.ChangeState(((MovementSM)stateMachine).idleState);
+        //}
 
         //
 
