@@ -19,12 +19,23 @@ public class Idle : BaseState
     {
         base.UpdateLogic();
 
+        Debug.Log("플레이어 FSM이 아이들 상태이다.");
+
         RaycastHit hit;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
-            Debug.Log("플레이어 FSM이 아이들 상태이다.");
+            Debug.Log("에이전트가 이동하고 있다.");
             stateMachine.ChangeState(((MovementSM)stateMachine).movingState);
         }
+
+        //
+
+        //// agent가 이동하고 있는지 여부를 계산
+        ////if (playerInput.Agent.velocity.sqrMagnitude >= 0.2f)
+        //if (playerInput.Agent.velocity.magnitude >= 0.2f)
+        //{
+        //    Debug.Log("에이전트가 이동하고 있다.");
+        //}
     }
 }

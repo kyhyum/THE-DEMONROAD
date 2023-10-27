@@ -27,9 +27,9 @@ public class Moving : BaseState
     {
         base.UpdateLogic();
 
-        // 목표지점에 도달하면 아이들 상태
+        Debug.Log("플레이어 FSM이 무빙 상태이다.");
 
-        
+        // 목표지점에 도달하면 아이들 상태
 
         // playerInput.HitPoint.x, playerInput.HitPoint.z 과 playerInput.Agent.gameObject.transform.position.x, playerInput.Agent.gameObject.transform.position.z 값 비교한다.
         Vector2 playerVector = new Vector2(playerInput.Agent.gameObject.transform.position.x, playerInput.Agent.gameObject.transform.position.z);
@@ -37,7 +37,7 @@ public class Moving : BaseState
 
         if (playerVector == hitVector)
         {
-            Debug.Log("플레이어 FSM이 무빙 상태이다.");
+            Debug.Log("에이전트가 목적지에 도착했다.");
             stateMachine.ChangeState(((MovementSM)stateMachine).idleState);
         }
 
@@ -49,6 +49,14 @@ public class Moving : BaseState
         //{
         //    //Debug.Log("플레이어 FSM이 무빙 상태이다.");
         //    stateMachine.ChangeState(((MovementSM)stateMachine).idleState);
+        //}
+
+        //
+
+        //// agent가 목적지에 도착했는지 여부를 계산
+        //if (playerInput.Agent.remainingDistance <= 0.5f)
+        //{
+        //    Debug.Log("에이전트가 목적지에 도착했다.");
         //}
     }
 
