@@ -12,10 +12,30 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     private GameObject itemClone;
     private Canvas canvas;
     private RectTransform rect;
+    private Image icon;
+    private TMP_Text quantity;
 
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
+        icon = GetComponentInChildren<Image>();
+        quantity = GetComponentInChildren<TMP_Text>();
+    }
+
+    public void SetItem(Item item)
+    {
+        if (item is IStackable)
+        {
+            IStackable stackableItem = (IStackable)item;
+            quantity.GetComponent<GameObject>().SetActive(true);
+            quantity.text = stackableItem.Get().ToString();
+        }
+        else
+        {
+            quantity.GetComponent<GameObject>().SetActive(false);
+        }
+
+
     }
 
     public void OnBeginDrag(PointerEventData eventData)
