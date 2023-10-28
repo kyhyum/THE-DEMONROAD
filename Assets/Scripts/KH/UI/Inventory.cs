@@ -23,22 +23,17 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
     public void Set(InventorySlot[] slots)
     {
         for (int i = 0; i < 30; i++)
         {
             inventorySlots[i] = slots[i];
         }
+    }
+
+    public void AddItem(Item item)
+    {
+
     }
 
     public void SwapItems(int slotA, int slotB)
