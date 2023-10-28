@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     private List<GameObject> EnableUI;
     private GameObject inventoryObject;
     private Inventory inventory;
+    [field: SerializeField] private ItemSO testItem;
 
     private void Awake()
     {
@@ -79,5 +80,10 @@ public class UIManager : MonoBehaviour
         }
 
         inventoryObject.SetActive(!inventoryObject.activeSelf);
+    }
+
+    public void TestMethodMakeItem()
+    {
+        GameObject item = testItem.CreateItem();
     }
 }
