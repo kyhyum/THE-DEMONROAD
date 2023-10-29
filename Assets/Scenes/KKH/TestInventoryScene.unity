@@ -679,6 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 2047555731}
+  testItem: {fileID: 11400000, guid: 560987a488e14c74797dcb5721bb43cb, type: 2}
 --- !u!4 &1228976842
 Transform:
   m_ObjectHideFlags: 0
