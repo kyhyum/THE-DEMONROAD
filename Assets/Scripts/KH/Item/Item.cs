@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
     public Sprite icon;
     public Rank rank;
     public ItemType type;
+    public GameObject prefab;
 
     public void Set(ItemSO itemSO)
     {
@@ -17,6 +18,7 @@ public class Item : MonoBehaviour
         icon = itemSO.icon;
         rank = itemSO.rank;
         type = itemSO.type;
+        prefab = itemSO.prefab;
     }
 
     public void RemoveObject()

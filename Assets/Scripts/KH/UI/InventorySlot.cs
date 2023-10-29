@@ -8,4 +8,5 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
     public int slotID;
+    public bool isContain;
 }

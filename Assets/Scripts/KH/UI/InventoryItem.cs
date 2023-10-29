@@ -13,6 +13,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     private Canvas canvas;
     private RectTransform rect;
     private Image icon;
+    private Item item;
     private TMP_Text quantity;
 
     private void Awake()
@@ -24,18 +25,39 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void SetItem(Item item)
     {
+        this.item = item;
+        icon.sprite = item.icon;
+
         if (item is IStackable)
         {
             IStackable stackableItem = (IStackable)item;
-            quantity.GetComponent<GameObject>().SetActive(true);
             quantity.text = stackableItem.Get().ToString();
         }
         else
         {
-            quantity.GetComponent<GameObject>().SetActive(false);
+            quantity.text = string.Empty;
         }
+    }
 
+    public Item GetItem()
+    {
+        return item;
+    }
 
+    public void AddItem(int count)
+    {
+        if (item is IStackable)
+        {
+            IStackable stackableItem = (IStackable)item;
+            stackableItem.Add(count);
+            quantity.text = stackableItem.Get().ToString();
+        }
+    }
+
+    public void Clear()
+    {
+        icon.sprite = null;
+        quantity.text = string.Empty;
     }
 
     public void OnBeginDrag(PointerEventData eventData)

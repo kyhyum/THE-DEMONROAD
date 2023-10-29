@@ -7,6 +7,8 @@ public class Inventory : MonoBehaviour
 {
     [field: SerializeField] private Transform slots;
     public InventorySlot[] inventorySlots;
+    private Dictionary<IStackable, int> stackItems;
+    public int gold { get; private set; }
 
     private void Awake()
     {
@@ -33,7 +35,51 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item)
     {
+        InventoryItem inventoryItem;
 
+        if (item.type == ItemType.Gold)
+        {
+            IStackable stackableItem = (IStackable)item;
+            gold += stackableItem.Get();
+        }
+        else if (item is IStackable)
+        {
+            IStackable stackableItem = (IStackable)item;
+            if (stackItems.TryGetValue(stackableItem, out int index))
+            {
+                inventoryItem = inventorySlots[index].GetComponentInChildren<InventoryItem>();
+                inventoryItem.AddItem(stackableItem.Get());
+            }
+            else
+            {
+                index = FindIndex();
+
+                inventoryItem = inventorySlots[index].GetComponentInChildren<InventoryItem>();
+                stackItems.Add(stackableItem, index);
+                inventorySlots[index].isContain = true;
+                inventoryItem.SetItem(item);
+            }
+        }
+        else
+        {
+            int index = FindIndex();
+            inventoryItem = inventorySlots[index].GetComponentInChildren<InventoryItem>();
+            inventorySlots[index].isContain = true;
+            inventoryItem.SetItem(item);
+        }
+    }
+
+    public int FindIndex()
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            if (!inventorySlots[i].isContain)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     public void SwapItems(int slotA, int slotB)
@@ -50,6 +96,9 @@ public class Inventory : MonoBehaviour
             itemB.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
             itemA.slotID = slotB;
             itemB.slotID = slotA;
+            bool tmp = inventorySlots[slotA].isContain;
+            inventorySlots[slotA].isContain = inventorySlots[slotB].isContain;
+            inventorySlots[slotB].isContain = tmp;
         }
     }
 }
