@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b20325add8ddd499cec4a095215636, type: 3}
   m_Name: MagicSword
   m_EditorClassIdentifier: 
-  <itemName>k__BackingField: 
-  <description>k__BackingField: 
+  <itemName>k__BackingField: "\uB9C8\uBC95\uAC80(\uC5BC\uC74C)"
+  <description>k__BackingField: "\uC5BC\uC74C \uC18D\uC131\uC744 \uAC00\uC9C4 \uB9C8\uBC95\uAC80\uC774\uB2E4"
   <type>k__BackingField: 0
   <rank>k__BackingField: 0
-  <icon>k__BackingField: {fileID: 0}
-  <prefab>k__BackingField: {fileID: 0}
+  <texture>k__BackingField: {fileID: 2800000, guid: 34d59de73bb24174ab237a30bee33e1f,
+    type: 3}
+  <prefab>k__BackingField: {fileID: 1777591198242490, guid: 3329101817c67e24fb70ba97b6168054,
+    type: 3}

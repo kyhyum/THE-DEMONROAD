@@ -12,12 +12,20 @@ public class ItemSO : ScriptableObject
     [field: SerializeField] public string description { get; private set; }
     [field: SerializeField] public ItemType type { get; private set; }
     [field: SerializeField] public Rank rank { get; private set; }
-    [field: SerializeField] public Sprite icon { get; private set; }
+    [field: SerializeField] public Texture2D texture { get; private set; }
     [field: SerializeField] public GameObject prefab { get; private set; }
+    public Sprite icon { get; private set; }
 
+    public void ConvertToSprite()
+    {
+        // Texture2D를 Sprite로 변환
+        icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
+    }
 
     public GameObject CreateItem()
     {
+        ConvertToSprite();
+
         GameObject gameObject = Instantiate(prefab);
         Item item;
 
