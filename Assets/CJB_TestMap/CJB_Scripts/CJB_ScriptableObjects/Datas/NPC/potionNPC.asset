@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d959fa556359c54bb56448b5ab7c28a, type: 3}
   m_Name: potionNPC
   m_EditorClassIdentifier: 
-  <npcName>k__BackingField: "\uBB3C\uC57D \uC0C1\uC778"
+  <npcName>k__BackingField: "\uBB3C\uC57D\uC0C1\uC778"
   <npcDialogue>k__BackingField:
   - "\uC798\uC624\uC168\uC2B5\uB2C8\uB2E4."
   - "\uC800\uD76C \uAC00\uAC8C\uC758 \uBB3C\uC57D\uC740 \uCD5C\uACE0\uB77C\uAD6C\uC694!"
+  - "\uCC9C\uCC9C\uD788 \uB458\uB7EC\uBCF4\uC138\uC694!"

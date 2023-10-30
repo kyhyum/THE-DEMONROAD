@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b9fb77a6cd2894ba4f49dfda6c4c84, type: 3}
   m_Name: GoblinQuest_01
   m_EditorClassIdentifier: 
-  <questIndex>k__BackingField: 0
-  <questName>k__BackingField: "\uACE0\uBE14\uB9B0 \uC804\uC0AC \uD1F4\uCE58"
+  <questIndex>k__BackingField: 2
+  <questName>k__BackingField: "\uACE0\uBE14\uB9B0 \uCC98\uCE58"
   <questType>k__BackingField: 0
   <questDescription>k__BackingField: "\uACE0\uBE14\uB9B0 \uC804\uC0AC 15 \uB9C8\uB9AC\uB97C
     \uCC98\uCE58\uD574\uC8FC\uC138\uC694."
