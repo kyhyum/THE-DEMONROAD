@@ -16,12 +16,13 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < 30; i++)
         {
-            GameObject slot = Resources.Load<GameObject>("KH/Prefabs/UI/InventorySlot");
+            GameObject slot = Resources.Load<GameObject>("KH/Prefabs/UI/UI_InventorySlot");
             slot = Instantiate(slot, slots);
             inventorySlots[i] = slot.GetComponent<InventorySlot>();
             inventorySlots[i].slotID = i;
             slot.GetComponentInChildren<InventoryItem>().slotID = i;
-            slot.GetComponentInChildren<TMP_Text>().text = i.ToString();
+            inventorySlots[i].GetComponentInChildren<InventoryItem>().Clear();
+
         }
     }
 
@@ -65,6 +66,7 @@ public class Inventory : MonoBehaviour
             int index = FindIndex();
             inventoryItem = inventorySlots[index].GetComponentInChildren<InventoryItem>();
             inventorySlots[index].isContain = true;
+            Debug.Log(inventoryItem);
             inventoryItem.SetItem(item);
         }
     }
@@ -88,17 +90,13 @@ public class Inventory : MonoBehaviour
         InventoryItem itemA = inventorySlots[slotA].GetComponentInChildren<InventoryItem>();
         InventoryItem itemB = inventorySlots[slotB].GetComponentInChildren<InventoryItem>();
 
-        if (itemA != null && itemB != null)
-        {
-            itemA.transform.SetParent(inventorySlots[slotB].transform);
-            itemB.transform.SetParent(inventorySlots[slotA].transform);
-            itemA.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-            itemB.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-            itemA.slotID = slotB;
-            itemB.slotID = slotA;
-            bool tmp = inventorySlots[slotA].isContain;
-            inventorySlots[slotA].isContain = inventorySlots[slotB].isContain;
-            inventorySlots[slotB].isContain = tmp;
-        }
+        Item item = itemA.GetItem();
+        itemA.SetItem(itemB.GetItem());
+        itemB.SetItem(item);
+
+        bool tmp = inventorySlots[slotA].isContain;
+        inventorySlots[slotA].isContain = inventorySlots[slotB].isContain;
+        inventorySlots[slotB].isContain = tmp;
+
     }
 }
