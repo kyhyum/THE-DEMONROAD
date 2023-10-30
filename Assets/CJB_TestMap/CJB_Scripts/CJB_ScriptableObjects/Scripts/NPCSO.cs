@@ -5,5 +5,5 @@ public class NPCSO : ScriptableObject
 {
     [field: SerializeField] public string npcName { get; private set; }
     [field: SerializeField] public string[] npcDialogue { get; private set; }
-    [field: SerializeField] public NPCInteraction.NPC npcType { get; private set; }
+    
 }

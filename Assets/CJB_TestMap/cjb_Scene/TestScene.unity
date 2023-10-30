@@ -10782,15 +10782,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 704793050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bd9da27849ba3f41a72ce932e24483f, type: 3}
+  m_Script: {fileID: 11500000, guid: 213bb067d4caba246b4124b0499f7802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueUI: {fileID: 1735550675}
-  npcNameText: {fileID: 1580947111}
-  dialogueText: {fileID: 1904894478}
-  player: {fileID: 1226324490}
-  npcType: {fileID: 11400000, guid: f0f69b6bd54ec3744b1bdfea587625f1, type: 2}
-  interactionDistance: 5
+  potionnpcDialogue: {fileID: 11400000, guid: f0f69b6bd54ec3744b1bdfea587625f1, type: 2}
+  dialogueUIManager: {fileID: 1735550680}
 --- !u!1001 &722010269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14818,15 +14814,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 958763090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bd9da27849ba3f41a72ce932e24483f, type: 3}
+  m_Script: {fileID: 11500000, guid: 05fb6342cb7e5d647ae21d18016933c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueUI: {fileID: 1735550675}
-  npcNameText: {fileID: 1580947111}
-  dialogueText: {fileID: 1904894478}
-  player: {fileID: 1226324490}
-  npcType: {fileID: 11400000, guid: cd1dfb6ddf4d3454e9f6e1773962761d, type: 2}
-  interactionDistance: 5
+  weaponnpcDialogue: {fileID: 11400000, guid: cd1dfb6ddf4d3454e9f6e1773962761d, type: 2}
+  dialogueUIManager: {fileID: 1735550680}
 --- !u!4 &967716103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2180350799644042534, guid: dad4a38c42e646a45b2da5a4b983b3a1,
@@ -17920,6 +17912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1226324490}
   - component: {fileID: 1226324491}
+  - component: {fileID: 1226324492}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -17957,6 +17950,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 15
   turnSpeed: 20
+--- !u!114 &1226324492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226324489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0f17788bf2dc445be189ce443e953a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactKey: 102
 --- !u!1 &1236967105
 GameObject:
   m_ObjectHideFlags: 0
@@ -19765,15 +19771,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1356136254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bd9da27849ba3f41a72ce932e24483f, type: 3}
+  m_Script: {fileID: 11500000, guid: edf0db48fa639e948bf43d1cac251847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueUI: {fileID: 1735550675}
-  npcNameText: {fileID: 1580947111}
-  dialogueText: {fileID: 1904894478}
-  player: {fileID: 1226324490}
-  npcType: {fileID: 11400000, guid: d3ce2970e3d24254e88844cc8be775e0, type: 2}
-  interactionDistance: 5
+  headnpcDialogue: {fileID: 11400000, guid: d3ce2970e3d24254e88844cc8be775e0, type: 2}
+  dialogueUIManager: {fileID: 1735550680}
 --- !u!1001 &1357877031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20132,6 +20134,52 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1384761162}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1395691077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1395691079}
+  - component: {fileID: 1395691078}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1395691078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395691077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03242cdf087c53d46970658981c3284d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closekey: 27
+  dialogueUIManager: {fileID: 1735550680}
+--- !u!4 &1395691079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395691077}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1228.0701, y: 3.1, z: 972.0215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1398530818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26281,6 +26329,7 @@ GameObject:
   - component: {fileID: 1735550678}
   - component: {fileID: 1735550677}
   - component: {fileID: 1735550676}
+  - component: {fileID: 1735550680}
   m_Layer: 5
   m_Name: TalkUI
   m_TagString: Untagged
@@ -26372,6 +26421,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1735550680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735550675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69e65e5607a8854e94975a16ba50513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueUI: {fileID: 1735550675}
+  dialogueText: {fileID: 1904894478}
 --- !u!1001 &1738353872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30576,7 +30639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1995877990
 MonoBehaviour:
   m_ObjectHideFlags: 0
