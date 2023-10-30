@@ -3421,7 +3421,7 @@ MonoBehaviour:
     name: 
     playerIndex: 0
     level: 0
-    scene: 0
+    scene: 1
     job: 1
     stats:
     - str: 4
@@ -5594,7 +5594,7 @@ MonoBehaviour:
     name: 
     playerIndex: 0
     level: 0
-    scene: 0
+    scene: 1
     job: 2
     stats:
     - str: 4
@@ -7086,7 +7086,7 @@ MonoBehaviour:
     name: 
     playerIndex: 0
     level: 0
-    scene: 0
+    scene: 1
     job: 0
     stats:
     - str: 8
@@ -14239,7 +14239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.3301887, g: 0.3286312, b: 0.3286312, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -15268,6 +15268,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1581975653}
         m_TargetAssemblyTypeName: StartSceneManager, Assembly-CSharp
         m_MethodName: StartButon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1174427762}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SceneLoad
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
