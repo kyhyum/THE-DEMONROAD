@@ -144,7 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618eff0288e0f8346bcf01440e8bf2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotID: 18
+  slotID: 99
+  item: {fileID: 0}
 --- !u!222 &1532212373279842212
 CanvasRenderer:
   m_ObjectHideFlags: 0
