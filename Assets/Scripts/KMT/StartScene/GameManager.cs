@@ -46,13 +46,16 @@ public class GameManager : MonoBehaviour
     }
     void Save()
     {
-        PlayerData data = player.GetComponent<PlayerData_KMT>().playerData;
-        string prefabPath = "Assets/Resources/MyCharacter/";
-        SavePlayerDataToJson(prefabPath, data.name, data);
+        if(player != null && player.TryGetComponent<PlayerData_KMT>(out PlayerData_KMT dataM))
+        {
+            PlayerData data = dataM.playerData;
+            string prefabPath = "Assets/Resources/MyCharacter/";
+            SavePlayerDataToJson(prefabPath, data.name, data);
+        }
     }
     public void SceneLoad()
     {
-        SceneManager.LoadScene(player.GetComponent<PlayerData_KMT>().playerData.sceneIndex);
+        SceneManager.LoadScene((int)player.GetComponent<PlayerData_KMT>().playerData.scene);
         DontDestroyOnLoad(this.gameObject);
     }
     private void OnApplicationQuit()
