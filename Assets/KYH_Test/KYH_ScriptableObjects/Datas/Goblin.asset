@@ -21,5 +21,5 @@ MonoBehaviour:
   <Dealing_Start_TransitionTime>k__BackingField: 0.15
   <Dealing_End_TransitionTime>k__BackingField: 0.75
   <BaseSpeed>k__BackingField: 5
-  <BaseRotationDamping>k__BackingField: 1
-  <RunSpeedModifier>k__BackingField: 1
+  <BaseRotationDamping>k__BackingField: 1.5
+  <RunSpeedModifier>k__BackingField: 2

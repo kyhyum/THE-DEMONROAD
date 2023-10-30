@@ -33,7 +33,7 @@ public class MonsterAttackState : MonsterBaseState
         float normalizedTime = GetNormalizedTime(stateMachine.Monster.Animator, "Attack");
         if (normalizedTime < 1f)
         {
-            if (stateMachine.Monster.Data.IsLongRanged)
+            if (!stateMachine.Monster.Data.IsLongRanged)
             {
                 if (normalizedTime >= stateMachine.Monster.Data.ForceTransitionTime)
                     TryApplyForce();
