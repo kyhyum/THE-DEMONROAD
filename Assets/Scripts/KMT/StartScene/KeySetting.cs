@@ -1,9 +1,6 @@
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
 
@@ -16,17 +13,13 @@ public class KeySettings : MonoBehaviour
     bool isChangeKey;
     string str;
     int key = -1; 
+    //public TMP_InputField inputField;
+    string strr;
     private void Start()
     {
+        //inputField.onEndEdit.AddListener(ChangeBinding);
         // InputActionMap을 얻어옵니다.
         actionMap = inputActionAsset.actionMaps[0]; // 여기에서는 첫 번째 액션 맵을 사용합니다.
-        /*// 각 액션에 대한 정보를 출력합니다.
-        foreach (var action in actionMap)
-        {
-            Debug.Log("Action Name: " + action.name);
-            Debug.Log("Bindings: " + string.Join(", ", action.bindings.Select(b => b.effectivePath)));
-            //action.ApplyBindingOverride("<Mouse>/RightButton");
-        }*/
         for (int i = 0; i < keyValues.Length; i++)
         {
             str = actionMap.actions[i].bindings[0].effectivePath;
@@ -57,10 +50,24 @@ public class KeySettings : MonoBehaviour
             isChangeKey = false;
             key = -1;
         }
+
+    }
+    private static void SaveBindingOverride(InputAction action)
+    {
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            PlayerPrefs.SetString(action.actionMap + action.name + i, action.bindings[i].overridePath);
+        }
+    }
+    public void SaveKey()
+    {
+        inputActionAsset.SaveBindingOverridesAsJson();
+        Debug.Log(bindings[3].action.bindings[0].effectivePath);
     }
     public void ChangeKey(int num)
     {
         isChangeKey = true;
         key = num;
     }
+    
 }
