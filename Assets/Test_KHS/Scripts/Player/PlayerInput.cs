@@ -8,24 +8,36 @@ public class PlayerInput : MonoBehaviour
 {
     public PlayerInputAction inputAction;
 
-    public NavMeshAgent Agent {  get; private set; }
+    private NavMeshAgent agent;
+    public NavMeshAgent Agent => agent;
 
-    public Vector3 HitPoint { get; private set; }
+    private Vector3 hitPoint;
+    public Vector3 HitPoint => hitPoint;
 
-    //Animator animator;
+    float speed;
+
+    Animator animator;
 
     private void Awake()
     {
         inputAction = new PlayerInputAction();
 
-        //animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
     {
-        Agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
 
         OnInputEnable();
+    }
+
+    private void Update()
+    {
+        speed = agent.velocity.magnitude;
+        //print($"speed:{speed}");
+
+        animator.SetFloat("Walk", speed);
     }
 
     public void OnInputEnable()
@@ -119,14 +131,10 @@ public class PlayerInput : MonoBehaviour
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
-            HitPoint = hit.point;
+            hitPoint = hit.point;
 
-            Agent.SetDestination(hit.point);
-
-            //animator.SetBool("Walk", true);
+            agent.SetDestination(hit.point);
         }
-
-        //StartCoroutine("IdleAnimation", 1f);
     }
 
     private void OnInputAttack(InputAction.CallbackContext callbackContext)
@@ -184,10 +192,6 @@ public class PlayerInput : MonoBehaviour
         Debug.Log("PlayerInput 클래스 OnInputQuickSlot5 함수 출력");
     }
 
-    //IEnumerator IdleAnimation()
-    //{
-    //    animator.SetBool("Idle", true);
-    //    yield return null;
-    //}
+
 }
 
