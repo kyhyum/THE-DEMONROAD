@@ -9,13 +9,19 @@ public enum Job
     ARCHOR,
     WIZZARD
 }
+public enum Scene
+{
+    Start,
+    Town,
+    Dungeon
+}
 [System.Serializable]
 public class PlayerData
 {
     public string name;
     public int playerIndex;
     public int level;
-    public int sceneIndex;
+    public Scene scene;
     public Job job;
     public List<Statss> stats;
     public Vector3 currentPlayerPos;
