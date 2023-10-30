@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
         inputAction = new PlayerInputAction();
         EnableUI = new List<GameObject>();
 
-        inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/Inventory");
+        inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Inventory");
         inventoryObject = Instantiate(inventoryObject, canvas);
         inventory = inventoryObject.GetComponent<Inventory>();
         inventoryObject.SetActive(false);

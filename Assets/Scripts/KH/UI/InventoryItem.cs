@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,21 +11,27 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     private GameObject itemClone;
     private Canvas canvas;
     private RectTransform rect;
-    private Image icon;
+    private RawImage icon;
     private Item item;
     private TMP_Text quantity;
 
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
-        icon = GetComponentInChildren<Image>();
+        icon = GetComponentInChildren<RawImage>();
         quantity = GetComponentInChildren<TMP_Text>();
     }
 
     public void SetItem(Item item)
     {
+        if (item == null)
+        {
+            Clear();
+            return;
+        }
+
         this.item = item;
-        icon.sprite = item.icon;
+        icon.texture = item.texture;
 
         if (item is IStackable)
         {
@@ -37,6 +42,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         {
             quantity.text = string.Empty;
         }
+
+        Color color = icon.color;
+        color.a = 1;
+        icon.color = color;
     }
 
     public Item GetItem()
@@ -56,12 +65,16 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void Clear()
     {
-        icon.sprite = null;
+        Color color = icon.color;
+        color.a = 0;
+        icon.color = color;
         quantity.text = string.Empty;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (item == null)
+            return;
         itemClone = Instantiate(gameObject, canvas.GetComponent<Transform>());
         rect = itemClone.GetComponent<RectTransform>();
 
@@ -84,16 +97,22 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (item == null)
+            return;
         rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (item == null)
+            return;
         Destroy(itemClone);
     }
 
     public void OnDrop(PointerEventData eventData)
     {
+        if (item == null)
+            return;
         // 드롭 대상의 RectTransform을 얻음
         RectTransform dropTarget = this.transform as RectTransform;
 

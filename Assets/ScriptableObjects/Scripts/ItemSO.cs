@@ -14,18 +14,10 @@ public class ItemSO : ScriptableObject
     [field: SerializeField] public Rank rank { get; private set; }
     [field: SerializeField] public Texture2D texture { get; private set; }
     [field: SerializeField] public GameObject prefab { get; private set; }
-    public Sprite icon { get; private set; }
 
-    public void ConvertToSprite()
-    {
-        // Texture2D를 Sprite로 변환
-        icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
-    }
 
     public GameObject CreateItem()
     {
-        ConvertToSprite();
-
         GameObject gameObject = Instantiate(prefab);
         Item item;
 
@@ -44,7 +36,7 @@ public class ItemSO : ScriptableObject
 
         item.Set(this);
 
-        GameObject canvas = Instantiate(Resources.Load<GameObject>("KH/Prefabs/UI/ItemLabel"), item.transform);
+        GameObject canvas = Instantiate(Resources.Load<GameObject>("KH/Prefabs/UI/UI_ItemLabel"), item.transform);
         TMP_Text text = canvas.GetComponentInChildren<TMP_Text>();
         text.text = itemName;
 

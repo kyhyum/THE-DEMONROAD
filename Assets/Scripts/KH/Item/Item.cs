@@ -6,7 +6,7 @@ public class Item : MonoBehaviour
 {
     public string itemName;
     public string description;
-    public Sprite icon;
+    public Texture2D texture;
     public Rank rank;
     public ItemType type;
     public GameObject prefab;
@@ -15,7 +15,7 @@ public class Item : MonoBehaviour
     {
         itemName = itemSO.itemName;
         description = itemSO.description;
-        icon = itemSO.icon;
+        texture = itemSO.texture;
         rank = itemSO.rank;
         type = itemSO.type;
         prefab = itemSO.prefab;
