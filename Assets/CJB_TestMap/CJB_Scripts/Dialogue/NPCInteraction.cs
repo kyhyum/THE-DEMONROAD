@@ -81,8 +81,22 @@ public class NPCInteraction : MonoBehaviour
         dialogueUI.SetActive(true);
 
         // UI에 NPC 이름과 대화 텍스트를 설정합니다.
-        npcNameText.text = npc.ToString();
-        dialogueText.text = "";
+        if (npc == NPC.weaponNPC)
+        {
+            npcNameText.text = "무기상인";
+            dialogueText.text = ""; 
+        }
+        else if (npc == NPC.headNPC)
+        {
+            npcNameText.text = "촌장";
+            dialogueText.text = ""; 
+        }
+        else if (npc == NPC.potionNPC)
+        {
+            npcNameText.text = "포션상인";
+            dialogueText.text = ""; 
+        }
+
 
 
         StartCoroutine(ShowDialogue(npcDialogues[npc]));

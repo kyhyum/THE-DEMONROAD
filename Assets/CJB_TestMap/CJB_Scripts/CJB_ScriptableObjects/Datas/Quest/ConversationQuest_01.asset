@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b9fb77a6cd2894ba4f49dfda6c4c84, type: 3}
   m_Name: ConversationQuest_01
   m_EditorClassIdentifier: 
-  <questIndex>k__BackingField: 2
+  <questIndex>k__BackingField: 1
   <questName>k__BackingField: "\uB9C8\uC744 \uC0AC\uB78C\uB4E4"
   <questType>k__BackingField: 2
   <questDescription>k__BackingField: "\uD3EC\uC158 \uC0C1\uC778\uACFC \uC778\uC0AC\uB97C

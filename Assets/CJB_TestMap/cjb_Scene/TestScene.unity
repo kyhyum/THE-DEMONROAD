@@ -8502,7 +8502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1675487490, guid: 0e8a48316c7f243948a75f0fca931274, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.13
+      value: 4.28
       objectReference: {fileID: 0}
     - target: {fileID: 1675487490, guid: 0e8a48316c7f243948a75f0fca931274, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8510,7 +8510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1675487490, guid: 0e8a48316c7f243948a75f0fca931274, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.9
+      value: 10.28
       objectReference: {fileID: 0}
     - target: {fileID: 1675487490, guid: 0e8a48316c7f243948a75f0fca931274, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30643,7 +30643,7 @@ MonoBehaviour:
   questDescriptionText: {fileID: 758467813}
   questConditionText: {fileID: 1185051826}
   questRewardText: {fileID: 2097166736}
-  questManager: {fileID: 0}
+  questManager: {fileID: 1799384172}
 --- !u!1001 &1996853397
 PrefabInstance:
   m_ObjectHideFlags: 0
