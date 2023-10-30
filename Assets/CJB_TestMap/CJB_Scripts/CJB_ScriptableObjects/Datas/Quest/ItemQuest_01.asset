@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ItemQuest_01
   m_EditorClassIdentifier: 
   <questIndex>k__BackingField: 1
-  <questName>k__BackingField: "\uACE0\uBE14\uB9B0 \uC804\uC0AC\uC758 \uBF08"
+  <questName>k__BackingField: "\uBF08 \uC218\uC9D1\uAC00"
   <questType>k__BackingField: 1
   <questDescription>k__BackingField: "\uACE0\uBE14\uB9B0 \uC804\uC0AC\uC758 \uBF08
     10\uAC1C\uB97C \uAC00\uC838\uC640\uB77C"
