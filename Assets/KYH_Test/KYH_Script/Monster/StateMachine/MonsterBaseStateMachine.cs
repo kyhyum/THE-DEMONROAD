@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 
-public abstract class StateMachine
+public abstract class MonsterBaseStateMachine
 {
     protected MonsterIState currentState;
 

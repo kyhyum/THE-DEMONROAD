@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MonsterStateMachine : StateMachine
+public class MonsterStateMachine : MonsterBaseStateMachine
 {
     public Monster Monster { get; }
 
