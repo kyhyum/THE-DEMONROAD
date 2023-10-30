@@ -64,9 +64,9 @@ public class Inventory : MonoBehaviour
         else
         {
             int index = FindIndex();
+
             inventoryItem = inventorySlots[index].GetComponentInChildren<InventoryItem>();
             inventorySlots[index].isContain = true;
-            Debug.Log(inventoryItem);
             inventoryItem.SetItem(item);
         }
     }
@@ -90,13 +90,15 @@ public class Inventory : MonoBehaviour
         InventoryItem itemA = inventorySlots[slotA].GetComponentInChildren<InventoryItem>();
         InventoryItem itemB = inventorySlots[slotB].GetComponentInChildren<InventoryItem>();
 
-        Item item = itemA.GetItem();
-        itemA.SetItem(itemB.GetItem());
-        itemB.SetItem(item);
+        itemA.transform.SetParent(inventorySlots[slotB].transform);
+        itemB.transform.SetParent(inventorySlots[slotA].transform);
+        itemA.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        itemB.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        itemA.slotID = slotB;
+        itemB.slotID = slotA;
 
         bool tmp = inventorySlots[slotA].isContain;
         inventorySlots[slotA].isContain = inventorySlots[slotB].isContain;
         inventorySlots[slotB].isContain = tmp;
-
     }
 }
