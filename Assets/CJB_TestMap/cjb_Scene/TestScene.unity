@@ -3175,6 +3175,40 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 167729350}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &171356031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 171356032}
+  m_Layer: 0
+  m_Name: NPC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &171356032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171356031}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1356136255}
+  - {fileID: 704793051}
+  - {fileID: 958763091}
+  m_Father: {fileID: 1023900344}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &173447977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8502,7 +8536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1675487490, guid: 0e8a48316c7f243948a75f0fca931274, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.28
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1675487490, guid: 0e8a48316c7f243948a75f0fca931274, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8510,7 +8544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1675487490, guid: 0e8a48316c7f243948a75f0fca931274, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.28
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1675487490, guid: 0e8a48316c7f243948a75f0fca931274, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10718,7 +10752,7 @@ GameObject:
   - component: {fileID: 704793052}
   m_Layer: 0
   m_Name: potionNPC
-  m_TagString: NPC
+  m_TagString: potionNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10730,13 +10764,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704793050}
-  m_LocalRotation: {x: -0, y: 0.106916845, z: -0, w: 0.994268}
-  m_LocalPosition: {x: 4.18, y: 0, z: 9.69}
+  m_LocalRotation: {x: -0, y: -0.012938587, z: -0, w: 0.9999163}
+  m_LocalPosition: {x: -51.97229, y: 0, z: -7.5494385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1878352268}
-  m_Father: {fileID: 2042147279}
+  m_Father: {fileID: 171356032}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 12.275, z: 0}
 --- !u!114 &704793052
@@ -10751,10 +10785,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd9da27849ba3f41a72ce932e24483f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueUI: {fileID: 1747587290}
-  npcNameText: {fileID: 924664193}
-  dialogueText: {fileID: 587397708}
+  dialogueUI: {fileID: 1735550675}
+  npcNameText: {fileID: 1580947111}
+  dialogueText: {fileID: 1904894478}
   player: {fileID: 1226324490}
+  npcType: {fileID: 11400000, guid: f0f69b6bd54ec3744b1bdfea587625f1, type: 2}
   interactionDistance: 5
 --- !u!1001 &722010269
 PrefabInstance:
@@ -11641,7 +11676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: df7bd6126dabfcd4281f8fa0377454d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.912573
+      value: 6.28
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: df7bd6126dabfcd4281f8fa0377454d9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11649,7 +11684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: df7bd6126dabfcd4281f8fa0377454d9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.024984
+      value: 9.05
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: df7bd6126dabfcd4281f8fa0377454d9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14753,7 +14788,7 @@ GameObject:
   - component: {fileID: 958763092}
   m_Layer: 0
   m_Name: ArmorNPC
-  m_TagString: NPC
+  m_TagString: weaponNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14765,13 +14800,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958763090}
-  m_LocalRotation: {x: -0, y: 0.106916845, z: -0, w: 0.994268}
-  m_LocalPosition: {x: -2.001966, y: 0, z: 1.1706448}
+  m_LocalRotation: {x: -0, y: -0.012938587, z: -0, w: 0.9999163}
+  m_LocalPosition: {x: 72.96744, y: 0, z: 22.496765}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 554673022}
-  m_Father: {fileID: 1081994622}
+  m_Father: {fileID: 171356032}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 12.275, z: 0}
 --- !u!114 &958763092
@@ -14786,10 +14821,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd9da27849ba3f41a72ce932e24483f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueUI: {fileID: 1054332661}
-  npcNameText: {fileID: 1275334065}
-  dialogueText: {fileID: 1821907862}
+  dialogueUI: {fileID: 1735550675}
+  npcNameText: {fileID: 1580947111}
+  dialogueText: {fileID: 1904894478}
   player: {fileID: 1226324490}
+  npcType: {fileID: 11400000, guid: cd1dfb6ddf4d3454e9f6e1773962761d, type: 2}
   interactionDistance: 5
 --- !u!4 &967716103 stripped
 Transform:
@@ -15433,7 +15469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1023900344}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: NPCbuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15453,8 +15489,8 @@ Transform:
   m_Children:
   - {fileID: 1081994622}
   - {fileID: 2042147279}
-  - {fileID: 1356136255}
   - {fileID: 197698901}
+  - {fileID: 171356032}
   m_Father: {fileID: 193883765}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16218,7 +16254,6 @@ Transform:
   - {fileID: 1546327340}
   - {fileID: 27461447}
   - {fileID: 1825792737}
-  - {fileID: 958763091}
   - {fileID: 632305195}
   - {fileID: 943032299}
   - {fileID: 1638972996}
@@ -19700,7 +19735,7 @@ GameObject:
   - component: {fileID: 1356136256}
   m_Layer: 0
   m_Name: headNPC
-  m_TagString: NPC
+  m_TagString: headNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19712,13 +19747,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1356136254}
-  m_LocalRotation: {x: -0, y: 0.9790484, z: -0, w: -0.20362778}
-  m_LocalPosition: {x: 8.34, y: 0, z: 13.5}
+  m_LocalRotation: {x: -0, y: 0.9790484, z: -0, w: -0.2036278}
+  m_LocalPosition: {x: 8.339996, y: 0, z: 13.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 123049456}
-  m_Father: {fileID: 1023900344}
+  m_Father: {fileID: 171356032}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 203.498, z: 0}
 --- !u!114 &1356136256
@@ -19737,6 +19772,7 @@ MonoBehaviour:
   npcNameText: {fileID: 1580947111}
   dialogueText: {fileID: 1904894478}
   player: {fileID: 1226324490}
+  npcType: {fileID: 11400000, guid: d3ce2970e3d24254e88844cc8be775e0, type: 2}
   interactionDistance: 5
 --- !u!1001 &1357877031
 PrefabInstance:
@@ -23131,7 +23167,7 @@ GameObject:
   - component: {fileID: 1580947112}
   - component: {fileID: 1580947111}
   m_Layer: 5
-  m_Name: NPCname
+  m_Name: nameTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29459,7 +29495,7 @@ GameObject:
   - component: {fileID: 1904894479}
   - component: {fileID: 1904894478}
   m_Layer: 5
-  m_Name: TextBox (1)
+  m_Name: converseTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31202,7 +31238,6 @@ Transform:
   - {fileID: 5208761}
   - {fileID: 64568032}
   - {fileID: 1088528212}
-  - {fileID: 704793051}
   m_Father: {fileID: 1023900344}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -13.758, z: 0}
