@@ -543,7 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: -3348328396892762973, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 7
   actionText: {fileID: 14746041}
   rebindButton: {fileID: 14746040}
   rebindText: {fileID: 14746039}
@@ -3442,7 +3442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: -8974385848138889753, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 1
   actionText: {fileID: 341282632}
   rebindButton: {fileID: 341282631}
   rebindText: {fileID: 341282630}
@@ -3869,7 +3869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: 8179730322620003528, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 5
   actionText: {fileID: 381463056}
   rebindButton: {fileID: 381463055}
   rebindText: {fileID: 381463054}
@@ -5967,7 +5967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: -5785730567290792065, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 11
   actionText: {fileID: 549561814}
   rebindButton: {fileID: 549561813}
   rebindText: {fileID: 549561812}
@@ -7204,7 +7204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: -2942823120335711157, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 4
   actionText: {fileID: 630954635}
   rebindButton: {fileID: 630954634}
   rebindText: {fileID: 630954633}
@@ -8367,7 +8367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: -1171863048693216269, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 8
   actionText: {fileID: 757323505}
   rebindButton: {fileID: 757323504}
   rebindText: {fileID: 757323503}
@@ -8695,7 +8695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: -3209493500745674831, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 3
   actionText: {fileID: 771740453}
   rebindButton: {fileID: 771740452}
   rebindText: {fileID: 771740451}
@@ -10343,7 +10343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: 1576481294397837441, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 6
   actionText: {fileID: 961443455}
   rebindButton: {fileID: 961443454}
   rebindText: {fileID: 961443453}
@@ -11813,7 +11813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: -727860868934481964, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 10
   actionText: {fileID: 1189079336}
   rebindButton: {fileID: 1189079335}
   rebindText: {fileID: 1189079334}
@@ -12676,7 +12676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: -6438850223736616340, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 0
   actionText: {fileID: 1308018836}
   rebindButton: {fileID: 1308018835}
   rebindText: {fileID: 1308018834}
@@ -14551,7 +14551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: 5521452689193405492, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 9
   actionText: {fileID: 1424975443}
   rebindButton: {fileID: 1424975442}
   rebindText: {fileID: 1424975441}
@@ -17695,7 +17695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionReference: {fileID: -886886704537751940, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
-  excludeMouse: 1
+  num: 2
   actionText: {fileID: 1741200712}
   rebindButton: {fileID: 1741200711}
   rebindText: {fileID: 1741200710}
