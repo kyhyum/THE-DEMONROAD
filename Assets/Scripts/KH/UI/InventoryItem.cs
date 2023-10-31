@@ -83,6 +83,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         icon.color = color;
     }
 
+    private bool isInItem()
+    {
+        return TryGetComponent<Item>(out Item item);
+    }
+
     public void Clear()
     {
         SetAlpha(0);
@@ -92,7 +97,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (icon.color.a == 0)
+        if (!isInItem())
             return;
         itemClone = Instantiate(gameObject, canvas.GetComponent<Transform>());
         rect = itemClone.GetComponent<RectTransform>();
@@ -116,14 +121,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (icon.color.a == 0)
+        if (!isInItem())
             return;
         rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (icon.color.a == 0)
+        if (!isInItem())
             return;
         Destroy(itemClone);
     }
@@ -145,6 +150,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
                     continue;
                 UIManager.Instance.GetInventory().SwapItems(inventoryItem.slotID, slotID);
             }
+
+            if (result.gameObject.TryGetComponent<EquipSlot>(out EquipSlot slot))
+            {
+                UIManager.Instance.GetInventory().Equip(slotID);
+            }
         }
     }
 
@@ -154,7 +164,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         {
             if (item is EquipItem)
             {
-                UIManager.Instance.GetInventory().Equip(slotID, item);
+                UIManager.Instance.GetInventory().Equip(slotID);
             }
         }
     }

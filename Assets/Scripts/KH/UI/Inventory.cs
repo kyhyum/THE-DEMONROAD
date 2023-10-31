@@ -110,9 +110,10 @@ public class Inventory : MonoBehaviour
         inventorySlots[slotB].isContain = tmp;
     }
 
-    public void Equip(int slotA, Item item)
+    public void Equip(int slotA)
     {
         InventoryItem itemA = inventorySlots[slotA].GetComponentInChildren<InventoryItem>();
+        Item item = itemA.GetItem();
 
         EquipSlot equipSlot = equipSlots[(int)item.type];
 

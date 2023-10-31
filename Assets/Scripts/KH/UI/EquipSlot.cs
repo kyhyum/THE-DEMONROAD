@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDropHandler
+public class EquipSlot : MonoBehaviour, IPointerDownHandler, IEndDragHandler, IDropHandler
 {
     public ItemType type;
     private EquipItem item;
@@ -13,7 +13,7 @@ public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDropHandler
 
     private void Start()
     {
-        icon = GetComponentInChildren<RawImage>();
+        icon = GetComponent<RawImage>();
         baseImage = Resources.Load<Texture2D>("KH/Images/UI/Equip/" + gameObject.name);
         Clear();
     }
@@ -50,6 +50,11 @@ public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDropHandler
                 UnEquip();
             }
         }
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Destroy(eventData.pointerDrag);
     }
 
     public void OnDrop(PointerEventData eventData)
