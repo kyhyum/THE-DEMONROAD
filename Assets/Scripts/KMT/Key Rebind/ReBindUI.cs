@@ -10,7 +10,7 @@ public class ReBindUI : MonoBehaviour
     private InputActionReference inputActionReference; //this is on the SO
 
     [SerializeField]
-    private bool excludeMouse = true;
+    private int num;
 
     private string actionName;
 
@@ -24,12 +24,18 @@ public class ReBindUI : MonoBehaviour
     [SerializeField]
     private Button resetButton;
 
+    private void Awake()
+    {
+        UpdateKey();
+    }
     private void OnEnable()
     {
         rebindButton.onClick.AddListener(() => DoRebind());
+        rebindButton.onClick.AddListener(() => UpdateKey());
         resetButton.onClick.AddListener(() => ResetBinding());
+        resetButton.onClick.AddListener(() => UpdateKey());
 
-        if(inputActionReference != null)
+        if (inputActionReference != null)
         {
             InputManager.LoadBindingOverride(actionName);
             GetBindingInfo();
@@ -45,11 +51,10 @@ public class ReBindUI : MonoBehaviour
         InputManager.rebindComplete -= UpdateUI;
         InputManager.rebindCanceled -= UpdateUI;
     }
-
-    private void OnValidate()
+    private void UpdateKey()
     {
         if (inputActionReference == null)
-            return; 
+            return;
 
         GetBindingInfo();
         UpdateUI();
@@ -81,7 +86,7 @@ public class ReBindUI : MonoBehaviour
 
     private void DoRebind()
     {
-        InputManager.StartRebind(actionName, rebindText, excludeMouse);
+        InputManager.StartRebind(actionName, rebindText, num);
     }
 
     private void ResetBinding()

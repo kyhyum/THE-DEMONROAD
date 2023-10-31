@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System;
+using Unity.VisualScripting;
 
 public class InputManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class InputManager : MonoBehaviour
     public static event Action rebindCanceled;
     public static event Action<InputAction> rebindStarted;
     [SerializeField] InputActionReference[] inputActionReferences;
+    static List<InputBinding> bindings = new List<InputBinding>();
+    static InputActionRebindingExtensions.RebindingOperation beforeRebindingAction = null;
     private void Awake()
     {
         if (inputActions == null)
@@ -21,26 +24,67 @@ public class InputManager : MonoBehaviour
             LoadBindingOverride(inputActionReferences[i].action.name);
         }
     }
-    public static void StartRebind(string actionName, Text statusText, bool excludeMouse)
+    public static void StartRebind(string actionName, Text statusText, int num)
     {
         InputAction action = inputActions.asset.FindAction(actionName);
-        DoRebind(action, statusText, false, excludeMouse);
+        DoRebind(action, statusText, num);
     }
 
-    private static void DoRebind(InputAction actionToRebind, Text statusText, bool allCompositeParts, bool excludeMouse)
+    private static void DoRebind(InputAction actionToRebind, Text statusText, int num)
     {
+        if(beforeRebindingAction != null)
+        {
+            beforeRebindingAction.Cancel();
+        }
+
+        bindings.Clear();
+
+        foreach (var action in inputActions)
+        {
+            bindings.Add(action.bindings[0]);
+        }
         statusText.text = $"Press a {actionToRebind.expectedControlType}";
 
         actionToRebind.Disable();
 
         var rebind = actionToRebind.PerformInteractiveRebinding(0);
+        beforeRebindingAction = rebind;
+        if (num <= 1)
+        {
+            rebind.WithControlsExcluding("Keyboard");
+        }
+        else
+        {
+            rebind.WithControlsExcluding("Mouse");
+        }
+        rebind.WithCancelingThrough("<Keyboard>/escape");
+
+        rebindStarted?.Invoke(actionToRebind);
+        rebind.Start();
 
         rebind.OnComplete(operation =>
         {
             actionToRebind.Enable();
             operation.Dispose();
-
             SaveBindingOverride(actionToRebind);
+            for(int i = 0; i < bindings.Count; i++)
+            {
+                if (bindings[i].overridePath != null)
+                {
+                    if (bindings[i].overridePath == actionToRebind.bindings[0].overridePath)
+                    {
+                        ResetBinding(actionToRebind.name);
+                    }
+                }
+                else
+                {
+                    if (bindings[i].path == actionToRebind.bindings[0].overridePath)
+                    {
+                        ResetBinding(actionToRebind.name);
+                    }
+                }
+                
+            }
             rebindComplete?.Invoke();
         });
 
@@ -51,14 +95,6 @@ public class InputManager : MonoBehaviour
 
             rebindCanceled?.Invoke();
         });
-
-        rebind.WithCancelingThrough("<Keyboard>/escape");
-
-        if (excludeMouse)
-            rebind.WithControlsExcluding("Mouse");
-
-        rebindStarted?.Invoke(actionToRebind);
-        rebind.Start(); //actually starts the rebinding process
     }
 
     public static string GetBindingName(string actionName)
@@ -99,5 +135,14 @@ public class InputManager : MonoBehaviour
 
         SaveBindingOverride(action);
     }
-
+    public static void ResetAllBinding()
+    {
+        if (inputActions == null)
+            inputActions = new PlayerInputAction();
+        inputActions.RemoveAllBindingOverrides();
+        foreach(var action in inputActions)
+        {
+            SaveBindingOverride(action);
+        }
+    }
 }
