@@ -13831,9 +13831,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uACE0\uBE14\uB9B0\uB4E4\uC774 \uB0A0\uB6F0\uACE0 \uC788\uC5B4\uC694 \uACE0\uBE14\uB9B0
-    \uC804\uC0AC 10\uB9C8\uB9AC\uB9CC \uCC98\uB9AC\uD574\uC8FC\uC2DC\uBA74 \uC88B\uC744\uAC70
-    \uAC19\uC544\uC694."
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
   m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
@@ -35511,9 +35509,7 @@ MonoBehaviour:
   questConditionText: {fileID: 777954767}
   questRewardText: {fileID: 1095866185}
   quests:
-  - {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
   - {fileID: 11400000, guid: 738a6d604c2069e4e8cfade4ddc6f1b9, type: 2}
-  - {fileID: 11400000, guid: 554968daf1f966c438f4542e43eb2462, type: 2}
 --- !u!1001 &1996853397
 PrefabInstance:
   m_ObjectHideFlags: 0
