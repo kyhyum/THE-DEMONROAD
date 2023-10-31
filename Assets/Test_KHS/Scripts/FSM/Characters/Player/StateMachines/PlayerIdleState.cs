@@ -30,14 +30,8 @@ public class PlayerIdleState : PlayerBaseState
     {
         base.Update();
 
-        //if (stateMachine.MovementInput != Vector2.zero)
-        //{
-        //    OnMove();
-        //    return;
-        //}
-
         stateMachine.Speed = stateMachine.Player.Agent.velocity.magnitude;
-        Debug.Log($"stateMachine.Speed : {stateMachine.Speed}");
+        //Debug.Log($"stateMachine.Speed : {stateMachine.Speed}");
         if (stateMachine.Speed != 0)
         {
             OnMove();

@@ -15,10 +15,28 @@ public class PlayerWalkState : PlayerBaseState
         StartAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
     }
 
+    public override void Update()
+    {
+        base.Update();
+
+        stateMachine.Speed = stateMachine.Player.Agent.velocity.magnitude;
+        //Debug.Log($"stateMachine.Speed : {stateMachine.Speed}");
+        if (stateMachine.Speed == 0)
+        {
+            OnStop();
+            return;
+        }
+    }
+
     public override void Exit()
     {
         base.Exit();
 
         StopAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
+    }
+
+    private void OnStop()
+    {
+        stateMachine.ChangeState(stateMachine.IdleState);
     }
 }
