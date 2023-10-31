@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour
+public class Old_PlayerInput : MonoBehaviour
 {
     public PlayerInputAction inputAction;
 
@@ -191,7 +191,4 @@ public class PlayerInput : MonoBehaviour
     {
         Debug.Log("PlayerInput 클래스 OnInputQuickSlot5 함수 출력");
     }
-
-
 }
-

@@ -132,8 +132,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 816956514}
-  - component: {fileID: 816956515}
   - component: {fileID: 816956512}
+  - component: {fileID: 816956516}
+  - component: {fileID: 816956517}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -179,7 +180,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &816956515
+--- !u!114 &816956516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,9 +189,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 816956511}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8130bedf876f0a7449c7a105463c39ce, type: 3}
+  m_Script: {fileID: 11500000, guid: f2fa99a83fffc894fb16432201953e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &816956517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816956511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91e0527b04228e4696b5adc246fdfc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Data>k__BackingField: {fileID: 0}
+  <AnimationData>k__BackingField:
+    idleParameterName: Idle
+    walkParameterName: Walk
 --- !u!4 &1035393313 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d94b199b04cd4994d891b2d285b62150,
@@ -290,7 +307,7 @@ Animator:
   m_GameObject: {fileID: 1499259560}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b0119d0aace882340966e0ba87281c0c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9e53e889d31ab7c4baa82c4b46848af2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
