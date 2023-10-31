@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BoardInteraction : MonoBehaviour
 {
+    public QuestSO quest;
     public GameObject questUI;
     private bool isUIVisible = false;
     public Transform player;
