@@ -68,7 +68,7 @@ public class PlayerBaseState : IState
 
     private void OnInputMove(InputAction.CallbackContext callbackContext)
     {
-        Debug.Log("PlayerInput 클래스 OnInputMove 함수 출력");
+       //Debug.Log("PlayerInput 클래스 OnInputMove 함수 출력");
 
         
 
@@ -77,7 +77,7 @@ public class PlayerBaseState : IState
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
             hitPoint = hit.point;
-            Debug.Log($"hitPoint:{hitPoint}");
+            //Debug.Log($"hitPoint:{hitPoint}");
 
             stateMachine.Player.Agent.SetDestination(hit.point);
             //agent.destination = hitPoint;

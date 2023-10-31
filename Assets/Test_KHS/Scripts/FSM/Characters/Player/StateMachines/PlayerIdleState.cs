@@ -16,21 +16,29 @@ public class PlayerIdleState : PlayerBaseState
 
         base.Enter();
 
-        StartAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
+        //StartAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        StopAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
+        //StopAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
     }
 
     public override void Update()
     {
         base.Update();
 
-        if (stateMachine.MovementInput != Vector2.zero)
+        //if (stateMachine.MovementInput != Vector2.zero)
+        //{
+        //    OnMove();
+        //    return;
+        //}
+
+        stateMachine.Speed = stateMachine.Player.Agent.velocity.magnitude;
+        Debug.Log($"stateMachine.Speed : {stateMachine.Speed}");
+        if (stateMachine.Speed != 0)
         {
             OnMove();
             return;
