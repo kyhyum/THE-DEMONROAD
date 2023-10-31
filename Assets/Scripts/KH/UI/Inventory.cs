@@ -7,11 +7,14 @@ public class Inventory : MonoBehaviour
 {
     [field: SerializeField] private Transform slots;
     public InventorySlot[] inventorySlots;
+    public EquipSlot[] equipSlots;
     private Dictionary<IStackable, int> stackItems;
     public int gold { get; private set; }
+    private int count;
 
     private void Awake()
     {
+        count = 0;
         inventorySlots = new InventorySlot[30];
 
         for (int i = 0; i < 30; i++)
@@ -22,7 +25,6 @@ public class Inventory : MonoBehaviour
             inventorySlots[i].slotID = i;
             slot.GetComponentInChildren<InventoryItem>().slotID = i;
             inventorySlots[i].GetComponentInChildren<InventoryItem>().Clear();
-
         }
     }
 
@@ -34,8 +36,10 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(Item item)
+    public bool AddItem(Item item)
     {
+        if (count == 30)
+            return false;
         InventoryItem inventoryItem;
 
         if (item.type == ItemType.Gold)
@@ -69,6 +73,10 @@ public class Inventory : MonoBehaviour
             inventorySlots[index].isContain = true;
             inventoryItem.SetItem(item);
         }
+
+        count++;
+
+        return true;
     }
 
     public int FindIndex()
@@ -100,5 +108,25 @@ public class Inventory : MonoBehaviour
         bool tmp = inventorySlots[slotA].isContain;
         inventorySlots[slotA].isContain = inventorySlots[slotB].isContain;
         inventorySlots[slotB].isContain = tmp;
+    }
+
+    public void Equip(int slotA, Item item)
+    {
+        InventoryItem itemA = inventorySlots[slotA].GetComponentInChildren<InventoryItem>();
+
+        EquipSlot equipSlot = equipSlots[(int)item.type];
+
+        if (equipSlot.TryGetComponent<EquipItem>(out EquipItem equipItem))
+        {
+            itemA.SetItem(equipItem);
+        }
+        else
+        {
+            count--;
+            inventorySlots[slotA].isContain = false;
+            itemA.Clear();
+        }
+
+        equipSlot.Equip((EquipItem)item);
     }
 }

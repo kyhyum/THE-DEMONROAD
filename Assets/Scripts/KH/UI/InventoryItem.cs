@@ -26,6 +26,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void SetItem(Item item)
     {
+        if (gameObject.TryGetComponent<Item>(out Item tmp))
+        {
+            Destroy(tmp);
+        }
 
         if (item.type == ItemType.Resources || item.type == ItemType.Gold)
         {
@@ -54,9 +58,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             quantity.text = string.Empty;
         }
 
-        Color color = icon.color;
-        color.a = 1;
-        icon.color = color;
+        SetAlpha(1);
     }
 
     public void AddItem(int count)
@@ -69,13 +71,23 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
     }
 
+    public Item GetItem()
+    {
+        return item;
+    }
+
+    private void SetAlpha(float a)
+    {
+        Color color = icon.color;
+        color.a = a;
+        icon.color = color;
+    }
+
     public void Clear()
     {
-        item = null;
-        Color color = icon.color;
-        color.a = 0;
-        icon.color = color;
+        SetAlpha(0);
         quantity.text = string.Empty;
+        Destroy(item);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -127,11 +139,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.TryGetComponent<InventoryItem>(out InventoryItem item))
+            if (result.gameObject.TryGetComponent<InventoryItem>(out InventoryItem inventoryItem))
             {
-                if (item.slotID == slotID)
+                if (inventoryItem.slotID == slotID)
                     continue;
-                UIManager.Instance.GetInventory().SwapItems(item.slotID, slotID);
+                UIManager.Instance.GetInventory().SwapItems(inventoryItem.slotID, slotID);
             }
         }
     }
@@ -140,8 +152,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         if (icon.color.a != 0 && eventData.button == PointerEventData.InputButton.Right)
         {
-            // 우클릭 이벤트 처리 코드를 여기에 작성합니다.
-            Debug.Log("우클릭 발생!");
+            if (item is EquipItem)
+            {
+                UIManager.Instance.GetInventory().Equip(slotID, item);
+            }
         }
     }
 }
