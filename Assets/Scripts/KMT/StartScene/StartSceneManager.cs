@@ -108,6 +108,7 @@ public class StartSceneManager : MonoBehaviour
             createCharacterData.name = nameText;
             createCharacterData.playerIndex = characterSlot.slotIndex;
             createCharacterData.level = 1;
+            createCharacterData.inventory = new Inventory();
             string prefabPath = "Assets/Resources/MyCharacter/";
             GameManager.s_instance.SavePlayerDataToJson(prefabPath, createCharacterData.name, createCharacterData);
             characterSlot.character.AddComponent<PlayerData_KMT>().playerData = GameManager.s_instance.LoadPlayerDataFromJson(prefabPath, createCharacterData.name);

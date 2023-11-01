@@ -2554,26 +2554,18 @@ MonoBehaviour:
   jobIndex: 1
   playerData:
     name: 
-    playerIndex: 0
     level: 0
-    scene: 1
     job: 1
     stats:
-    - str: 4
+      str: 4
       dex: 8
       Int: 4
-      con: 20
+      con: 30
+    playerIndex: 0
+    scene: 1
     currentPlayerPos: {x: 0, y: 0, z: 0}
     isDead: 0
-    items:
-    - name: "\uB0A1\uC740 \uD65C"
-      itemIndex: 3
-      hp: 20
-      level: 1
-    - name: "\uCC9C \uAC11\uC637"
-      itemIndex: 4
-      hp: 5
-      level: 3
+    inventory: {fileID: 0}
 --- !u!1 &304019781
 GameObject:
   m_ObjectHideFlags: 0
@@ -5309,26 +5301,18 @@ MonoBehaviour:
   jobIndex: 2
   playerData:
     name: 
-    playerIndex: 0
     level: 0
-    scene: 1
     job: 2
     stats:
-    - str: 4
+      str: 4
       dex: 4
       Int: 8
       con: 30
+    playerIndex: 0
+    scene: 1
     currentPlayerPos: {x: 0, y: 0, z: 0}
     isDead: 0
-    items:
-    - name: "\uB0A1\uC740 \uC9C0\uD321\uC774"
-      itemIndex: 4
-      hp: 2
-      level: 1
-    - name: "\uAC00\uC8FD \uAC11\uC637"
-      itemIndex: 5
-      hp: 2
-      level: 1
+    inventory: {fileID: 0}
 --- !u!114 &500104864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6685,26 +6669,18 @@ MonoBehaviour:
   jobIndex: 0
   playerData:
     name: 
-    playerIndex: 0
     level: 0
-    scene: 1
     job: 0
     stats:
-    - str: 8
+      str: 8
       dex: 4
       Int: 4
       con: 50
+    playerIndex: 0
+    scene: 1
     currentPlayerPos: {x: 0, y: 0, z: 0}
     isDead: 0
-    items:
-    - name: "\uB0A1\uC740 \uAC80"
-      itemIndex: 2
-      hp: 6
-      level: 1
-    - name: "\uB179\uC2A8 \uBC29\uD328"
-      itemIndex: 1
-      hp: 20
-      level: 1
+    inventory: {fileID: 0}
 --- !u!1 &619515929
 GameObject:
   m_ObjectHideFlags: 0
