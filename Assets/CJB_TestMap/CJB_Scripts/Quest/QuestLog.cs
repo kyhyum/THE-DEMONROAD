@@ -9,6 +9,10 @@ public class QuestLog : MonoBehaviour
     public GameObject questLogPanel;
     private bool isLogVisible = false;
 
+    private void Start()
+    {
+        questLogPanel.SetActive(false);
+    }
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Q))
