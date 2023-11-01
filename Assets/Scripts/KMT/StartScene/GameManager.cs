@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject settingCanvas;
     public static GameManager s_instance;
-    public GameObject player;
+    public PlayerData player;
+    public GameObject Myplayer;
     private void Awake()
     {
+        Debug.Log("01");
         if (s_instance == null)
         {
             s_instance = this;
@@ -19,6 +22,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+        if (player != null)
+        {
+            Myplayer = Instantiate(player.baseObject);
+        }
+    }
+    private void OnEnable()
+    {
+        
     }
     public void Finish()
     {
@@ -46,20 +57,27 @@ public class GameManager : MonoBehaviour
     }
     void Save()
     {
-        if(player != null && player.TryGetComponent<PlayerData_KMT>(out PlayerData_KMT dataM))
+        if(player != null)
         {
-            PlayerData data = dataM.playerData;
+            PlayerData data = player;
             string prefabPath = "Assets/Resources/MyCharacter/";
             SavePlayerDataToJson(prefabPath, data.name, data);
         }
     }
     public void SceneLoad()
     {
-        SceneManager.LoadScene((int)player.GetComponent<PlayerData_KMT>().playerData.scene);
-        DontDestroyOnLoad(this.gameObject);
+        
     }
     private void OnApplicationQuit()
     {
         Save();
+    }
+    public void OnSettingCanvasInputEnable()
+    {
+        
+    }
+    private void ActiveSettingCanvas(InputAction.CallbackContext context)
+    {
+        settingCanvas.SetActive(!settingCanvas.activeSelf);
     }
 }

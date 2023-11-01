@@ -15,12 +15,13 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            PlayerData data = character.GetComponent<PlayerData_KMT>().playerData;
-            GameObject obj = Instantiate(character);
-            obj.transform.SetParent(this.transform);
-            obj.transform.position = characterPos;
-            obj.transform.LookAt(Camera.main.transform.position);
-            characterName.text = data.name;
+            PlayerData data = character.GetComponent<Player>().data;
+            character.name = data.name;
+            character.transform.SetParent(this.transform);
+            character.transform.position = characterPos;
+            character.transform.localScale = new Vector3(3, 3, 3);
+            character.transform.LookAt(Camera.main.transform.position);
+            characterName.text = character.name;
             characterLevel.text = data.level.ToString();
             characterJob.text = data.job.ToString();
             createButton.SetActive(false);

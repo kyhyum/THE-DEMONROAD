@@ -9,6 +9,13 @@ public enum Job
     ARCHOR,
     WIZZARD
 }
+public enum StatType
+{
+    STR,
+    DEX,
+    INT,
+    CON
+}
 public enum Scene
 {
     Start,
@@ -21,7 +28,8 @@ public class PlayerData
     public string name;
     public int level;
     public Job job;
-    public Stats stats;
+    public List<Stat> stats;
+    public GameObject baseObject;
 
     public int playerIndex;
     
@@ -33,17 +41,15 @@ public class PlayerData
 }
 
 [System.Serializable]
-public class Stats
+public class Stat
 {
-    public int str;
-    public int dex;
-    public int Int;
-    public int con;
+    public StatType type;
+    public int statValue;
 }
 public class PlayerData_KMT : MonoBehaviour
 {
     public PlayerData playerData;
-    private void Awake()
+    private void Start()
     {
         Debug.Log(playerData.name);
     }

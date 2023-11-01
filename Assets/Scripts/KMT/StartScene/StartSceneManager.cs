@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartSceneManager : MonoBehaviour
@@ -18,7 +20,6 @@ public class StartSceneManager : MonoBehaviour
     public TMP_InputField nameCreate;
     List<string> playerName = new List<string>();
     PlayerData createCharacterData;
-    PlayerData[] MyCharacterDatas = new PlayerData[4];
     private void Awake()
     {
         if (s_instance == null)
@@ -43,28 +44,19 @@ public class StartSceneManager : MonoBehaviour
             foreach (string one in playerName)
             {
                 PlayerData data = GameManager.s_instance.LoadPlayerDataFromJson(prefabPath, one);
-                characterSlots[data.playerIndex].character = baseCharacters[(int)data.job];
-                characterSlots[data.playerIndex].character.AddComponent<PlayerData_KMT>().playerData = data;
+                characterSlots[data.playerIndex].character = Instantiate(baseCharacters[(int)data.job], characterSlots[data.playerIndex].transform);
+                characterSlots[data.playerIndex].character.AddComponent<Player>().data = data;
             }
-        }
-    }
-    private void Start()
-    {
-        AddDatas();
-    }
-    void AddDatas()
-    {
-        for(int i = 0; i < characterSlots.Length; i++)
-        {
-            MyCharacterDatas[i] = characterSlots[i].character != null ? characterSlots[i].character.GetComponent<PlayerData_KMT>().playerData : null;
         }
     }
     public void StartButon()
     {
         if (characterSlot.character != null)
         {
-            GameManager.s_instance.player = characterSlot.character;
-            Debug.Log(GameManager.s_instance.player.GetComponent<PlayerData_KMT>().playerData.name);
+            string prefabPath = "Assets/Resources/MyCharacter/";
+            GameManager.s_instance.player = GameManager.s_instance.LoadPlayerDataFromJson(prefabPath, characterSlot.character.name);
+            SceneManager.LoadScene((int)GameManager.s_instance.player.scene);
+            DontDestroyOnLoad(GameManager.s_instance.gameObject);
         }
         else
         {
@@ -83,7 +75,6 @@ public class StartSceneManager : MonoBehaviour
         selectCanvas.SetActive(true);
         createCanvas.SetActive(false);
         startCanvas.SetActive(false);
-        AddDatas();
     }
     public void ChangeJob()
     {
@@ -108,10 +99,9 @@ public class StartSceneManager : MonoBehaviour
             createCharacterData.name = nameText;
             createCharacterData.playerIndex = characterSlot.slotIndex;
             createCharacterData.level = 1;
-            createCharacterData.inventory = new Inventory();
             string prefabPath = "Assets/Resources/MyCharacter/";
             GameManager.s_instance.SavePlayerDataToJson(prefabPath, createCharacterData.name, createCharacterData);
-            characterSlot.character.AddComponent<PlayerData_KMT>().playerData = GameManager.s_instance.LoadPlayerDataFromJson(prefabPath, createCharacterData.name);
+            characterSlot.character.AddComponent<Player>().data = GameManager.s_instance.LoadPlayerDataFromJson(prefabPath, createCharacterData.name);
             OpenSelectCanvas();
         }
         else
