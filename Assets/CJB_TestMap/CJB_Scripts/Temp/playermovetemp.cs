@@ -9,6 +9,9 @@ public class playermovetemp : MonoBehaviour
 
     private Vector3 lastMousePosition;
 
+    public GameObject questLogPanel;
+    private bool isLogVisible = false;
+
 
     void Start()
     {
@@ -17,8 +20,7 @@ public class playermovetemp : MonoBehaviour
 
     void Update()
     {
-
-
+        
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -37,7 +39,11 @@ public class playermovetemp : MonoBehaviour
 
         lastMousePosition = currentMousePosition;
 
-
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            isLogVisible = !isLogVisible;
+            questLogPanel.SetActive(isLogVisible);
+        }
 
     }
 }

@@ -7,7 +7,7 @@ public class questacceptPanelController : MonoBehaviour
     public GameObject questacceptPanel; 
 
     
-    public bool isUIVisible = false;
+    private bool isUIVisible = false;
 
     void Start()
     {
