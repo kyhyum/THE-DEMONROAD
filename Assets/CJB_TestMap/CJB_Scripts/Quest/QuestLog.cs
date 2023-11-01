@@ -6,5 +6,15 @@ using UnityEngine;
 
 public class QuestLog : MonoBehaviour
 {
-    
+    public GameObject questLogPanel;
+    private bool isLogVisible = false;
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            isLogVisible = !isLogVisible;
+            questLogPanel.SetActive(isLogVisible);
+        }   
+    }
 }
