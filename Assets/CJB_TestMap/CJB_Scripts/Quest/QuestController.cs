@@ -1,13 +1,15 @@
 using UnityEngine;
 
-public class QuestLog : MonoBehaviour
+public class QuestController : MonoBehaviour
 {
     public GameObject questLogPanel;
+    public GameObject questProgressPanel;
     private bool isLogVisible = false;
 
     private void Start()
     {
         questLogPanel.SetActive(false);
+        questProgressPanel.SetActive(false);
     }
     void Update()
     {
@@ -16,5 +18,10 @@ public class QuestLog : MonoBehaviour
             isLogVisible = !isLogVisible;
             questLogPanel.SetActive(isLogVisible);
         }   
+    }
+    public void OpenProgressUI()
+    {
+        questLogPanel.SetActive(false);
+        questProgressPanel.SetActive(true);
     }
 }
