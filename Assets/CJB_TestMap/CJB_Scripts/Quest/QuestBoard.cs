@@ -5,15 +5,13 @@ using UnityEngine.UI;
 
 public class QuestBoard : MonoBehaviour
 {
-    public GameObject questListPanel;
-    //public GameObject questDetailsPanel;
+    public GameObject questListPanel;   
     public GameObject acceptPopup;
     public GameObject cancelPopup;
     public GameObject questButton;
     public QuestType questType;
 
     public TMP_Text questTitleText;
-    //public TMP_Text questacceptNameText;
     public TMP_Text questDescriptionText;
     public TMP_Text questConditionText;
     public TMP_Text questRewardText;
@@ -53,8 +51,6 @@ public class QuestBoard : MonoBehaviour
         AcceptQuest(selectedQuest);
 
         
-        //questDetailsPanel.SetActive(true);
-        //questacceptNameText.text = selectedQuest.questName;
         questTitleText.text = selectedQuest.questName;
         questDescriptionText.text = selectedQuest.questDescription;
         questConditionText.text = selectedQuest.questCondition;
@@ -64,7 +60,7 @@ public class QuestBoard : MonoBehaviour
     {
         foreach (var acceptedQuest in acceptedQuests)
         {
-            if (acceptedQuest.questType == quest.questType) // questType는 각 퀘스트의 종류를 나타내는 변수
+            if (acceptedQuest.questType == quest.questType) 
             {
                 return true;
             }
