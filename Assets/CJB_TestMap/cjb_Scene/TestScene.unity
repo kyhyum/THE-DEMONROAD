@@ -1389,11 +1389,16 @@ MonoBehaviour:
   acceptPopup: {fileID: 1085281778}
   cancelPopup: {fileID: 1495364443}
   questButton: {fileID: 55232164}
+  questLogPanel: {fileID: 1553776588}
   questType: 0
   questTitleText: {fileID: 345078597}
   questDescriptionText: {fileID: 758467813}
   questConditionText: {fileID: 1185051826}
   questRewardText: {fileID: 2097166736}
+  questLogName: {fileID: 1714369780}
+  questLogSelected: {fileID: 587364886}
+  questLogDescription: {fileID: 560013017}
+  questLogRewards: {fileID: 112967624}
   quests:
   - {fileID: 11400000, guid: 738a6d604c2069e4e8cfade4ddc6f1b9, type: 2}
   acceptedQuests: []
@@ -2597,7 +2602,7 @@ GameObject:
   - component: {fileID: 112967625}
   - component: {fileID: 112967624}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: rewardTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10556,7 +10561,7 @@ GameObject:
   - component: {fileID: 560013018}
   - component: {fileID: 560013017}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: describeTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11129,7 +11134,7 @@ GameObject:
   - component: {fileID: 587364887}
   - component: {fileID: 587364886}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: selectTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20178,11 +20183,16 @@ MonoBehaviour:
   acceptPopup: {fileID: 1085281778}
   cancelPopup: {fileID: 1495364443}
   questButton: {fileID: 1102801040}
+  questLogPanel: {fileID: 1553776588}
   questType: 1
   questTitleText: {fileID: 439385619}
   questDescriptionText: {fileID: 758467813}
   questConditionText: {fileID: 1185051826}
   questRewardText: {fileID: 2097166736}
+  questLogName: {fileID: 1007013000}
+  questLogSelected: {fileID: 587364886}
+  questLogDescription: {fileID: 560013017}
+  questLogRewards: {fileID: 112967624}
   quests:
   - {fileID: 11400000, guid: 554968daf1f966c438f4542e43eb2462, type: 2}
   acceptedQuests: []
@@ -35387,11 +35397,16 @@ MonoBehaviour:
   acceptPopup: {fileID: 1085281778}
   cancelPopup: {fileID: 1495364443}
   questButton: {fileID: 1947091419}
+  questLogPanel: {fileID: 1553776588}
   questType: 2
   questTitleText: {fileID: 1947091418}
   questDescriptionText: {fileID: 758467813}
   questConditionText: {fileID: 1185051826}
   questRewardText: {fileID: 2097166736}
+  questLogName: {fileID: 1599057850}
+  questLogSelected: {fileID: 587364886}
+  questLogDescription: {fileID: 560013017}
+  questLogRewards: {fileID: 112967624}
   quests:
   - {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
   acceptedQuests: []

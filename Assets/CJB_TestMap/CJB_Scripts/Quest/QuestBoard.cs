@@ -9,12 +9,19 @@ public class QuestBoard : MonoBehaviour
     public GameObject acceptPopup;
     public GameObject cancelPopup;
     public GameObject questButton;
+    public GameObject questLogPanel;
     public QuestType questType;
 
     public TMP_Text questTitleText;
     public TMP_Text questDescriptionText;
     public TMP_Text questConditionText;
     public TMP_Text questRewardText;
+    
+    //questlog
+    public TMP_Text questLogName;
+    public TMP_Text questLogSelected;
+    public TMP_Text questLogDescription;
+    public TMP_Text questLogRewards;
 
     public List<QuestSO> quests;
 
@@ -73,11 +80,27 @@ public class QuestBoard : MonoBehaviour
         {
             acceptedQuests.Add(quest);
             acceptPopup.SetActive(true);
+            UpdateQuestLogUI();
         }
         else
         {
             Debug.Log("Quest already accepted!");
             cancelPopup.SetActive(true);
+        }
+    }
+    private void UpdateQuestLogUI()
+    {
+        questLogName.text = "";
+        questLogSelected.text = "";
+        questLogDescription.text = "";
+        questLogRewards.text = "";
+
+        foreach (var acceptedQuest in acceptedQuests)
+        {
+            questLogName.text = acceptedQuest.questName;
+            questLogSelected.text = acceptedQuest.questName;
+            questLogDescription.text = acceptedQuest.questDescription;
+            questLogRewards.text = acceptedQuest.questReward;
         }
     }
 
