@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadingSceneManager : MonoBehaviour
+public class SceneLoadManager : MonoBehaviour
 {
     public static string nextScene;
     [SerializeField] Slider progressBar;
