@@ -7,6 +7,10 @@ using UnityEngine;
 public class QuestLog : MonoBehaviour
 {
     public GameObject questLogPanel;
+    public GameObject questButton;
+
+
+    public List<QuestSO> quests;
     private bool isLogVisible = false;
 
     private void Start()
