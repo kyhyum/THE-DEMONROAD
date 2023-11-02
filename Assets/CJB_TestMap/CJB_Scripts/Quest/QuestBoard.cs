@@ -10,6 +10,7 @@ public class QuestBoard : MonoBehaviour
     public GameObject cancelPopup;
     public GameObject questButton;
     public GameObject questLogPanel;
+    
     public QuestType questType;
 
     //quest board
@@ -23,6 +24,9 @@ public class QuestBoard : MonoBehaviour
     public TMP_Text questLogSelected;
     public TMP_Text questLogDescription;
     public TMP_Text questLogRewards;
+
+    //quest progress
+    public TMP_Text questProgName;
 
     public List<QuestSO> quests;
     public List<QuestSO> acceptedQuests = new List<QuestSO>();
@@ -81,6 +85,7 @@ public class QuestBoard : MonoBehaviour
             acceptedQuests.Add(quest);
             acceptPopup.SetActive(true);
             UpdateQuestLogUI();
+            ShowQuestProgress(quest);
         }
         else
         {
@@ -107,6 +112,7 @@ public class QuestBoard : MonoBehaviour
     public void OnQuestObjectClick(QuestSO quest)
     {
         ShowLogQuestDetails(quest);
+        
     }  
 
     private void ShowLogQuestDetails(QuestSO selectedQuest)
@@ -115,6 +121,11 @@ public class QuestBoard : MonoBehaviour
         questLogSelected.text = selectedQuest.questName;
         questLogDescription.text = selectedQuest.questDescription;
         questLogRewards.text = selectedQuest.questReward;
+    }
+
+    public void ShowQuestProgress(QuestSO selectedQuest)
+    {
+        questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / 완료조건 ";
     }
 
 
