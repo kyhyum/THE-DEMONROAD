@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -103,5 +104,25 @@ public class QuestBoard : MonoBehaviour
             questLogRewards.text = acceptedQuest.questReward;
         }
     }
+
+    public void OnQuestObjectClick(QuestSO quest)
+    {
+        ShowLogQuestDetails(quest);
+    }
+
+    // 이전 코드를 포함하는 부분
+
+    private void ShowLogQuestDetails(QuestSO selectedQuest)
+    {
+
+
+        // 선택한 퀘스트의 정보를 해당 UI 텍스트에 할당합니다.
+        questLogSelected.text = selectedQuest.questName;
+        questLogDescription.text = selectedQuest.questDescription;
+        questLogRewards.text = selectedQuest.questReward;
+    }
+
+
+
 
 }
