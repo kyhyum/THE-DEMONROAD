@@ -15,7 +15,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            PlayerData data = character.GetComponent<Player>().data;
+            /*PlayerData data = character.GetComponent<Player>().data;
             character.name = data.name;
             character.transform.SetParent(this.transform);
             character.transform.position = characterPos;
@@ -25,7 +25,7 @@ public class CharacterSlot : MonoBehaviour
             characterLevel.text = data.level.ToString();
             characterJob.text = data.job.ToString();
             createButton.SetActive(false);
-            TextOpen(true);
+            TextOpen(true);*/
         }
         else
         {
