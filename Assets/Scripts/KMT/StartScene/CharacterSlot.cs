@@ -15,7 +15,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            /*PlayerData data = character.GetComponent<Player>().data;
+            PlayerData data = character.GetComponent<PlayerCondition>().playerData;
             character.name = data.name;
             character.transform.SetParent(this.transform);
             character.transform.position = characterPos;
@@ -25,7 +25,7 @@ public class CharacterSlot : MonoBehaviour
             characterLevel.text = data.level.ToString();
             characterJob.text = data.job.ToString();
             createButton.SetActive(false);
-            TextOpen(true);*/
+            TextOpen(true);
         }
         else
         {
@@ -34,11 +34,11 @@ public class CharacterSlot : MonoBehaviour
     }
     public void SelectSlot()
     {
-        StartSceneManager.s_instance.characterSlot = this;
+        StartSceneManager.s_instance.selectedSlot = slotIndex;
     }
     public void CreateButton()
     {
-        StartSceneManager.s_instance.characterSlot = this;
+        StartSceneManager.s_instance.selectedSlot = slotIndex;
         StartSceneManager.s_instance.OpenCreateCanvas();
     }
     void TextOpen(bool isChar)

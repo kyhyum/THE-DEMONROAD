@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class StartSceneManager : MonoBehaviour
 {
     public static StartSceneManager s_instance;
-    public CharacterSlot characterSlot;
+    public int selectedSlot;
     [SerializeField] CharacterSlot[] characterSlots;
     [SerializeField] GameObject selectCanvas, createCanvas, startCanvas;
     [SerializeField] GameObject[] baseCharacters;
@@ -45,16 +45,15 @@ public class StartSceneManager : MonoBehaviour
             {
                 PlayerData data = GameManager.s_instance.LoadPlayerDataFromJson(prefabPath, one);
                 characterSlots[data.playerIndex].character = Instantiate(baseCharacters[(int)data.job], characterSlots[data.playerIndex].transform);
-                //characterSlots[data.playerIndex].character.AddComponent<Player>().data = data;
+                characterSlots[data.playerIndex].character.AddComponent<PlayerCondition>().playerData = data;
             }
         }
     }
     public void StartButon()
     {
-        if (characterSlot.character != null)
+        if (characterSlots[selectedSlot].character != null)
         {
-            string prefabPath = "Assets/Resources/MyCharacter/";
-            GameManager.s_instance.player = GameManager.s_instance.LoadPlayerDataFromJson(prefabPath, characterSlot.character.name);
+            GameManager.s_instance.player = characterSlots[selectedSlot].character.GetComponent<PlayerCondition>().playerData;
             SceneManager.LoadScene((int)GameManager.s_instance.player.scene);
             DontDestroyOnLoad(GameManager.s_instance.gameObject);
         }
@@ -67,7 +66,7 @@ public class StartSceneManager : MonoBehaviour
     {
         createCanvas.SetActive(true);
         selectCanvas.SetActive(false);
-        characterSlot.character = job[0].jobCharacter;
+        characterSlots[selectedSlot].character = job[0].jobCharacter;
         createCharacterData = job[0].playerData;
     }
     public void OpenSelectCanvas()
@@ -86,7 +85,7 @@ public class StartSceneManager : MonoBehaviour
             {
                 job[i].jobImage.SetActive(true);
                 job[i].jobCharacter.SetActive(true);
-                characterSlot.character = job[i].jobCharacter;
+                characterSlots[selectedSlot].character = job[i].jobCharacter;
                 createCharacterData = job[i].playerData;
             }
         }
@@ -97,11 +96,11 @@ public class StartSceneManager : MonoBehaviour
         {
             string nameText = nameCreate.text;
             createCharacterData.name = nameText;
-            createCharacterData.playerIndex = characterSlot.slotIndex;
+            createCharacterData.playerIndex = selectedSlot;
             createCharacterData.level = 1;
             string prefabPath = "Assets/Resources/MyCharacter/";
             GameManager.s_instance.SavePlayerDataToJson(prefabPath, createCharacterData.name, createCharacterData);
-            //characterSlot.character.AddComponent<Player>().data = GameManager.s_instance.LoadPlayerDataFromJson(prefabPath, createCharacterData.name);
+            characterSlots[selectedSlot].character.AddComponent<PlayerCondition>().playerData = GameManager.s_instance.LoadPlayerDataFromJson(prefabPath, createCharacterData.name);
             OpenSelectCanvas();
         }
         else

@@ -16,7 +16,7 @@ public enum StatType
     INT,
     CON
 }
-public enum Scene
+public enum SceneType
 {
     Start,
     Town,
@@ -33,11 +33,11 @@ public class PlayerData
 
     public int playerIndex;
     
-    public Scene scene;
+    public SceneType scene;
     public Vector3 currentPlayerPos;
     
     public bool isDead;
-    public Inventory inventory;
+    public List<Item> items;
 }
 
 [System.Serializable]
@@ -46,7 +46,7 @@ public class Stat
     public StatType type;
     public int statValue;
 }
-public class PlayerData_KMT : MonoBehaviour
+public class PlayerCondition : MonoBehaviour
 {
     public PlayerData playerData;
     private void Start()

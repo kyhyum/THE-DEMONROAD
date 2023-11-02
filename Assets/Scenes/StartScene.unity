@@ -2565,11 +2565,12 @@ MonoBehaviour:
       statValue: 4
     - type: 3
       statValue: 20
+    baseObject: {fileID: 0}
     playerIndex: 0
     scene: 1
     currentPlayerPos: {x: 0, y: 0, z: 0}
     isDead: 0
-    inventory: {fileID: 0}
+    items: []
 --- !u!1 &304019781
 GameObject:
   m_ObjectHideFlags: 0
@@ -5316,11 +5317,12 @@ MonoBehaviour:
       statValue: 8
     - type: 3
       statValue: 30
+    baseObject: {fileID: 0}
     playerIndex: 0
     scene: 1
     currentPlayerPos: {x: 0, y: 0, z: 0}
     isDead: 0
-    inventory: {fileID: 0}
+    items: []
 --- !u!114 &500104864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6688,11 +6690,14 @@ MonoBehaviour:
       statValue: 4
     - type: 3
       statValue: 50
+    baseObject: {fileID: 8497167851833225634, guid: 7c4e4ae6a1911b0488c655450d48400b,
+      type: 3}
     playerIndex: 0
     scene: 1
     currentPlayerPos: {x: 0, y: 0, z: 0}
     isDead: 0
-    inventory: {fileID: 0}
+    items:
+    - {fileID: 0}
 --- !u!1 &619515929
 GameObject:
   m_ObjectHideFlags: 0
@@ -11230,7 +11235,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingCanvas: {fileID: 2066763862}
-  player: {fileID: 0}
+  player:
+    name: 
+    level: 0
+    job: 0
+    stats: []
+    baseObject: {fileID: 0}
+    playerIndex: 0
+    scene: 0
+    currentPlayerPos: {x: 0, y: 0, z: 0}
+    isDead: 0
+    items: []
+  Myplayer: {fileID: 0}
 --- !u!1 &1179955078
 GameObject:
   m_ObjectHideFlags: 0
@@ -16008,7 +16024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bdcdb7b9b393284fb26325ea5e6c69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSlot: {fileID: 0}
+  selectedSlot: 0
   characterSlots:
   - {fileID: 1372909680}
   - {fileID: 1400770974}

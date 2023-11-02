@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     public GameObject Myplayer;
     private void Awake()
     {
-        Debug.Log("01");
         if (s_instance == null)
         {
             s_instance = this;
@@ -22,14 +21,19 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-        if (player != null)
-        {
-            Myplayer = Instantiate(player.baseObject);
-        }
     }
-    private void OnEnable()
+    private void Start()
     {
-        
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (player.baseObject != null && scene.buildIndex != 0)
+        {
+            Myplayer = Instantiate<GameObject>(player.baseObject);
+            Myplayer.AddComponent<PlayerCondition>().playerData = player;
+            Myplayer.transform.position = player.currentPlayerPos;
+        }
     }
     public void Finish()
     {
