@@ -1,5 +1,3 @@
-
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +8,7 @@ public class QuestBoard : MonoBehaviour
     public GameObject questListPanel;
     public GameObject questDetailsPanel;
     public GameObject questButton;
+    public QuestType questType;
 
     public TMP_Text questTitleText;
     public TMP_Text questacceptNameText;
@@ -48,10 +47,6 @@ public class QuestBoard : MonoBehaviour
     }
     private void ShowQuestDetails(QuestSO selectedQuest)
     {
-        if (IsQuestAlreadyAccepted(selectedQuest))
-        {
-            return;
-        }
         AcceptQuest(selectedQuest);
 
         questDetailsPanel.SetActive(true);
@@ -76,6 +71,13 @@ public class QuestBoard : MonoBehaviour
 
     private void AcceptQuest(QuestSO quest)
     {
-        acceptedQuests.Add(quest);
+        if (!IsQuestAlreadyAccepted(quest))
+        {
+            acceptedQuests.Add(quest);
+        }
+        else
+        {
+            Debug.Log("Quest already accepted!");
+        }
     }
 }

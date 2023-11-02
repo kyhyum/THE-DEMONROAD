@@ -21,23 +21,8 @@ public class QuestAcceptWindow : MonoBehaviour
     {
         CloseWindow();
         questLog.SetActive(true);
-        ShowSelectedQuest();
-    }
-    private void ShowSelectedQuest()
-    {
-        QuestBoard questBoard = FindObjectOfType<QuestBoard>();
-
-        
-
-        foreach (QuestSO quest in questBoard.acceptedQuests)
-        {
-            questLogList.text = quest.questName;
-            questSelected.text = quest.questName;
-            questDescription.text = quest.questDescription;
-            questRewards.text = quest.questReward;
-
-        }
         
     }
+    
 
  }
