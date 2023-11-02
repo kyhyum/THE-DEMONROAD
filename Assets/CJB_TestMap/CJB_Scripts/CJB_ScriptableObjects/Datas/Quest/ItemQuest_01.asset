@@ -20,4 +20,5 @@ MonoBehaviour:
     \uC548\uB420\uAE4C\uC694? 10\uAC1C\uC815\uB3C4\uBA74 \uC88B\uC744\uAC70 \uAC19\uC544\uC694."
   <questCondition>k__BackingField: "\uACE0\uBE14\uB9B0 \uC804\uC0AC\uC758 \uBF08
     10\uAC1C"
+  <questComplete>k__BackingField: 10
   <questReward>k__BackingField: "\uAE08\uD654 3\uAC1C"

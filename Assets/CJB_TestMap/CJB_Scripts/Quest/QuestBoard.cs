@@ -125,7 +125,7 @@ public class QuestBoard : MonoBehaviour
 
     public void ShowQuestProgress(QuestSO selectedQuest)
     {
-        questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / 완료조건 ";
+        questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / "+ selectedQuest.questComplete;
     }
 
 

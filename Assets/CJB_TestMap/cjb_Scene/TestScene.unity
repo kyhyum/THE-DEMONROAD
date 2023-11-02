@@ -1399,6 +1399,7 @@ MonoBehaviour:
   questLogSelected: {fileID: 587364886}
   questLogDescription: {fileID: 560013017}
   questLogRewards: {fileID: 112967624}
+  questProgName: {fileID: 715683515}
   quests:
   - {fileID: 11400000, guid: 738a6d604c2069e4e8cfade4ddc6f1b9, type: 2}
   acceptedQuests: []
@@ -4739,7 +4740,7 @@ GameObject:
   - component: {fileID: 201066516}
   - component: {fileID: 201066515}
   m_Layer: 5
-  m_Name: monsterquestTxt
+  m_Name: itemquestTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12180,7 +12181,7 @@ GameObject:
   - component: {fileID: 681685323}
   - component: {fileID: 681685322}
   m_Layer: 5
-  m_Name: monsterquestTxt
+  m_Name: conversequestTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19648,6 +19649,7 @@ MonoBehaviour:
   questLogSelected: {fileID: 587364886}
   questLogDescription: {fileID: 560013017}
   questLogRewards: {fileID: 112967624}
+  questProgName: {fileID: 201066515}
   quests:
   - {fileID: 11400000, guid: 554968daf1f966c438f4542e43eb2462, type: 2}
   acceptedQuests: []
@@ -20803,7 +20805,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 763.82043, y: 261.01172}
+  m_AnchoredPosition: {x: 763.82043, y: -143.6}
   m_SizeDelta: {x: 348.3591, y: 355.9766}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1178509483
@@ -20819,7 +20821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.050980393}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -26724,7 +26726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1553776589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34993,6 +34995,7 @@ MonoBehaviour:
   questLogSelected: {fileID: 587364886}
   questLogDescription: {fileID: 560013017}
   questLogRewards: {fileID: 112967624}
+  questProgName: {fileID: 681685322}
   quests:
   - {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
   acceptedQuests: []
