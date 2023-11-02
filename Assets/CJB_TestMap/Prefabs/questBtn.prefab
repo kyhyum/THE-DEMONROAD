@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 4373124019030252587}
   - component: {fileID: 1653125673808216735}
   - component: {fileID: 5464975202777587745}
-  - component: {fileID: 2902680206179995798}
   m_Layer: 5
   m_Name: questBtn
   m_TagString: Untagged
@@ -272,18 +271,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2902680206179995798}
-        m_TargetAssemblyTypeName: questController, Assembly-CSharp
-        m_MethodName: ToggleQuestPanelVisibility
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &5464975202777587745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,17 +284,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textToChange: {fileID: 157917310365722777}
---- !u!114 &2902680206179995798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7951174816068407725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d733e53f14aad49ae1f7da16b447be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questacceptPanel: {fileID: 0}
-  isUIVisible: 0
