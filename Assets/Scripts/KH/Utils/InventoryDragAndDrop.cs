@@ -22,8 +22,6 @@ public class InventoryDragAndDrop : MonoBehaviour, IDragHandler
     }
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log(rect.anchoredPosition);
-
         rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
         if (rect.anchoredPosition.x > canvasWidth - width)
