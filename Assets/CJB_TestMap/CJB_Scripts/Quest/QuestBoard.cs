@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,6 +12,7 @@ public class QuestBoard : MonoBehaviour
     public GameObject questLogPanel;
     public QuestType questType;
 
+    //quest board
     public TMP_Text questTitleText;
     public TMP_Text questDescriptionText;
     public TMP_Text questConditionText;
@@ -25,7 +25,6 @@ public class QuestBoard : MonoBehaviour
     public TMP_Text questLogRewards;
 
     public List<QuestSO> quests;
-
     public List<QuestSO> acceptedQuests = new List<QuestSO>();
 
     public void Start()
@@ -108,15 +107,11 @@ public class QuestBoard : MonoBehaviour
     public void OnQuestObjectClick(QuestSO quest)
     {
         ShowLogQuestDetails(quest);
-    }
-
-    // 이전 코드를 포함하는 부분
+    }  
 
     private void ShowLogQuestDetails(QuestSO selectedQuest)
     {
-
-
-        // 선택한 퀘스트의 정보를 해당 UI 텍스트에 할당합니다.
+        
         questLogSelected.text = selectedQuest.questName;
         questLogDescription.text = selectedQuest.questDescription;
         questLogRewards.text = selectedQuest.questReward;
