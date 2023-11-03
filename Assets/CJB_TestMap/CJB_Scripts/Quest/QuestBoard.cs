@@ -12,6 +12,7 @@ public class QuestBoard : MonoBehaviour
     public GameObject questLogPanel;
     
     public QuestType questType;
+    
 
     //quest board
     public TMP_Text questTitleText;
@@ -86,6 +87,7 @@ public class QuestBoard : MonoBehaviour
             acceptPopup.SetActive(true);
             UpdateQuestLogUI();
             ShowQuestProgress(quest);
+           
         }
         else
         {
