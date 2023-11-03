@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class CharacterSlot : MonoBehaviour
 {
-    public Vector3 characterPos;
+    [SerializeField] Vector3 characterPos;
+    [SerializeField] Quaternion look;
     public GameObject character;
     public int slotIndex;
     [SerializeField] GameObject createButton;
@@ -20,7 +21,7 @@ public class CharacterSlot : MonoBehaviour
             character.transform.SetParent(this.transform);
             character.transform.position = characterPos;
             character.transform.localScale = new Vector3(3, 3, 3);
-            character.transform.LookAt(Camera.main.transform.position);
+            character.transform.rotation = look;
             characterName.text = character.name;
             characterLevel.text = data.level.ToString();
             characterJob.text = data.job.ToString();
@@ -30,6 +31,14 @@ public class CharacterSlot : MonoBehaviour
         else
         {
             TextOpen(false);
+        }
+    }
+    private void OnValidate()
+    {
+        if(character != null)
+        {
+            character.transform.position = characterPos;
+            character.transform.rotation = look;
         }
     }
     public void SelectSlot()

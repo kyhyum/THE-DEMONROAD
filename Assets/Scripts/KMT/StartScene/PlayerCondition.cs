@@ -59,7 +59,7 @@ public class PlayerCondition : MonoBehaviour
     public float maxHp;
     public float currentMp;
     public float maxMp;
-    Dictionary<StatType, int> myStats;
+    Dictionary<StatType, int> myStats = new Dictionary<StatType, int>();
     private void Start()
     {
         switch (playerData.job)

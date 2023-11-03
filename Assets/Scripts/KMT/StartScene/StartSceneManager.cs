@@ -51,6 +51,11 @@ public class StartSceneManager : MonoBehaviour
     }
     public void StartButon()
     {
+        if(selectedSlot == -1)
+        {
+            Debug.Log("캐릭터를 선택해주세요");
+            return;
+        }
         if (characterSlots[selectedSlot].character != null)
         {
             GameManager.s_instance.player = characterSlots[selectedSlot].character.GetComponent<PlayerCondition>().playerData;
@@ -66,7 +71,7 @@ public class StartSceneManager : MonoBehaviour
     {
         createCanvas.SetActive(true);
         selectCanvas.SetActive(false);
-        characterSlots[selectedSlot].character = job[0].jobCharacter;
+        characterSlots[selectedSlot].character =  job[0].jobCharacter;
         createCharacterData = job[0].playerData;
     }
     public void OpenSelectCanvas()
@@ -95,6 +100,7 @@ public class StartSceneManager : MonoBehaviour
         if (!playerName.Contains(nameCreate.text))
         {
             string nameText = nameCreate.text;
+            characterSlots[selectedSlot].character = Instantiate(characterSlots[selectedSlot].character);
             createCharacterData.name = nameText;
             createCharacterData.playerIndex = selectedSlot;
             createCharacterData.level = 1;
