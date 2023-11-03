@@ -33,14 +33,6 @@ public class CharacterSlot : MonoBehaviour
             TextOpen(false);
         }
     }
-    private void OnValidate()
-    {
-        if(character != null)
-        {
-            character.transform.position = characterPos;
-            character.transform.rotation = look;
-        }
-    }
     public void SelectSlot()
     {
         StartSceneManager.s_instance.selectedSlot = slotIndex;
@@ -60,5 +52,19 @@ public class CharacterSlot : MonoBehaviour
         characterLevel.gameObject.SetActive(isChar);
         characterJob.gameObject.SetActive(isChar);
     }
-    
+    public void DeleteCharacter()
+    {
+        string prefabPath = "Assets/Resources/MyCharacter/";
+        if(GameManager.s_instance.DeleteCharacter(prefabPath, character.GetComponent<PlayerCondition>().playerData.name))
+        {
+            Destroy(character);
+            TextOpen(false);
+            createButton.SetActive(true);
+            character = null;
+        }
+        else
+        {
+            Debug.Log("실패했습니다");
+        }
+    }
 }

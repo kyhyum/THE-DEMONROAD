@@ -59,6 +59,16 @@ public class GameManager : MonoBehaviour
         return JsonUtility.FromJson<PlayerData>(jsonData);
         
     }
+    public bool DeleteCharacter(string jsonPath, string characterName)
+    {
+        string path = Path.Combine(jsonPath, $"{characterName}.json");
+        bool result = File.Exists(path);
+        if (result)
+        {
+            File.Delete(path);
+        }
+        return result;
+    }
     void Save()
     {
         if(player != null)
