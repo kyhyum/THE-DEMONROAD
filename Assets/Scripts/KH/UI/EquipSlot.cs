@@ -13,36 +13,50 @@ public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegi
     private GameObject itemClone;
     private Canvas canvas;
     private RectTransform rect;
+    private bool isEquip;
+    private bool isDrag;
+
+    private void Awake()
+    {
+        icon = GetComponent<RawImage>();
+        baseImage = Resources.Load<Texture2D>("KH/Images/UI/Equip/" + gameObject.name);
+        Clear();
+    }
 
     private void Start()
     {
-        icon = GetComponent<RawImage>();
         canvas = GetComponentInParent<Canvas>();
-        baseImage = Resources.Load<Texture2D>("KH/Images/UI/Equip/" + gameObject.name);
-        Clear();
     }
 
     private void Clear()
     {
         icon.texture = baseImage;
         icon.color = Color.black;
+        isEquip = false;
     }
 
     public void Equip(EquipItem item)
     {
         this.item = gameObject.AddComponent<EquipItem>();
         this.item.Set(item);
-        icon.color = Color.white;
-        item.Equip();
 
+        icon.color = Color.white;
         icon.texture = item.texture;
+        isEquip = true;
+        item.Equip();
     }
 
     public void UnEquip()
     {
         Clear();
         item.UnEquip();
+        isEquip = false;
         Destroy(item);
+    }
+
+    public Item GetItem()
+    {
+        return item;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -57,15 +71,21 @@ public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegi
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (icon.texture == baseImage)
+        if (!isEquip)
             return;
+        isDrag = true;
 
         itemClone = Instantiate(gameObject, canvas.GetComponent<Transform>());
         rect = itemClone.GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(70, 70);
+
+        if (itemClone.TryGetComponent<EquipSlot>(out EquipSlot equipSlot))
+        {
+            equipSlot.Equip(item);
+            equipSlot.type = type;
+        }
 
         Vector2 mousePosition = Input.mousePosition;
-        mousePosition.x -= Screen.width / 2;
-        mousePosition.y -= Screen.height / 2;
 
         rect.anchoredPosition = mousePosition;
 
@@ -77,16 +97,17 @@ public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegi
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (icon.texture == baseImage)
+        if (!isDrag)
             return;
         rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (icon.texture == baseImage)
+        if (!isDrag)
             return;
         Destroy(itemClone);
+        isDrag = false;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -100,9 +121,9 @@ public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegi
 
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.TryGetComponent<InventoryItem>(out InventoryItem inventoryItem))
+            if (result.gameObject.TryGetComponent<InventorySlot>(out InventorySlot slot))
             {
-                Debug.Log("OnDrop");
+                UIManager.Instance.GetInventory().UnEquip(slot.slotID, item.type);
             }
         }
     }

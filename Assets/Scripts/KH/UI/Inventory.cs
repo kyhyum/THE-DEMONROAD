@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -57,26 +58,25 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                index = FindIndex();
-
-                inventoryItem = inventorySlots[index].GetComponentInChildren<InventoryItem>();
                 stackItems.Add(stackableItem, index);
-                inventorySlots[index].isContain = true;
-                inventoryItem.SetItem(item);
+                AddItem(FindIndex(), item);
             }
         }
         else
         {
-            int index = FindIndex();
-
-            inventoryItem = inventorySlots[index].GetComponentInChildren<InventoryItem>();
-            inventorySlots[index].isContain = true;
-            inventoryItem.SetItem(item);
+            AddItem(FindIndex(), item);
         }
 
         count++;
 
         return true;
+    }
+
+    public void AddItem(int index, Item item)
+    {
+        InventoryItem inventoryItem = inventorySlots[index].GetComponentInChildren<InventoryItem>();
+        inventorySlots[index].isContain = true;
+        inventoryItem.SetItem(item);
     }
 
     public int FindIndex()
@@ -120,6 +120,7 @@ public class Inventory : MonoBehaviour
         if (equipSlot.TryGetComponent<EquipItem>(out EquipItem equipItem))
         {
             itemA.SetItem(equipItem);
+            equipSlot.UnEquip();
         }
         else
         {
@@ -129,5 +130,35 @@ public class Inventory : MonoBehaviour
         }
 
         equipSlot.Equip((EquipItem)item);
+    }
+
+    public void UnEquip(int slotA, ItemType type)
+    {
+        InventoryItem itemA = inventorySlots[slotA].GetComponentInChildren<InventoryItem>();
+        EquipSlot equipSlot = equipSlots[(int)type];
+
+        if (itemA.TryGetComponent<Item>(out Item item))
+        {
+            if (item is EquipItem)
+            {
+                EquipItem equipItem = (EquipItem)item;
+
+                if (equipItem.type == type)
+                {
+                    AddItem(slotA, equipSlot.GetItem());
+                    equipSlot.UnEquip();
+                    equipSlot.Equip(equipItem);
+
+                    return;
+                }
+            }
+            AddItem(equipSlot.GetItem());
+            equipSlot.UnEquip();
+        }
+        else
+        {
+            AddItem(slotA, equipSlot.GetItem());
+            equipSlot.UnEquip();
+        }
     }
 }
