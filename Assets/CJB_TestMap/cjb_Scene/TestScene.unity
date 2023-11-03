@@ -20606,6 +20606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1226324490}
   - component: {fileID: 1226324491}
+  - component: {fileID: 1226324492}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -20644,6 +20645,19 @@ MonoBehaviour:
   moveSpeed: 15
   turnSpeed: 20
   questLogPanel: {fileID: 1553776588}
+--- !u!114 &1226324492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226324489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a578c2315725c44a3bfa2d550c76fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerProgress: 0
 --- !u!1 &1236967105
 GameObject:
   m_ObjectHideFlags: 0
