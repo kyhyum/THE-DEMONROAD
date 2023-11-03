@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
     public void Finish()
     {
         Application.Quit();
-        //UnityEditor.EditorApplication.isPlaying = false;
     }
     public void SavePlayerDataToJson(string jsonPath, string characterName, PlayerData data)
     {
@@ -69,18 +68,18 @@ public class GameManager : MonoBehaviour
         }
         return result;
     }
-    void Save()
+    public void HomeButton()
     {
-        if(player != null)
-        {
-            PlayerData data = player;
-            string prefabPath = "Assets/Resources/MyCharacter/";
-            SavePlayerDataToJson(prefabPath, data.name, data);
-        }
+        Save();
     }
-    public void SceneLoad()
+    public void Save()
     {
-        
+        if(SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 2)
+        {
+            player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
+            player.currentPlayerPos = Myplayer.transform.position;
+        }
+        SavePlayerDataToJson(StringManager.jsonPath, player.name, player);
     }
     private void OnApplicationQuit()
     {
