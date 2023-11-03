@@ -53,7 +53,10 @@ public class npcInteraction : MonoBehaviour
         isTalking = true;
         dialogueUI.SetActive(true);
         nameText.text = npc.npcName;
-        StartCoroutine(DisplayDialogue());
+
+        string appropriateDialogue = npc.GetAppropriateDialogue(false);
+        StartCoroutine(DisplayDialogue(appropriateDialogue));
+        //StartCoroutine(DisplayDialogue());
     }
 
     void HideDialogue()
@@ -62,15 +65,25 @@ public class npcInteraction : MonoBehaviour
         dialogueUI.SetActive(false);
     }
 
-    System.Collections.IEnumerator DisplayDialogue()
+    System.Collections.IEnumerator DisplayDialogue(string dialogue) 
     {
-        foreach (string dialogue in npc.npcDialogue)
+        dialogueText.text = ""; 
+        foreach (char letter in dialogue.ToCharArray()) 
         {
-            dialogueText.text = dialogue;
-            yield return new WaitForSeconds(1f); 
+            dialogueText.text += letter; 
+            yield return new WaitForSeconds(0.05f); 
         }
-        
-        
     }
-    
+
+    //System.Collections.IEnumerator DisplayDialogue()
+    //{
+    //    foreach (string dialogue in npc.npcDialogue)
+    //    {
+    //        dialogueText.text = dialogue;
+    //        yield return new WaitForSeconds(1f); 
+    //    }
+
+
+    //}
+
 }
