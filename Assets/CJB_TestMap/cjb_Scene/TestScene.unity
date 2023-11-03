@@ -20648,7 +20648,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 15
   turnSpeed: 20
-  questLogPanel: {fileID: 1553776588}
 --- !u!114 &1226324492
 MonoBehaviour:
   m_ObjectHideFlags: 0
