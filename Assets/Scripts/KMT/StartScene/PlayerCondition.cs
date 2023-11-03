@@ -5,25 +5,7 @@ using System.IO;
 using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
-public enum Job
-{
-    WARRIOR,
-    ARCHOR,
-    WIZZARD
-}
-public enum StatType
-{
-    STR,
-    DEX,
-    INT,
-    CON
-}
-public enum SceneType
-{
-    Start,
-    Town,
-    Dungeon
-}
+
 [System.Serializable]
 public class PlayerData
 {

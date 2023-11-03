@@ -35,7 +35,7 @@ public class CharacterSlot : MonoBehaviour
     }
     public void SelectSlot()
     {
-        StartSceneManager.s_instance.selectedSlot = slotIndex;
+        SelectCanvasManager.s_instance.selectedSlot = slotIndex;
         if(character != null)
         {
             character.GetComponent<Animator>().SetTrigger("Choice");
@@ -43,7 +43,8 @@ public class CharacterSlot : MonoBehaviour
     }
     public void CreateButton()
     {
-        StartSceneManager.s_instance.selectedSlot = slotIndex;
+        SelectCanvasManager.s_instance.selectedSlot = slotIndex;
+        SelectCanvasManager.s_instance.createSlot = this;
         StartSceneManager.s_instance.OpenCreateCanvas();
     }
     void TextOpen(bool isChar)
