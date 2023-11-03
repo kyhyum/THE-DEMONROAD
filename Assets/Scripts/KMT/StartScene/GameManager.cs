@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (player.baseObject != null && scene.buildIndex != 0)
+        if (player.baseObject != null && scene.buildIndex != 0 && scene.buildIndex != 2)
         {
             Myplayer = Instantiate<GameObject>(player.baseObject);
             Myplayer.AddComponent<PlayerCondition>().playerData = player;

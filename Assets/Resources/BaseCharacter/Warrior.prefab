@@ -2335,7 +2335,7 @@ Transform:
   m_GameObject: {fileID: 7401510000397243250}
   m_LocalRotation: {x: -4.419666e-15, y: -0.0000000048471085, z: -0.00000071926604,
     w: 1}
-  m_LocalPosition: {x: -0.0003429121, y: 0.95578784, z: 0.0050036493}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2609,7 +2609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1079517321193145836}
-  - component: {fileID: -6471391961525075846}
+  - component: {fileID: 610071002711537942}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Untagged
@@ -2624,9 +2624,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8497167851833225634}
-  m_LocalRotation: {x: 0.023754334, y: 0.954487, z: 0.07911508, w: -0.2865851}
-  m_LocalPosition: {x: 6.6, y: -1, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3375684317246297858}
@@ -2635,47 +2635,29 @@ Transform:
   - {fileID: 6458060586736322313}
   - {fileID: 1357397181278521334}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &-6471391961525075846
-MonoBehaviour:
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &610071002711537942
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8497167851833225634}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ca23b1c741a74846978194de3c0a79e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData:
-    name: eqw
-    level: 1
-    job: 0
-    stats:
-    - type: 0
-      statValue: 8
-    - type: 1
-      statValue: 4
-    - type: 2
-      statValue: 4
-    - type: 3
-      statValue: 50
-    baseObject: {fileID: 8497167851833225634}
-    playerIndex: 3
-    scene: 1
-    currentPlayerPos: {x: 0, y: 0, z: 0}
-    isDead: 0
-    items:
-    - {fileID: 0}
-  atk: 0
-  def: 0
-  speed: 0
-  currentHp: 0
-  maxHp: 0
-  currentMp: 0
-  maxMp: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8806b6dc888de414b96e504b1b6e2ad9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8499390132886410066
 GameObject:
   m_ObjectHideFlags: 0

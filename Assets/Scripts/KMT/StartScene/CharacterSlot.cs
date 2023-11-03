@@ -44,6 +44,10 @@ public class CharacterSlot : MonoBehaviour
     public void SelectSlot()
     {
         StartSceneManager.s_instance.selectedSlot = slotIndex;
+        if(character != null)
+        {
+            character.GetComponent<Animator>().SetTrigger("Choice");
+        }
     }
     public void CreateButton()
     {
