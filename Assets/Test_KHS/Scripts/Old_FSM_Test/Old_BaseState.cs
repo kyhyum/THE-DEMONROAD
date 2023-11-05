@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class BaseState
+public class Old_BaseState
 {
     public string name;
-    protected StateMachine stateMachine;
+    protected Old_StateMachine stateMachine;
 
     public PlayerInput playerInput;
 
-    public BaseState(string name, StateMachine stateMachine)
+    public Old_BaseState(string name, Old_StateMachine stateMachine)
     {
         this.name = name;
         this.stateMachine = stateMachine;
-        
+
     }
 
     public virtual void Enter()

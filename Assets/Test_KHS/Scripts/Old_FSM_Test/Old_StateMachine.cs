@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Old_StateMachine : MonoBehaviour
 {
-    BaseState currentState;
+    Old_BaseState currentState;
 
-    public PlayerInput playerInput;
+    public Old_PlayerInput playerInput;
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
+        playerInput = GetComponent<Old_PlayerInput>();
     }
 
     void Start()
@@ -32,17 +32,18 @@ public class Old_StateMachine : MonoBehaviour
             currentState.UpdatePhysics();
     }
 
-    public void ChangeState(BaseState newState)
+    public void ChangeState(Old_BaseState newState)
     {
         currentState.Exit();
 
         currentState = newState;
-        currentState.playerInput = playerInput;
+        //?
+        //currentState.playerInput = playerInput;
         currentState.Enter();
 
     }
 
-    protected virtual BaseState GetInitialState()
+    protected virtual Old_BaseState GetInitialState()
     {
         return null;
     }
