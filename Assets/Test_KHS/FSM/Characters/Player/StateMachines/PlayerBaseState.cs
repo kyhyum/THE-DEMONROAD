@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.Windows;
 
 public class PlayerBaseState : IState
 {
@@ -10,8 +14,7 @@ public class PlayerBaseState : IState
     public PlayerBaseState(PlayerStateMachine playerStateMachine)
     {
         stateMachine = playerStateMachine;
-        // TODO
-        //groundData = playerStateMachine.Data.GroundData;
+        groundData = playerStateMachine.Player.Data.GroundedData;
     }
 
     public virtual void Enter()
@@ -22,6 +25,8 @@ public class PlayerBaseState : IState
     public virtual void Exit()
     {
         RemoveInputActionsCallbacks();
+
+        
     }
 
     /// <summary>
@@ -42,12 +47,18 @@ public class PlayerBaseState : IState
         Move();
     }
 
+    public virtual void LateUpdate()
+    {
+        LateMove();
+    }
+
     /// <summary>
     /// Add
     /// </summary>
     protected virtual void AddInputActionsCallbacks()
     {
-
+        PlayerInput input = stateMachine.Player.Input;
+        input.PlayerActions.Move.canceled += OnMoveCanceled;
     }
 
     /// <summary>
@@ -55,7 +66,22 @@ public class PlayerBaseState : IState
     /// </summary>
     protected virtual void RemoveInputActionsCallbacks()
     {
+        PlayerInput input = stateMachine.Player.Input;
+        input.PlayerActions.Move.canceled -= OnMoveCanceled;
+    }
 
+    // Move.canceled: 무브가 떼어졌을 때, 마우스 오른쪽 버튼이 떨어졌을 때 발생하는 이벤트이다.
+    protected virtual void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition), out hit, 100))
+        {
+            Debug.Log($"hit.collider.name: {hit.collider.name}");
+            Debug.Log($"hit.point: {hit.point}");
+
+            stateMachine.Player.Agent.SetDestination(hit.point);
+        }
     }
 
     /// <summary>
@@ -63,10 +89,7 @@ public class PlayerBaseState : IState
     /// </summary>
     private void ReadMovementInput()
     {
-        // stateMachine에 역참조를 계속 간다. 참조만 따라가면 된다.
-        // 이제부터 자주 사용되는 애들은 캐싱을 해놓는게 아무래도 좋다.
-        // TODO
-        //stateMachine.MovementInput = stateMachine.Player.Input.PlayerActions.Movement.ReadValue<Vector2>();
+        stateMachine.MovementInput = stateMachine.Player.Input.PlayerActions.Move.ReadValue<float>();
     }
 
     /// <summary>
@@ -74,74 +97,21 @@ public class PlayerBaseState : IState
     /// </summary>
     private void Move()
     {
-        // 이동 방향이다.
-        Vector3 movementDirection = GetMovementDirection();
-        
-        Rotate(movementDirection);
-
-        Move(movementDirection);
-    }
-
-    /// <summary>
-    /// 이동해야하는 방향을 가져온다. 카메라가 바라보고 있는 방향으로 이동을 하게 만들 것이다.
-    /// </summary>
-    /// <returns></returns>
-    private Vector3 GetMovementDirection()
-    {
-        // 메인 카메라가 바라보고 있는 정면이다.
-        Vector3 forward = stateMachine.MainCameraTransform.forward;
-        // 메인 카메라 right 방향이다.
-        Vector3 right = stateMachine.MainCameraTransform.right;
-
-        // y값을 제거해야지 땅바닥 보고 안간다.
-        forward.y = 0;
-        right.y = 0;
-
-        // Normalize(): 저 벡터 자체를 normalize한다.
-        forward.Normalize();
-        right.Normalize();
-
-        return forward * stateMachine.MovementInput.y + right * stateMachine.MovementInput.x;
-    }
-
-    /// <summary>
-    /// 이동
-    /// </summary>
-    /// <param name="movementDirection"></param>
-    private void Move(Vector3 movementDirection)
-    {
-        // 이 스피드를 가지고서 실제로 이동 처리를 한다.
         float movementSpeed = GetMovemenetSpeed();
-        // 컨트롤러를 쓸 것이기 때문에 Controller.Move를 쓴다.
-        stateMachine.Player.Controller.Move(
-            // 이동 처리를 한다.
-            // 이동 방향과 스피드를 곱해 주는 것이다.
-            // 그런 다음에 곱하기해서 deltaTime 해주면 끝이다.
 
-            // 나중에 여기서 기능이 조금 더 추가될 것이다.
-            (movementDirection * movementSpeed) * Time.deltaTime
-            );
+        if (stateMachine.Player.Agent.remainingDistance > stateMachine.Player.Agent.stoppingDistance)
+        {
+            stateMachine.Player.Controller.Move((stateMachine.Player.Agent.velocity.normalized * movementSpeed) * Time.deltaTime);
+        }
+        else
+        {
+            stateMachine.Player.Controller.Move(Vector3.zero);
+        }
     }
 
-    /// <summary>
-    /// 회전
-    /// </summary>
-    /// <param name="movementDirection"></param>
-    private void Rotate(Vector3 movementDirection)
+    private void LateMove()
     {
-        // 뭔가 입력이 됐을 때 
-        if (movementDirection != Vector3.zero)
-        {
-            // stateMachine.Player.transform이 너무 자주 나와서 줄였다.
-            Transform playerTransform = stateMachine.Player.transform;
-            // 그 방향을 바라보는 로테이션을 만들어 줄 것이다.
-            // Quaternion.LookRotation(Vector3 forward) : forward 방향을 바라보는 쿼터니언을 만들어준다.
-            Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
-            // stateMachine.Player.transform.rotation 값을 바꿔주면 되는데, 이러면 너무 순간이동하듯이 뺑뺑 도니까
-            // 러프인데 S러프 그러니까 선형 보간이 아니라 타원의 곡선의 보간이 일어난다.
-            // Quaternion.Slerp(): 타원의 곡선의 보간을 해준다.
-            playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, stateMachine.RotationDamping * Time.deltaTime);
-        }
+        stateMachine.Player.transform.position = stateMachine.Player.Agent.nextPosition;
     }
 
     private float GetMovemenetSpeed()

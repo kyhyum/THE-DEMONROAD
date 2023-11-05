@@ -22,8 +22,12 @@ public interface IState
     /// <summary>
     /// State용 Update 함수이다.
     /// </summary>
-    /// 
     public void Update();
+
+    /// <summary>
+    /// State용 LateUpdate 함수이다
+    /// </summary>
+    public void LateUpdate();
 
     /// <summary>
     /// State용 물리적 update 함수이다. 

@@ -24,5 +24,12 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Update()
     {
         base.Update();
+
+        // 이동이 일어나면
+        if (stateMachine.MovementInput != 0)
+        {
+            OnMove();
+            return;
+        }
     }
 }

@@ -3,10 +3,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.PlayerLoop;
 
 public class Player : MonoBehaviour
 {
+    public LayerMask groundLayerMask;
+
     [field: Header("References")]
     [field: SerializeField] public PlayerSO Data { get; private set; }
 
@@ -17,6 +20,8 @@ public class Player : MonoBehaviour
     public Animator Animator { get; private set; }
     public PlayerInput Input { get; private set; }
     public CharacterController Controller { get; private set; }
+    public NavMeshAgent Agent { get; private set; }
+    public Camera Camera { get; private set; }
 
     private PlayerStateMachine stateMachine;
 
@@ -28,12 +33,18 @@ public class Player : MonoBehaviour
         Animator = GetComponentInChildren<Animator>();
         Input = GetComponent<PlayerInput>();
         Controller = GetComponent<CharacterController>();
+        Agent = GetComponent<NavMeshAgent>();
 
         stateMachine = new PlayerStateMachine(this);
     }
 
     private void Start()
     {
+        Agent.updatePosition = false;
+        Agent.updateRotation = true;
+
+        Camera = Camera.main;
+
         stateMachine.ChangeState(stateMachine.IdleState);
     }
 
@@ -41,6 +52,11 @@ public class Player : MonoBehaviour
     {
         stateMachine.HandleInput();
         stateMachine.Update();
+    }
+
+    private void LateUpdate()
+    {
+        stateMachine.LateUpdate();
     }
 
     private void FixedUpdate()
