@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class MonsterChaseState : MonsterBaseState
@@ -27,7 +28,7 @@ public class MonsterChaseState : MonsterBaseState
     public override void Update()
     {
         base.Update();
-
+        stateMachine.Monster.EnemyNavMeshAgent.SetDestination(stateMachine.Target.transform.position);
         if (!IsInChaseRange())
         {
             stateMachine.ChangeState(stateMachine.IdleState);
@@ -35,6 +36,7 @@ public class MonsterChaseState : MonsterBaseState
         }
         else if (IsInAttackRange())
         {
+            stateMachine.Monster.EnemyNavMeshAgent.ResetPath();
             stateMachine.ChangeState(stateMachine.AttackState);
             return;
         }

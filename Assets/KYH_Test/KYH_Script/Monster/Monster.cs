@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Monster : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Monster : MonoBehaviour
     [field: SerializeField] public MonsterAnimationData monsterAnimationData { get; private set; }
 
     public EnemyForceReceiver EnemyForceReceiver { get; private set; }
+    public NavMeshAgent EnemyNavMeshAgent { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
     public CharacterController Controller { get; private set; }
@@ -27,13 +29,23 @@ public class Monster : MonoBehaviour
         Animator = GetComponent<Animator>();
         Controller = GetComponent<CharacterController>();
         EnemyForceReceiver = GetComponent<EnemyForceReceiver>();
+        EnemyNavMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new MonsterStateMachine(this);
         MonsterHealth = GetComponent<MonsterHealth>();
 
     }
 
+    //NavMeshAent 초기화
+    private void InitNavMesh()
+    {
+        EnemyNavMeshAgent.speed = Data.BaseSpeed;
+        EnemyNavMeshAgent.autoBraking = false;
+    }
+
     private void Start()
     {
+        InitNavMesh();
+        MonsterHealth.health = Data.Health;
         stateMachine.ChangeState(stateMachine.IdleState);
         MonsterHealth.OnDie += OnDie;
     }

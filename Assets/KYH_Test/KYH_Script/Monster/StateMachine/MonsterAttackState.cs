@@ -44,22 +44,17 @@ public class MonsterAttackState : MonsterBaseState
                 stateMachine.Monster.Weapon.SetAttack(stateMachine.Monster.Data.Damage);
                 stateMachine.Monster.Weapon.gameObject.SetActive(true);
                 alreadyAppliedDealing = true;
-            }
-
-            if (alreadyAppliedDealing && normalizedTime >= stateMachine.Monster.Data.Dealing_End_TransitionTime)
+            }else if (alreadyAppliedDealing && normalizedTime >= stateMachine.Monster.Data.Dealing_End_TransitionTime)
             {
                 stateMachine.Monster.Weapon.gameObject.SetActive(false);
-                alreadyAppliedDealing = false;
+                alreadyAppliedDealing = false; 
+                if (IsInChaseRange())
+                {
+                    stateMachine.ChangeState(stateMachine.ChasingState);
+                    return;
+                }
             }
 
-        }
-        else
-        {
-            if (IsInChaseRange())
-            {
-                stateMachine.ChangeState(stateMachine.ChasingState);
-                return;
-            }
         }
     }
 
@@ -73,4 +68,5 @@ public class MonsterAttackState : MonsterBaseState
         stateMachine.Monster.EnemyForceReceiver.AddForce(stateMachine.Monster.transform.forward * stateMachine.Monster.Data.Force);
 
     }
+
 }

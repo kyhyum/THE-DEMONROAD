@@ -27,15 +27,20 @@ public class MonsterBaseState : MonsterIState
 
     public virtual void Update()
     {
-        Move();
+        Rotate();
     }
 
-    private void Move()
+    //private void Move()
+    //{
+    //    Vector3 movementDirection = GetMovementDirection();
+    //    Rotate(movementDirection);
+    //    Move(movementDirection);
+    //}
+
+    private void Rotate()
     {
         Vector3 movementDirection = GetMovementDirection();
-        Debug.Log(movementDirection);
         Rotate(movementDirection);
-        Move(movementDirection);
     }
 
     protected void ForceMove()
@@ -49,11 +54,11 @@ public class MonsterBaseState : MonsterIState
         return (stateMachine.Target.transform.position - stateMachine.Monster.transform.position).normalized;
     }
 
-    private void Move(Vector3 direction)
-    {
-        float movementSpeed = GetMovementSpeed();
-        stateMachine.Monster.Controller.Move(((direction * movementSpeed) + stateMachine.Monster.EnemyForceReceiver.Movement) * Time.deltaTime);
-    }
+    //private void Move(Vector3 direction)
+    //{
+    //    float movementSpeed = GetMovementSpeed();
+    //    stateMachine.Monster.Controller.Move(((direction * movementSpeed) + stateMachine.Monster.EnemyForceReceiver.Movement) * Time.deltaTime);
+    //}
 
     private void Rotate(Vector3 direction)
     {
@@ -109,11 +114,5 @@ public class MonsterBaseState : MonsterIState
         float playerDistanceSqr = (stateMachine.Target.transform.position - stateMachine.Monster.transform.position).sqrMagnitude;
 
         return playerDistanceSqr <= stateMachine.Monster.Data.PlayerChasingRange * stateMachine.Monster.Data.PlayerChasingRange;
-    }
-    protected bool IsDead()
-    {
-        // TODO : 
-        // 살았는지 죽었는지 확인하는 bool함수
-        return true;
     }
 }

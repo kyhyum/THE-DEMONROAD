@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MonsterHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 100;
+    public int maxHealth = 100;
     public int health;
     public event Action OnDie;
 

@@ -6,6 +6,9 @@ using UnityEngine;
 public class MonsterSO : ScriptableObject
 {
     [field: Header("AttackData")]
+    [field: SerializeField] public int Health { get; private set; } = 100;
+
+    [field: Header("AttackData")]
     [field: SerializeField] public bool IsLongRanged { get; private set; } = false;
     [field: SerializeField] public float PlayerChasingRange { get; private set; } = 10f;
     [field: SerializeField] public float AttackRange { get; private set; } = 1.5f;
@@ -19,7 +22,4 @@ public class MonsterSO : ScriptableObject
     [field: Header("MoveData")]
     [field: SerializeField][field: Range(0f, 25f)] public float BaseSpeed { get; private set; } = 5f;
     [field: SerializeField][field: Range(0f, 25f)] public float BaseRotationDamping { get; private set; } = 1f;
-
-    [field: SerializeField][field: Range(0f, 2f)] public float RunSpeedModifier { get; private set; } = 1f;
-
 }

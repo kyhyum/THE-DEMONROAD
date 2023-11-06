@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IsLongRanged>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 12
-  <AttackRange>k__BackingField: 3
-  <ForceTransitionTime>k__BackingField: 0
-  <Force>k__BackingField: 0
+  <AttackRange>k__BackingField: 2
+  <ForceTransitionTime>k__BackingField: 0.05
+  <Force>k__BackingField: 0.5
   <Damage>k__BackingField: 5
   <Dealing_Start_TransitionTime>k__BackingField: 0.15
   <Dealing_End_TransitionTime>k__BackingField: 0.75
-  <BaseSpeed>k__BackingField: 6
+  <BaseSpeed>k__BackingField: 7
   <BaseRotationDamping>k__BackingField: 1.5
   <RunSpeedModifier>k__BackingField: 2
