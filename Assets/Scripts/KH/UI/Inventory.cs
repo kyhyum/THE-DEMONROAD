@@ -1,39 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
     [field: SerializeField] private Transform slots;
-    public InventorySlot[] inventorySlots;
+    public ItemSlot[] inventorySlots;
     public EquipSlot[] equipSlots;
     private Dictionary<IStackable, int> stackItems;
-    public int gold { get; private set; }
+    private int gold = 3000000;
+    public int Gold
+    {
+        get
+        {
+            return gold;
+        }
+        set
+        {
+            gold += value;
+
+            text.text = string.Format("{0:#,###}", gold);
+        }
+    }
     private int count;
+    public TMP_Text text;
 
     private void Awake()
     {
         count = 0;
-        inventorySlots = new InventorySlot[30];
+        inventorySlots = new ItemSlot[30];
+        text.text = string.Format("{0:#,###}", gold);
 
         for (int i = 0; i < 30; i++)
         {
             GameObject slot = Resources.Load<GameObject>("KH/Prefabs/UI/UI_InventorySlot");
             slot = Instantiate(slot, slots);
-            inventorySlots[i] = slot.GetComponent<InventorySlot>();
+            inventorySlots[i] = slot.GetComponent<ItemSlot>();
             inventorySlots[i].slotID = i;
             slot.GetComponentInChildren<InventoryItem>().slotID = i;
             inventorySlots[i].GetComponentInChildren<InventoryItem>().Clear();
         }
     }
 
-    public void Set(InventorySlot[] slots)
+    public void Set(ItemSlot[] slots)
     {
         for (int i = 0; i < 30; i++)
         {
             inventorySlots[i] = slots[i];
+            if (slots[i].GetComponentInChildren<InventoryItem>().TryGetComponent<Item>(out Item item))
+            {
+                inventorySlots[i].GetComponentInChildren<InventoryItem>().SetItem(item);
+            }
         }
     }
 

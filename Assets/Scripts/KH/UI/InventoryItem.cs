@@ -160,9 +160,13 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (icon.color.a != 0 && eventData.button == PointerEventData.InputButton.Right)
+        if (isInItem() && eventData.button == PointerEventData.InputButton.Right)
         {
-            if (item is EquipItem)
+            if (UIManager.Instance.storageOpen)
+            {
+
+            }
+            else if (item is EquipItem)
             {
                 UIManager.Instance.GetInventory().Equip(slotID);
             }
