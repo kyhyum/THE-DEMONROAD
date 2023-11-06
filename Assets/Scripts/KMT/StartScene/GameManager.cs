@@ -26,9 +26,21 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+    public IEnumerator RealTimeSave()
+    {
+        if(SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start)
+        {
+            Save();
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == (int)SceneType.Start)
+        {
+            yield break;
+        }
+        yield return new WaitForSecondsRealtime(20f);
+    }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (player.baseObject != null && scene.buildIndex != 0 && scene.buildIndex != 2)
+        if (player.baseObject != null && scene.buildIndex != (int)SceneType.Start && scene.buildIndex != (int)SceneType.Loading)
         {
             Myplayer = Instantiate<GameObject>(player.baseObject);
             Myplayer.AddComponent<PlayerCondition>().playerData = player;
@@ -70,7 +82,13 @@ public class GameManager : MonoBehaviour
     }
     public void HomeButton()
     {
-        Save();
+        if(SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            SceneLoadManager.LoadScene("Start");
+            Save();
+            player = null;
+            Myplayer = null;
+        }
     }
     public void Save()
     {
