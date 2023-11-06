@@ -26,7 +26,7 @@ public class PlayerIdleState : PlayerGroundedState
         base.Update();
 
         // 이동이 일어나면
-        if (stateMachine.MovementInput != 0)
+        if (stateMachine.Player.Agent.velocity != Vector3.zero)
         {
             OnMove();
             return;

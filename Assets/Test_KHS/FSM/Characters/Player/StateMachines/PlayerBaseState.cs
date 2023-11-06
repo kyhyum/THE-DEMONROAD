@@ -29,14 +29,6 @@ public class PlayerBaseState : IState
         
     }
 
-    /// <summary>
-    /// Movement에 대한 Input을 가져온다.
-    /// </summary>
-    public virtual void HandleInput()
-    {
-        ReadMovementInput();
-    }
-
     public virtual void PhysicsUpdate()
     {
         
@@ -58,7 +50,8 @@ public class PlayerBaseState : IState
     protected virtual void AddInputActionsCallbacks()
     {
         PlayerInput input = stateMachine.Player.Input;
-        input.PlayerActions.Move.canceled += OnMoveCanceled;
+        // .started: 해당 키가 눌려졌을 때
+        input.PlayerActions.Move.started += OnMoveStarted;
     }
 
     /// <summary>
@@ -67,12 +60,13 @@ public class PlayerBaseState : IState
     protected virtual void RemoveInputActionsCallbacks()
     {
         PlayerInput input = stateMachine.Player.Input;
-        input.PlayerActions.Move.canceled -= OnMoveCanceled;
+        input.PlayerActions.Move.started -= OnMoveStarted;
     }
 
-    // Move.canceled: 무브가 떼어졌을 때, 마우스 오른쪽 버튼이 떨어졌을 때 발생하는 이벤트이다.
-    protected virtual void OnMoveCanceled(InputAction.CallbackContext context)
+    protected virtual void OnMoveStarted(InputAction.CallbackContext context)
     {
+        Debug.Log("OnMoveStarted 함수 호출한다.");
+
         RaycastHit hit;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition), out hit, 100))
@@ -85,28 +79,11 @@ public class PlayerBaseState : IState
     }
 
     /// <summary>
-    /// 이동 입력값을 읽어온다.
-    /// </summary>
-    private void ReadMovementInput()
-    {
-        stateMachine.MovementInput = stateMachine.Player.Input.PlayerActions.Move.ReadValue<float>();
-    }
-
-    /// <summary>
     /// 실제 이동하는 처리를 한다.
     /// </summary>
     private void Move()
     {
-        float movementSpeed = GetMovemenetSpeed();
 
-        if (stateMachine.Player.Agent.remainingDistance > stateMachine.Player.Agent.stoppingDistance)
-        {
-            stateMachine.Player.Controller.Move((stateMachine.Player.Agent.velocity.normalized * movementSpeed) * Time.deltaTime);
-        }
-        else
-        {
-            stateMachine.Player.Controller.Move(Vector3.zero);
-        }
     }
 
     private void LateMove()

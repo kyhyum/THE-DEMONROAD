@@ -15,11 +15,6 @@ public interface IState
     public void Exit();
 
     /// <summary>
-    /// State 중에 입력 처리를 할 때 실행된다.
-    /// </summary>
-    public void HandleInput();
-
-    /// <summary>
     /// State용 Update 함수이다.
     /// </summary>
     public void Update();

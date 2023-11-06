@@ -37,19 +37,17 @@ public class PlayerGroundedState : PlayerBaseState
     }
 
     //
-    protected override void OnMoveCanceled(InputAction.CallbackContext context)
+    protected override void OnMoveStarted(InputAction.CallbackContext context)
     {
         // 입력 처리가 안들어오면 
-        if (stateMachine.MovementInput == 0)
+        if (stateMachine.Player.Agent.velocity != Vector3.zero)
         {
             return;
         }
 
-        // 입력 처리가 들어왔다가 취소가 난 상황이다.
-        // 마우스 오른쪽 키가 떼졌을때이다.
         stateMachine.ChangeState(stateMachine.IdleState);
 
-        base.OnMoveCanceled(context);
+        base.OnMoveStarted(context);
     }
 
     protected virtual void OnMove()

@@ -50,7 +50,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        stateMachine.HandleInput();
         stateMachine.Update();
     }
 
