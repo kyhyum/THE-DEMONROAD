@@ -139,9 +139,8 @@ public class npcInteraction : MonoBehaviour
         }
         if (isCompleteDialogue)
         {
-            completeUI.SetActive(true); // 대화가 완전히 출력된 후에 completeUI를 활성화
-
-            // 2초 후에 completeUI를 비활성화
+            completeUI.SetActive(true); 
+            
             yield return new WaitForSeconds(2.0f);
             completeUI.SetActive(false);
         }

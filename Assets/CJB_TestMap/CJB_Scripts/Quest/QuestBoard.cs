@@ -145,9 +145,10 @@ public class QuestBoard : MonoBehaviour
     public void ShowQuestProgress(QuestSO selectedQuest) //questProgress 표시창
     {
         questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / "+ selectedQuest.questComplete;
+        //현재 상황 부분도 업데이트 해야함.
     }
 
-    internal void RemoveAcceptedQuest(QuestSO selectedquest)
+    internal void RemoveAcceptedQuest(QuestSO selectedquest) // Remove가 현재 안되는중
     {
         acceptedQuests.Remove(selectedquest);
         Debug.Log("퀘스트 삭제");
