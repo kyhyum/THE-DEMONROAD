@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterCreate : MonoBehaviour
 {
-    public GameObject jobCharacter, jobImage;
+    [SerializeField] GameObject jobCharacter, jobImage;
     public PlayerData playerData;
     public void ChoiceJob()
     {
@@ -12,5 +12,10 @@ public class CharacterCreate : MonoBehaviour
         {
             animator.SetTrigger("Slash");
         }
+    }
+    public void ActiveObject(bool isActive)
+    {
+        jobCharacter.SetActive(isActive);
+        jobImage.SetActive(isActive);
     }
 }

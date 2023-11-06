@@ -17,13 +17,9 @@ public class ChangerSlot : MonoBehaviour
         {
             selectCanvasManager = SelectCanvasManager.s_instance;
         }
-        if(selectCanvasManager.playerDatas[slotIndex].baseObject != null)
+        if(selectCanvasManager.PlayerDatas[slotIndex] != null)
         {
-            playerData = selectCanvasManager.playerDatas[slotIndex];
-        }
-        else
-        {
-            playerData = null;
+            playerData = selectCanvasManager.PlayerDatas[slotIndex];
         }
         UpdateUI();
     }
