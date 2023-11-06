@@ -57,6 +57,7 @@ public class SelectCanvasManager : MonoBehaviour
         {
             GameManager.s_instance.player = characterSlots[selectedSlot].character.GetComponent<PlayerCondition>().playerData;
             SceneManager.LoadScene((int)GameManager.s_instance.player.scene);
+            StartCoroutine(GameManager.s_instance.RealTimeSave());
             DontDestroyOnLoad(GameManager.s_instance.gameObject);
         }
         else

@@ -23,5 +23,6 @@ public enum SceneType
 {
     Start,
     Town,
-    Dungeon
+    Dungeon,
+    Loading
 }

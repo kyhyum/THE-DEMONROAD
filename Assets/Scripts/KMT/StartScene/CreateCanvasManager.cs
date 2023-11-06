@@ -36,7 +36,7 @@ public class CreateCanvasManager : MonoBehaviour
     }
     public void CreateCharacter()
     {
-        if (!SelectCanvasManager.s_instance.playerName.Contains(nameCreate.text))
+        if (!SelectCanvasManager.s_instance.playerName.Contains(nameCreate.text) && selectJobIndex == 0)
         {
             string nameText = nameCreate.text;
             SelectCanvasManager.s_instance.createSlot.character = Instantiate(job[selectJobIndex].jobCharacter);
@@ -47,6 +47,10 @@ public class CreateCanvasManager : MonoBehaviour
             GameManager.s_instance.SavePlayerDataToJson(StringManager.jsonPath, createCharacterData.name, createCharacterData);
             SelectCanvasManager.s_instance.createSlot.character.AddComponent<PlayerCondition>().playerData = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.jsonPath, createCharacterData.name);
             StartSceneManager.s_instance.OpenSelectCanvas();
+        }
+        else if (selectJobIndex != 0)
+        {
+            Debug.Log("아직 개발 단계라 생성할 수 없습니다");
         }
         else
         {
