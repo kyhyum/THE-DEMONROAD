@@ -1,4 +1,4 @@
 public enum ItemType
 {
-    Weapon, Helmet, Gloves, Shoes, Armor, Ring, Necklace, Consumes, Resources, Gold
+    Helmet, Armor, Gloves, Boots, Weapon, Necklace, Ring, Consumes, Resources, Gold
 }

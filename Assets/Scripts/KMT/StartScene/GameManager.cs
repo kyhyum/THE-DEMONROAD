@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject settingCanvas;
     public static GameManager s_instance;
-    public GameObject player;
+    public PlayerData player;
+    public GameObject Myplayer;
     private void Awake()
     {
         if (s_instance == null)
@@ -20,10 +22,22 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
     }
+    private void Start()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (player.baseObject != null && scene.buildIndex != 0 && scene.buildIndex != 2)
+        {
+            Myplayer = Instantiate<GameObject>(player.baseObject);
+            Myplayer.AddComponent<PlayerCondition>().playerData = player;
+            Myplayer.transform.position = player.currentPlayerPos;
+        }
+    }
     public void Finish()
     {
         Application.Quit();
-        //UnityEditor.EditorApplication.isPlaying = false;
     }
     public void SavePlayerDataToJson(string jsonPath, string characterName, PlayerData data)
     {
@@ -44,22 +58,39 @@ public class GameManager : MonoBehaviour
         return JsonUtility.FromJson<PlayerData>(jsonData);
         
     }
-    void Save()
+    public bool DeleteCharacter(string jsonPath, string characterName)
     {
-        if(player != null && player.TryGetComponent<PlayerData_KMT>(out PlayerData_KMT dataM))
+        string path = Path.Combine(jsonPath, $"{characterName}.json");
+        bool result = File.Exists(path);
+        if (result)
         {
-            PlayerData data = dataM.playerData;
-            string prefabPath = "Assets/Resources/MyCharacter/";
-            SavePlayerDataToJson(prefabPath, data.name, data);
+            File.Delete(path);
         }
+        return result;
     }
-    public void SceneLoad()
+    public void HomeButton()
     {
-        SceneManager.LoadScene((int)player.GetComponent<PlayerData_KMT>().playerData.scene);
-        DontDestroyOnLoad(this.gameObject);
+        Save();
+    }
+    public void Save()
+    {
+        if(SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 2)
+        {
+            player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
+            player.currentPlayerPos = Myplayer.transform.position;
+        }
+        SavePlayerDataToJson(StringManager.jsonPath, player.name, player);
     }
     private void OnApplicationQuit()
     {
         Save();
+    }
+    public void OnSettingCanvasInputEnable()
+    {
+        
+    }
+    private void ActiveSettingCanvas(InputAction.CallbackContext context)
+    {
+        settingCanvas.SetActive(!settingCanvas.activeSelf);
     }
 }

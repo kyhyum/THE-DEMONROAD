@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class EquipItem : Item
 {
+    public void Equip()
+    {
 
+    }
+
+    public void UnEquip()
+    {
+
+    }
 }

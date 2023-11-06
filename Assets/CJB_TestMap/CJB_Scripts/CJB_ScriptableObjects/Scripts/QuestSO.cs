@@ -8,5 +8,6 @@ public class QuestSO : ScriptableObject
     [field: SerializeField] public QuestType questType { get; private set; }
     [field: SerializeField] public string questDescription { get; private set; }
     [field: SerializeField] public string questCondition { get; private set; } //퀘스트 완료조건
+    [field: SerializeField] public int questComplete { get; private set; } //퀘스트 완료 숫자
     [field: SerializeField] public string questReward { get; private set; }
 }

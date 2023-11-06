@@ -5,6 +5,7 @@ using UnityEngine;
 public class ResourceItem : Item, IStackable
 {
     private int count;
+
     public void Add(int n)
     {
         count += n;

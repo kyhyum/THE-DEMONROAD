@@ -10,7 +10,11 @@ public class CharacterCreate : MonoBehaviour
     public PlayerData playerData;
     public void ChooseJob()
     {
-        StartSceneManager.s_instance.selectJobIndex = jobIndex;
-        StartSceneManager.s_instance.ChangeJob();
+        CreateCanvasManager.s_instance.selectJobIndex = jobIndex;
+        CreateCanvasManager.s_instance.ChangeJob();
+        if (jobCharacter.TryGetComponent<Animator>(out Animator animator))
+        {
+            animator.SetTrigger("Slash");
+        }
     }
 }

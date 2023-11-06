@@ -1,32 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.Profiling;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler, IPointerDownHandler
 {
     public int slotID;
     private GameObject itemClone;
     private Canvas canvas;
     private RectTransform rect;
-    private Image icon;
+    private RawImage icon;
     private Item item;
     private TMP_Text quantity;
 
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
-        icon = GetComponentInChildren<Image>();
+        icon = GetComponentInChildren<RawImage>();
         quantity = GetComponentInChildren<TMP_Text>();
+        item = null;
     }
 
     public void SetItem(Item item)
     {
-        this.item = item;
-        icon.sprite = item.icon;
+        if (gameObject.TryGetComponent<Item>(out Item tmp))
+        {
+            Destroy(tmp);
+        }
+
+        if (item.type == ItemType.Resources || item.type == ItemType.Gold)
+        {
+            this.item = gameObject.AddComponent<ResourceItem>();
+        }
+        else if (item.type == ItemType.Consumes)
+        {
+            this.item = gameObject.AddComponent<UseItem>();
+        }
+        else
+        {
+            this.item = gameObject.AddComponent<EquipItem>();
+        }
+
+        this.item.Set(item);
+
+        icon.texture = item.texture;
 
         if (item is IStackable)
         {
@@ -37,11 +57,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         {
             quantity.text = string.Empty;
         }
-    }
 
-    public Item GetItem()
-    {
-        return item;
+        SetAlpha(1);
     }
 
     public void AddItem(int count)
@@ -54,14 +71,34 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
     }
 
+    public Item GetItem()
+    {
+        return item;
+    }
+
+    private void SetAlpha(float a)
+    {
+        Color color = icon.color;
+        color.a = a;
+        icon.color = color;
+    }
+
+    private bool isInItem()
+    {
+        return TryGetComponent<Item>(out Item item);
+    }
+
     public void Clear()
     {
-        icon.sprite = null;
+        SetAlpha(0);
         quantity.text = string.Empty;
+        Destroy(item);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!isInItem())
+            return;
         itemClone = Instantiate(gameObject, canvas.GetComponent<Transform>());
         rect = itemClone.GetComponent<RectTransform>();
 
@@ -71,7 +108,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
         rect.anchoredPosition = mousePosition;
 
-        Image image = itemClone.GetComponentInChildren<Image>();
+        RawImage image = itemClone.GetComponentInChildren<RawImage>();
         Color color = image.color;
         color.a = .8f;
         image.color = color;
@@ -84,11 +121,15 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isInItem())
+            return;
         rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!isInItem())
+            return;
         Destroy(itemClone);
     }
 
@@ -103,11 +144,27 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.TryGetComponent<InventoryItem>(out InventoryItem item))
+            if (result.gameObject.TryGetComponent<InventoryItem>(out InventoryItem inventoryItem))
             {
-                if (item.slotID == slotID)
+                if (inventoryItem.slotID == slotID)
                     continue;
-                UIManager.Instance.GetInventory().SwapItems(item.slotID, slotID);
+                UIManager.Instance.GetInventory().SwapItems(inventoryItem.slotID, slotID);
+            }
+
+            if (result.gameObject.TryGetComponent<EquipSlot>(out EquipSlot slot))
+            {
+                UIManager.Instance.GetInventory().Equip(slotID);
+            }
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (icon.color.a != 0 && eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (item is EquipItem)
+            {
+                UIManager.Instance.GetInventory().Equip(slotID);
             }
         }
     }

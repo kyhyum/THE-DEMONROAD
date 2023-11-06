@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     private PlayerInputAction inputAction;
     private List<GameObject> EnableUI;
     private GameObject inventoryObject;
+    private GameObject StorageObject;
     private Inventory inventory;
     [field: SerializeField] private ItemSO testItem;
 
@@ -18,7 +19,7 @@ public class UIManager : MonoBehaviour
         inputAction = new PlayerInputAction();
         EnableUI = new List<GameObject>();
 
-        inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/Inventory");
+        inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Inventory");
         inventoryObject = Instantiate(inventoryObject, canvas);
         inventory = inventoryObject.GetComponent<Inventory>();
         inventoryObject.SetActive(false);
@@ -46,16 +47,12 @@ public class UIManager : MonoBehaviour
 
     public void OnUIInputEnable()
     {
-        Debug.Log("Enable UI Input");
-
         inputAction.Player.Inventory.Enable();
         inputAction.Player.Inventory.started += ActiveInventory;
     }
 
     public void OnUIInputDisable()
     {
-        Debug.Log("Disable UI Input");
-
         inputAction.Player.Inventory.Disable();
         inputAction.Player.Inventory.started -= ActiveInventory;
     }
@@ -85,5 +82,10 @@ public class UIManager : MonoBehaviour
     public void TestMethodMakeItem()
     {
         GameObject item = testItem.CreateItem();
+    }
+
+    public void ActiveStorage()
+    {
+
     }
 }

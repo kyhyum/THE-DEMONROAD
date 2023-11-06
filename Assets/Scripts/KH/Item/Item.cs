@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class Item : MonoBehaviour
 {
     public string itemName;
     public string description;
-    public Sprite icon;
+    public Texture2D texture;
     public Rank rank;
     public ItemType type;
     public GameObject prefab;
@@ -15,10 +16,20 @@ public class Item : MonoBehaviour
     {
         itemName = itemSO.itemName;
         description = itemSO.description;
-        icon = itemSO.icon;
+        texture = itemSO.texture;
         rank = itemSO.rank;
         type = itemSO.type;
         prefab = itemSO.prefab;
+    }
+
+    public void Set(Item item)
+    {
+        itemName = item.itemName;
+        description = item.description;
+        texture = item.texture;
+        rank = item.rank;
+        type = item.type;
+        prefab = item.prefab;
     }
 
     public void RemoveObject()

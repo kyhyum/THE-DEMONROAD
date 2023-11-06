@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DisplayManager : MonoBehaviour
 {
     List<Resolution> resolutions = new List<Resolution>();
+    Dictionary<int, Resolution> resolutionsDic = new Dictionary<int, Resolution>();
     [SerializeField] TMP_Dropdown resolutionDropDown;
     [SerializeField] Toggle fullScreenToggle;
     int resolutionIndex;
@@ -15,22 +17,15 @@ public class DisplayManager : MonoBehaviour
     {
         InitUI();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void InitUI()
     {
-        /*for(int i = 0; i < Screen.resolutions.Length; i++)
+        for (int i = 0; i < Screen.resolutions.Length; i++)
         {
-            if (Screen.resolutions[i].refreshRateRatio.Equals(60))
+            if (Screen.resolutions[i].refreshRateRatio.value == 60f)
             {
                 resolutions.Add(Screen.resolutions[i]);
             }
-        }*/
-        resolutions.AddRange(Screen.resolutions);
+        }
         resolutionDropDown.options.Clear();
         int optionIndex = 0;
         foreach(Resolution one in resolutions)
@@ -38,7 +33,7 @@ public class DisplayManager : MonoBehaviour
             TMP_Dropdown.OptionData optionData = new TMP_Dropdown.OptionData();
             optionData.text = $"{one.width} × {one.height}";
             resolutionDropDown.options.Add(optionData);
-            if(one.width ==Screen.width && one.height == Screen.height)
+            if (one.width == Screen.width && one.height == Screen.height)
             {
                 resolutionDropDown.value = optionIndex;
             }
