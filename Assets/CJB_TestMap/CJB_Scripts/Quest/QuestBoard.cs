@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.UI;
 
 public class QuestBoard : MonoBehaviour
 {
+    //gameobject
     public GameObject questListPanel;   
     public GameObject acceptPopup;
     public GameObject cancelPopup;
@@ -31,9 +33,12 @@ public class QuestBoard : MonoBehaviour
 
     public List<QuestSO> quests;
     public List<QuestSO> acceptedQuests = new List<QuestSO>();
+    
+    
 
     public void Start()
     {
+        
         InitializeQuestList();
     }
 
@@ -58,17 +63,16 @@ public class QuestBoard : MonoBehaviour
             }
         }
     }
-    private void ShowQuestDetails(QuestSO selectedQuest)
+    private void ShowQuestDetails(QuestSO selectedQuest) //questBoard에서 표시되는 퀘스트 정보
     {
         AcceptQuest(selectedQuest);
 
-        
         questTitleText.text = selectedQuest.questName;
         questDescriptionText.text = selectedQuest.questDescription;
         questConditionText.text = selectedQuest.questCondition;
         questRewardText.text = selectedQuest.questReward;
     }
-    private bool IsQuestAlreadyAccepted(QuestSO quest)
+    private bool IsQuestAlreadyAccepted(QuestSO quest) // 같은 타입의 퀘스트는 한번만 받게끔
     {
         foreach (var acceptedQuest in acceptedQuests)
         {
@@ -79,7 +83,7 @@ public class QuestBoard : MonoBehaviour
         }
         return false;
     }
-    private void AcceptQuest(QuestSO quest)
+    private void AcceptQuest(QuestSO quest) // questBoard에서 퀘스트를 수락
     {
         if (!IsQuestAlreadyAccepted(quest))
         {
@@ -87,7 +91,16 @@ public class QuestBoard : MonoBehaviour
             acceptPopup.SetActive(true);
             UpdateQuestLogUI();
             ShowQuestProgress(quest);
-           
+
+            foreach (var npc in quest.relatedNPCs)
+            {
+                if (npc != null)
+                {
+                    npc.hasQuest = true;
+                }
+                
+            }
+
         }
         else
         {
@@ -95,7 +108,10 @@ public class QuestBoard : MonoBehaviour
             cancelPopup.SetActive(true);
         }
     }
-    private void UpdateQuestLogUI()
+
+   
+
+    private void UpdateQuestLogUI() //questLog에 선택된 퀘스트 정보 표시
     {
         questLogName.text = "";
         questLogSelected.text = "";
@@ -104,20 +120,21 @@ public class QuestBoard : MonoBehaviour
 
         foreach (var acceptedQuest in acceptedQuests)
         {
-            questLogName.text = acceptedQuest.questName;
-            questLogSelected.text = acceptedQuest.questName;
-            questLogDescription.text = acceptedQuest.questDescription;
-            questLogRewards.text = acceptedQuest.questReward;
+            questLogName.text += acceptedQuest.questName;
+            questLogSelected.text += acceptedQuest.questName;
+            questLogDescription.text += acceptedQuest.questDescription;
+            questLogRewards.text += acceptedQuest.questReward;
         }
+        
     }
 
-    public void OnQuestObjectClick(QuestSO quest)
+    public void OnQuestObjectClick(QuestSO quest) //questLog에서 퀘스트를 하나하나 선택
     {
         ShowLogQuestDetails(quest);
         
     }  
 
-    private void ShowLogQuestDetails(QuestSO selectedQuest)
+    private void ShowLogQuestDetails(QuestSO selectedQuest) // questLog에서 선택된 퀘스트 정보 표시
     {
         
         questLogSelected.text = selectedQuest.questName;
@@ -125,12 +142,16 @@ public class QuestBoard : MonoBehaviour
         questLogRewards.text = selectedQuest.questReward;
     }
 
-    public void ShowQuestProgress(QuestSO selectedQuest)
+    public void ShowQuestProgress(QuestSO selectedQuest) //questProgress 표시창
     {
         questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / "+ selectedQuest.questComplete;
+        //현재 상황 부분도 업데이트 해야함.
     }
 
-
-
-
+    internal void RemoveAcceptedQuest(QuestSO selectedquest) // Remove가 현재 안되는중
+    {
+        acceptedQuests.Remove(selectedquest);
+        Debug.Log("퀘스트 삭제");
+        UpdateQuestLogUI();
+    }
 }
