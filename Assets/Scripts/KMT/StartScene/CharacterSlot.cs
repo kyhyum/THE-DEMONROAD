@@ -25,7 +25,6 @@ public class CharacterSlot : MonoBehaviour
             characterName.text = character.name;
             characterLevel.text = data.level.ToString();
             characterJob.text = data.job.ToString();
-            createButton.SetActive(false);
             TextOpen(true);
         }
         else
@@ -33,39 +32,18 @@ public class CharacterSlot : MonoBehaviour
             TextOpen(false);
         }
     }
-    public void SelectSlot()
+    public void ChoiceSlot()
     {
-        SelectCanvasManager.s_instance.selectedSlot = slotIndex;
         if(character != null)
         {
             character.GetComponent<Animator>().SetTrigger("Choice");
         }
     }
-    public void CreateButton()
-    {
-        SelectCanvasManager.s_instance.selectedSlot = slotIndex;
-        SelectCanvasManager.s_instance.createSlot = this;
-        StartSceneManager.s_instance.OpenCreateCanvas();
-    }
-    void TextOpen(bool isChar)
+    public void TextOpen(bool isChar)
     {
         characterName.gameObject.SetActive(isChar);
         characterLevel.gameObject.SetActive(isChar);
         characterJob.gameObject.SetActive(isChar);
-    }
-    public void DeleteCharacter()
-    {
-        string prefabPath = "Assets/Resources/MyCharacter/";
-        if(GameManager.s_instance.DeleteCharacter(prefabPath, character.GetComponent<PlayerCondition>().playerData.name))
-        {
-            Destroy(character);
-            TextOpen(false);
-            createButton.SetActive(true);
-            character = null;
-        }
-        else
-        {
-            Debug.Log("실패했습니다");
-        }
+        createButton.SetActive(!isChar);
     }
 }
