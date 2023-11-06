@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   <Data>k__BackingField: {fileID: 11400000, guid: 64bffd7005e15e6429b1d670bab8bd45,
     type: 2}
   <AnimationData>k__BackingField:
