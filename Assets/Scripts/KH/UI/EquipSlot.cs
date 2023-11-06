@@ -121,7 +121,7 @@ public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegi
 
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.TryGetComponent<InventorySlot>(out InventorySlot slot))
+            if (result.gameObject.TryGetComponent<ItemSlot>(out ItemSlot slot))
             {
                 UIManager.Instance.GetInventory().UnEquip(slot.slotID, item.type);
             }
