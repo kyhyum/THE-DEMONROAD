@@ -21,3 +21,5 @@ MonoBehaviour:
     \uC88B\uACA0\uAD70\uC694!"
   <hasQuest>k__BackingField: 0
   <questType>k__BackingField: 2
+  <conversationCount>k__BackingField: 0
+  <isQuestAccepted>k__BackingField: 0

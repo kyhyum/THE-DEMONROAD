@@ -51,12 +51,53 @@ public class npcInteraction : MonoBehaviour
     void ShowDialogue()
     {
         isTalking = true;
+        StopAllCoroutines(); //초기화
+
         dialogueUI.SetActive(true);
         nameText.text = npc.npcName;
 
-        string appropriateDialogue = npc.GetAppropriateDialogue(false);
-        StartCoroutine(DisplayDialogue(appropriateDialogue));
+        if (npc.questType == QuestType.ConversationQuest)
+        {
+            if (npc.conversationCount >= 1)
+            {
+                string appropriateDialogue = npc.completeDialogue[0];
+                StartCoroutine(DisplayDialogue(appropriateDialogue));
+                CompleteConversationQuest(npc);
+            }
+            else
+            {
+                string appropriateDialogue = npc.npcDialogue[0];
+                StartCoroutine(DisplayDialogue(appropriateDialogue));
+                IncrementConversationCount(npc);
+            }
+        }
+        else
+        {
+            string appropriateDialogue = npc.npcDialogue[0];
+            StartCoroutine(DisplayDialogue(appropriateDialogue));
+        }
+
+        //string appropriateDialogue = npc.GetAppropriateDialogue(false);
+        //StartCoroutine(DisplayDialogue(appropriateDialogue));
+
+    }
+    private void IncrementConversationCount(NPCSO npc)
+    {
+        if (npc.hasQuest)
+        {
+            npc.conversationCount++;
+        }
+
         
+
+    }
+
+    private void CompleteConversationQuest(NPCSO npc)
+    {
+        npc.conversationCount = 0;
+
+        // 퀘스트 완료 처리를 수행할 코드 작성
+        Debug.Log("Quest completed!");
     }
 
     void HideDialogue()

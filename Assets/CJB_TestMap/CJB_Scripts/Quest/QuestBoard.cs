@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -34,6 +33,7 @@ public class QuestBoard : MonoBehaviour
     public List<QuestSO> quests;
     public List<QuestSO> acceptedQuests = new List<QuestSO>();
     public NPCListSO npcListSO;
+    
 
     public void Start()
     {
@@ -91,7 +91,7 @@ public class QuestBoard : MonoBehaviour
             UpdateQuestLogUI();
             ShowQuestProgress(quest);
 
-            
+           
 
         }
         else
