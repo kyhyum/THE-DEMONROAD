@@ -4435,8 +4435,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterPos: {x: 8.4, y: 1.5, z: 0}
   look: {x: 0, y: 0.9848077, z: 0, w: -0.1736482}
-  character: {fileID: 0}
-  slotIndex: 3
   createButton: {fileID: 1202302898}
   characterName: {fileID: 310121648}
   characterLevel: {fileID: 1581339962}
@@ -6092,6 +6090,139 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420240831}
+  m_CullTransparentMesh: 1
+--- !u!1 &429251840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429251841}
+  - component: {fileID: 429251844}
+  - component: {fileID: 429251843}
+  - component: {fileID: 429251842}
+  m_Layer: 5
+  m_Name: SaveButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &429251841
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429251840}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1578231621}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -100, y: -230}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &429251842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429251840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 429251843}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1479947788}
+        m_TargetAssemblyTypeName: SelectCanvasManager, Assembly-CSharp
+        m_MethodName: SlotChangeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &429251843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429251840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.8490566, b: 0.060348894, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 4613e6e8cc8b359fd91afe249631f680, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &429251844
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429251840}
   m_CullTransparentMesh: 1
 --- !u!1 &433872623
 GameObject:
@@ -14261,7 +14392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -230}
+  m_AnchoredPosition: {x: 100, y: -230}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1098546219
@@ -17484,8 +17615,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterPos: {x: -6.4, y: 1.5, z: 0}
   look: {x: 0, y: 0.9848077, z: 0, w: 0.17364822}
-  character: {fileID: 0}
-  slotIndex: 0
   createButton: {fileID: 280927008}
   characterName: {fileID: 922814718}
   characterLevel: {fileID: 1636931605}
@@ -18193,8 +18322,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterPos: {x: -1.5, y: 1.5, z: 0}
   look: {x: 0, y: 0.9961947, z: 0, w: 0.087155804}
-  character: {fileID: 0}
-  slotIndex: 1
   createButton: {fileID: 1393691882}
   characterName: {fileID: 1551523652}
   characterLevel: {fileID: 410194945}
@@ -19410,13 +19537,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d29e0c57a45e6c469e2e8c1174cbb77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedSlot: 0
   changerSlots:
   - {fileID: 1501005340}
   - {fileID: 2074019641}
   - {fileID: 1813188714}
   - {fileID: 2047261314}
-  createSlot: {fileID: 0}
   characterSlots:
   - {fileID: 1372909680}
   - {fileID: 1400770974}
@@ -19426,48 +19551,6 @@ MonoBehaviour:
   - {fileID: 8497167852158856508}
   - {fileID: 1668039821}
   - {fileID: 1275173432}
-  playerDatas:
-  - name: 
-    level: 0
-    job: 0
-    stats: []
-    baseObject: {fileID: 0}
-    playerIndex: 0
-    scene: 0
-    currentPlayerPos: {x: 0, y: 0, z: 0}
-    isDead: 0
-    items: []
-  - name: 
-    level: 0
-    job: 0
-    stats: []
-    baseObject: {fileID: 0}
-    playerIndex: 0
-    scene: 0
-    currentPlayerPos: {x: 0, y: 0, z: 0}
-    isDead: 0
-    items: []
-  - name: 
-    level: 0
-    job: 0
-    stats: []
-    baseObject: {fileID: 0}
-    playerIndex: 0
-    scene: 0
-    currentPlayerPos: {x: 0, y: 0, z: 0}
-    isDead: 0
-    items: []
-  - name: 
-    level: 0
-    job: 0
-    stats: []
-    baseObject: {fileID: 0}
-    playerIndex: 0
-    scene: 0
-    currentPlayerPos: {x: 0, y: 0, z: 0}
-    isDead: 0
-    items: []
-  playerName: []
 --- !u!1 &1481629882
 GameObject:
   m_ObjectHideFlags: 0
@@ -21430,6 +21513,7 @@ RectTransform:
   - {fileID: 2074019640}
   - {fileID: 1813188713}
   - {fileID: 2047261313}
+  - {fileID: 429251841}
   - {fileID: 1098546218}
   m_Father: {fileID: 392932966}
   m_RootOrder: -1
@@ -21801,8 +21885,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterPos: {x: 3.5, y: 1.5, z: 0}
   look: {x: 0, y: 0.99904823, z: 0, w: -0.043619424}
-  character: {fileID: 0}
-  slotIndex: 2
   createButton: {fileID: 1608369}
   characterName: {fileID: 794932443}
   characterLevel: {fileID: 624909301}
@@ -22150,7 +22232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1e302b88713ca4780834330f83e97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectJobIndex: 0
   nameCreate: {fileID: 556869419}
   job:
   - {fileID: 601793632}
