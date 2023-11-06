@@ -50,6 +50,11 @@ public class PlayerGroundedState : PlayerBaseState
         base.OnMoveStarted(context);
     }
 
+    protected virtual void OnStand()
+    {
+        stateMachine.ChangeState(stateMachine.IdleState);
+    }
+
     protected virtual void OnMove()
     {
         stateMachine.ChangeState(stateMachine.WalkState);

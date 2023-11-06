@@ -21,4 +21,16 @@ public class PlayerWalkState : PlayerGroundedState
         base.Exit();
         StopAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
     }
+
+    public override void Update()
+    {
+        base.Update();
+
+        // 멈추면
+        if (stateMachine.Player.Agent.velocity == Vector3.zero)
+        {
+            OnStand();
+            return;
+        }
+    }
 }
