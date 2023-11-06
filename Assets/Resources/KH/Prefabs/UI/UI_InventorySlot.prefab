@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5653836695925299109}
   - component: {fileID: 8912786385312954538}
   - component: {fileID: 658133991646489118}
-  - component: {fileID: 7486379860287841555}
+  - component: {fileID: 3411495069271931395}
   m_Layer: 5
   m_Name: UI_InventorySlot
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7486379860287841555
+--- !u!114 &3411495069271931395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,7 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotID: 99
-  item: {fileID: 0}
 --- !u!222 &1532212373279842212
 CanvasRenderer:
   m_ObjectHideFlags: 0

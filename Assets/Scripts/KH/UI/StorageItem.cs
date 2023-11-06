@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.EventSystems;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler, IPointerDownHandler
+public class StorageItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler, IPointerDownHandler
 {
     public int slotID;
     private GameObject itemClone;
@@ -71,11 +70,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
     }
 
-    public Item GetItem()
-    {
-        return item;
-    }
-
     private void SetAlpha(float a)
     {
         Color color = icon.color;
@@ -135,41 +129,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void OnDrop(PointerEventData eventData)
     {
-        // 드롭 대상의 RectTransform을 얻음
-        RectTransform dropTarget = this.transform as RectTransform;
 
-        // 이벤트 데이터를 이용해 드롭 지점에서의 Raycast를 수행
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);
-
-        foreach (RaycastResult result in results)
-        {
-            if (result.gameObject.TryGetComponent<InventoryItem>(out InventoryItem inventoryItem))
-            {
-                if (inventoryItem.slotID == slotID)
-                    continue;
-                UIManager.Instance.GetInventory().SwapItems(inventoryItem.slotID, slotID);
-            }
-
-            if (result.gameObject.TryGetComponent<EquipSlot>(out EquipSlot slot))
-            {
-                UIManager.Instance.GetInventory().Equip(slotID);
-            }
-        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (isInItem() && eventData.button == PointerEventData.InputButton.Right)
         {
-            if (UIManager.Instance.storageOpen)
-            {
 
-            }
-            else if (item is EquipItem)
-            {
-                UIManager.Instance.GetInventory().Equip(slotID);
-            }
         }
     }
 }

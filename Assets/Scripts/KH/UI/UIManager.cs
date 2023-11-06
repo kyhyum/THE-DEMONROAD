@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,19 +11,19 @@ public class UIManager : MonoBehaviour
     private PlayerInputAction inputAction;
     private List<GameObject> EnableUI;
     private GameObject inventoryObject;
-    private GameObject StorageObject;
+    private GameObject storageObject;
     private Inventory inventory;
+    private Storage storage;
     [field: SerializeField] private ItemSO testItem;
+    public bool storageOpen => storageObject.activeSelf;
 
     private void Awake()
     {
         inputAction = new PlayerInputAction();
         EnableUI = new List<GameObject>();
 
-        inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Inventory");
-        inventoryObject = Instantiate(inventoryObject, canvas);
-        inventory = inventoryObject.GetComponent<Inventory>();
-        inventoryObject.SetActive(false);
+        CreateInventory();
+        CreateStorage();
     }
 
     private void Start()
@@ -38,6 +39,22 @@ public class UIManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this);
+    }
+
+    private void CreateInventory()
+    {
+        inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Inventory");
+        inventoryObject = Instantiate(inventoryObject, canvas);
+        inventory = inventoryObject.GetComponent<Inventory>();
+        inventoryObject.SetActive(false);
+    }
+
+    private void CreateStorage()
+    {
+        storageObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Storage");
+        storageObject = Instantiate(storageObject, canvas);
+        storage = storageObject.GetComponent<Storage>();
+        storageObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -62,14 +79,13 @@ public class UIManager : MonoBehaviour
         return inventory;
     }
 
-
     private void ActiveInventory(InputAction.CallbackContext context)
     {
         Debug.Log("Active Inventory");
 
         if (!inventoryObject.activeSelf)
         {
-            EnableUI.Add(inventoryObject);
+            EnableUI.Insert(0, inventoryObject);
         }
         else
         {
@@ -86,6 +102,25 @@ public class UIManager : MonoBehaviour
 
     public void ActiveStorage()
     {
+        if (!storageObject.activeSelf)
+        {
+            if (!inventoryObject.activeSelf)
+            {
+                EnableUI.Add(inventoryObject);
+                inventoryObject.SetActive(true);
+                inventoryObject.GetComponentInChildren<InventoryDragAndDrop>().enabled = false;
+            }
 
+            EnableUI.Insert(0, storageObject);
+            storageObject.SetActive(true);
+        }
+        else
+        {
+            EnableUI.RemoveAt(EnableUI.IndexOf(storageObject));
+            inventoryObject.GetComponentInChildren<InventoryDragAndDrop>().enabled = true;
+        }
+
+
+        storageObject.SetActive(!storageObject.activeSelf);
     }
 }
