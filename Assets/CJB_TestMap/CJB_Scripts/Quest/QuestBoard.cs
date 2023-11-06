@@ -120,11 +120,12 @@ public class QuestBoard : MonoBehaviour
 
         foreach (var acceptedQuest in acceptedQuests)
         {
-            questLogName.text = acceptedQuest.questName;
-            questLogSelected.text = acceptedQuest.questName;
-            questLogDescription.text = acceptedQuest.questDescription;
-            questLogRewards.text = acceptedQuest.questReward;
+            questLogName.text += acceptedQuest.questName;
+            questLogSelected.text += acceptedQuest.questName;
+            questLogDescription.text += acceptedQuest.questDescription;
+            questLogRewards.text += acceptedQuest.questReward;
         }
+        
     }
 
     public void OnQuestObjectClick(QuestSO quest) //questLog에서 퀘스트를 하나하나 선택
@@ -146,9 +147,9 @@ public class QuestBoard : MonoBehaviour
         questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / "+ selectedQuest.questComplete;
     }
 
-    internal void RemoveAcceptedQuest(QuestSO quest)
+    internal void RemoveAcceptedQuest(QuestSO selectedquest)
     {
-        acceptedQuests.Remove(quest);
+        acceptedQuests.Remove(selectedquest);
         Debug.Log("퀘스트 삭제");
         UpdateQuestLogUI();
     }

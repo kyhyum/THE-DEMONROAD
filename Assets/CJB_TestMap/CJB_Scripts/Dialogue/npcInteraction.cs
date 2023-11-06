@@ -5,6 +5,7 @@ using UnityEngine;
 public class npcInteraction : MonoBehaviour
 {
     public NPCSO npc;
+    public QuestSO quest;
     private QuestBoard questBoard;
 
     public GameObject dialogueUI;
@@ -83,8 +84,7 @@ public class npcInteraction : MonoBehaviour
             StartCoroutine(DisplayDialogue(appropriateDialogue));
         }
 
-        //string appropriateDialogue = npc.GetAppropriateDialogue(false);
-        //StartCoroutine(DisplayDialogue(appropriateDialogue));
+        
 
     }
     private void IncrementConversationCount(NPCSO npc)
@@ -102,16 +102,17 @@ public class npcInteraction : MonoBehaviour
     {
         npc.conversationCount = 0;
         npc.hasQuest = false;
+
         // 퀘스트 완료 처리를 수행할 코드 작성
         Debug.Log("Quest completed!");
 
-        QuestBoard questBoard = FindObjectOfType<QuestBoard>();
+        
 
         if (questBoard != null) 
         {
             foreach (var quest in questBoard.acceptedQuests)
             {
-                if (quest.relatedNPCs.Contains(npc))
+                if (quest.relatedNPCs.Contains(npc) && quest.questComplete == npc.conversationCount)
                 {
                     questBoard.RemoveAcceptedQuest(quest);
                 }
