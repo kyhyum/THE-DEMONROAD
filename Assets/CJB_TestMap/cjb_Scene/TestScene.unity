@@ -1403,6 +1403,7 @@ MonoBehaviour:
   quests:
   - {fileID: 11400000, guid: 738a6d604c2069e4e8cfade4ddc6f1b9, type: 2}
   acceptedQuests: []
+  npcSOList: {fileID: 11400000, guid: a1d9213b133213f42a78c3b37a7c48c2, type: 2}
 --- !u!1001 &59182934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18985,6 +18986,7 @@ MonoBehaviour:
   quests:
   - {fileID: 11400000, guid: 554968daf1f966c438f4542e43eb2462, type: 2}
   acceptedQuests: []
+  npcSOList: {fileID: 11400000, guid: a1d9213b133213f42a78c3b37a7c48c2, type: 2}
 --- !u!1001 &1108400544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33584,6 +33586,7 @@ MonoBehaviour:
   quests:
   - {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
   acceptedQuests: []
+  npcSOList: {fileID: 11400000, guid: a1d9213b133213f42a78c3b37a7c48c2, type: 2}
 --- !u!1001 &1948539442
 PrefabInstance:
   m_ObjectHideFlags: 0

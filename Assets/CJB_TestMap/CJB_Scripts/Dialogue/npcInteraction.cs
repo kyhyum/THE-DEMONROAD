@@ -56,7 +56,7 @@ public class npcInteraction : MonoBehaviour
 
         string appropriateDialogue = npc.GetAppropriateDialogue(false);
         StartCoroutine(DisplayDialogue(appropriateDialogue));
-        //StartCoroutine(DisplayDialogue());
+        
     }
 
     void HideDialogue()
@@ -75,15 +75,6 @@ public class npcInteraction : MonoBehaviour
         }
     }
 
-    //System.Collections.IEnumerator DisplayDialogue()
-    //{
-    //    foreach (string dialogue in npc.npcDialogue)
-    //    {
-    //        dialogueText.text = dialogue;
-    //        yield return new WaitForSeconds(1f); 
-    //    }
-
-
-    //}
+    
 
 }

@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.UI;
 
 public class QuestBoard : MonoBehaviour
 {
+    //gameobject
     public GameObject questListPanel;   
     public GameObject acceptPopup;
     public GameObject cancelPopup;
@@ -31,9 +33,11 @@ public class QuestBoard : MonoBehaviour
 
     public List<QuestSO> quests;
     public List<QuestSO> acceptedQuests = new List<QuestSO>();
+    public NPCListSO npcListSO;
 
     public void Start()
     {
+        npcListSO = ScriptableObject.CreateInstance<NPCListSO>();
         InitializeQuestList();
     }
 
@@ -58,17 +62,16 @@ public class QuestBoard : MonoBehaviour
             }
         }
     }
-    private void ShowQuestDetails(QuestSO selectedQuest)
+    private void ShowQuestDetails(QuestSO selectedQuest) //questBoard에서 표시되는 퀘스트 정보
     {
         AcceptQuest(selectedQuest);
 
-        
         questTitleText.text = selectedQuest.questName;
         questDescriptionText.text = selectedQuest.questDescription;
         questConditionText.text = selectedQuest.questCondition;
         questRewardText.text = selectedQuest.questReward;
     }
-    private bool IsQuestAlreadyAccepted(QuestSO quest)
+    private bool IsQuestAlreadyAccepted(QuestSO quest) // 같은 타입의 퀘스트는 한번만 받게끔
     {
         foreach (var acceptedQuest in acceptedQuests)
         {
@@ -79,7 +82,7 @@ public class QuestBoard : MonoBehaviour
         }
         return false;
     }
-    private void AcceptQuest(QuestSO quest)
+    private void AcceptQuest(QuestSO quest) // questBoard에서 퀘스트를 수락
     {
         if (!IsQuestAlreadyAccepted(quest))
         {
@@ -87,7 +90,9 @@ public class QuestBoard : MonoBehaviour
             acceptPopup.SetActive(true);
             UpdateQuestLogUI();
             ShowQuestProgress(quest);
-           
+
+            
+
         }
         else
         {
@@ -95,7 +100,10 @@ public class QuestBoard : MonoBehaviour
             cancelPopup.SetActive(true);
         }
     }
-    private void UpdateQuestLogUI()
+
+   
+
+    private void UpdateQuestLogUI() //questLog에 선택된 퀘스트 정보 표시
     {
         questLogName.text = "";
         questLogSelected.text = "";
@@ -111,13 +119,13 @@ public class QuestBoard : MonoBehaviour
         }
     }
 
-    public void OnQuestObjectClick(QuestSO quest)
+    public void OnQuestObjectClick(QuestSO quest) //questLog에서 퀘스트를 하나하나 선택
     {
         ShowLogQuestDetails(quest);
         
     }  
 
-    private void ShowLogQuestDetails(QuestSO selectedQuest)
+    private void ShowLogQuestDetails(QuestSO selectedQuest) // questLog에서 선택된 퀘스트 정보 표시
     {
         
         questLogSelected.text = selectedQuest.questName;
@@ -125,7 +133,7 @@ public class QuestBoard : MonoBehaviour
         questLogRewards.text = selectedQuest.questReward;
     }
 
-    public void ShowQuestProgress(QuestSO selectedQuest)
+    public void ShowQuestProgress(QuestSO selectedQuest) //questProgress 표시창
     {
         questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / "+ selectedQuest.questComplete;
     }
