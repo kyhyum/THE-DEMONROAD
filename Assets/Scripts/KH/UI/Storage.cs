@@ -6,10 +6,13 @@ public class Storage : MonoBehaviour
 {
     ItemSlot[] slots;
     private int[] count;
+    private Inventory inventory;
 
     private void Awake()
     {
         count = new int[3];
         slots = new ItemSlot[81];
     }
+
+
 }
