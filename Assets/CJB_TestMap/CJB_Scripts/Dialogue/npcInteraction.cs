@@ -5,7 +5,11 @@ using UnityEngine;
 public class npcInteraction : MonoBehaviour
 {
     public NPCSO npc;
+    private QuestBoard questBoard;
+
     public GameObject dialogueUI;
+    public GameObject completeUI;
+
     public TMP_Text nameText;
     public TMP_Text dialogueText;
 
@@ -17,7 +21,9 @@ public class npcInteraction : MonoBehaviour
 
     void Start()
     {
+        questBoard = FindObjectOfType<QuestBoard>();
         dialogueUI.SetActive(false);
+        completeUI.SetActive(false);
     }
     void Update()
     {
@@ -61,7 +67,7 @@ public class npcInteraction : MonoBehaviour
             if (npc.conversationCount >= 1)
             {
                 string appropriateDialogue = npc.completeDialogue[0];
-                StartCoroutine(DisplayDialogue(appropriateDialogue));
+                StartCoroutine(DisplayDialogue(appropriateDialogue));              
                 CompleteConversationQuest(npc);
             }
             else
@@ -95,9 +101,23 @@ public class npcInteraction : MonoBehaviour
     private void CompleteConversationQuest(NPCSO npc)
     {
         npc.conversationCount = 0;
-
+        npc.hasQuest = false;
         // 퀘스트 완료 처리를 수행할 코드 작성
         Debug.Log("Quest completed!");
+
+        QuestBoard questBoard = FindObjectOfType<QuestBoard>();
+
+        if (questBoard != null) 
+        {
+            foreach (var quest in questBoard.acceptedQuests)
+            {
+                if (quest.relatedNPCs.Contains(npc))
+                {
+                    questBoard.RemoveAcceptedQuest(quest);
+                }
+            }
+        }
+
     }
 
     void HideDialogue()
@@ -108,12 +128,23 @@ public class npcInteraction : MonoBehaviour
 
     System.Collections.IEnumerator DisplayDialogue(string dialogue) 
     {
-        dialogueText.text = ""; 
+        dialogueText.text = "";
+        bool isCompleteDialogue = dialogue == npc.completeDialogue[0];
+
         foreach (char letter in dialogue.ToCharArray()) 
         {
             dialogueText.text += letter; 
             yield return new WaitForSeconds(0.05f); 
         }
+        if (isCompleteDialogue)
+        {
+            completeUI.SetActive(true); // 대화가 완전히 출력된 후에 completeUI를 활성화
+
+            // 2초 후에 completeUI를 비활성화
+            yield return new WaitForSeconds(2.0f);
+            completeUI.SetActive(false);
+        }
+
     }
 
     

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -32,12 +33,12 @@ public class QuestBoard : MonoBehaviour
 
     public List<QuestSO> quests;
     public List<QuestSO> acceptedQuests = new List<QuestSO>();
-    public NPCListSO npcListSO;
+    
     
 
     public void Start()
     {
-        npcListSO = ScriptableObject.CreateInstance<NPCListSO>();
+        
         InitializeQuestList();
     }
 
@@ -91,7 +92,14 @@ public class QuestBoard : MonoBehaviour
             UpdateQuestLogUI();
             ShowQuestProgress(quest);
 
-           
+            foreach (var npc in quest.relatedNPCs)
+            {
+                if (npc != null)
+                {
+                    npc.hasQuest = true;
+                }
+                
+            }
 
         }
         else
@@ -138,7 +146,10 @@ public class QuestBoard : MonoBehaviour
         questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / "+ selectedQuest.questComplete;
     }
 
-
-
-
+    internal void RemoveAcceptedQuest(QuestSO quest)
+    {
+        acceptedQuests.Remove(quest);
+        Debug.Log("퀘스트 삭제");
+        UpdateQuestLogUI();
+    }
 }

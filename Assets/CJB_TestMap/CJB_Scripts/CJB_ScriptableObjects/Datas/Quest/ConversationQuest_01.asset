@@ -21,3 +21,7 @@ MonoBehaviour:
   <questCondition>k__BackingField: "npc\uD55C\uBA85\uACFC \uC778\uC0AC\uC644\uB8CC"
   <questComplete>k__BackingField: 1
   <questReward>k__BackingField: "\uAE08\uD654 1\uAC1C"
+  relatedNPCs:
+  - {fileID: 11400000, guid: cd1dfb6ddf4d3454e9f6e1773962761d, type: 2}
+  - {fileID: 11400000, guid: f0f69b6bd54ec3744b1bdfea587625f1, type: 2}
+  - {fileID: 11400000, guid: d3ce2970e3d24254e88844cc8be775e0, type: 2}
