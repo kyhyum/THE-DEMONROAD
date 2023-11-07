@@ -17,7 +17,6 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
 
         foreach (RaycastResult result in results)
         {
-            Debug.Log(result);
             if (result.gameObject.TryGetComponent<InventorySlot>(out InventorySlot inventorySlot))
             {
                 if (inventorySlot.slotID == slotID)
@@ -34,7 +33,7 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
 
             if (result.gameObject.TryGetComponent<StorageSlot>(out StorageSlot storageSlot))
             {
-
+                UIManager.Instance.SwapItems(slotID, storageSlot.slotID);
                 return;
             }
         }
@@ -42,11 +41,16 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (GetItem() != null && eventData.button == PointerEventData.InputButton.Right)
+        Item item = GetItem();
+        if (item != null && eventData.button == PointerEventData.InputButton.Right)
         {
             if (UIManager.Instance.storageOpen)
             {
-                // UIManager.Instance.GetStorage().AddItem();
+                Debug.Log(UIManager.Instance.GetStorage());
+                if (UIManager.Instance.GetStorage().AddItem(item))
+                {
+                    SetItem(null);
+                }
             }
             else if (GetItem() is EquipItem)
             {
