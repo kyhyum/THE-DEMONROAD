@@ -77,7 +77,7 @@ public class npcInteraction : MonoBehaviour
             {
                 string appropriateDialogue = npc.npcDialogue[0];
                 StartCoroutine(DisplayDialogue(appropriateDialogue));
-                //IncrementConversationCount(npc);
+                
             }
         }
         else
@@ -89,22 +89,15 @@ public class npcInteraction : MonoBehaviour
         
 
     }
-    //private void IncrementConversationCount(NPCSO npc)
-    //{
-    //    if (npc.hasQuest)
-    //    {
-    //        npc.conversationCount++;
-    //    }
+    
 
-        
-
-    //}
 
     private void CompleteConversationQuest(NPCSO npc)
     {
         npc.conversationCount = 0;
         npc.hasQuest = false;
 
+        
         // 퀘스트 완료 처리를 수행할 코드 작성
         Debug.Log("Quest completed!");
 
@@ -120,6 +113,8 @@ public class npcInteraction : MonoBehaviour
                 }
             }
         }
+
+        
 
     }
 

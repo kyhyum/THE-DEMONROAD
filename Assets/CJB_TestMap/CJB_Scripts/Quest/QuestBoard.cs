@@ -32,7 +32,7 @@ public class QuestBoard : MonoBehaviour
 
     public List<QuestSO> quests;
     public List<QuestSO> acceptedQuests = new List<QuestSO>();
-    
+
     
 
     public void Start()
@@ -162,7 +162,7 @@ public class QuestBoard : MonoBehaviour
         } 
     }
 
-    internal void RemoveAcceptedQuest(QuestSO selectedquest) // Remove가 현재 안되는중
+    public void RemoveAcceptedQuest(QuestSO selectedquest) // Remove가 현재 안되는중
     {
         acceptedQuests.Remove(selectedquest);
         Debug.Log("퀘스트 삭제");
