@@ -76,6 +76,7 @@ public class npcInteraction : MonoBehaviour
                 Debug.Log("대화횟수 1증가");
                 Debug.Log("현재 총 대화수: " + npc.conversationCount);
 
+                
                 if (npc.conversationCount == quest.questComplete) 
                 {
                     // 퀘스트 완료 처리를 수행합니다.
