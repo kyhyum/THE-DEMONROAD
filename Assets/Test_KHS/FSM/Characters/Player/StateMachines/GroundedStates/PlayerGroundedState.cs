@@ -24,6 +24,12 @@ public class PlayerGroundedState : PlayerBaseState
     public override void Update()
     {
         base.Update();
+
+        if (stateMachine.Player.IsAttacking)
+        {
+            OnAttack();
+            return;
+        }
     }
 
     public override void LateUpdate()
@@ -58,5 +64,10 @@ public class PlayerGroundedState : PlayerBaseState
     protected virtual void OnMove()
     {
         stateMachine.ChangeState(stateMachine.WalkState);
+    }
+
+    protected virtual void OnAttack()
+    {
+        stateMachine.ChangeState(stateMachine.AttackState);
     }
 }
