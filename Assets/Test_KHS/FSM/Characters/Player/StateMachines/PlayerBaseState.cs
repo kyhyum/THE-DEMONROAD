@@ -34,7 +34,7 @@ public class PlayerBaseState : IState
 
     public virtual void Update()
     {
-        Move();
+
     }
 
     public virtual void LateUpdate()
@@ -71,15 +71,7 @@ public class PlayerBaseState : IState
     {
         //Debug.Log("OnMoveStarted 함수 호출한다.");
 
-        RaycastHit hit;
-
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition), out hit, 100))
-        {
-            //Debug.Log($"hit.collider.name: {hit.collider.name}");
-            //Debug.Log($"hit.point: {hit.point}");
-
-            stateMachine.Player.Agent.SetDestination(hit.point);
-        }
+        Move();
     }
 
     protected virtual void OnAttackPerformed(InputAction.CallbackContext context)
@@ -99,21 +91,22 @@ public class PlayerBaseState : IState
     /// <summary>
     /// 실제 이동하는 처리를 한다.
     /// </summary>
-    private void Move()
+    protected void Move()
     {
+        RaycastHit hit;
 
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition), out hit, 100))
+        {
+            //Debug.Log($"hit.collider.name: {hit.collider.name}");
+            //Debug.Log($"hit.point: {hit.point}");
+
+            stateMachine.Player.Agent.SetDestination(hit.point);
+        }
     }
 
     private void LateMove()
     {
         stateMachine.Player.transform.position = stateMachine.Player.Agent.nextPosition;
-    }
-
-    private float GetMovemenetSpeed()
-    {
-        // 실제로 이동해야 되는 속도가 나온다.
-        float movementSpeed = stateMachine.MovementSpeed * stateMachine.MovementSpeedModifier;
-        return movementSpeed;
     }
 
     #region State용 애니메이션 처리 함수

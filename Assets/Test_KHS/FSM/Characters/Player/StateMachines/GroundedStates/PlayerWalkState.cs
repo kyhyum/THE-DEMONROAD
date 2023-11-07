@@ -33,4 +33,11 @@ public class PlayerWalkState : PlayerGroundedState
             return;
         }
     }
+
+    protected override void OnMoveStarted(InputAction.CallbackContext context)
+    {
+        base.OnMoveStarted(context);
+
+        Move();
+    }
 }
