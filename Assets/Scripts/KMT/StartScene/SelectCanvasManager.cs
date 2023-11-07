@@ -128,7 +128,7 @@ public class SelectCanvasManager : MonoBehaviour
             GameManager.s_instance.SavePlayerDataToJson(StringManager.jsonPath, data.name, data);
             PlayerData thisdata = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.jsonPath, data.name);
             characterSlots[selectedSlot].CreateCharacter(baseCharacters[(int)data.job], thisdata);
-            playerDatas[data.playerIndex] = data;
+            playerDatas[thisdata.playerIndex] = thisdata;
             playerName.Add(name);
             StartSceneManager.s_instance.OpenSelectCanvas();
         }

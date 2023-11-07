@@ -31,6 +31,7 @@ public class ChangerSlot : MonoBehaviour
         }
         else
         {
+            
             UISetActive(true);
             index.text = (playerData.playerIndex + 1).ToString() + ".";
             charLevel.text = "Lv." + playerData.level.ToString();

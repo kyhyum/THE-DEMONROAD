@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     }
     public void Save()
     {
-        if(SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 2)
+        if(SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 3)
         {
             player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
             player.currentPlayerPos = Myplayer.transform.position;
