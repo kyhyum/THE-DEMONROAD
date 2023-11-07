@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public CharacterController Controller { get; private set; }
     public NavMeshAgent Agent { get; private set; }
     public Camera Camera { get; private set; }
+    public bool IsAttacking { get; set; }
 
     private PlayerStateMachine stateMachine;
 
