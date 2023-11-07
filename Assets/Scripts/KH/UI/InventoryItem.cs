@@ -13,7 +13,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     private Canvas canvas;
     private RectTransform rect;
     private RawImage icon;
-    private Item item;
+    protected Item item;
     private TMP_Text quantity;
 
     private void Awake()
@@ -26,25 +26,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void SetItem(Item item)
     {
-        if (gameObject.TryGetComponent<Item>(out Item tmp))
-        {
-            Destroy(tmp);
-        }
-
-        if (item.type == ItemType.Resources || item.type == ItemType.Gold)
-        {
-            this.item = gameObject.AddComponent<ResourceItem>();
-        }
-        else if (item.type == ItemType.Consumes)
-        {
-            this.item = gameObject.AddComponent<UseItem>();
-        }
-        else
-        {
-            this.item = gameObject.AddComponent<EquipItem>();
-        }
-
-        this.item.Set(item);
+        this.item = item;
 
         icon.texture = item.texture;
 
@@ -85,14 +67,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     private bool isInItem()
     {
-        return TryGetComponent<Item>(out Item item);
+        return item != null;
     }
 
     public void Clear()
     {
         SetAlpha(0);
         quantity.text = string.Empty;
-        Destroy(item);
+        item = null;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
