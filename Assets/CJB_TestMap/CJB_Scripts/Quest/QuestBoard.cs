@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -33,7 +32,7 @@ public class QuestBoard : MonoBehaviour
 
     public List<QuestSO> quests;
     public List<QuestSO> acceptedQuests = new List<QuestSO>();
-    
+
     
 
     public void Start()
@@ -97,6 +96,7 @@ public class QuestBoard : MonoBehaviour
                 if (npc != null)
                 {
                     npc.hasQuest = true;
+                    
                 }
                 
             }
@@ -144,14 +144,25 @@ public class QuestBoard : MonoBehaviour
 
     public void ShowQuestProgress(QuestSO selectedQuest) //questProgress 표시창
     {
-        questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / "+ selectedQuest.questComplete;
-        //현재 상황 부분도 업데이트 해야함.
+        if (selectedQuest.questType == QuestType.ConversationQuest) //대화퀘스트
+        {
+            foreach (var npc in selectedQuest.relatedNPCs)
+            {    
+                questProgName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;    
+
+            }
+        }
+        else if(selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트
+        {
+            questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+        }
+        else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트
+        {
+            questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+        } 
     }
 
-    internal void RemoveAcceptedQuest(QuestSO selectedquest) // Remove가 현재 안되는중
-    {
-        acceptedQuests.Remove(selectedquest);
-        Debug.Log("퀘스트 삭제");
-        UpdateQuestLogUI();
-    }
+    
+
+
 }
