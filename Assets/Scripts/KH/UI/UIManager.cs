@@ -79,6 +79,11 @@ public class UIManager : MonoBehaviour
         return inventory;
     }
 
+    public Storage GetStorage()
+    {
+        return storage;
+    }
+
     private void ActiveInventory(InputAction.CallbackContext context)
     {
         Debug.Log("Active Inventory");
