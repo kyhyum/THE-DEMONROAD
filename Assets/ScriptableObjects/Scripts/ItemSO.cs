@@ -23,26 +23,27 @@ public class ItemSO : ScriptableObject
 
         if (type == ItemType.Resources || type == ItemType.Gold)
         {
-            item = gameObject.AddComponent<ResourceItem>();
+            item = new ResourceItem(this);
         }
         else if (type == ItemType.Consumes)
         {
-            item = gameObject.AddComponent<UseItem>();
+            item = new UseItem(this);
         }
         else
         {
-            item = gameObject.AddComponent<EquipItem>();
+            item = new EquipItem(this);
         }
 
-        item.Set(this);
-
-        GameObject canvas = Instantiate(Resources.Load<GameObject>("KH/Prefabs/UI/UI_ItemLabel"), item.transform);
+        GameObject canvas = Instantiate(Resources.Load<GameObject>("KH/Prefabs/UI/UI_ItemLabel"), gameObject.transform);
         TMP_Text text = canvas.GetComponentInChildren<TMP_Text>();
         text.text = itemName;
 
         Image image = canvas.GetComponentInChildren<Image>();
         Color imageColor = new Color();
         Color textColor = new Color();
+
+        canvas.GetComponentInChildren<ItemLabel>().SetItem(item);
+        canvas.GetComponentInChildren<ItemLabel>().SetObject(gameObject);
 
         switch (rank)
         {

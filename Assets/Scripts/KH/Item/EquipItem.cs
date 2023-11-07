@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EquipItem : Item
 {
+    public EquipItem(ItemSO itemSO) : base(itemSO)
+    {
+    }
+
     public void Equip()
     {
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item
 {
     public string itemName;
     public string description;
@@ -12,7 +12,7 @@ public class Item : MonoBehaviour
     public ItemType type;
     public GameObject prefab;
 
-    public void Set(ItemSO itemSO)
+    public Item(ItemSO itemSO)
     {
         itemName = itemSO.itemName;
         description = itemSO.description;
@@ -20,20 +20,5 @@ public class Item : MonoBehaviour
         rank = itemSO.rank;
         type = itemSO.type;
         prefab = itemSO.prefab;
-    }
-
-    public void Set(Item item)
-    {
-        itemName = item.itemName;
-        description = item.description;
-        texture = item.texture;
-        rank = item.rank;
-        type = item.type;
-        prefab = item.prefab;
-    }
-
-    public void RemoveObject()
-    {
-        Destroy(gameObject);
     }
 }

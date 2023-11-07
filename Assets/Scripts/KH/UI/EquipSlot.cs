@@ -4,54 +4,34 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
+public class EquipSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler, IPointerDownHandler
 {
     public ItemType type;
-    private EquipItem item;
-    private RawImage icon;
-    private Texture2D baseImage;
     private GameObject itemClone;
     private Canvas canvas;
     private RectTransform rect;
-    private bool isEquip;
-    private bool isDrag;
+    private RawImage icon;
+    private Item item;
 
     private void Awake()
     {
-        icon = GetComponent<RawImage>();
-        baseImage = Resources.Load<Texture2D>("KH/Images/UI/Equip/" + gameObject.name);
-        Clear();
-    }
-
-    private void Start()
-    {
         canvas = GetComponentInParent<Canvas>();
+        icon = GetComponentInChildren<RawImage>();
+        item = null;
     }
 
-    private void Clear()
+    public void SetItem(Item item)
     {
-        icon.texture = baseImage;
-        icon.color = Color.black;
-        isEquip = false;
-    }
+        this.item = item;
 
-    public void Equip(EquipItem item)
-    {
-        this.item = gameObject.AddComponent<EquipItem>();
-        this.item.Set(item);
+        if (item == null)
+        {
+            Clear();
+            return;
+        }
 
-        icon.color = Color.white;
         icon.texture = item.texture;
-        isEquip = true;
-        item.Equip();
-    }
-
-    public void UnEquip()
-    {
-        Clear();
-        item.UnEquip();
-        isEquip = false;
-        Destroy(item);
+        SetAlpha(1);
     }
 
     public Item GetItem()
@@ -59,31 +39,54 @@ public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegi
         return item;
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+
+    public void Clear()
     {
-        if (TryGetComponent<EquipItem>(out EquipItem item) && eventData.button == PointerEventData.InputButton.Right)
-        {
-            if (UIManager.Instance.GetInventory().AddItem(item))
-            {
-                UnEquip();
-            }
-        }
+        SetAlpha(0);
     }
+
+    private void SetAlpha(float f)
+    {
+        Color color = icon.color;
+        color.a = f;
+        icon.color = color;
+    }
+
+    public void Equip(Item item)
+    {
+        if (item is EquipItem)
+        {
+            EquipItem equipItem = (EquipItem)item;
+
+            equipItem.Equip();
+        }
+
+        SetItem(item);
+    }
+
+    public void UnEquip()
+    {
+        Item item = GetItem();
+
+        if (item is EquipItem)
+        {
+            EquipItem equipItem = (EquipItem)item;
+
+            equipItem.UnEquip();
+        }
+
+        SetItem(null);
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!isEquip)
+        Debug.Log(item);
+        if (item == null)
             return;
-        isDrag = true;
-
         itemClone = Instantiate(gameObject, canvas.GetComponent<Transform>());
         rect = itemClone.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(70, 70);
 
-        if (itemClone.TryGetComponent<EquipSlot>(out EquipSlot equipSlot))
-        {
-            equipSlot.Equip(item);
-            equipSlot.type = type;
-        }
+        rect.sizeDelta = new Vector2(70, 70);
 
         Vector2 mousePosition = Input.mousePosition;
 
@@ -97,17 +100,16 @@ public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegi
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!isDrag)
+        if (itemClone == null)
             return;
         rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!isDrag)
+        if (itemClone == null)
             return;
         Destroy(itemClone);
-        isDrag = false;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -121,9 +123,28 @@ public class EquipSlot : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegi
 
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.TryGetComponent<ItemSlot>(out ItemSlot slot))
+            if (result.gameObject.TryGetComponent<InventorySlot>(out InventorySlot inventorySlot))
             {
-                UIManager.Instance.GetInventory().UnEquip(slot.slotID, item.type);
+                UIManager.Instance.GetInventory().UnEquip(inventorySlot.slotID, type);
+                return;
+            }
+
+            if (result.gameObject.TryGetComponent<StorageSlot>(out StorageSlot storageSlot))
+            {
+                UIManager.Instance.GetStorage();
+                return;
+            }
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Item item = GetItem();
+        if (item != null && eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (UIManager.Instance.GetInventory().AddItem(item))
+            {
+                UnEquip();
             }
         }
     }
