@@ -3820,7 +3820,7 @@ MonoBehaviour:
       statValue: 30
     baseObject: {fileID: 0}
     playerIndex: 0
-    scene: 1
+    scene: 2
     currentPlayerPos: {x: 0, y: 0, z: 0}
     isDead: 0
 --- !u!1 &304019781
@@ -7302,7 +7302,7 @@ MonoBehaviour:
       statValue: 20
     baseObject: {fileID: 0}
     playerIndex: 0
-    scene: 1
+    scene: 2
     currentPlayerPos: {x: 0, y: 0, z: 0}
     isDead: 0
 --- !u!114 &500104864
@@ -8982,7 +8982,7 @@ MonoBehaviour:
     baseObject: {fileID: 8497167851833225634, guid: 7c4e4ae6a1911b0488c655450d48400b,
       type: 3}
     playerIndex: 0
-    scene: 1
+    scene: 2
     currentPlayerPos: {x: 0, y: 0, z: 0}
     isDead: 0
 --- !u!1 &619515929
