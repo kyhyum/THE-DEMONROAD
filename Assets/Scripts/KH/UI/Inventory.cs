@@ -181,4 +181,14 @@ public class Inventory : MonoBehaviour
             equipSlot.UnEquip();
         }
     }
+
+    public Item[] Get()
+    {
+        return null;
+    }
+
+    public void Set(Item[] items)
+    {
+
+    }
 }
