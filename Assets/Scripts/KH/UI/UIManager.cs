@@ -12,9 +12,9 @@ public class UIManager : MonoBehaviour
     private List<GameObject> EnableUI;
     private GameObject inventoryObject;
     private GameObject storageObject;
+    public GameObject settingObject;
     private Inventory inventory;
     private Storage storage;
-    [field: SerializeField] private ItemSO testItem;
     public bool storageOpen => storageObject.activeSelf;
     private Vector2 pos;
 
@@ -60,7 +60,6 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        OnUIInputEnable();
         inputAction.Player.Escape.Enable();
         inputAction.Player.Escape.started += OnEscapeKey;
     }
@@ -68,12 +67,14 @@ public class UIManager : MonoBehaviour
     public void OnUIInputEnable()
     {
         inputAction.Player.Inventory.Enable();
+        inputAction.Player.SkillUI.Enable();
         inputAction.Player.Inventory.started += ActiveInventory;
     }
 
     public void OnUIInputDisable()
     {
         inputAction.Player.Inventory.Disable();
+        inputAction.Player.SkillUI.Disable();
         inputAction.Player.Inventory.started -= ActiveInventory;
     }
 
@@ -87,14 +88,14 @@ public class UIManager : MonoBehaviour
         return storage;
     }
 
+    public void ActiveSettingWindow()
+    {
+        ActiveUIGameObject(settingObject);
+    }
+
     private void ActiveInventory(InputAction.CallbackContext context)
     {
         ActiveUIGameObject(inventoryObject);
-    }
-
-    public void TestMethodMakeItem()
-    {
-        GameObject item = testItem.CreateItem();
     }
 
     private void ActiveStorage()
@@ -122,7 +123,6 @@ public class UIManager : MonoBehaviour
 
             OnUIInputEnable();
         }
-
 
         ActiveUIGameObject(storageObject);
     }

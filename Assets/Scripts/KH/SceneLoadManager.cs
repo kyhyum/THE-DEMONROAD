@@ -34,11 +34,11 @@ public class SceneLoadManager : MonoBehaviour
         if (string.Empty.Equals(nextSceneName))
         {
             op = SceneManager.LoadSceneAsync(nextSceneNumber);
-
         }
         else
         {
             op = SceneManager.LoadSceneAsync(nextSceneName);
+
         }
 
         op.allowSceneActivation = false;
