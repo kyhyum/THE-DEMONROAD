@@ -84,7 +84,7 @@ public class UIManager : MonoBehaviour
         return inventory;
     }
 
-    public Storage GetStorage()
+    public Inventory GetStorage()
     {
         return storage;
     }
