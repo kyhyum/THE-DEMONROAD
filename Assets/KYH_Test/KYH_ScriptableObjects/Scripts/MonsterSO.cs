@@ -5,7 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MonsterSO", menuName = "Characters/Monster")]
 public class MonsterSO : ScriptableObject
 {
-    [field: Header("AttackData")]
+    [field: Header("MonsterData")]
+    [field: SerializeField] public string Name { get; private set; }
+    [field: Header("HealthData")]
     [field: SerializeField] public int Health { get; private set; } = 100;
 
     [field: Header("AttackData")]

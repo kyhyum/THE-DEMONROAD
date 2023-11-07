@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6dcd50079e7c04da65883a88051c32, type: 3}
   m_Name: OrkBerserker
   m_EditorClassIdentifier: 
+  <Name>k__BackingField: OrkBerserker
+  <Health>k__BackingField: 100
   <IsLongRanged>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 12
   <AttackRange>k__BackingField: 1
@@ -22,4 +24,3 @@ MonoBehaviour:
   <Dealing_End_TransitionTime>k__BackingField: 0.75
   <BaseSpeed>k__BackingField: 9
   <BaseRotationDamping>k__BackingField: 2
-  <RunSpeedModifier>k__BackingField: 1
