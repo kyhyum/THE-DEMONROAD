@@ -162,10 +162,5 @@ public class QuestBoard : MonoBehaviour
         } 
     }
 
-    public void RemoveAcceptedQuest(QuestSO selectedquest) // Remove가 현재 안되는중
-    {
-        acceptedQuests.Remove(selectedquest);
-        Debug.Log("퀘스트 삭제");
-        UpdateQuestLogUI();
-    }
+    
 }

@@ -1,4 +1,3 @@
-
 using TMPro;
 using UnityEngine;
 
@@ -103,16 +102,6 @@ public class npcInteraction : MonoBehaviour
 
         
 
-        if (questBoard != null) 
-        {
-            foreach (var quest in questBoard.acceptedQuests)
-            {
-                if (quest.relatedNPCs.Contains(npc) && quest.questComplete == npc.conversationCount)
-                {
-                    questBoard.RemoveAcceptedQuest(quest);
-                }
-            }
-        }
 
         
 
