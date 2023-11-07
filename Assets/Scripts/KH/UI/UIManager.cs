@@ -13,17 +13,18 @@ public class UIManager : MonoBehaviour
     private GameObject inventoryObject;
     private GameObject storageObject;
     private Inventory inventory;
-    private Storage storage;
+    private Inventory storage;
     [field: SerializeField] private ItemSO testItem;
     public bool storageOpen => storageObject.activeSelf;
+    private Vector2 pos;
 
     private void Awake()
     {
         inputAction = new PlayerInputAction();
         EnableUI = new List<GameObject>();
 
-        CreateInventory();
         CreateStorage();
+        CreateInventory();
     }
 
     private void Start()
@@ -46,6 +47,7 @@ public class UIManager : MonoBehaviour
         inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Inventory");
         inventoryObject = Instantiate(inventoryObject, canvas);
         inventory = inventoryObject.GetComponent<Inventory>();
+        inventory.SetLimit(30);
         inventoryObject.SetActive(false);
     }
 
@@ -53,13 +55,16 @@ public class UIManager : MonoBehaviour
     {
         storageObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Storage");
         storageObject = Instantiate(storageObject, canvas);
-        storage = storageObject.GetComponent<Storage>();
+        storage = storageObject.GetComponent<Inventory>();
+        storage.SetLimit(81);
         storageObject.SetActive(false);
     }
 
     private void OnEnable()
     {
         OnUIInputEnable();
+        inputAction.Player.Escape.Enable();
+        inputAction.Player.Escape.started += OnEscapeKey;
     }
 
     public void OnUIInputEnable()
@@ -86,18 +91,7 @@ public class UIManager : MonoBehaviour
 
     private void ActiveInventory(InputAction.CallbackContext context)
     {
-        Debug.Log("Active Inventory");
-
-        if (!inventoryObject.activeSelf)
-        {
-            EnableUI.Insert(0, inventoryObject);
-        }
-        else
-        {
-            EnableUI.RemoveAt(EnableUI.IndexOf(inventoryObject));
-        }
-
-        inventoryObject.SetActive(!inventoryObject.activeSelf);
+        ActiveUIGameObject(inventoryObject);
     }
 
     public void TestMethodMakeItem()
@@ -105,27 +99,62 @@ public class UIManager : MonoBehaviour
         GameObject item = testItem.CreateItem();
     }
 
-    public void ActiveStorage()
+    private void ActiveStorage()
     {
         if (!storageObject.activeSelf)
         {
+            pos = inventoryObject.GetComponent<RectTransform>().anchoredPosition;
+
             if (!inventoryObject.activeSelf)
             {
-                EnableUI.Add(inventoryObject);
-                inventoryObject.SetActive(true);
-                inventoryObject.GetComponentInChildren<InventoryDragAndDrop>().enabled = false;
+                ActiveUIGameObject(inventoryObject);
             }
 
-            EnableUI.Insert(0, storageObject);
-            storageObject.SetActive(true);
+            inventoryObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(-510, 0);
+            inventoryObject.GetComponentInChildren<InventoryDragAndDrop>().enabled = false;
+
+            OnUIInputDisable();
         }
         else
         {
-            EnableUI.RemoveAt(EnableUI.IndexOf(storageObject));
+            inventoryObject.GetComponent<RectTransform>().anchoredPosition = pos;
             inventoryObject.GetComponentInChildren<InventoryDragAndDrop>().enabled = true;
+
+            ActiveUIGameObject(inventoryObject);
+
+            OnUIInputEnable();
         }
 
 
-        storageObject.SetActive(!storageObject.activeSelf);
+        ActiveUIGameObject(storageObject);
+    }
+
+    private void OnEscapeKey(InputAction.CallbackContext context)
+    {
+        if (EnableUI.Count != 0)
+        {
+            if (EnableUI[0].Equals(storageObject))
+            {
+                ActiveStorage();
+            }
+            else
+            {
+                ActiveUIGameObject(EnableUI[0]);
+            }
+        }
+    }
+
+    private void ActiveUIGameObject(GameObject gameObject)
+    {
+        if (EnableUI.Contains(gameObject))
+        {
+            EnableUI.RemoveAt(EnableUI.IndexOf(gameObject));
+        }
+        else
+        {
+            EnableUI.Insert(0, gameObject);
+        }
+
+        gameObject.SetActive(!gameObject.activeSelf);
     }
 }

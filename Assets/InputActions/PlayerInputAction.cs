@@ -134,6 +134,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""e403dbba-c9e5-4f09-a9ce-d5514a841992"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -268,6 +277,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""QuickSlot5"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb99ab54-5b98-42af-b334-820ec3f8169f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -288,6 +308,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_QuickSlot3 = m_Player.FindAction("QuickSlot3", throwIfNotFound: true);
         m_Player_QuickSlot4 = m_Player.FindAction("QuickSlot4", throwIfNotFound: true);
         m_Player_QuickSlot5 = m_Player.FindAction("QuickSlot5", throwIfNotFound: true);
+        m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -361,6 +382,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_QuickSlot3;
     private readonly InputAction m_Player_QuickSlot4;
     private readonly InputAction m_Player_QuickSlot5;
+    private readonly InputAction m_Player_Escape;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -377,6 +399,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @QuickSlot3 => m_Wrapper.m_Player_QuickSlot3;
         public InputAction @QuickSlot4 => m_Wrapper.m_Player_QuickSlot4;
         public InputAction @QuickSlot5 => m_Wrapper.m_Player_QuickSlot5;
+        public InputAction @Escape => m_Wrapper.m_Player_Escape;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -422,6 +445,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @QuickSlot5.started += instance.OnQuickSlot5;
             @QuickSlot5.performed += instance.OnQuickSlot5;
             @QuickSlot5.canceled += instance.OnQuickSlot5;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -462,6 +488,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @QuickSlot5.started -= instance.OnQuickSlot5;
             @QuickSlot5.performed -= instance.OnQuickSlot5;
             @QuickSlot5.canceled -= instance.OnQuickSlot5;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -493,5 +522,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnQuickSlot3(InputAction.CallbackContext context);
         void OnQuickSlot4(InputAction.CallbackContext context);
         void OnQuickSlot5(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }
