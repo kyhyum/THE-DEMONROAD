@@ -5,12 +5,24 @@ using UnityEngine;
 
 public class ItemLabel : MonoBehaviour
 {
+    Item item;
+    GameObject itemObject;
+
+    public void SetObject(GameObject gameObject)
+    {
+        itemObject = gameObject;
+    }
+
+    public void SetItem(Item item)
+    {
+        this.item = item;
+    }
+
     public void GetItem()
     {
-        Item item = GetComponentInParent<Item>();
         if (UIManager.Instance.GetInventory().AddItem(item))
         {
-            item.RemoveObject();
+            Destroy(itemObject);
         }
     }
 }
