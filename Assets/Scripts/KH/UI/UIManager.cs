@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    private Transform canvas;
     private PlayerInputAction inputAction;
+    [field: SerializeField] private Transform canvas;
     private List<GameObject> EnableUI;
     private GameObject inventoryObject;
     private GameObject storageObject;
@@ -20,7 +20,6 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        canvas = GetComponent<Canvas>().transform;
         inputAction = new PlayerInputAction();
         EnableUI = new List<GameObject>();
 
@@ -86,13 +85,6 @@ public class UIManager : MonoBehaviour
     public Storage GetStorage()
     {
         return storage;
-    }
-
-    public void SwapItems(int slotA, int slotB)
-    {
-        Item item = GetInventory().GetItem(slotA);
-        GetInventory().AddItem(slotA, GetStorage().GetItem(slotB));
-        GetStorage().AddItem(slotB, item);
     }
 
     private void ActiveInventory(InputAction.CallbackContext context)
@@ -163,4 +155,12 @@ public class UIManager : MonoBehaviour
 
         gameObject.SetActive(!gameObject.activeSelf);
     }
+
+    public void SwapItems(int slotA, int slotB)
+    {
+        Item item = GetInventory().GetItem(slotA);
+        GetInventory().AddItem(slotA, GetStorage().GetItem(slotB));
+        GetStorage().AddItem(slotB, item);
+    }
+
 }

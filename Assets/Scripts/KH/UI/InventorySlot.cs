@@ -46,7 +46,6 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
         {
             if (UIManager.Instance.storageOpen)
             {
-                Debug.Log(UIManager.Instance.GetStorage());
                 if (UIManager.Instance.GetStorage().AddItem(item))
                 {
                     SetItem(null);
