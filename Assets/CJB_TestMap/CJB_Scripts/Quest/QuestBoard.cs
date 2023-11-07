@@ -96,7 +96,7 @@ public class QuestBoard : MonoBehaviour
                 if (npc != null)
                 {
                     npc.hasQuest = true;
-                    npc.conversationCount = 1;
+                    
                 }
                 
             }
@@ -163,4 +163,6 @@ public class QuestBoard : MonoBehaviour
     }
 
     
+
+
 }

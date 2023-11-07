@@ -11,27 +11,6 @@ public class NPCSO : ScriptableObject
     [field: SerializeField] public QuestType questType { get; private set; }
     [field: SerializeField] public int conversationCount { get; set; }
 
-    public void AcceptQuest()
-    {
-        hasQuest = true;
-    }
-
-    //public string GetAppropriateDialogue(bool playerHasCompletedQuest)
-    //{
-    //    if (hasQuest)
-    //    {
-    //        if (playerHasCompletedQuest)
-    //        {
-    //            return completeDialogue[0];
-    //        }
-    //        else
-    //        {
-    //            return npcDialogue[0];
-    //        }
-    //    }
-    //    else
-    //    {
-    //        return npcDialogue[0];
-    //    }
-    //}
+   
+    
 }

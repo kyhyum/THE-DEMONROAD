@@ -64,13 +64,25 @@ public class npcInteraction : MonoBehaviour
 
        
 
-            if (npc.questType == QuestType.ConversationQuest)
+        if (npc.questType == QuestType.ConversationQuest)
         {
-            if (npc.conversationCount >= 1)
+            if (npc.hasQuest)
             {
                 string appropriateDialogue = npc.completeDialogue[0];
-                StartCoroutine(DisplayDialogue(appropriateDialogue));              
-                CompleteConversationQuest(npc);
+                StartCoroutine(DisplayDialogue(appropriateDialogue));  
+                
+                npc.conversationCount++;
+                npc.hasQuest = false;
+                Debug.Log("대화횟수 1증가");
+                Debug.Log("현재 총 대화수: " + npc.conversationCount);
+
+                if (npc.conversationCount == quest.questComplete) 
+                {
+                    // 퀘스트 완료 처리를 수행합니다.
+                    CompleteConversationQuest(npc);
+                }
+
+
             }
             else
             {
@@ -93,13 +105,23 @@ public class npcInteraction : MonoBehaviour
 
     private void CompleteConversationQuest(NPCSO npc)
     {
-        npc.conversationCount = 0;
-        npc.hasQuest = false;
+        npc.conversationCount--;
 
-        
+        foreach (var relatednpc in quest.relatedNPCs)
+        {
+            if (relatednpc != null)
+            {
+                relatednpc.hasQuest = false;
+
+            }
+
+        }
+
+
         // 퀘스트 완료 처리를 수행할 코드 작성
         Debug.Log("Quest completed!");
 
+        
         
 
 
@@ -123,10 +145,10 @@ public class npcInteraction : MonoBehaviour
             dialogueText.text += letter; 
             yield return new WaitForSeconds(0.05f); 
         }
-        if (isCompleteDialogue)
+        if (isCompleteDialogue) // 퀘스트 완료 팝업 띄우고 2초뒤에 닫기
         {
-            completeUI.SetActive(true); 
-            
+            completeUI.SetActive(true);
+
             yield return new WaitForSeconds(2.0f);
             completeUI.SetActive(false);
         }
