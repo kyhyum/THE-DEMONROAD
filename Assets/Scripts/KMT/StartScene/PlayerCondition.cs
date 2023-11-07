@@ -18,7 +18,8 @@ public class PlayerData
     public Vector3 currentPlayerPos;
     
     public bool isDead;
-    public List<Item> items;
+    /*public Item[] inventory;
+    public Item[] storage;*/
 }
 
 [System.Serializable]

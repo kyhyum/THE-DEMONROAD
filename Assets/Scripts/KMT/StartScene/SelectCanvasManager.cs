@@ -39,7 +39,7 @@ public class SelectCanvasManager : MonoBehaviour
             {
                 foreach (string one in playerName)
                 {
-                    PlayerData data = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.jsonPath, one);
+                    PlayerData data = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.JsonPath, one);
                     playerDatas[data.playerIndex] = data;
                     characterSlots[data.playerIndex].CreateCharacter(baseCharacters[(int)data.job], data);
                 }
@@ -125,8 +125,8 @@ public class SelectCanvasManager : MonoBehaviour
             data.name = name;
             data.playerIndex = selectedSlot;
             data.level = 1;
-            GameManager.s_instance.SavePlayerDataToJson(StringManager.jsonPath, data.name, data);
-            PlayerData thisdata = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.jsonPath, data.name);
+            GameManager.s_instance.SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
+            PlayerData thisdata = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.JsonPath, data.name);
             characterSlots[selectedSlot].CreateCharacter(baseCharacters[(int)data.job], thisdata);
             playerDatas[thisdata.playerIndex] = thisdata;
             playerName.Add(name);
@@ -143,7 +143,7 @@ public class SelectCanvasManager : MonoBehaviour
         {
             if (playerDatas[i] != null)
             {
-                GameManager.s_instance.SavePlayerDataToJson(StringManager.jsonPath, playerDatas[i].name, playerDatas[i]);
+                GameManager.s_instance.SavePlayerDataToJson(StringManager.JsonPath, playerDatas[i].name, playerDatas[i]);
             }
         }
         for(int i = 0; i < characterSlots.Length; i++)

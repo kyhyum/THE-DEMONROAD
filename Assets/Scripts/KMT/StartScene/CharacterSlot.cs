@@ -38,7 +38,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            if (GameManager.s_instance.DeleteCharacter(StringManager.jsonPath, character.GetComponent<PlayerCondition>().playerData.name))
+            if (GameManager.s_instance.DeleteCharacter(StringManager.JsonPath, character.GetComponent<PlayerCondition>().playerData.name))
             {
                 ClearSlot();
             }
