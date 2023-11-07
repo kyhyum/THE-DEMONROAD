@@ -5,11 +5,12 @@ using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class Inventory : MonoBehaviour
 {
     [field: SerializeField] private Transform slots;
     private ItemSlot[] inventorySlots;
-    private EquipSlot[] equipSlots;
+    public EquipSlot[] equipSlots;
     private int gold = 3000000;
     public int Gold
     {
@@ -24,7 +25,6 @@ public class Inventory : MonoBehaviour
             text.text = string.Format("{0:#,###}", gold);
         }
     }
-    public int limit;
     public TMP_Text text;
 
     private void Awake()
@@ -43,20 +43,14 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void SetLimit(int limit)
-    {
-        this.limit = limit;
-    }
-
     public bool AddItem(Item item)
     {
-        if (limit == 0)
-            return false;
-
         if (item.type == ItemType.Gold)
         {
             IStackable stackableItem = (IStackable)item;
             gold += stackableItem.Get();
+
+            return true;
         }
         else if (item is IStackable)
         {
@@ -66,26 +60,32 @@ public class Inventory : MonoBehaviour
 
             if (index == -1)
             {
-                AddItem(FindIndex(), item);
+                return AddItem(FindIndex(), item);
             }
             else
             {
                 inventorySlots[index].AddItem(stackableItem.Get());
+                return true;
             }
         }
         else
         {
-            AddItem(FindIndex(), item);
+            return AddItem(FindIndex(), item);
         }
+    }
 
+    public bool AddItem(int index, Item item)
+    {
+        if (index == -1)
+            return false;
+
+        inventorySlots[index].SetItem(item);
         return true;
     }
 
-    public void AddItem(int index, Item item)
+    public Item GetItem(int slot)
     {
-        if (item != null)
-            limit--;
-        inventorySlots[index].SetItem(item);
+        return inventorySlots[slot].GetItem();
     }
 
     private int FindIndex()

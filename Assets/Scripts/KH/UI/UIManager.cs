@@ -7,19 +7,20 @@ using UnityEngine.InputSystem;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    [field: SerializeField] private Transform canvas;
+    private Transform canvas;
     private PlayerInputAction inputAction;
     private List<GameObject> EnableUI;
     private GameObject inventoryObject;
     private GameObject storageObject;
     private Inventory inventory;
-    private Inventory storage;
+    private Storage storage;
     [field: SerializeField] private ItemSO testItem;
     public bool storageOpen => storageObject.activeSelf;
     private Vector2 pos;
 
     private void Awake()
     {
+        canvas = GetComponent<Canvas>().transform;
         inputAction = new PlayerInputAction();
         EnableUI = new List<GameObject>();
 
@@ -47,7 +48,6 @@ public class UIManager : MonoBehaviour
         inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Inventory");
         inventoryObject = Instantiate(inventoryObject, canvas);
         inventory = inventoryObject.GetComponent<Inventory>();
-        inventory.SetLimit(30);
         inventoryObject.SetActive(false);
     }
 
@@ -55,8 +55,7 @@ public class UIManager : MonoBehaviour
     {
         storageObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Storage");
         storageObject = Instantiate(storageObject, canvas);
-        storage = storageObject.GetComponent<Inventory>();
-        storage.SetLimit(81);
+        storage = storageObject.GetComponentInChildren<Storage>();
         storageObject.SetActive(false);
     }
 
@@ -84,9 +83,16 @@ public class UIManager : MonoBehaviour
         return inventory;
     }
 
-    public Inventory GetStorage()
+    public Storage GetStorage()
     {
         return storage;
+    }
+
+    public void SwapItems(int slotA, int slotB)
+    {
+        Item item = GetInventory().GetItem(slotA);
+        GetInventory().AddItem(slotA, GetStorage().GetItem(slotB));
+        GetStorage().AddItem(slotB, item);
     }
 
     private void ActiveInventory(InputAction.CallbackContext context)
