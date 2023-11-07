@@ -63,7 +63,9 @@ public class npcInteraction : MonoBehaviour
         dialogueUI.SetActive(true);
         nameText.text = npc.npcName;
 
-        if (npc.questType == QuestType.ConversationQuest)
+       
+
+            if (npc.questType == QuestType.ConversationQuest)
         {
             if (npc.conversationCount >= 1)
             {
@@ -75,7 +77,7 @@ public class npcInteraction : MonoBehaviour
             {
                 string appropriateDialogue = npc.npcDialogue[0];
                 StartCoroutine(DisplayDialogue(appropriateDialogue));
-                IncrementConversationCount(npc);
+                //IncrementConversationCount(npc);
             }
         }
         else
@@ -87,16 +89,16 @@ public class npcInteraction : MonoBehaviour
         
 
     }
-    private void IncrementConversationCount(NPCSO npc)
-    {
-        if (npc.hasQuest)
-        {
-            npc.conversationCount++;
-        }
+    //private void IncrementConversationCount(NPCSO npc)
+    //{
+    //    if (npc.hasQuest)
+    //    {
+    //        npc.conversationCount++;
+    //    }
 
         
 
-    }
+    //}
 
     private void CompleteConversationQuest(NPCSO npc)
     {
