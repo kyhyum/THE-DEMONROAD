@@ -98,8 +98,8 @@ public class CharacterSlot : MonoBehaviour
         if (character != null)
         {
             GameManager.s_instance.player = character.GetComponent<PlayerCondition>().playerData;
-            SceneLoadManager.LoadScene((int)GameManager.s_instance.player.scene);
             StartCoroutine(GameManager.s_instance.RealTimeSave());
+            SceneLoadManager.LoadScene((int)GameManager.s_instance.player.scene);
             DontDestroyOnLoad(GameManager.s_instance.gameObject);
         }
         else

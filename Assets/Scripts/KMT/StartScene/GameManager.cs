@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     public PlayerData player;
     public GameObject Myplayer;
+    WaitForSecondsRealtime wait;
     private void Awake()
     {
         if (s_instance == null)
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+        wait = new WaitForSecondsRealtime(20f);
     }
     private void Start()
     {
@@ -29,15 +31,14 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator RealTimeSave()
     {
-        if(SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start)
+        while (true)
         {
-            Save();
+            if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start)
+            {
+                Save();
+            }
+            yield return wait;
         }
-        else if(SceneManager.GetActiveScene().buildIndex == (int)SceneType.Start)
-        {
-            yield break;
-        }
-        yield return new WaitForSecondsRealtime(20f);
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
     {
         // ToJson을 사용하면 JSON형태로 포멧팅된 문자열이 생성된다  
         string jsonData = JsonUtility.ToJson(data, true);
+        Debug.Log("발동1");
         // 데이터를 저장할 경로 지정
         string path = Path.Combine(jsonPath, $"{itemArrayName}.json");
         // 파일 생성 및 저장
@@ -94,9 +96,9 @@ public class GameManager : MonoBehaviour
     {
         // 데이터를 불러올 경로 지정
         string path = Path.Combine(jsonPath, $"{itemArrayName}.json");
-        bool result = File.Exists(path);
-        if(result)
+        if(File.Exists(path))
         {
+            Debug.Log("발동");
             string jsonData = File.ReadAllText(path);
             return JsonUtility.FromJson<Item[]>(jsonData);
         }
@@ -114,17 +116,18 @@ public class GameManager : MonoBehaviour
     }
     public void HomeButton()
     {
-        if(SceneManager.GetActiveScene().buildIndex != 0)
+        if(SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start)
         {
-            SceneLoadManager.LoadScene("Start");
+            SceneLoadManager.LoadScene((int)SceneType.Start);
             Save();
+            StopCoroutine(RealTimeSave());
             player = null;
             Myplayer = null;
         }
     }
     public void Save()
     {
-        if(SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 3)
+        if(SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)SceneType.Loading)
         {
             player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
             player.currentPlayerPos = Myplayer.transform.position;

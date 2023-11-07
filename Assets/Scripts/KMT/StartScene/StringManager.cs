@@ -27,7 +27,7 @@ public enum StatType
 public enum SceneType
 {
     Start,
+    Loading,
     Town,
-    Dungeon,
-    Loading
+    Dungeon
 }
