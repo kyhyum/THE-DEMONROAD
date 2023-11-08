@@ -5,9 +5,9 @@ public class QuestController : MonoBehaviour
 {
     public GameObject questLogPanel;
     public GameObject questProgressPanel;
+    public GameObject completeUI; 
 
     public float fadeDuration = 1f; 
-    public GameObject completeUI; 
 
     private bool isLogVisible = false;
 
@@ -46,7 +46,7 @@ public class QuestController : MonoBehaviour
 
     IEnumerator FadeIn()
     {
-        completeUI.SetActive(true); // UI를 활성화합니다.
+        completeUI.SetActive(true); 
         CanvasGroup canvasGroup = completeUI.GetComponent<CanvasGroup>();
         canvasGroup.alpha = 0f;
 
@@ -67,6 +67,6 @@ public class QuestController : MonoBehaviour
             yield return null;
         }
 
-        completeUI.SetActive(false); // UI를 비활성화합니다.
+        completeUI.SetActive(false); 
     }
 }

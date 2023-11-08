@@ -1390,7 +1390,6 @@ MonoBehaviour:
   cancelPopup: {fileID: 1495364443}
   questButton: {fileID: 55232164}
   questLogPanel: {fileID: 1553776588}
-  questType: 0
   questTitleText: {fileID: 345078597}
   questDescriptionText: {fileID: 758467813}
   questConditionText: {fileID: 1185051826}
@@ -1403,6 +1402,7 @@ MonoBehaviour:
   quests:
   - {fileID: 11400000, guid: 738a6d604c2069e4e8cfade4ddc6f1b9, type: 2}
   acceptedQuests: []
+  questType: 0
 --- !u!1001 &59182934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10649,6 +10649,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questLogPanel: {fileID: 1553776588}
   questProgressPanel: {fileID: 1110821356}
+  completeUI: {fileID: 1810874149}
+  fadeDuration: 1
 --- !u!4 &592654586
 Transform:
   m_ObjectHideFlags: 0
@@ -12620,10 +12622,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: f0f69b6bd54ec3744b1bdfea587625f1, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
+  controller: {fileID: 0}
   dialogueUI: {fileID: 2043401718}
   completeUI: {fileID: 1810874149}
   nameText: {fileID: 1608689205}
   dialogueText: {fileID: 1010167134}
+  questProgName: {fileID: 681685322}
+  questComplete: {fileID: 0}
   player: {fileID: 1226324490}
   activationDistance: 5
 --- !u!1 &715683513
@@ -16791,10 +16796,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: cd1dfb6ddf4d3454e9f6e1773962761d, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
+  controller: {fileID: 0}
   dialogueUI: {fileID: 1856389047}
   completeUI: {fileID: 1810874149}
   nameText: {fileID: 1324289736}
   dialogueText: {fileID: 1689673536}
+  questProgName: {fileID: 681685322}
+  questComplete: {fileID: 0}
   player: {fileID: 1226324490}
   activationDistance: 5
 --- !u!4 &967716103 stripped
@@ -17478,7 +17486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.987615, g: 0.990566, b: 0.98589355, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -19189,7 +19197,6 @@ MonoBehaviour:
   cancelPopup: {fileID: 1495364443}
   questButton: {fileID: 1102801040}
   questLogPanel: {fileID: 1553776588}
-  questType: 1
   questTitleText: {fileID: 439385619}
   questDescriptionText: {fileID: 758467813}
   questConditionText: {fileID: 1185051826}
@@ -19202,6 +19209,7 @@ MonoBehaviour:
   quests:
   - {fileID: 11400000, guid: 554968daf1f966c438f4542e43eb2462, type: 2}
   acceptedQuests: []
+  questType: 1
 --- !u!1001 &1108400544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22648,10 +22656,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: d3ce2970e3d24254e88844cc8be775e0, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
+  controller: {fileID: 0}
   dialogueUI: {fileID: 1735550675}
   completeUI: {fileID: 1810874149}
   nameText: {fileID: 1580947111}
   dialogueText: {fileID: 1904894478}
+  questProgName: {fileID: 681685322}
+  questComplete: {fileID: 0}
   player: {fileID: 1226324490}
   activationDistance: 5
 --- !u!1001 &1357877031
@@ -25954,7 +25965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1553776589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31367,6 +31378,7 @@ GameObject:
   - component: {fileID: 1810874152}
   - component: {fileID: 1810874151}
   - component: {fileID: 1810874150}
+  - component: {fileID: 1810874154}
   m_Layer: 5
   m_Name: QuestCompleteUI
   m_TagString: Untagged
@@ -31458,6 +31470,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &1810874154
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810874149}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1811132320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33892,7 +33916,6 @@ MonoBehaviour:
   cancelPopup: {fileID: 1495364443}
   questButton: {fileID: 1947091419}
   questLogPanel: {fileID: 1553776588}
-  questType: 2
   questTitleText: {fileID: 1947091418}
   questDescriptionText: {fileID: 758467813}
   questConditionText: {fileID: 1185051826}
@@ -33905,6 +33928,7 @@ MonoBehaviour:
   quests:
   - {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
   acceptedQuests: []
+  questType: 2
 --- !u!1001 &1948539442
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,9 +11,6 @@ public class QuestBoard : MonoBehaviour
     public GameObject cancelPopup;
     public GameObject questButton;
     public GameObject questLogPanel;
-    
-    public QuestType questType;
-    
 
     //quest board
     public TMP_Text questTitleText;
@@ -32,6 +29,7 @@ public class QuestBoard : MonoBehaviour
 
     public List<QuestSO> quests;
     public List<QuestSO> acceptedQuests = new List<QuestSO>();
+    public QuestType questType;
     
 
     public void Start()

@@ -107,7 +107,7 @@ public class npcInteraction : MonoBehaviour
         
 
     }
-    public void ConversationQuestProgress(QuestSO selectedQuest) //questProgress 표시창
+    public void ConversationQuestProgress(QuestSO selectedQuest) 
     {
         if (selectedQuest.questType == QuestType.ConversationQuest) //대화퀘스트
         {
