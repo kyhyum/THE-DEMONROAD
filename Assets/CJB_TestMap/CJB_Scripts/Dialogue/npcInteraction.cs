@@ -1,11 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class npcInteraction : MonoBehaviour
 {
     public NPCSO npc;
     public QuestSO quest;
-    private QuestBoard questBoard;
+    public QuestController controller;
 
     public GameObject dialogueUI;
     public GameObject completeUI;
@@ -25,9 +26,9 @@ public class npcInteraction : MonoBehaviour
 
     void Start()
     {
-        questBoard = FindObjectOfType<QuestBoard>();
+        controller = FindObjectOfType<QuestController>();
         dialogueUI.SetActive(false);
-        completeUI.SetActive(false);
+        
     }
     void Update()
     {
@@ -165,10 +166,10 @@ public class npcInteraction : MonoBehaviour
         }
         if (isCompleteDialogue) // 퀘스트 완료 팝업 띄우고 2초뒤에 닫기
         {
-            completeUI.SetActive(true);
+            controller.ShowPopup();
 
             yield return new WaitForSeconds(2.0f);
-            completeUI.SetActive(false);
+            controller.HidePopup();
         }
 
     }
