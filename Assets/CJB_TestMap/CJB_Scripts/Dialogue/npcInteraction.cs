@@ -1,17 +1,22 @@
 using TMPro;
 using UnityEngine;
 
+
 public class npcInteraction : MonoBehaviour
 {
     public NPCSO npc;
     public QuestSO quest;
-    private QuestBoard questBoard;
+    public QuestController controller;
 
     public GameObject dialogueUI;
     public GameObject completeUI;
 
     public TMP_Text nameText;
     public TMP_Text dialogueText;
+
+    //progressui
+    public TMP_Text questProgName;
+    public TMP_Text questComplete;
 
     private bool isUIVisible = false;
     private bool isTalking = false;
@@ -21,9 +26,9 @@ public class npcInteraction : MonoBehaviour
 
     void Start()
     {
-        questBoard = FindObjectOfType<QuestBoard>();
+        controller = FindObjectOfType<QuestController>();
         dialogueUI.SetActive(false);
-        completeUI.SetActive(false);
+        
     }
     void Update()
     {
@@ -76,6 +81,7 @@ public class npcInteraction : MonoBehaviour
                 Debug.Log("대화횟수 1증가");
                 Debug.Log("현재 총 대화수: " + npc.conversationCount);
 
+                ConversationQuestProgress(quest);
                 
                 if (npc.conversationCount == quest.questComplete) 
                 {
@@ -101,7 +107,20 @@ public class npcInteraction : MonoBehaviour
         
 
     }
-    
+    public void ConversationQuestProgress(QuestSO selectedQuest) 
+    {
+        if (selectedQuest.questType == QuestType.ConversationQuest) //대화퀘스트
+        {
+            foreach (var npc in selectedQuest.relatedNPCs)
+            {
+
+                questProgName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
+
+            }
+        }
+        
+    }
+
 
 
     private void CompleteConversationQuest(NPCSO npc)
@@ -122,11 +141,10 @@ public class npcInteraction : MonoBehaviour
         // 퀘스트 완료 처리를 수행할 코드 작성
         Debug.Log("Quest completed!");
 
-        
-        
+        questProgName.color = Color.green;
 
 
-        
+
 
     }
 
@@ -148,10 +166,10 @@ public class npcInteraction : MonoBehaviour
         }
         if (isCompleteDialogue) // 퀘스트 완료 팝업 띄우고 2초뒤에 닫기
         {
-            completeUI.SetActive(true);
+            controller.ShowPopup();
 
             yield return new WaitForSeconds(2.0f);
-            completeUI.SetActive(false);
+            controller.HidePopup();
         }
 
     }

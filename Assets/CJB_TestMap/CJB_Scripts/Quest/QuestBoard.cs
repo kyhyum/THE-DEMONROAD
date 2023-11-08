@@ -11,9 +11,6 @@ public class QuestBoard : MonoBehaviour
     public GameObject cancelPopup;
     public GameObject questButton;
     public GameObject questLogPanel;
-    
-    public QuestType questType;
-    
 
     //quest board
     public TMP_Text questTitleText;
@@ -32,7 +29,7 @@ public class QuestBoard : MonoBehaviour
 
     public List<QuestSO> quests;
     public List<QuestSO> acceptedQuests = new List<QuestSO>();
-
+    public QuestType questType;
     
 
     public void Start()
@@ -147,12 +144,13 @@ public class QuestBoard : MonoBehaviour
         if (selectedQuest.questType == QuestType.ConversationQuest) //대화퀘스트
         {
             foreach (var npc in selectedQuest.relatedNPCs)
-            {    
-                questProgName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;    
+            {
+
+                questProgName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
 
             }
         }
-        else if(selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트
+        else if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트
         {
             questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
