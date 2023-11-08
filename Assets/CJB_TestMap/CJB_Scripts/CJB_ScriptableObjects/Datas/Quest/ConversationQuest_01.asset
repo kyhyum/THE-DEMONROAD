@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: ConversationQuest_01
   m_EditorClassIdentifier: 
   <questIndex>k__BackingField: 1
-  <questName>k__BackingField: "\uB9C8\uC744 \uC0AC\uB78C\uB4E4"
+  <questName>k__BackingField: "\uB300\uD654\uB97C \uD558\uC790"
   <questType>k__BackingField: 2
   <questDescription>k__BackingField: "\uB9C8\uC744 \uC0AC\uB78C\uB4E4\uACFC \uB300\uD654\uB97C
     \uB098\uB204\uC138\uC694! \uB300\uD654\uB97C \uB098\uB204\uACE0 \uB098\uBA74
     \uC88B\uC740 \uC77C\uC774 \uC788\uC744\uC9C0\uB3C4..?!"
-  <questCondition>k__BackingField: "npc 1\uBA85\uACFC \uC778\uC0AC\uC644\uB8CC"
+  <questCondition>k__BackingField: "\uCD0C\uC7A5\uACFC \uC778\uC0AC\uC644\uB8CC"
   <questComplete>k__BackingField: 1
   <questReward>k__BackingField: "\uAE08\uD654 1\uAC1C"
   relatedNPCs:

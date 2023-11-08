@@ -1,6 +1,6 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
+
 
 public class npcInteraction : MonoBehaviour
 {
