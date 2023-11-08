@@ -6,6 +6,10 @@ public class UseItem : Item, IStackable, IUsable
 {
     private int count;
 
+    public UseItem(ItemSO itemSO) : base(itemSO)
+    {
+    }
+
     public void Add(int n)
     {
         count += n;

@@ -1,28 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    [field: SerializeField] private Transform canvas;
     private PlayerInputAction inputAction;
+    [field: SerializeField] private Transform canvas;
     private List<GameObject> EnableUI;
     private GameObject inventoryObject;
-    private GameObject StorageObject;
+    private GameObject storageObject;
+    public GameObject settingObject;
     private Inventory inventory;
-    [field: SerializeField] private ItemSO testItem;
+    private Storage storage;
+    public bool storageOpen => storageObject.activeSelf;
+    private Vector2 pos;
 
     private void Awake()
     {
         inputAction = new PlayerInputAction();
         EnableUI = new List<GameObject>();
 
-        inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Inventory");
-        inventoryObject = Instantiate(inventoryObject, canvas);
-        inventory = inventoryObject.GetComponent<Inventory>();
-        inventoryObject.SetActive(false);
+        CreateStorage();
+        CreateInventory();
     }
 
     private void Start()
@@ -40,20 +42,39 @@ public class UIManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    private void CreateInventory()
+    {
+        inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Inventory");
+        inventoryObject = Instantiate(inventoryObject, canvas);
+        inventory = inventoryObject.GetComponent<Inventory>();
+        inventoryObject.SetActive(false);
+    }
+
+    private void CreateStorage()
+    {
+        storageObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Storage");
+        storageObject = Instantiate(storageObject, canvas);
+        storage = storageObject.GetComponentInChildren<Storage>();
+        storageObject.SetActive(false);
+    }
+
     private void OnEnable()
     {
-        OnUIInputEnable();
+        inputAction.Player.Escape.Enable();
+        inputAction.Player.Escape.started += OnEscapeKey;
     }
 
     public void OnUIInputEnable()
     {
         inputAction.Player.Inventory.Enable();
+        inputAction.Player.SkillUI.Enable();
         inputAction.Player.Inventory.started += ActiveInventory;
     }
 
     public void OnUIInputDisable()
     {
         inputAction.Player.Inventory.Disable();
+        inputAction.Player.SkillUI.Disable();
         inputAction.Player.Inventory.started -= ActiveInventory;
     }
 
@@ -62,30 +83,84 @@ public class UIManager : MonoBehaviour
         return inventory;
     }
 
+    public Storage GetStorage()
+    {
+        return storage;
+    }
+
+    public void ActiveSettingWindow()
+    {
+        ActiveUIGameObject(settingObject);
+    }
 
     private void ActiveInventory(InputAction.CallbackContext context)
     {
-        Debug.Log("Active Inventory");
+        ActiveUIGameObject(inventoryObject);
+    }
 
-        if (!inventoryObject.activeSelf)
+    private void ActiveStorage()
+    {
+        if (!storageObject.activeSelf)
         {
-            EnableUI.Add(inventoryObject);
+            pos = inventoryObject.GetComponent<RectTransform>().anchoredPosition;
+
+            if (!inventoryObject.activeSelf)
+            {
+                ActiveUIGameObject(inventoryObject);
+            }
+
+            inventoryObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(-510, 0);
+            inventoryObject.GetComponentInChildren<InventoryDragAndDrop>().enabled = false;
+
+            OnUIInputDisable();
         }
         else
         {
-            EnableUI.RemoveAt(EnableUI.IndexOf(inventoryObject));
+            inventoryObject.GetComponent<RectTransform>().anchoredPosition = pos;
+            inventoryObject.GetComponentInChildren<InventoryDragAndDrop>().enabled = true;
+
+            ActiveUIGameObject(inventoryObject);
+
+            OnUIInputEnable();
         }
 
-        inventoryObject.SetActive(!inventoryObject.activeSelf);
+        ActiveUIGameObject(storageObject);
     }
 
-    public void TestMethodMakeItem()
+    private void OnEscapeKey(InputAction.CallbackContext context)
     {
-        GameObject item = testItem.CreateItem();
+        if (EnableUI.Count != 0)
+        {
+            if (EnableUI[0].Equals(storageObject))
+            {
+                ActiveStorage();
+            }
+            else
+            {
+                ActiveUIGameObject(EnableUI[0]);
+            }
+        }
     }
 
-    public void ActiveStorage()
+    private void ActiveUIGameObject(GameObject gameObject)
     {
+        if (EnableUI.Contains(gameObject))
+        {
+            EnableUI.RemoveAt(EnableUI.IndexOf(gameObject));
+        }
+        else
+        {
+            EnableUI.Insert(0, gameObject);
+        }
 
+        gameObject.SetActive(!gameObject.activeSelf);
     }
+
+    public void SwapItems(int slotA, int slotB)
+    {
+        Item item = GetInventory().GetItem(slotA);
+        GetInventory().AddItem(slotA, GetStorage().GetItem(slotB));
+        GetStorage().AddItem(slotB, item);
+    }
+
 }

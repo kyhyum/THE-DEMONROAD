@@ -1,17 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class SelectCanvasManager : MonoBehaviour
 {
     public static SelectCanvasManager s_instance;
-    public int selectedSlot;
+    
+    public ChangerSlot[] changerSlots;
 
-    public CharacterSlot createSlot;
+    int selectedSlot;
     [SerializeField] CharacterSlot[] characterSlots;
-    public List<string> playerName = new List<string>();
+    [SerializeField] GameObject[] baseCharacters;
+    
+    private List<string> playerName = new List<string>();
+
+    private PlayerData[] playerDatas = new PlayerData[4];
+    public PlayerData[] PlayerDatas { get { return playerDatas; } }
     private void Awake()
     {
         if (s_instance == null)
@@ -33,14 +39,16 @@ public class SelectCanvasManager : MonoBehaviour
             {
                 foreach (string one in playerName)
                 {
-                    PlayerData data = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.jsonPath, one);
-                    characterSlots[data.playerIndex].character = Instantiate(StartSceneManager.s_instance.baseCharacters[(int)data.job], characterSlots[data.playerIndex].transform);
-                    characterSlots[data.playerIndex].character.SetActive(true);
-                    characterSlots[data.playerIndex].character.AddComponent<PlayerCondition>().playerData = data;
+                    PlayerData data = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.JsonPath, one);
+                    playerDatas[data.playerIndex] = data;
+                    characterSlots[data.playerIndex].CreateCharacter(baseCharacters[(int)data.job], data);
                 }
             }
         }
-        
+        for(int i = 0; i < characterSlots.Length; i++)
+        {
+            characterSlots[i].gameObject.SetActive(true);
+        }
     }
     private void OnEnable()
     {
@@ -53,16 +61,7 @@ public class SelectCanvasManager : MonoBehaviour
             Debug.Log("캐릭터를 선택해주세요");
             return;
         }
-        if (characterSlots[selectedSlot].character != null)
-        {
-            GameManager.s_instance.player = characterSlots[selectedSlot].character.GetComponent<PlayerCondition>().playerData;
-            SceneManager.LoadScene((int)GameManager.s_instance.player.scene);
-            DontDestroyOnLoad(GameManager.s_instance.gameObject);
-        }
-        else
-        {
-            Debug.Log("캐릭터 선택해줘");
-        }
+        characterSlots[selectedSlot].StartCharacter();
     }
     public void DeleteButton()
     {
@@ -71,13 +70,92 @@ public class SelectCanvasManager : MonoBehaviour
             Debug.Log("캐릭터를 선택해주세요");
             return;
         }
-        if (characterSlots[selectedSlot].character != null)
+        characterSlots[selectedSlot].DeleteCharacter();
+    }
+    public void ClickUpButton(int slotIndex)
+    {
+        if (changerSlots[slotIndex - 1].PlayerData == null)
         {
-            characterSlots[selectedSlot].DeleteCharacter();
+            changerSlots[slotIndex - 1].SetData(slotIndex - 1, changerSlots[slotIndex].PlayerData);
+            changerSlots[slotIndex].SetData(slotIndex, null);
+            playerDatas[slotIndex - 1] = playerDatas[slotIndex];
+            playerDatas[slotIndex] = null;
         }
         else
         {
-            Debug.Log("캐릭터 선택해줘");
+            PlayerData data = changerSlots[slotIndex - 1].PlayerData;
+            changerSlots[slotIndex - 1].SetData(slotIndex - 1, changerSlots[slotIndex].PlayerData);
+            changerSlots[slotIndex].SetData(slotIndex, data);
+            playerDatas[slotIndex - 1] = playerDatas[slotIndex];
+            playerDatas[slotIndex] = data;
+        }
+    }
+    public void ClickDownButton(int slotIndex)
+    {
+        if (changerSlots[slotIndex + 1].PlayerData == null)
+        {
+            changerSlots[slotIndex + 1].SetData(slotIndex + 1, changerSlots[slotIndex].PlayerData);
+            changerSlots[slotIndex].SetData(slotIndex, null);
+            playerDatas[slotIndex + 1] = playerDatas[slotIndex];
+            playerDatas[slotIndex] = null;
+        }
+        else
+        {
+            PlayerData data = changerSlots[slotIndex + 1].PlayerData;
+            changerSlots[slotIndex + 1].SetData(slotIndex + 1, changerSlots[slotIndex].PlayerData);
+            changerSlots[slotIndex].SetData(slotIndex, data);
+            playerDatas[slotIndex + 1] = playerDatas[slotIndex];
+            playerDatas[slotIndex] = data;
+        }
+    }
+    public void SelectSlot(int slotIndex)
+    {
+        selectedSlot = slotIndex;
+        characterSlots[selectedSlot].ChoiceSlot();
+    }
+    public void CreateButton(int slotIndex)
+    {
+        selectedSlot = slotIndex;
+        StartSceneManager.s_instance.OpenCreateCanvas();
+    }
+    public void CreateCharacter(string name, PlayerData data)
+    {
+        if (!playerName.Contains(name))
+        {
+            data.name = name;
+            data.playerIndex = selectedSlot;
+            data.level = 1;
+            GameManager.s_instance.SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
+            PlayerData thisdata = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.JsonPath, data.name);
+            characterSlots[selectedSlot].CreateCharacter(baseCharacters[(int)data.job], thisdata);
+            playerDatas[thisdata.playerIndex] = thisdata;
+            playerName.Add(name);
+            StartSceneManager.s_instance.OpenSelectCanvas();
+        }
+        else
+        {
+            Debug.Log("이미 있는 이름입니다");
+        }
+    }
+    public void SlotChangeButton()
+    {
+        for(int i = 0; i< playerDatas.Length; i++)
+        {
+            if (playerDatas[i] != null)
+            {
+                GameManager.s_instance.SavePlayerDataToJson(StringManager.JsonPath, playerDatas[i].name, playerDatas[i]);
+            }
+        }
+        for(int i = 0; i < characterSlots.Length; i++)
+        {
+            if (playerDatas[i] != null)
+            {
+                characterSlots[i].ChangeSlot(baseCharacters[(int)playerDatas[i].job], playerDatas[i]);
+            }
+            else
+            {
+                characterSlots[i].ClearSlot();
+            }
         }
     }
 }

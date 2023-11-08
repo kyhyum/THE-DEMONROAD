@@ -1,89 +1,98 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class Inventory : MonoBehaviour
 {
     [field: SerializeField] private Transform slots;
-    public InventorySlot[] inventorySlots;
+    private ItemSlot[] inventorySlots;
     public EquipSlot[] equipSlots;
-    private Dictionary<IStackable, int> stackItems;
-    public int gold { get; private set; }
-    private int count;
+    private int gold = 3000000;
+    public int Gold
+    {
+        get
+        {
+            return gold;
+        }
+        set
+        {
+            gold += value;
+
+            text.text = string.Format("{0:#,###}", gold);
+        }
+    }
+    public TMP_Text text;
 
     private void Awake()
     {
-        count = 0;
-        inventorySlots = new InventorySlot[30];
+        inventorySlots = new ItemSlot[30];
+        text.text = string.Format("{0:#,###}", gold);
 
         for (int i = 0; i < 30; i++)
         {
-            GameObject slot = Resources.Load<GameObject>("KH/Prefabs/UI/UI_InventorySlot");
+            GameObject slot = Resources.Load<GameObject>("KH/Prefabs/UI/UI_ItemSlot");
             slot = Instantiate(slot, slots);
-            inventorySlots[i] = slot.GetComponent<InventorySlot>();
+            slot.name = "InventorySlot" + i;
+            inventorySlots[i] = slot.AddComponent<InventorySlot>();
             inventorySlots[i].slotID = i;
-            slot.GetComponentInChildren<InventoryItem>().slotID = i;
-            inventorySlots[i].GetComponentInChildren<InventoryItem>().Clear();
-        }
-    }
-
-    public void Set(InventorySlot[] slots)
-    {
-        for (int i = 0; i < 30; i++)
-        {
-            inventorySlots[i] = slots[i];
+            inventorySlots[i].Clear();
         }
     }
 
     public bool AddItem(Item item)
     {
-        if (count == 30)
-            return false;
-        InventoryItem inventoryItem;
-
         if (item.type == ItemType.Gold)
         {
             IStackable stackableItem = (IStackable)item;
             gold += stackableItem.Get();
+
+            return true;
         }
         else if (item is IStackable)
         {
             IStackable stackableItem = (IStackable)item;
-            if (stackItems.TryGetValue(stackableItem, out int index))
+
+            int index = FindItemIndex(item);
+
+            if (index == -1)
             {
-                inventoryItem = inventorySlots[index].GetComponentInChildren<InventoryItem>();
-                inventoryItem.AddItem(stackableItem.Get());
+                return AddItem(FindIndex(), item);
             }
             else
             {
-                stackItems.Add(stackableItem, index);
-                AddItem(FindIndex(), item);
+                inventorySlots[index].AddItem(stackableItem.Get());
+                return true;
             }
         }
         else
         {
-            AddItem(FindIndex(), item);
+            return AddItem(FindIndex(), item);
         }
+    }
 
-        count++;
+    public bool AddItem(int index, Item item)
+    {
+        if (index == -1)
+            return false;
 
+        inventorySlots[index].SetItem(item);
         return true;
     }
 
-    public void AddItem(int index, Item item)
+    public Item GetItem(int slot)
     {
-        InventoryItem inventoryItem = inventorySlots[index].GetComponentInChildren<InventoryItem>();
-        inventorySlots[index].isContain = true;
-        inventoryItem.SetItem(item);
+        return inventorySlots[slot].GetItem();
     }
 
-    public int FindIndex()
+    private int FindIndex()
     {
         for (int i = 0; i < 30; i++)
         {
-            if (!inventorySlots[i].isContain)
+            if (inventorySlots[i].GetItem() == null)
             {
                 return i;
             }
@@ -92,52 +101,41 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
+    private int FindItemIndex(Item item)
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            if (item.itemName.Equals(inventorySlots[i].GetItem().itemName))
+                return i;
+        }
+
+        return -1;
+    }
+
     public void SwapItems(int slotA, int slotB)
     {
         // 슬롯 A와 슬롯 B의 아이템 위치를 바꿈
-        InventoryItem itemA = inventorySlots[slotA].GetComponentInChildren<InventoryItem>();
-        InventoryItem itemB = inventorySlots[slotB].GetComponentInChildren<InventoryItem>();
-
-        itemA.transform.SetParent(inventorySlots[slotB].transform);
-        itemB.transform.SetParent(inventorySlots[slotA].transform);
-        itemA.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        itemB.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        itemA.slotID = slotB;
-        itemB.slotID = slotA;
-
-        bool tmp = inventorySlots[slotA].isContain;
-        inventorySlots[slotA].isContain = inventorySlots[slotB].isContain;
-        inventorySlots[slotB].isContain = tmp;
+        Item item = inventorySlots[slotA].GetItem();
+        inventorySlots[slotA].SetItem(inventorySlots[slotB].GetItem());
+        inventorySlots[slotB].SetItem(item);
     }
 
     public void Equip(int slotA)
     {
-        InventoryItem itemA = inventorySlots[slotA].GetComponentInChildren<InventoryItem>();
-        Item item = itemA.GetItem();
+        Item item = inventorySlots[slotA].GetItem();
 
         EquipSlot equipSlot = equipSlots[(int)item.type];
 
-        if (equipSlot.TryGetComponent<EquipItem>(out EquipItem equipItem))
-        {
-            itemA.SetItem(equipItem);
-            equipSlot.UnEquip();
-        }
-        else
-        {
-            count--;
-            inventorySlots[slotA].isContain = false;
-            itemA.Clear();
-        }
+        AddItem(slotA, equipSlot.GetItem());
 
         equipSlot.Equip((EquipItem)item);
     }
 
     public void UnEquip(int slotA, ItemType type)
     {
-        InventoryItem itemA = inventorySlots[slotA].GetComponentInChildren<InventoryItem>();
         EquipSlot equipSlot = equipSlots[(int)type];
-
-        if (itemA.TryGetComponent<Item>(out Item item))
+        Item item = inventorySlots[slotA].GetItem();
+        if (item != null)
         {
             if (item is EquipItem)
             {
@@ -159,6 +157,38 @@ public class Inventory : MonoBehaviour
         {
             AddItem(slotA, equipSlot.GetItem());
             equipSlot.UnEquip();
+        }
+    }
+
+    public Item[] Get()
+    {
+        Item[] items = new Item[37];
+
+        for (int i = 0; i < 7; i++)
+        {
+            items[i] = equipSlots[i].GetItem();
+        }
+
+        for (int i = 0; i < 30; i++)
+        {
+            items[i + 7] = inventorySlots[i].GetItem();
+        }
+
+        return items;
+    }
+
+    public void Set(Item[] items)
+    {
+        for (int i = 0; i < 37; i++)
+        {
+            if (i < 7)
+            {
+                equipSlots[i].SetItem(items[i]);
+            }
+            else
+            {
+                inventorySlots[i - 7].SetItem(items[i]);
+            }
         }
     }
 }

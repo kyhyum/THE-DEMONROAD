@@ -20,3 +20,5 @@ MonoBehaviour:
   <completeDialogue>k__BackingField:
   - "\uBC18\uAC11\uB124! \uC55E\uC73C\uB85C \uC790\uC8FC\uBCF4\uC790\uAD6C!"
   <hasQuest>k__BackingField: 0
+  <questType>k__BackingField: 2
+  <conversationCount>k__BackingField: 0

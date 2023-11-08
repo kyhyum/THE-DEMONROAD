@@ -2,70 +2,106 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CharacterSlot : MonoBehaviour
 {
     [SerializeField] Vector3 characterPos;
     [SerializeField] Quaternion look;
-    public GameObject character;
-    public int slotIndex;
     [SerializeField] GameObject createButton;
     [SerializeField] TextMeshProUGUI characterName, characterLevel, characterJob;
+
+    GameObject character;
     private void OnEnable()
     {
         if (character != null)
         {
             PlayerData data = character.GetComponent<PlayerCondition>().playerData;
-            character.name = data.name;
-            character.transform.SetParent(this.transform);
-            character.transform.position = characterPos;
-            character.transform.localScale = new Vector3(3, 3, 3);
-            character.transform.rotation = look;
-            characterName.text = character.name;
-            characterLevel.text = data.level.ToString();
-            characterJob.text = data.job.ToString();
-            createButton.SetActive(false);
-            TextOpen(true);
+            TextUpdate(data);
         }
         else
         {
             TextOpen(false);
         }
     }
-    public void SelectSlot()
+    public void CreateCharacter(GameObject obj, PlayerData data)
     {
-        SelectCanvasManager.s_instance.selectedSlot = slotIndex;
+        if(character == null)
+        {
+            character = Instantiate(obj, this.transform);
+            character.SetActive(true);
+            character.AddComponent<PlayerCondition>().playerData = data;
+        }
+    }
+    public void DeleteCharacter()
+    {
+        if (character != null)
+        {
+            if (GameManager.s_instance.DeleteCharacter(StringManager.JsonPath, character.GetComponent<PlayerCondition>().playerData.name))
+            {
+                ClearSlot();
+            }
+            else
+            {
+                Debug.Log("실패했습니다");
+            }
+        }
+        else
+        {
+            Debug.Log("캐릭터 선택해줘");
+        }
+    }
+    public void ClearSlot()
+    {
+        Destroy(character);
+        TextOpen(false);
+        character = null;
+    }
+    public void ChoiceSlot()
+    {
         if(character != null)
         {
             character.GetComponent<Animator>().SetTrigger("Choice");
         }
-    }
-    public void CreateButton()
-    {
-        SelectCanvasManager.s_instance.selectedSlot = slotIndex;
-        SelectCanvasManager.s_instance.createSlot = this;
-        StartSceneManager.s_instance.OpenCreateCanvas();
     }
     void TextOpen(bool isChar)
     {
         characterName.gameObject.SetActive(isChar);
         characterLevel.gameObject.SetActive(isChar);
         characterJob.gameObject.SetActive(isChar);
+        createButton.SetActive(!isChar);
     }
-    public void DeleteCharacter()
+    void TextUpdate(PlayerData data)
     {
-        string prefabPath = "Assets/Resources/MyCharacter/";
-        if(GameManager.s_instance.DeleteCharacter(prefabPath, character.GetComponent<PlayerCondition>().playerData.name))
+        character.name = data.name;
+        character.transform.SetParent(this.transform);
+        character.transform.position = characterPos;
+        character.transform.localScale = new Vector3(3, 3, 3);
+        character.transform.rotation = look;
+        characterName.text = character.name;
+        characterLevel.text = data.level.ToString();
+        characterJob.text = data.job.ToString();
+        TextOpen(true);
+    }
+    public void ChangeSlot(GameObject obj,PlayerData data)
+    {
+        if(character != null)
         {
-            Destroy(character);
-            TextOpen(false);
-            createButton.SetActive(true);
-            character = null;
+            ClearSlot();
+        }
+        CreateCharacter(obj, data);
+        TextUpdate(data);
+    }
+    public void StartCharacter()
+    {
+        if (character != null)
+        {
+            GameManager.s_instance.player = character.GetComponent<PlayerCondition>().playerData;
         }
         else
         {
-            Debug.Log("실패했습니다");
+            Debug.Log("캐릭터 선택해줘");
         }
     }
 }

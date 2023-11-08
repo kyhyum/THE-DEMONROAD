@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    public static string nextScene;
+    public static string nextSceneName = string.Empty;
+    public static int nextSceneNumber = -1;
     [SerializeField] Slider progressBar;
 
     private void Start()
@@ -16,14 +17,30 @@ public class SceneLoadManager : MonoBehaviour
 
     public static void LoadScene(string sceneName)
     {
-        nextScene = sceneName;
+        nextSceneName = sceneName;
         SceneManager.LoadScene("LoadingScene");
     }
 
+    public static void LoadScene(int sceneNumber)
+    {
+        nextSceneNumber = sceneNumber;
+        SceneManager.LoadScene("LoadingScene");
+    }
     IEnumerator LoadScene()
     {
         yield return null;
-        AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
+        AsyncOperation op;
+
+        if (string.Empty.Equals(nextSceneName))
+        {
+            op = SceneManager.LoadSceneAsync(nextSceneNumber);
+        }
+        else
+        {
+            op = SceneManager.LoadSceneAsync(nextSceneName);
+
+        }
+
         op.allowSceneActivation = false;
         float timer = 0.0f;
         while (!op.isDone)
@@ -48,5 +65,8 @@ public class SceneLoadManager : MonoBehaviour
                 }
             }
         }
+
+        nextSceneName = string.Empty;
+        nextSceneNumber = -1;
     }
 }

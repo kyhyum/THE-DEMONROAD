@@ -1,20 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class StartSceneManager : MonoBehaviour
 {
     public static StartSceneManager s_instance;
     [SerializeField] GameObject selectCanvas, createCanvas, startCanvas;
-    public GameObject[] baseCharacters;
-
-    
     private void Awake()
     {
         if (s_instance == null)

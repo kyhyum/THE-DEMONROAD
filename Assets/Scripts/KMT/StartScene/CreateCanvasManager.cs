@@ -7,12 +7,11 @@ public class CreateCanvasManager : MonoBehaviour
 {
     public static CreateCanvasManager s_instance;
     
-    public int selectJobIndex;
+    int selectJobIndex;
 
     [SerializeField] TMP_InputField nameCreate;
     [SerializeField] CharacterCreate[] job;
-
-    PlayerData createCharacterData;
+    SelectCanvasManager selectCanvasManager;
     private void Awake()
     {
         if (s_instance == null)
@@ -23,46 +22,36 @@ public class CreateCanvasManager : MonoBehaviour
         {
             Destroy(this);
         }
+        selectCanvasManager = SelectCanvasManager.s_instance;
     }
     private void OnEnable()
     {
         nameCreate.text = null;
         selectJobIndex = 0;
-        job[selectJobIndex].jobCharacter.SetActive(true);
+        job[selectJobIndex].ActiveObject(true);
     }
     private void OnDisable()
     {
-        job[selectJobIndex].jobCharacter.SetActive(false);
+        job[selectJobIndex].ActiveObject(false);
     }
     public void CreateCharacter()
     {
-        if (!SelectCanvasManager.s_instance.playerName.Contains(nameCreate.text))
+        if(selectJobIndex == 0)
         {
-            string nameText = nameCreate.text;
-            SelectCanvasManager.s_instance.createSlot.character = Instantiate(job[selectJobIndex].jobCharacter);
-            createCharacterData = job[selectJobIndex].playerData;
-            createCharacterData.name = nameText;
-            createCharacterData.playerIndex = SelectCanvasManager.s_instance.createSlot.slotIndex;
-            createCharacterData.level = 1;
-            GameManager.s_instance.SavePlayerDataToJson(StringManager.jsonPath, createCharacterData.name, createCharacterData);
-            SelectCanvasManager.s_instance.createSlot.character.AddComponent<PlayerCondition>().playerData = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.jsonPath, createCharacterData.name);
-            StartSceneManager.s_instance.OpenSelectCanvas();
-        }
-        else
-        {
-            Debug.Log("이미 있는 이름입니다");
+            selectCanvasManager.CreateCharacter(nameCreate.text, job[selectJobIndex].playerData);
         }
     }
-    public void ChangeJob()
+    public void ChangeJob(int jobIndex)
     {
         for (int i = 0; i < job.Length; i++)
         {
-            job[i].jobImage.SetActive(false);
-            job[i].jobCharacter.SetActive(false);
-            if (i == selectJobIndex)
+            job[i].ActiveObject(false);
+            
+            if (i == jobIndex)
             {
-                job[i].jobImage.SetActive(true);
-                job[i].jobCharacter.SetActive(true);
+                selectJobIndex = i;
+                job[i].ActiveObject(true);
+                job[i].ChoiceJob();
             }
         }
     }

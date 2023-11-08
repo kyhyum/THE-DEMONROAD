@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
-using System.Linq;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 
 [System.Serializable]
@@ -21,7 +18,6 @@ public class PlayerData
     public Vector3 currentPlayerPos;
     
     public bool isDead;
-    public List<Item> items;
 }
 
 [System.Serializable]
