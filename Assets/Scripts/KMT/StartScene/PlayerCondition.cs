@@ -18,6 +18,8 @@ public class PlayerData
     public Vector3 currentPlayerPos;
     
     public bool isDead;
+
+    public List<QuestSO> acceptQuest;
 }
 
 [System.Serializable]

@@ -28,13 +28,12 @@ public class QuestBoard : MonoBehaviour
     public TMP_Text questProgName;
 
     public List<QuestSO> quests;
-    public List<QuestSO> acceptedQuests = new List<QuestSO>();
     public QuestType questType;
-    
+    PlayerData player;
 
     public void Start()
     {
-        
+        player = GameManager.s_instance.player;
         InitializeQuestList();
     }
 
@@ -70,7 +69,7 @@ public class QuestBoard : MonoBehaviour
     }
     private bool IsQuestAlreadyAccepted(QuestSO quest) // 같은 타입의 퀘스트는 한번만 받게끔
     {
-        foreach (var acceptedQuest in acceptedQuests)
+        foreach (var acceptedQuest in player.acceptQuest)
         {
             if (acceptedQuest.questType == quest.questType) 
             {
@@ -83,7 +82,7 @@ public class QuestBoard : MonoBehaviour
     {
         if (!IsQuestAlreadyAccepted(quest))
         {
-            acceptedQuests.Add(quest);
+            GameManager.s_instance.player.acceptQuest.Add(quest);
             acceptPopup.SetActive(true);
             UpdateQuestLogUI();
             ShowQuestProgress(quest);
@@ -115,7 +114,7 @@ public class QuestBoard : MonoBehaviour
         questLogDescription.text = "";
         questLogRewards.text = "";
 
-        foreach (var acceptedQuest in acceptedQuests)
+        foreach (var acceptedQuest in player.acceptQuest)
         {
             questLogName.text += acceptedQuest.questName;
             questLogSelected.text += acceptedQuest.questName;
