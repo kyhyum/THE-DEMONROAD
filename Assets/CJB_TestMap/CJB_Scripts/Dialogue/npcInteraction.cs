@@ -13,6 +13,10 @@ public class npcInteraction : MonoBehaviour
     public TMP_Text nameText;
     public TMP_Text dialogueText;
 
+    //progressui
+    public TMP_Text questProgName;
+    public TMP_Text questComplete;
+
     private bool isUIVisible = false;
     private bool isTalking = false;
     public Transform player;
@@ -76,6 +80,7 @@ public class npcInteraction : MonoBehaviour
                 Debug.Log("대화횟수 1증가");
                 Debug.Log("현재 총 대화수: " + npc.conversationCount);
 
+                ConversationQuestProgress(quest);
                 
                 if (npc.conversationCount == quest.questComplete) 
                 {
@@ -101,7 +106,20 @@ public class npcInteraction : MonoBehaviour
         
 
     }
-    
+    public void ConversationQuestProgress(QuestSO selectedQuest) //questProgress 표시창
+    {
+        if (selectedQuest.questType == QuestType.ConversationQuest) //대화퀘스트
+        {
+            foreach (var npc in selectedQuest.relatedNPCs)
+            {
+
+                questProgName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
+
+            }
+        }
+        
+    }
+
 
 
     private void CompleteConversationQuest(NPCSO npc)
@@ -122,11 +140,10 @@ public class npcInteraction : MonoBehaviour
         // 퀘스트 완료 처리를 수행할 코드 작성
         Debug.Log("Quest completed!");
 
-        
-        
+        questProgName.color = Color.green;
 
 
-        
+
 
     }
 
