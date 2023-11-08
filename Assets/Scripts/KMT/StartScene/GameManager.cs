@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject settingCanvas;
     public static GameManager s_instance;
     public UIManager uiManager;
     public PlayerData player;
     public GameObject Myplayer;
     WaitForSecondsRealtime wait;
+    SlotItem slot;
     private void Awake()
     {
         if (s_instance == null)
@@ -23,7 +22,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-        wait = new WaitForSecondsRealtime(20f);
+        wait = new WaitForSecondsRealtime(5f);
+        slot= new SlotItem();
     }
     private void Start()
     {
@@ -82,11 +82,11 @@ public class GameManager : MonoBehaviour
             return null;
         }
     }
-    public void SaveItemArrayToJson(string jsonPath, string itemArrayName, Item[] data)
+    public void SaveItemArrayToJson(string jsonPath, string itemArrayName, Item[] items)
     {
+        slot.items = items;
         // ToJson을 사용하면 JSON형태로 포멧팅된 문자열이 생성된다  
-        string jsonData = JsonUtility.ToJson(data, true);
-        Debug.Log("발동1");
+        string jsonData = JsonUtility.ToJson(slot, true);
         // 데이터를 저장할 경로 지정
         string path = Path.Combine(jsonPath, $"{itemArrayName}.json");
         // 파일 생성 및 저장
@@ -98,9 +98,8 @@ public class GameManager : MonoBehaviour
         string path = Path.Combine(jsonPath, $"{itemArrayName}.json");
         if(File.Exists(path))
         {
-            Debug.Log("발동");
             string jsonData = File.ReadAllText(path);
-            return JsonUtility.FromJson<Item[]>(jsonData);
+            return JsonUtility.FromJson<SlotItem>(jsonData).items;
         }
         return null;
     }
@@ -113,6 +112,12 @@ public class GameManager : MonoBehaviour
             File.Delete(path);
         }
         return result;
+    }
+    public void GameStart()
+    {
+        DontDestroyOnLoad(this.gameObject);
+        SceneLoadManager.LoadScene((int)player.scene);
+        StartCoroutine(RealTimeSave());
     }
     public void HomeButton()
     {
@@ -138,14 +143,7 @@ public class GameManager : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
+        StopAllCoroutines();
         Save();
-    }
-    public void OnSettingCanvasInputEnable()
-    {
-        
-    }
-    private void ActiveSettingCanvas(InputAction.CallbackContext context)
-    {
-        settingCanvas.SetActive(!settingCanvas.activeSelf);
     }
 }
