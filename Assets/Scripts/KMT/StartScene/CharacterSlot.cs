@@ -29,7 +29,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if(character == null)
         {
-            character = Instantiate(obj, this.transform);
+            character = Instantiate(obj);
             character.SetActive(true);
             character.AddComponent<PlayerCondition>().playerData = data;
         }
@@ -75,7 +75,6 @@ public class CharacterSlot : MonoBehaviour
     void TextUpdate(PlayerData data)
     {
         character.name = data.name;
-        character.transform.SetParent(this.transform);
         character.transform.position = characterPos;
         character.transform.localScale = new Vector3(3, 3, 3);
         character.transform.rotation = look;
