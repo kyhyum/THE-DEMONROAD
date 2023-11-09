@@ -6,9 +6,11 @@ public class ObjectPool<T> where T : Component
     private List<T> pooledObjects;
     private T prefab;
     private Transform parentTransform;
+    private int listSize;
 
     public ObjectPool(T prefab, int initialSize, Transform parentTransform = null)
     {
+        listSize = initialSize;
         this.prefab = prefab;
         this.parentTransform = parentTransform;
         pooledObjects = new List<T>();
@@ -24,6 +26,7 @@ public class ObjectPool<T> where T : Component
         if (pooledObjects.Count == 0)
         {
             CreateObject();
+            listSize++;
         }
 
         T obj = pooledObjects[pooledObjects.Count - 1];
@@ -46,5 +49,17 @@ public class ObjectPool<T> where T : Component
         pooledObjects.Add(obj);
 
         return obj;
+    }
+
+    public bool CheckListSize()
+    {
+        if(pooledObjects.Count == listSize)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

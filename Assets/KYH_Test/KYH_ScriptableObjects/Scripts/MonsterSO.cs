@@ -7,6 +7,7 @@ public class MonsterSO : ScriptableObject
 {
     [field: Header("MonsterData")]
     [field: SerializeField] public string Name { get; private set; }
+    [field: SerializeField] public MonsterType MonsterType { get; private set; }
     [field: Header("HealthData")]
     [field: SerializeField] public int Health { get; private set; } = 100;
 

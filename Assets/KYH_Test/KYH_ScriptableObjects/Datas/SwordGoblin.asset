@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SwordGoblin
   m_EditorClassIdentifier: 
   <Name>k__BackingField: SwordGoblin
+  <MonsterType>k__BackingField: 1
   <Health>k__BackingField: 100
   <IsLongRanged>k__BackingField: 1
   <PlayerChasingRange>k__BackingField: 12

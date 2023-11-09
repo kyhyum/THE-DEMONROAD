@@ -20,6 +20,7 @@ public class Monster : MonoBehaviour
     private MonsterStateMachine stateMachine;        
     [field: SerializeField] public MonsterWeapon Weapon { get; private set; }
     public MonsterHealth MonsterHealth { get; private set; }
+    public ItemDropController itemDropController { get; private set; }
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class Monster : MonoBehaviour
         EnemyNavMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new MonsterStateMachine(this);
         MonsterHealth = GetComponent<MonsterHealth>();
+        itemDropController = GetComponent<ItemDropController>();
         MonsterHealth.InitEnemyHealth(Data.Health, Data.Name);
 
     }
@@ -49,6 +51,7 @@ public class Monster : MonoBehaviour
         MonsterHealth.health = Data.Health;
         stateMachine.ChangeState(stateMachine.IdleState);
         MonsterHealth.OnDie += OnDie;
+        MonsterHealth.OnDie += itemDropController.DropItem;
     }
 
     private void Update()

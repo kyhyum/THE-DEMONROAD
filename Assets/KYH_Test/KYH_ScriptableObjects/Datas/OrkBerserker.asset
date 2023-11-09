@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: OrkBerserker
   m_EditorClassIdentifier: 
   <Name>k__BackingField: OrkBerserker
+  <MonsterType>k__BackingField: 3
   <Health>k__BackingField: 100
   <IsLongRanged>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 12
