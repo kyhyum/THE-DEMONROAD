@@ -26,9 +26,11 @@ public class Inventory : MonoBehaviour
         }
     }
     public TMP_Text text;
+    private Item[] items;
 
     private void Awake()
     {
+        items = new Item[37];
         inventorySlots = new ItemSlot[30];
         text.text = string.Format("{0:#,###}", gold);
 
@@ -162,8 +164,6 @@ public class Inventory : MonoBehaviour
 
     public Item[] Get()
     {
-        Item[] items = new Item[37];
-
         for (int i = 0; i < 7; i++)
         {
             items[i] = equipSlots[i].GetItem();
@@ -181,13 +181,15 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < 37; i++)
         {
+            Item item = items[i].itemName.Equals(string.Empty) ? null : items[i];
+
             if (i < 7)
             {
-                equipSlots[i].SetItem(items[i]);
+                equipSlots[i].SetItem(item);
             }
             else
             {
-                inventorySlots[i - 7].SetItem(items[i]);
+                inventorySlots[i - 7].SetItem(item);
             }
         }
     }
