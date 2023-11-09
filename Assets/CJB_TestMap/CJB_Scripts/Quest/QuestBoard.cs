@@ -1,22 +1,24 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class QuestBoard : MonoBehaviour
 {
     //gameobject
-    public GameObject questListPanel;   
+    //public GameObject questListPanel;   
     public GameObject acceptPopup;
     public GameObject cancelPopup;
-    public GameObject questButton;
     public GameObject questLogPanel;
+    [SerializeField] Button[] questButton;
 
     //quest board
-    public TMP_Text questTitleText;
+    [SerializeField] TMP_Text[] questTitleText;
     public TMP_Text questDescriptionText;
     public TMP_Text questConditionText;
     public TMP_Text questRewardText;
+    [SerializeField] Button acceptButton;
     
     //questlog
     public TMP_Text questLogName;
@@ -27,55 +29,40 @@ public class QuestBoard : MonoBehaviour
     //quest progress
     public TMP_Text questProgName;
 
-    public List<QuestSO> quests;
-    public List<QuestSO> acceptedQuests = new List<QuestSO>();
-    public QuestType questType;
-    
+    [SerializeField] List<QuestSO> quests;
+    public List<QuestSO> Quests { get { return quests; } }
+
+    QuestSO selectQuest;
+    PlayerData player;
 
     public void Start()
     {
-        
+        player = GameManager.s_instance.player;
         InitializeQuestList();
+        acceptButton.onClick.AddListener(() => { AcceptQuest(selectQuest); });
     }
 
     private void InitializeQuestList()
     {
-        foreach(QuestSO quest in quests)
+        for(int i = 0; i < quests.Count; i++)
         {
-            if (questButton != null)
-            {
-                TMP_Text buttonText = questButton.GetComponentInChildren<TMP_Text>();
-                buttonText.text = quest.questName;
-
-                
-                questButton.GetComponent<Button>().onClick.AddListener(() =>
-                {
-                    ShowQuestDetails(quest);
-                });
-            }
-            else
-            {
-                Debug.LogError("Existing quest button not found!");
-            }
+            int index = i;
+            questTitleText[i].text = quests[i].questName;
+            questButton[i].onClick.AddListener(() => { ShowQuestDetails(quests[index]); });
         }
     }
     private void ShowQuestDetails(QuestSO selectedQuest) //questBoard에서 표시되는 퀘스트 정보
     {
-        AcceptQuest(selectedQuest);
-
-        questTitleText.text = selectedQuest.questName;
         questDescriptionText.text = selectedQuest.questDescription;
         questConditionText.text = selectedQuest.questCondition;
         questRewardText.text = selectedQuest.questReward;
+        selectQuest = selectedQuest;
     }
     private bool IsQuestAlreadyAccepted(QuestSO quest) // 같은 타입의 퀘스트는 한번만 받게끔
     {
-        foreach (var acceptedQuest in acceptedQuests)
+        if (player.acceptQuest.Contains(quest))
         {
-            if (acceptedQuest.questType == quest.questType) 
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }
@@ -83,7 +70,7 @@ public class QuestBoard : MonoBehaviour
     {
         if (!IsQuestAlreadyAccepted(quest))
         {
-            acceptedQuests.Add(quest);
+            GameManager.s_instance.player.acceptQuest.Add(quest);
             acceptPopup.SetActive(true);
             UpdateQuestLogUI();
             ShowQuestProgress(quest);
@@ -115,7 +102,7 @@ public class QuestBoard : MonoBehaviour
         questLogDescription.text = "";
         questLogRewards.text = "";
 
-        foreach (var acceptedQuest in acceptedQuests)
+        foreach (var acceptedQuest in player.acceptQuest)
         {
             questLogName.text += acceptedQuest.questName;
             questLogSelected.text += acceptedQuest.questName;

@@ -8,12 +8,13 @@ public class BoardInteraction : MonoBehaviour
     public GameObject questUI;
 
     private bool isUIVisible = false;
-    public Transform player;
+    Transform player;
 
     public float activationDistance = 5f;
 
     void Start()
     {
+        player = GameManager.s_instance.Myplayer.transform;
         questUI.SetActive(false);
     }
     void Update()

@@ -20,7 +20,7 @@ public class npcInteraction : MonoBehaviour
 
     private bool isUIVisible = false;
     private bool isTalking = false;
-    public Transform player;
+    Transform player;
 
     public float activationDistance = 5f;
 
@@ -28,7 +28,7 @@ public class npcInteraction : MonoBehaviour
     {
         controller = FindObjectOfType<QuestController>();
         dialogueUI.SetActive(false);
-        
+        player = GameManager.s_instance.Myplayer.transform;
     }
     void Update()
     {
