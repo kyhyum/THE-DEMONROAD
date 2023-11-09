@@ -8981,7 +8981,7 @@ MonoBehaviour:
       statValue: 4
     - type: 3
       statValue: 50
-    baseObject: {fileID: 8497167851833225634, guid: 7c4e4ae6a1911b0488c655450d48400b,
+    baseObject: {fileID: 5181127313120891243, guid: 972817151106359489c5887bbb921ee2,
       type: 3}
     playerIndex: 0
     scene: 2
