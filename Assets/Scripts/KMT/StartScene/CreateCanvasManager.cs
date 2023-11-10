@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CreateCanvasManager : MonoBehaviour
 {
-    public static CreateCanvasManager s_instance;
+    public static CreateCanvasManager Instance;
     
     int selectJobIndex;
 
@@ -14,15 +14,15 @@ public class CreateCanvasManager : MonoBehaviour
     SelectCanvasManager selectCanvasManager;
     private void Awake()
     {
-        if (s_instance == null)
+        if (Instance == null)
         {
-            s_instance = this;
+            Instance = this;
         }
         else
         {
             Destroy(this);
         }
-        selectCanvasManager = SelectCanvasManager.s_instance;
+        selectCanvasManager = SelectCanvasManager.Instance;
     }
     private void OnEnable()
     {

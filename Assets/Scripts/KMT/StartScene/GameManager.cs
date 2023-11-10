@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager s_instance;
+    public static GameManager Instance;
     public UIManager uiManager;
     public PlayerData player;
     public GameObject Myplayer;
@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
     SlotItem slot;
     private void Awake()
     {
-        if (s_instance == null)
+        if (Instance == null)
         {
-            s_instance = this;
+            Instance = this;
         }
         else
         {
@@ -44,9 +44,8 @@ public class GameManager : MonoBehaviour
     {
         if (player.baseObject != null && scene.buildIndex != (int)SceneType.Start && scene.buildIndex != (int)SceneType.Loading)
         {
-            Myplayer = Instantiate<GameObject>(player.baseObject);
+            Myplayer = Instantiate<GameObject>(player.baseObject, player.currentPlayerPos, player.currentPlayerRot);
             Myplayer.AddComponent<PlayerCondition>().playerData = player;
-            Myplayer.transform.position = player.currentPlayerPos;
             uiManager.gameObject.SetActive(true);
             uiManager.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, player.name));
             uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
@@ -136,6 +135,7 @@ public class GameManager : MonoBehaviour
         {
             player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
             player.currentPlayerPos = Myplayer.transform.position;
+            player.currentPlayerRot = Myplayer.transform.rotation;
             SaveItemArrayToJson(StringManager.ItemJsonPath, player.name, uiManager.GetInventory().Get());
             SaveItemArrayToJson(StringManager.ItemJsonPath, StringManager.StorageName, uiManager.GetStorage().Get());
         }

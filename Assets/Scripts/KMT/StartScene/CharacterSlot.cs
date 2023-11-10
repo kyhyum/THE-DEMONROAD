@@ -13,6 +13,12 @@ public class CharacterSlot : MonoBehaviour
     [SerializeField] TextMeshProUGUI characterName, characterLevel, characterJob;
 
     GameObject character;
+
+    GameManager gameManager;
+    private void Awake()
+    {
+        gameManager = GameManager.Instance;
+    }
     private void OnEnable()
     {
         if (character != null)
@@ -38,7 +44,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            if (GameManager.s_instance.DeleteCharacter(StringManager.JsonPath, character.GetComponent<PlayerCondition>().playerData.name))
+            if (gameManager.DeleteCharacter(StringManager.JsonPath, character.GetComponent<PlayerCondition>().playerData.name))
             {
                 ClearSlot();
             }
@@ -96,7 +102,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            GameManager.s_instance.player = character.GetComponent<PlayerCondition>().playerData;
+            gameManager.player = character.GetComponent<PlayerCondition>().playerData;
         }
         else
         {

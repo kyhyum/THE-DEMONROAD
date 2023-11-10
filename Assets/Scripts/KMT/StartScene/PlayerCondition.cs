@@ -8,6 +8,7 @@ public class PlayerData
 {
     public string name;
     public int level;
+    public int exp;
     public Job job;
     public List<Stat> stats;
     public GameObject baseObject;
@@ -16,10 +17,45 @@ public class PlayerData
     
     public SceneType scene;
     public Vector3 currentPlayerPos;
+    public Quaternion currentPlayerRot;
     
     public bool isDead;
 
     public List<QuestSO> acceptQuest;
+
+    public float atkRatio;
+    public float defRatio;
+    public float speedRatio;
+    public float hpRatio;
+    public float mpRatio;
+
+    public PlayerData(Job job)
+    {
+        switch(job)
+        {
+            case Job.WARRIOR:
+                atkRatio = 4f;
+                defRatio = 0.7f;
+                speedRatio = 8f;
+                hpRatio = 12f;
+                mpRatio = 8f;
+                break;
+            case Job.ARCHOR:
+                atkRatio = 3.5f;
+                defRatio = 0.4f;
+                speedRatio = 10f;
+                hpRatio = 8f;
+                mpRatio = 9f;
+                break;
+            case Job.WIZZARD:
+                atkRatio = 4f;
+                defRatio = 0.3f;
+                speedRatio = 7f;
+                hpRatio = 7f;
+                mpRatio = 12f;
+                break;
+        }
+    }
 }
 
 [System.Serializable]
@@ -39,6 +75,10 @@ public class PlayerCondition : MonoBehaviour
     public float maxHp;
     public float currentMp;
     public float maxMp;
+
+    public const int mainStatRatio = 3;
+    public const int statRatio = 1;
+
     Dictionary<StatType, int> myStats = new Dictionary<StatType, int>();
     private void Start()
     {
@@ -58,14 +98,39 @@ public class PlayerCondition : MonoBehaviour
         {
             myStats.Add(playerData.stats[i].type, playerData.stats[i].statValue);
         }
-        atk = myStats[mainStat] * 3;
-        def = myStats[StatType.DEX] * 0.5f;
-        speed = myStats[StatType.DEX] + 10;
-        maxHp = myStats[StatType.CON] + myStats[StatType.STR] * 5;
+        StatSynchronization();
+    }
+    private void LevelUp()
+    {
+        playerData.exp -= playerData.level;
+        playerData.level++;
+        StatUp();
+        StatSynchronization();
+    }
+    void StatUp()
+    {
+        foreach(var stat in myStats.Keys)
+        {
+            if(stat == mainStat)
+            {
+                myStats[stat] += mainStatRatio;
+            }
+            else
+            {
+                myStats[stat] += statRatio;
+            }
+        }
+    }
+    void StatSynchronization()
+    {
+        atk = myStats[mainStat] * playerData.atkRatio;
+        def = myStats[StatType.DEX] * playerData.defRatio;
+        speed = myStats[StatType.DEX] + playerData.speedRatio;
+        maxHp = myStats[StatType.CON] + myStats[StatType.STR] * playerData.hpRatio;
         currentHp = maxHp;
-        maxMp = myStats[StatType.INT] * 10;
+        maxMp = myStats[StatType.INT] * playerData.mpRatio;
         currentMp = maxMp;
-        for(int i = 0; i < playerData.stats.Count; i++)
+        for (int i = 0; i < playerData.stats.Count; i++)
         {
             playerData.stats[i].statValue = myStats[playerData.stats[i].type];
         }

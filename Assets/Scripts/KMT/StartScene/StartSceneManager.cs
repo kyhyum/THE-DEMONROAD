@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class StartSceneManager : MonoBehaviour
 {
-    public static StartSceneManager s_instance;
+    public static StartSceneManager Instance;
     [SerializeField] GameObject selectCanvas, createCanvas, startCanvas;
     private void Awake()
     {
-        if (s_instance == null)
+        if (Instance == null)
         {
-            s_instance = this;
+            Instance = this;
         }
         else
         {

@@ -37,7 +37,7 @@ public class QuestBoard : MonoBehaviour
 
     public void Start()
     {
-        player = GameManager.s_instance.player;
+        player = GameManager.Instance.player;
         InitializeQuestList();
         acceptButton.onClick.AddListener(() => { AcceptQuest(selectQuest); });
     }
@@ -70,7 +70,7 @@ public class QuestBoard : MonoBehaviour
     {
         if (!IsQuestAlreadyAccepted(quest))
         {
-            GameManager.s_instance.player.acceptQuest.Add(quest);
+            GameManager.Instance.player.acceptQuest.Add(quest);
             acceptPopup.SetActive(true);
             UpdateQuestLogUI();
             ShowQuestProgress(quest);

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SelectCanvasManager : MonoBehaviour
 {
-    public static SelectCanvasManager s_instance;
+    public static SelectCanvasManager Instance;
     
     public ChangerSlot[] changerSlots;
 
@@ -18,16 +18,22 @@ public class SelectCanvasManager : MonoBehaviour
 
     private PlayerData[] playerDatas = new PlayerData[4];
     public PlayerData[] PlayerDatas { get { return playerDatas; } }
+
+    GameManager gameManager;
+
+    StartSceneManager startSceneManager;
     private void Awake()
     {
-        if (s_instance == null)
+        if (Instance == null)
         {
-            s_instance = this;
+            Instance = this;
         }
         else
         {
             Destroy(this);
         }
+        gameManager = GameManager.Instance;
+        startSceneManager = StartSceneManager.Instance;
         TextAsset[] jsons = Resources.LoadAll<TextAsset>("MyCharacter/");
         if (jsons.Length > 0)
         {
@@ -39,7 +45,7 @@ public class SelectCanvasManager : MonoBehaviour
             {
                 foreach (string one in playerName)
                 {
-                    PlayerData data = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.JsonPath, one);
+                    PlayerData data = gameManager.LoadPlayerDataFromJson(StringManager.JsonPath, one);
                     playerDatas[data.playerIndex] = data;
                     characterSlots[data.playerIndex].CreateCharacter(baseCharacters[(int)data.job], data);
                 }
@@ -116,7 +122,7 @@ public class SelectCanvasManager : MonoBehaviour
     public void CreateButton(int slotIndex)
     {
         selectedSlot = slotIndex;
-        StartSceneManager.s_instance.OpenCreateCanvas();
+        startSceneManager.OpenCreateCanvas();
     }
     public void CreateCharacter(string name, PlayerData data)
     {
@@ -125,12 +131,12 @@ public class SelectCanvasManager : MonoBehaviour
             data.name = name;
             data.playerIndex = selectedSlot;
             data.level = 1;
-            GameManager.s_instance.SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
-            PlayerData thisdata = GameManager.s_instance.LoadPlayerDataFromJson(StringManager.JsonPath, data.name);
+            gameManager.SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
+            PlayerData thisdata = gameManager.LoadPlayerDataFromJson(StringManager.JsonPath, data.name);
             characterSlots[selectedSlot].CreateCharacter(baseCharacters[(int)data.job], thisdata);
             playerDatas[thisdata.playerIndex] = thisdata;
             playerName.Add(name);
-            StartSceneManager.s_instance.OpenSelectCanvas();
+            startSceneManager.OpenSelectCanvas();
         }
         else
         {
@@ -143,7 +149,7 @@ public class SelectCanvasManager : MonoBehaviour
         {
             if (playerDatas[i] != null)
             {
-                GameManager.s_instance.SavePlayerDataToJson(StringManager.JsonPath, playerDatas[i].name, playerDatas[i]);
+                gameManager.SavePlayerDataToJson(StringManager.JsonPath, playerDatas[i].name, playerDatas[i]);
             }
         }
         for(int i = 0; i < characterSlots.Length; i++)

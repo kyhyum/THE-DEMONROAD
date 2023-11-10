@@ -28,7 +28,7 @@ public class npcInteraction : MonoBehaviour
     {
         controller = FindObjectOfType<QuestController>();
         dialogueUI.SetActive(false);
-        player = GameManager.s_instance.Myplayer.transform;
+        player = GameManager.Instance.Myplayer.transform;
     }
     void Update()
     {

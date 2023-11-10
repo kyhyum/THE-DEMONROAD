@@ -14,7 +14,7 @@ public class BoardInteraction : MonoBehaviour
 
     void Start()
     {
-        player = GameManager.s_instance.Myplayer.transform;
+        player = GameManager.Instance.Myplayer.transform;
         questUI.SetActive(false);
     }
     void Update()
