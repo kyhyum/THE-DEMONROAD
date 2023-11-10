@@ -140,6 +140,10 @@ public class UIManager : MonoBehaviour
                 ActiveUIGameObject(EnableUI[0]);
             }
         }
+        else
+        {
+            ActiveSettingWindow();
+        }
     }
 
     private void ActiveUIGameObject(GameObject gameObject)

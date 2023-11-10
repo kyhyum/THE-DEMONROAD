@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
         Input = GetComponent<PlayerInput>();
         Controller = GetComponent<CharacterController>();
         Agent = GetComponent<NavMeshAgent>();
-        
 
         stateMachine = new PlayerStateMachine(this);
     }
@@ -48,7 +47,7 @@ public class Player : MonoBehaviour
     {
         Agent.updatePosition = false;
         Agent.updateRotation = true;
-        
+
         Camera = Camera.main;
 
         playerCondition = GetComponent<PlayerCondition>();
@@ -58,6 +57,8 @@ public class Player : MonoBehaviour
         stateMachine.ChangeState(stateMachine.IdleState);
 
         playerCondition.OnDie += OnDie;
+
+        UIManager.Instance.OnUIInputEnable();
     }
 
     private void Update()
@@ -80,5 +81,10 @@ public class Player : MonoBehaviour
         Animator.SetTrigger("Die");
         // Player.cs를 false로 만든다.
         enabled = false;
+    }
+
+    private void OnDestroy()
+    {
+        UIManager.Instance.OnUIInputDisable();
     }
 }
