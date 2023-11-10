@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -29,6 +30,12 @@ public class Player : MonoBehaviour
     public bool IsAttacking { get; set; }
 
     private PlayerStateMachine stateMachine;
+
+
+    public Slider hpSlider;
+
+    public Slider mpSlider;
+
 
     private void Awake()
     {
@@ -57,6 +64,13 @@ public class Player : MonoBehaviour
         stateMachine.ChangeState(stateMachine.IdleState);
 
         playerCondition.OnDie += OnDie;
+        playerCondition.OnHealthChanged += UpdateHealthUI;
+        playerCondition.OnManaChanged += UpdateManaUI;
+
+        hpSlider.maxValue = playerCondition.maxHp;
+        hpSlider.value = playerCondition.maxHp;
+        mpSlider.maxValue = playerCondition.maxMp;
+        mpSlider.value = playerCondition.maxMp;
 
         UIManager.Instance.OnUIInputEnable();
     }
@@ -76,6 +90,11 @@ public class Player : MonoBehaviour
         stateMachine.PhysicsUpdate();
     }
 
+    private void OnDestroy()
+    {
+        UIManager.Instance.OnUIInputDisable();
+    }
+
     void OnDie()
     {
         Animator.SetTrigger("Die");
@@ -83,8 +102,13 @@ public class Player : MonoBehaviour
         enabled = false;
     }
 
-    private void OnDestroy()
+    void UpdateHealthUI(float newHealth)
     {
-        UIManager.Instance.OnUIInputDisable();
+        hpSlider.value = newHealth;
+    }
+
+    void UpdateManaUI(float newMana)
+    {
+        mpSlider.value = newMana;
     }
 }

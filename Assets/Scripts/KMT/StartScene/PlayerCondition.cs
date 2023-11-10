@@ -14,11 +14,11 @@ public class PlayerData
     public GameObject baseObject;
 
     public int playerIndex;
-    
+
     public SceneType scene;
     public Vector3 currentPlayerPos;
     public Quaternion currentPlayerRot;
-    
+
     public bool isDead;
 
     public List<QuestSO> acceptQuest;
@@ -54,6 +54,13 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
 
     public event Action OnDie;
 
+    public delegate void HealthChangedDelegate(float newHealth);
+    public event HealthChangedDelegate OnHealthChanged;
+
+
+    public delegate void ManaChangedDelegate(float newMana);
+    public event HealthChangedDelegate OnManaChanged;
+
     public bool IsDead => currentHp == 0;
     public void Initialize()
     {
@@ -69,7 +76,7 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
                 mainStat = StatType.INT;
                 break;
         }
-        for(int i = 0; i < playerData.stats.Count; i++)
+        for (int i = 0; i < playerData.stats.Count; i++)
         {
             myStats.Add(playerData.stats[i].type, playerData.stats[i].statValue);
         }
@@ -85,9 +92,9 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     }
     void StatUp()
     {
-        foreach(var stat in myStats.Keys)
+        foreach (var stat in myStats.Keys)
         {
-            if(stat == mainStat)
+            if (stat == mainStat)
             {
                 myStats[stat] += mainStatRatio;
             }
@@ -151,6 +158,8 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
 
         float result = currentHp - damage;
         currentHp = Mathf.Max(result, 0);
+
+        OnHealthChanged?.Invoke(currentHp);
 
         if (currentHp == 0)
             OnDie?.Invoke();
