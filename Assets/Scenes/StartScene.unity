@@ -3014,6 +3014,7 @@ GameObject:
   - component: {fileID: 227998446}
   - component: {fileID: 227998445}
   - component: {fileID: 227998443}
+  - component: {fileID: 227998447}
   m_Layer: 0
   m_Name: UICamera
   m_TagString: Untagged
@@ -3131,6 +3132,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &227998447
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227998442}
+  m_Enabled: 1
 --- !u!1 &231024331
 GameObject:
   m_ObjectHideFlags: 0
@@ -3808,6 +3817,7 @@ MonoBehaviour:
   playerData:
     name: 
     level: 0
+    exp: 0
     job: 1
     stats:
     - type: 0
@@ -3822,6 +3832,7 @@ MonoBehaviour:
     playerIndex: 0
     scene: 2
     currentPlayerPos: {x: 0, y: 0, z: 0}
+    currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
     isDead: 0
     acceptQuest: []
 --- !u!1 &304019781
@@ -7291,6 +7302,7 @@ MonoBehaviour:
   playerData:
     name: 
     level: 0
+    exp: 0
     job: 2
     stats:
     - type: 0
@@ -7305,6 +7317,7 @@ MonoBehaviour:
     playerIndex: 0
     scene: 2
     currentPlayerPos: {x: 0, y: 0, z: 0}
+    currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
     isDead: 0
     acceptQuest: []
 --- !u!114 &500104864
@@ -8971,6 +8984,7 @@ MonoBehaviour:
   playerData:
     name: 
     level: 0
+    exp: 0
     job: 0
     stats:
     - type: 0
@@ -8986,6 +9000,7 @@ MonoBehaviour:
     playerIndex: 0
     scene: 2
     currentPlayerPos: {x: 0, y: 0, z: 0}
+    currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
     isDead: 0
     acceptQuest: []
 --- !u!1 &619515929
@@ -15176,12 +15191,14 @@ MonoBehaviour:
   player:
     name: 
     level: 0
+    exp: 0
     job: 0
     stats: []
     baseObject: {fileID: 0}
     playerIndex: 0
     scene: 0
     currentPlayerPos: {x: 0, y: 0, z: 0}
+    currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
     isDead: 0
     acceptQuest: []
   Myplayer: {fileID: 0}
@@ -21758,6 +21775,7 @@ MonoBehaviour:
   selectCanvas: {fileID: 1479947783}
   createCanvas: {fileID: 1606950251}
   startCanvas: {fileID: 1926759561}
+  mainCamera: {fileID: 1878565557}
 --- !u!1 &1595610073
 GameObject:
   m_ObjectHideFlags: 0
@@ -25857,7 +25875,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1878565558}
   - component: {fileID: 1878565557}
-  - component: {fileID: 1878565556}
   - component: {fileID: 1878565559}
   m_Layer: 0
   m_Name: Main Camera
@@ -25865,15 +25882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &1878565556
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1878565555}
-  m_Enabled: 1
+  m_IsActive: 0
 --- !u!20 &1878565557
 Camera:
   m_ObjectHideFlags: 0

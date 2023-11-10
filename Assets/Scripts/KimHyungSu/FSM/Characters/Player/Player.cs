@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     public NavMeshAgent Agent { get; private set; }
 
     [field: SerializeField] public Weapon Weapon { get; private set; }
-    public Health Health { get; private set; }
+    public PlayerCondition playerCondition { get; private set; }
 
     public Camera Camera { get; private set; }
     public bool IsAttacking { get; set; }
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         Input = GetComponent<PlayerInput>();
         Controller = GetComponent<CharacterController>();
         Agent = GetComponent<NavMeshAgent>();
-        Health = GetComponent<Health>();
+        
 
         stateMachine = new PlayerStateMachine(this);
     }
@@ -48,12 +48,16 @@ public class Player : MonoBehaviour
     {
         Agent.updatePosition = false;
         Agent.updateRotation = true;
-
+        
         Camera = Camera.main;
+
+        playerCondition = GetComponent<PlayerCondition>();
+
+        Agent.speed = playerCondition.speed;
 
         stateMachine.ChangeState(stateMachine.IdleState);
 
-        Health.OnDie += OnDie;
+        playerCondition.OnDie += OnDie;
     }
 
     private void Update()

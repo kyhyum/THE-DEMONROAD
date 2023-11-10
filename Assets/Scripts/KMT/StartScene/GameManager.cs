@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     public PlayerData player;
     public GameObject Myplayer;
+
+    PlayerCondition conditon;
+
     WaitForSecondsRealtime wait;
     SlotItem slot;
     private void Awake()
@@ -45,7 +48,9 @@ public class GameManager : MonoBehaviour
         if (player.baseObject != null && scene.buildIndex != (int)SceneType.Start && scene.buildIndex != (int)SceneType.Loading)
         {
             Myplayer = Instantiate<GameObject>(player.baseObject, player.currentPlayerPos, player.currentPlayerRot);
-            Myplayer.AddComponent<PlayerCondition>().playerData = player;
+            conditon = Myplayer.AddComponent<PlayerCondition>();
+            conditon.playerData = player;
+            conditon.Initialize();
             uiManager.gameObject.SetActive(true);
             uiManager.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, player.name));
             uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));

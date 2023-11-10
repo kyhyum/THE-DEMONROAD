@@ -14,7 +14,11 @@ public class CharacterSlot : MonoBehaviour
 
     GameObject character;
 
+    PlayerCondition conditon;
+    PlayerData data;
     GameManager gameManager;
+
+    Animator animator;
     private void Awake()
     {
         gameManager = GameManager.Instance;
@@ -23,7 +27,9 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            PlayerData data = character.GetComponent<PlayerCondition>().playerData;
+            conditon = character.GetComponent<PlayerCondition>();
+            data = conditon.playerData;
+            animator = character.GetComponent<Animator>();
             TextUpdate(data);
         }
         else
@@ -37,14 +43,16 @@ public class CharacterSlot : MonoBehaviour
         {
             character = Instantiate(obj);
             character.SetActive(true);
-            character.AddComponent<PlayerCondition>().playerData = data;
+            conditon = character.AddComponent<PlayerCondition>();
+            conditon.playerData = data;
+            conditon.Initialize();
         }
     }
     public void DeleteCharacter()
     {
         if (character != null)
         {
-            if (gameManager.DeleteCharacter(StringManager.JsonPath, character.GetComponent<PlayerCondition>().playerData.name))
+            if (gameManager.DeleteCharacter(StringManager.JsonPath, data.name))
             {
                 ClearSlot();
             }
@@ -68,7 +76,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if(character != null)
         {
-            character.GetComponent<Animator>().SetTrigger("Choice");
+            animator.SetTrigger("Choice");
         }
     }
     void TextOpen(bool isChar)
@@ -102,7 +110,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            gameManager.player = character.GetComponent<PlayerCondition>().playerData;
+            gameManager.player = data;
         }
         else
         {
