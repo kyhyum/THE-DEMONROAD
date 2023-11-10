@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 [System.Serializable]
 public class PlayerData
@@ -22,40 +22,6 @@ public class PlayerData
     public bool isDead;
 
     public List<QuestSO> acceptQuest;
-
-    public float atkRatio;
-    public float defRatio;
-    public float speedRatio;
-    public float hpRatio;
-    public float mpRatio;
-
-    public PlayerData(Job job)
-    {
-        switch(job)
-        {
-            case Job.WARRIOR:
-                atkRatio = 4f;
-                defRatio = 0.7f;
-                speedRatio = 8f;
-                hpRatio = 12f;
-                mpRatio = 8f;
-                break;
-            case Job.ARCHOR:
-                atkRatio = 3.5f;
-                defRatio = 0.4f;
-                speedRatio = 10f;
-                hpRatio = 8f;
-                mpRatio = 9f;
-                break;
-            case Job.WIZZARD:
-                atkRatio = 4f;
-                defRatio = 0.3f;
-                speedRatio = 7f;
-                hpRatio = 7f;
-                mpRatio = 12f;
-                break;
-        }
-    }
 }
 
 [System.Serializable]
@@ -64,7 +30,7 @@ public class Stat
     public StatType type;
     public int statValue;
 }
-public class PlayerCondition : MonoBehaviour
+public class PlayerCondition : MonoBehaviour, ITakeDamage
 {
     public PlayerData playerData;
     StatType mainStat;
@@ -76,11 +42,20 @@ public class PlayerCondition : MonoBehaviour
     public float currentMp;
     public float maxMp;
 
-    public const int mainStatRatio = 3;
-    public const int statRatio = 1;
+    float atkRatio;
+    float defRatio;
+    float speedRatio;
+    float hpRatio;
+    float mpRatio;
+    const int mainStatRatio = 3;
+    const int statRatio = 1;
 
     Dictionary<StatType, int> myStats = new Dictionary<StatType, int>();
-    private void Start()
+
+    public event Action OnDie;
+
+    public bool IsDead => currentHp == 0;
+    public void Initialize()
     {
         switch (playerData.job)
         {
@@ -98,6 +73,7 @@ public class PlayerCondition : MonoBehaviour
         {
             myStats.Add(playerData.stats[i].type, playerData.stats[i].statValue);
         }
+        RaitoSet(playerData.job);
         StatSynchronization();
     }
     private void LevelUp()
@@ -121,18 +97,64 @@ public class PlayerCondition : MonoBehaviour
             }
         }
     }
+    void RaitoSet(Job job)
+    {
+        switch (job)
+        {
+            case Job.WARRIOR:
+                atkRatio = 4f;
+                defRatio = 0.7f;
+                speedRatio = 1.8f;
+                hpRatio = 12f;
+                mpRatio = 8f;
+                break;
+            case Job.ARCHOR:
+                atkRatio = 3.5f;
+                defRatio = 0.4f;
+                speedRatio = 2.5f;
+                hpRatio = 8f;
+                mpRatio = 9f;
+                break;
+            case Job.WIZZARD:
+                atkRatio = 4f;
+                defRatio = 0.3f;
+                speedRatio = 2f;
+                hpRatio = 7f;
+                mpRatio = 12f;
+                break;
+        }
+    }
     void StatSynchronization()
     {
-        atk = myStats[mainStat] * playerData.atkRatio;
-        def = myStats[StatType.DEX] * playerData.defRatio;
-        speed = myStats[StatType.DEX] + playerData.speedRatio;
-        maxHp = myStats[StatType.CON] + myStats[StatType.STR] * playerData.hpRatio;
+        atk = myStats[mainStat] * atkRatio;
+        def = myStats[StatType.DEX] * defRatio;
+        speed = myStats[StatType.DEX] * speedRatio;
+        maxHp = myStats[StatType.CON] + myStats[StatType.STR] * hpRatio;
         currentHp = maxHp;
-        maxMp = myStats[StatType.INT] * playerData.mpRatio;
+        maxMp = myStats[StatType.INT] * mpRatio;
         currentMp = maxMp;
         for (int i = 0; i < playerData.stats.Count; i++)
         {
             playerData.stats[i].statValue = myStats[playerData.stats[i].type];
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.GetComponent<ITakeDamage>().TakeDamage(atk);
+        }
+    }
+    public void TakeDamage(float damage)
+    {
+        if (currentHp == 0) return;
+
+        float result = currentHp - damage;
+        currentHp = Mathf.Max(result, 0);
+
+        if (currentHp == 0)
+            OnDie?.Invoke();
+
+        Debug.Log(currentHp);
     }
 }

@@ -70,7 +70,7 @@ public class QuestBoard : MonoBehaviour
     {
         if (!IsQuestAlreadyAccepted(quest))
         {
-            GameManager.Instance.player.acceptQuest.Add(quest);
+            player.acceptQuest.Add(quest);
             acceptPopup.SetActive(true);
             UpdateQuestLogUI();
             ShowQuestProgress(quest);
