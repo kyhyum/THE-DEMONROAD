@@ -38,8 +38,6 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(this);
     }
 
     private void CreateInventory()
