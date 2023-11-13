@@ -130,6 +130,11 @@ public class Storage : MonoBehaviour
 
     public void Set(Item[] items)
     {
+        if (items == null)
+        {
+            return;
+        }
+
         for (int i = 0; i < 81; i++)
         {
             Item item = items[i].itemName.Equals(string.Empty) ? null : items[i];

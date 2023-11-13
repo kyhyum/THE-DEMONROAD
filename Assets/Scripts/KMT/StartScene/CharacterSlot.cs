@@ -45,8 +45,17 @@ public class CharacterSlot : MonoBehaviour
             character.SetActive(true);
             conditon = character.AddComponent<PlayerCondition>();
             conditon.playerData = data;
+            animator = character.GetComponent<Animator>();
             conditon.Initialize();
         }
+    }
+    public void SetActiceCharacter()
+    {
+        if(character == null)
+        {
+            return;
+        }
+        character.SetActive(false);
     }
     public void DeleteCharacter()
     {
