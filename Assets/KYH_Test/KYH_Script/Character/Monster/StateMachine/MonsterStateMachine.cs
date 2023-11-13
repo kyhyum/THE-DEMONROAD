@@ -13,6 +13,7 @@ public class MonsterStateMachine : MonsterBaseStateMachine
     public MonsterIdleState IdleState { get; private set;}
     public MonsterChaseState ChasingState { get; private set;}
     public MonsterAttackState AttackState { get; private set;}
+    public MonsterStunState StunState { get; private set;}
 
 
     public float MovementSpeed { get; private set; }
@@ -28,6 +29,7 @@ public class MonsterStateMachine : MonsterBaseStateMachine
         IdleState = new MonsterIdleState(this);
         ChasingState = new MonsterChaseState(this);
         AttackState= new MonsterAttackState(this);
+        StunState= new MonsterStunState(this);
 
         MovementSpeed = monster.Data.BaseSpeed;
         RotationDamping = monster.Data.BaseRotationDamping;

@@ -23,7 +23,14 @@ public class Weapon : MonoBehaviour
         if (alreadyColliderWith.Contains(other)) return;
 
         alreadyColliderWith.Add(other);
-
+        //if (other.TryGetComponent(out EnemyHealth enemyHealth))
+        //{
+        //    enemyHealth.TakeDamage(damage);
+        //}
+        if (other.TryGetComponent(out Monster monster))
+        {
+            monster.GetStun(10f);
+        }
         // Component.TryGetComponent(): 지정된 타입의 컴포넌트(있는 경우)를 가져온다.
         if (other.TryGetComponent(out Health health))
         {

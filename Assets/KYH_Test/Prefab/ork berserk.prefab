@@ -16184,6 +16184,7 @@ GameObject:
   - component: {fileID: 6190888093956069009}
   - component: {fileID: 5029073058357686214}
   - component: {fileID: 8514576228078297077}
+  - component: {fileID: 3090317492686381846}
   m_Layer: 0
   m_Name: ork berserk
   m_TagString: Untagged
@@ -16210,7 +16211,7 @@ Transform:
   - {fileID: 6447883676000382858}
   - {fileID: 7109401922964492370}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6358963543300568846
 Animator:
@@ -16259,7 +16260,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6444556048730354580}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cec921851efe3984e9b93f2fe3383981, type: 3}
   m_Name: 
@@ -16282,7 +16283,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 1.5
   m_Radius: 0.3
@@ -16344,6 +16345,29 @@ MonoBehaviour:
   item:
   - {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
   - {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
+--- !u!136 &3090317492686381846
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6444556048730354580}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6444558090719451246
 GameObject:
   m_ObjectHideFlags: 0
