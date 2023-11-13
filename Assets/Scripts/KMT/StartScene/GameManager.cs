@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     public PlayerData player;
     public GameObject Myplayer;
+
+    public EventSystem eventSystem;
 
     PlayerCondition conditon;
 

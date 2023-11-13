@@ -43,12 +43,15 @@ public class SoundManager : MonoBehaviour
     }
     public void MasterControl()
     {
+        master = masterSlider.value;
+        PlayerPrefs.SetFloat("Master", master);
+
+
         if (mute)
         {
             return;
         }
 
-        master = masterSlider.value;
         if (master == -40f)
         {
             masterMixer.SetFloat("Master", -80);
@@ -57,16 +60,18 @@ public class SoundManager : MonoBehaviour
         {
             masterMixer.SetFloat("Master", master);
         }
-        PlayerPrefs.SetFloat("Master", master);
+        
     }
     public void BGMControl()
     {
+        bgm = bgmSlider.value;
+        PlayerPrefs.SetFloat("BGM", bgm);
+
         if (mute)
         {
             return;
         }
 
-        bgm = bgmSlider.value;
         if (bgm == -40f)
         {
             masterMixer.SetFloat("BGM", -80);
@@ -75,16 +80,18 @@ public class SoundManager : MonoBehaviour
         {
             masterMixer.SetFloat("BGM", bgm);
         }
-        PlayerPrefs.SetFloat("BGM", bgm);
+        
     }
     public void SFXControl()
     {
+        sfx = sfxSlider.value;
+        PlayerPrefs.SetFloat("SFX", sfx);
+
         if (mute)
         {
             return;
         }
 
-        sfx = sfxSlider.value;
         if (sfx == -40f)
         {
             masterMixer.SetFloat("SFX", -80f);
@@ -93,7 +100,7 @@ public class SoundManager : MonoBehaviour
         {
             masterMixer.SetFloat("SFX", sfx);
         }
-        PlayerPrefs.SetFloat("SFX", sfx);
+        
     }
     public void MuteCheck(bool isMute)
     {
