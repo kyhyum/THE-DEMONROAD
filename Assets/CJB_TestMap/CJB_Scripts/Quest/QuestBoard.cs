@@ -21,7 +21,7 @@ public class QuestBoard : MonoBehaviour
     [SerializeField] Button acceptButton;
     
     //questlog
-    public TMP_Text questLogName;
+    [SerializeField] TMP_Text[] questLogName;
     public TMP_Text questLogSelected;
     public TMP_Text questLogDescription;
     public TMP_Text questLogRewards;
@@ -97,19 +97,40 @@ public class QuestBoard : MonoBehaviour
 
     private void UpdateQuestLogUI() //questLog에 선택된 퀘스트 정보 표시
     {
-        questLogName.text = "";
+        //questLogName.text = "";
+        for (int i = 0; i < questLogName.Length; i++)
+        {
+            questLogName[i].text = "";
+        }
         questLogSelected.text = "";
         questLogDescription.text = "";
         questLogRewards.text = "";
 
         foreach (var acceptedQuest in player.acceptQuest)
         {
-            questLogName.text += acceptedQuest.questName;
+            
+            int questIndex = acceptedQuest.questIndex;
+
+            
+            if (questIndex >= 0 && questIndex < questLogName.Length)
+            {
+                
+                questLogName[questIndex].text = acceptedQuest.questName;
+            }
+
+            
             questLogSelected.text += acceptedQuest.questName;
             questLogDescription.text += acceptedQuest.questDescription;
             questLogRewards.text += acceptedQuest.questReward;
         }
-        
+        //foreach (var acceptedQuest in player.acceptQuest)
+        //{
+        //    questLogName.text += acceptedQuest.questName;
+        //    questLogSelected.text += acceptedQuest.questName;
+        //    questLogDescription.text += acceptedQuest.questDescription;
+        //    questLogRewards.text += acceptedQuest.questReward;
+        //}
+
     }
 
     public void OnQuestObjectClick(QuestSO quest) //questLog에서 퀘스트를 하나하나 선택
