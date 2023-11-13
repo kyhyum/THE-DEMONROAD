@@ -167,4 +167,10 @@ public class UIManager : MonoBehaviour
         GetStorage().AddItem(slotB, item);
     }
 
+    public void ItemAddTest(ItemSO itemSO)
+    {
+        OnUIInputEnable();
+        Item item = new Item(itemSO);
+        GetInventory().AddItem(item);
+    }
 }
