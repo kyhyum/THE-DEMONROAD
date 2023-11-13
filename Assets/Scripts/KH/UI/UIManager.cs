@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        inputAction = new PlayerInputAction();
+        inputAction = InputManager.inputActions;
         EnableUI = new List<GameObject>();
 
         CreateStorage();
