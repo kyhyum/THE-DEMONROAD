@@ -7,7 +7,7 @@ public class Storage : MonoBehaviour
 {
     [field: SerializeField] private Transform slots;
     private ItemSlot[] storageSlots;
-    private int gold = 3000000;
+    private int gold;
     public int Gold
     {
         get
