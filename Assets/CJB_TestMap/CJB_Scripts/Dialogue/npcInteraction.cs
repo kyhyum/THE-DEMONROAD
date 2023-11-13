@@ -9,7 +9,7 @@ public class npcInteraction : MonoBehaviour
     public QuestController controller;
 
     public GameObject dialogueUI;
-    public GameObject completeUI;
+    //public GameObject completeUI;
 
     public TMP_Text nameText;
     public TMP_Text dialogueText;
