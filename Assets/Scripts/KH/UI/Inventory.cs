@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     [field: SerializeField] private Transform slots;
     private ItemSlot[] inventorySlots;
     public EquipSlot[] equipSlots;
-    private int gold = 3000000;
+    private int gold;
     public int Gold
     {
         get
