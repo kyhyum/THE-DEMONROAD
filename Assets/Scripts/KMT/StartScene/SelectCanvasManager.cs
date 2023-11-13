@@ -122,6 +122,10 @@ public class SelectCanvasManager : MonoBehaviour
     public void CreateButton(int slotIndex)
     {
         selectedSlot = slotIndex;
+        for (int i = 0; i < characterSlots.Length; i++)
+        {
+            characterSlots[i].SetActiceCharacter();
+        }
         startSceneManager.OpenCreateCanvas();
     }
     public void CreateCharacter(string name, PlayerData data)

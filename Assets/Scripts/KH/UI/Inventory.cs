@@ -179,6 +179,11 @@ public class Inventory : MonoBehaviour
 
     public void Set(Item[] items)
     {
+        if (items == null)
+        {
+            return;
+        }
+
         for (int i = 0; i < 37; i++)
         {
             Item item = items[i].itemName.Equals(string.Empty) ? null : items[i];

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -30,6 +31,12 @@ public class Player : MonoBehaviour
 
     private PlayerStateMachine stateMachine;
 
+
+    public Slider hpSlider;
+
+    public Slider mpSlider;
+
+
     private void Awake()
     {
         AnimationData.Initialize();
@@ -39,7 +46,6 @@ public class Player : MonoBehaviour
         Input = GetComponent<PlayerInput>();
         Controller = GetComponent<CharacterController>();
         Agent = GetComponent<NavMeshAgent>();
-        
 
         stateMachine = new PlayerStateMachine(this);
     }
@@ -48,7 +54,7 @@ public class Player : MonoBehaviour
     {
         Agent.updatePosition = false;
         Agent.updateRotation = true;
-        
+
         Camera = Camera.main;
 
         playerCondition = GetComponent<PlayerCondition>();
@@ -58,6 +64,15 @@ public class Player : MonoBehaviour
         stateMachine.ChangeState(stateMachine.IdleState);
 
         playerCondition.OnDie += OnDie;
+        playerCondition.OnHealthChanged += UpdateHealthUI;
+        playerCondition.OnManaChanged += UpdateManaUI;
+
+        hpSlider.maxValue = playerCondition.maxHp;
+        hpSlider.value = playerCondition.maxHp;
+        mpSlider.maxValue = playerCondition.maxMp;
+        mpSlider.value = playerCondition.maxMp;
+
+        UIManager.Instance.OnUIInputEnable();
     }
 
     private void Update()
@@ -75,10 +90,25 @@ public class Player : MonoBehaviour
         stateMachine.PhysicsUpdate();
     }
 
+    private void OnDestroy()
+    {
+        UIManager.Instance.OnUIInputDisable();
+    }
+
     void OnDie()
     {
         Animator.SetTrigger("Die");
         // Player.cs를 false로 만든다.
         enabled = false;
+    }
+
+    void UpdateHealthUI(float newHealth)
+    {
+        hpSlider.value = newHealth;
+    }
+
+    void UpdateManaUI(float newMana)
+    {
+        mpSlider.value = newMana;
     }
 }

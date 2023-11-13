@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager s_instance;
+    public static SoundManager Instance;
     public AudioSource[] audioSources;
     [SerializeField] AudioMixer masterMixer;
     [SerializeField] Slider masterSlider;
@@ -16,9 +16,9 @@ public class SoundManager : MonoBehaviour
     float sfx;
     private void Awake()
     {
-        if (s_instance == null)
+        if (Instance == null)
         {
-            s_instance = this;
+            Instance = this;
         }
         else
         {
@@ -83,5 +83,10 @@ public class SoundManager : MonoBehaviour
         masterMixer.SetFloat("BGM", isMute? -80f : bgm);
         masterMixer.SetFloat("SFX", isMute? -80f : sfx);
         PlayerPrefs.SetInt("Mute", isMute ? 1 : 0);
+    }
+    public void AudioPlay(AudioSource source, AudioClip clip)
+    {
+        source.clip = clip;
+        source.Play();
     }
 }

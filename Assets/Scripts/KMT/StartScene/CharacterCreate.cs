@@ -15,6 +15,10 @@ public class CharacterCreate : MonoBehaviour
     }
     public void ActiveObject(bool isActive)
     {
+        if(jobCharacter == null)
+        {
+            return;
+        }
         jobCharacter.SetActive(isActive);
         jobImage.SetActive(isActive);
     }
