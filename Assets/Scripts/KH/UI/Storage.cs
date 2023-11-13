@@ -22,11 +22,11 @@ public class Storage : MonoBehaviour
         }
     }
     public TMP_Text text;
-    private Item[] items;
 
+    SlotItem data;
     private void Awake()
     {
-        items = new Item[81];
+        data = new SlotItem(81);
         storageSlots = new ItemSlot[81];
         text.text = string.Format("{0:#,###}", gold);
 
@@ -118,26 +118,30 @@ public class Storage : MonoBehaviour
         storageSlots[slotB].SetItem(item);
     }
 
-    public Item[] Get()
+    public SlotItem Get()
     {
         for (int i = 0; i < 81; i++)
         {
-            items[i] = storageSlots[i].GetItem();
+            data.items[i] = storageSlots[i].GetItem();
         }
 
-        return items;
+        data.gold = gold;
+
+        return data;
     }
 
-    public void Set(Item[] items)
+    public void Set(SlotItem data)
     {
-        if (items == null)
+        if (data == null)
         {
             return;
         }
 
+        gold = data.gold;
+
         for (int i = 0; i < 81; i++)
         {
-            Item item = items[i].itemName.Equals(string.Empty) ? null : items[i];
+            Item item = data.items[i].itemName.Equals(string.Empty) ? null : data.items[i];
 
             storageSlots[i].SetItem(item);
         }

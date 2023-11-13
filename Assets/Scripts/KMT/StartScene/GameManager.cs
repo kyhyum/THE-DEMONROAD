@@ -62,22 +62,22 @@ public class GameManager : MonoBehaviour
     }
     public void SavePlayerDataToJson(string jsonPath, string characterName, PlayerData data)
     {
-        // ToJson을 사용하면 JSON형태로 포멧팅된 문자열이 생성된다  
+          
         string jsonData = JsonUtility.ToJson(data, true);
-        // 데이터를 저장할 경로 지정
+        
         string path = Path.Combine(jsonPath, $"{characterName}.json");
-        // 파일 생성 및 저장
+        
         File.WriteAllText(path, jsonData);
     }
     public PlayerData LoadPlayerDataFromJson(string jsonPath, string characterName)
     {
-        // 데이터를 불러올 경로 지정
+        
         string path = Path.Combine(jsonPath, $"{characterName}.json");
         if(File.Exists(path))
         {
-            // 파일의 텍스트를 string으로 저장
+
             string jsonData = File.ReadAllText(path);
-            // 이 Json데이터를 역직렬화하여 playerData에 넣어줌
+            
             return JsonUtility.FromJson<PlayerData>(jsonData);
         }
         else
@@ -86,24 +86,24 @@ public class GameManager : MonoBehaviour
             return null;
         }
     }
-    public void SaveItemArrayToJson(string jsonPath, string itemArrayName, Item[] items)
+    public void SaveItemArrayToJson(string jsonPath, string itemArrayName, SlotItem data)
     {
-        slot.items = items;
-        // ToJson을 사용하면 JSON형태로 포멧팅된 문자열이 생성된다  
+        slot = data;
+         
         string jsonData = JsonUtility.ToJson(slot, true);
-        // 데이터를 저장할 경로 지정
+        
         string path = Path.Combine(jsonPath, $"{itemArrayName}.json");
-        // 파일 생성 및 저장
+        
         File.WriteAllText(path, jsonData);
     }
-    public Item[] LoadItemArrayFromJson(string jsonPath, string itemArrayName)
+    public SlotItem LoadItemArrayFromJson(string jsonPath, string itemArrayName)
     {
-        // 데이터를 불러올 경로 지정
+        
         string path = Path.Combine(jsonPath, $"{itemArrayName}.json");
         if(File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
-            return JsonUtility.FromJson<SlotItem>(jsonData).items;
+            return JsonUtility.FromJson<SlotItem>(jsonData);
         }
         return null;
     }
