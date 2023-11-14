@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] Slider bgmSlider;
     [SerializeField] Slider sfxSlider;
     [SerializeField] Toggle muteToggle;
+    bool mute;
     float master;
     float bgm;
     float sfx;
@@ -36,12 +37,21 @@ public class SoundManager : MonoBehaviour
         sfx = PlayerPrefs.GetFloat("SFX");
         masterMixer.SetFloat("SFX", sfx);
         sfxSlider.value = sfx;
-        muteToggle.isOn = PlayerPrefs.GetInt("Mute") == 1;
+        mute = PlayerPrefs.GetInt("Mute") == 1;
+        muteToggle.isOn = mute;
         MuteCheck(muteToggle.isOn);
     }
     public void MasterControl()
     {
         master = masterSlider.value;
+        PlayerPrefs.SetFloat("Master", master);
+
+
+        if (mute)
+        {
+            return;
+        }
+
         if (master == -40f)
         {
             masterMixer.SetFloat("Master", -80);
@@ -50,11 +60,18 @@ public class SoundManager : MonoBehaviour
         {
             masterMixer.SetFloat("Master", master);
         }
-        PlayerPrefs.SetFloat("Master", master);
+        
     }
     public void BGMControl()
     {
         bgm = bgmSlider.value;
+        PlayerPrefs.SetFloat("BGM", bgm);
+
+        if (mute)
+        {
+            return;
+        }
+
         if (bgm == -40f)
         {
             masterMixer.SetFloat("BGM", -80);
@@ -63,11 +80,18 @@ public class SoundManager : MonoBehaviour
         {
             masterMixer.SetFloat("BGM", bgm);
         }
-        PlayerPrefs.SetFloat("BGM", bgm);
+        
     }
     public void SFXControl()
     {
         sfx = sfxSlider.value;
+        PlayerPrefs.SetFloat("SFX", sfx);
+
+        if (mute)
+        {
+            return;
+        }
+
         if (sfx == -40f)
         {
             masterMixer.SetFloat("SFX", -80f);
@@ -76,13 +100,14 @@ public class SoundManager : MonoBehaviour
         {
             masterMixer.SetFloat("SFX", sfx);
         }
-        PlayerPrefs.SetFloat("SFX", sfx);
+        
     }
     public void MuteCheck(bool isMute)
     {
-        masterMixer.SetFloat("BGM", isMute? -80f : bgm);
-        masterMixer.SetFloat("SFX", isMute? -80f : sfx);
-        PlayerPrefs.SetInt("Mute", isMute ? 1 : 0);
+        mute = isMute;
+        masterMixer.SetFloat("BGM", mute ? -80f : bgm);
+        masterMixer.SetFloat("SFX", mute ? -80f : sfx);
+        PlayerPrefs.SetInt("Mute", mute ? 1 : 0);
     }
     public void AudioPlay(AudioSource source, AudioClip clip)
     {

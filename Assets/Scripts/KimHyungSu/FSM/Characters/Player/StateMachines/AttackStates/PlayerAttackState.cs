@@ -12,6 +12,8 @@ public class PlayerAttackState : PlayerBaseState
     {
         // 공격할 때 이동을 못하게 한다. 
         stateMachine.MovementSpeedModifier = 0;
+        // agent.ResetPath();
+        stateMachine.Player.Agent.ResetPath();
         base.Enter();
 
         StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);

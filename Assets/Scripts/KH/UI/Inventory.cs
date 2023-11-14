@@ -11,7 +11,8 @@ public class Inventory : MonoBehaviour
     [field: SerializeField] private Transform slots;
     private ItemSlot[] inventorySlots;
     public EquipSlot[] equipSlots;
-    private int gold = 3000000;
+    SlotItem data;
+    private int gold;
     public int Gold
     {
         get
@@ -20,17 +21,15 @@ public class Inventory : MonoBehaviour
         }
         set
         {
-            gold += value;
+            gold = value;
 
             text.text = string.Format("{0:#,###}", gold);
         }
     }
     public TMP_Text text;
-    private Item[] items;
-
     private void Awake()
     {
-        items = new Item[37];
+        data = new SlotItem(37);
         inventorySlots = new ItemSlot[30];
         text.text = string.Format("{0:#,###}", gold);
 
@@ -162,31 +161,35 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public Item[] Get()
+    public SlotItem Get()
     {
         for (int i = 0; i < 7; i++)
         {
-            items[i] = equipSlots[i].GetItem();
+            data.items[i] = equipSlots[i].GetItem();
         }
 
         for (int i = 0; i < 30; i++)
         {
-            items[i + 7] = inventorySlots[i].GetItem();
+            data.items[i + 7] = inventorySlots[i].GetItem();
         }
 
-        return items;
+        data.gold = gold;
+
+        return data;
     }
 
-    public void Set(Item[] items)
+    public void Set(SlotItem data)
     {
-        if (items == null)
+        if (data == null)
         {
             return;
         }
 
+        gold = data.gold;
+
         for (int i = 0; i < 37; i++)
         {
-            Item item = items[i].itemName.Equals(string.Empty) ? null : items[i];
+            Item item = data.items[i].itemName.Equals(string.Empty) ? null : data.items[i];
 
             if (i < 7)
             {
