@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
@@ -31,6 +33,8 @@ public class Player : MonoBehaviour
 
     private PlayerStateMachine stateMachine;
 
+    private PlayerInput playerInput;
+
 
     public Slider hpSlider;
 
@@ -48,6 +52,8 @@ public class Player : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
 
         stateMachine = new PlayerStateMachine(this);
+
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
@@ -77,6 +83,21 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        // 마우스 포인터가 UI 위에 있으면
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("마우스 포인터가 UI 위에 있다.");
+
+            playerInput.InputActions.Disable();
+        }
+        //
+        else
+        {
+            Debug.Log("마우스 포인터가 UI 위에 없다.");
+
+            playerInput.InputActions.Enable();
+        }
+
         stateMachine.Update();
     }
 

@@ -18,7 +18,7 @@ public class PlayerInput : MonoBehaviour
     /// <summary>
     /// InputActions을 활성화 한다.
     /// </summary>
-    private void OnEnable()
+    public void OnEnable()
     {
         InputActions.Enable();
     }
@@ -26,7 +26,7 @@ public class PlayerInput : MonoBehaviour
     /// <summary>
     /// InputActions을 비활성화 한다.
     /// </summary>
-    private void OnDisable()
+    public void OnDisable()
     {
         InputActions.Disable();
     }
