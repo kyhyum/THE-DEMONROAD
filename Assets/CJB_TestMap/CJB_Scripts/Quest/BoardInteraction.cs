@@ -17,7 +17,7 @@ public class BoardInteraction : MonoBehaviour
     {
         player = GameManager.Instance.Myplayer.transform;
         questUI.SetActive(false);
-        interactionPop.SetActive(false);
+        
     }
     void Update()
     {
@@ -26,6 +26,7 @@ public class BoardInteraction : MonoBehaviour
         
         if (distance <= activationDistance)
         {
+            Debug.Log("보드 상호작용 가능");
             interactionPop.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.F))
