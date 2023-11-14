@@ -29,9 +29,9 @@ public class Inventory : MonoBehaviour
     public TMP_Text text;
     private void Awake()
     {
+        Gold = 0;
         data = new SlotItem(37);
         inventorySlots = new ItemSlot[30];
-        text.text = string.Format("{0:#,###}", gold);
 
         for (int i = 0; i < 30; i++)
         {
@@ -129,7 +129,7 @@ public class Inventory : MonoBehaviour
 
         AddItem(slotA, equipSlot.GetItem());
 
-        equipSlot.Equip((EquipItem)item);
+        equipSlot.Equip(item);
     }
 
     public void UnEquip(int slotA, ItemType type)

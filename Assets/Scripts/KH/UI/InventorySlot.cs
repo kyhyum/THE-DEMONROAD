@@ -42,6 +42,7 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         Item item = GetItem();
+
         if (item != null && eventData.button == PointerEventData.InputButton.Right)
         {
             if (UIManager.Instance.storageOpen)
@@ -51,7 +52,7 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
                     SetItem(null);
                 }
             }
-            else if (GetItem() is EquipItem)
+            else if (item is EquipItem)
             {
                 UIManager.Instance.GetInventory().Equip(slotID);
             }

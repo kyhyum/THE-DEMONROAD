@@ -168,7 +168,7 @@ public class UIManager : MonoBehaviour
     public void ItemAddTest(ItemSO itemSO)
     {
         OnUIInputEnable();
-        Item item = new Item(itemSO);
+        Item item = new EquipItem(itemSO);
         GetInventory().AddItem(item);
     }
 }

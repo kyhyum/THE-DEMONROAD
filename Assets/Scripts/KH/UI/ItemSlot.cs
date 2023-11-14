@@ -79,7 +79,6 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log(item);
         if (item == null)
             return;
         itemClone = Instantiate(gameObject, canvas.GetComponent<Transform>());

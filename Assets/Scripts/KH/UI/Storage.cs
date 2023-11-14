@@ -26,9 +26,9 @@ public class Storage : MonoBehaviour
     SlotItem data;
     private void Awake()
     {
+        Gold = 0;
         data = new SlotItem(81);
         storageSlots = new ItemSlot[81];
-        text.text = string.Format("{0:#,###}", gold);
 
         for (int i = 0; i < 81; i++)
         {
