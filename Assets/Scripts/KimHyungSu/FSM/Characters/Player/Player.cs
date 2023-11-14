@@ -1,5 +1,6 @@
 // 필요한 데이터들, 컴포넌트들을 사용할 것이다.
 
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,7 +35,8 @@ public class Player : MonoBehaviour
     private PlayerStateMachine stateMachine;
 
     private PlayerInput playerInput;
-
+    [field: SerializeField] public CinemachineVirtualCamera virtualCamera;
+    [field: SerializeField] Transform cameraLookPoint;
 
     public Slider hpSlider;
 
@@ -79,6 +81,12 @@ public class Player : MonoBehaviour
         mpSlider.value = playerCondition.maxMp;
 
         UIManager.Instance.OnUIInputEnable();
+
+        virtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+        //virtualCamera = GameObject.FindWithTag("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
+        if (virtualCamera != null)
+            virtualCamera.Follow = cameraLookPoint;
+
     }
 
     private void Update()
@@ -86,14 +94,14 @@ public class Player : MonoBehaviour
         // 마우스 포인터가 UI 위에 있으면
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("마우스 포인터가 UI 위에 있다.");
+            //Debug.Log("마우스 포인터가 UI 위에 있다.");
 
             playerInput.InputActions.Disable();
         }
         //
         else
         {
-            Debug.Log("마우스 포인터가 UI 위에 없다.");
+            //Debug.Log("마우스 포인터가 UI 위에 없다.");
 
             playerInput.InputActions.Enable();
         }
