@@ -27,7 +27,9 @@ public class QuestBoard : MonoBehaviour
     public TMP_Text questLogRewards;
 
     //quest progress
-    public TMP_Text questProgName;
+    [SerializeField] TMP_Text questProgmonsterName;
+    [SerializeField] TMP_Text questProgitemName;
+    [SerializeField] TMP_Text questProgconverseName;
 
     [SerializeField] List<QuestSO> quests;
     public List<QuestSO> Quests { get { return quests; } }
@@ -119,10 +121,15 @@ public class QuestBoard : MonoBehaviour
             }
 
             
-            questLogSelected.text += acceptedQuest.questName;
-            questLogDescription.text += acceptedQuest.questDescription;
-            questLogRewards.text += acceptedQuest.questReward;
+            //questLogSelected.text += acceptedQuest.questName;
+            //questLogDescription.text += acceptedQuest.questDescription;
+            //questLogRewards.text += acceptedQuest.questReward;
         }
+
+        
+        questLogSelected.text = "";
+        questLogDescription.text = "";
+        questLogRewards.text = "";
         //foreach (var acceptedQuest in player.acceptQuest)
         //{
         //    questLogName.text += acceptedQuest.questName;
@@ -154,21 +161,22 @@ public class QuestBoard : MonoBehaviour
             foreach (var npc in selectedQuest.relatedNPCs)
             {
 
-                questProgName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
+                questProgconverseName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
 
             }
         }
-        else if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트
+        if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트
         {
-            questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+            questProgitemName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
         else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트
         {
-            questProgName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
-        } 
+            questProgmonsterName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+        }
     }
+   
 
-    
+
 
 
 }
