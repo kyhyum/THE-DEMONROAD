@@ -5,7 +5,7 @@ using UnityEngine;
 public class StartSceneManager : MonoBehaviour
 {
     public static StartSceneManager Instance;
-    [SerializeField] GameObject selectCanvas, createCanvas, startCanvas;
+    [SerializeField] GameObject selectCanvas, createCanvas, startCanvas, fadeOutCanvas;
     [SerializeField] Camera mainCamera;
     private void Awake()
     {
@@ -20,6 +20,7 @@ public class StartSceneManager : MonoBehaviour
     }
     public void OpenStartCanvas()
     {
+        fadeOutCanvas.SetActive(true);
         startCanvas.SetActive(true);
         selectCanvas.SetActive(false);
         createCanvas.SetActive(false);
@@ -27,6 +28,7 @@ public class StartSceneManager : MonoBehaviour
     }
     public void OpenCreateCanvas()
     {
+        fadeOutCanvas.SetActive(true);
         createCanvas.SetActive(true);
         mainCamera.gameObject.SetActive(true);
         selectCanvas.SetActive(false);
@@ -34,6 +36,7 @@ public class StartSceneManager : MonoBehaviour
     }
     public void OpenSelectCanvas()
     {
+        fadeOutCanvas.SetActive(true);
         selectCanvas.SetActive(true);
         createCanvas.SetActive(false);
         startCanvas.SetActive(false);
