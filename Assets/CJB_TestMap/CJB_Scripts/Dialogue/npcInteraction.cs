@@ -9,6 +9,7 @@ public class npcInteraction : MonoBehaviour
     public QuestController controller;
 
     public GameObject dialogueUI;
+    public GameObject interactionPopup;
     //public GameObject completeUI;
 
     public TMP_Text nameText;
@@ -36,6 +37,10 @@ public class npcInteraction : MonoBehaviour
 
         if (distance <= activationDistance)
         {
+            //상호작용 가능시 팝업
+            Debug.Log("대화: F");
+            interactionPopup.SetActive(true);
+
             if (Input.GetKeyDown(KeyCode.F))
             {
                 isUIVisible = !isUIVisible;
@@ -46,6 +51,7 @@ public class npcInteraction : MonoBehaviour
                 else
                 {
                     HideDialogue();
+                    
                 }
             }
         }
@@ -152,6 +158,7 @@ public class npcInteraction : MonoBehaviour
     {
         isTalking = false;
         dialogueUI.SetActive(false);
+        interactionPopup.SetActive(false);
     }
 
     System.Collections.IEnumerator DisplayDialogue(string dialogue) 
