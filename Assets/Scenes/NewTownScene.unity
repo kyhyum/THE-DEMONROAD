@@ -5063,7 +5063,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1995877994}
         m_TargetAssemblyTypeName: QuestBoard, Assembly-CSharp
         m_MethodName: OnQuestObjectClick
         m_Mode: 2
@@ -17451,7 +17451,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1995877994}
         m_TargetAssemblyTypeName: QuestBoard, Assembly-CSharp
         m_MethodName: OnQuestObjectClick
         m_Mode: 2
@@ -18878,8 +18878,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42.000065, y: -88.6}
-  m_SizeDelta: {x: 306.1543, y: 97.3012}
+  m_AnchoredPosition: {x: 10.5535, y: -88.6}
+  m_SizeDelta: {x: 243.2614, y: 97.3012}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &368564781
 GameObject:
@@ -38554,7 +38554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &592654585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41349,7 +41349,6 @@ MonoBehaviour:
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
   controller: {fileID: 0}
   dialogueUI: {fileID: 2043401718}
-  completeUI: {fileID: 1810874149}
   nameText: {fileID: 1608689205}
   dialogueText: {fileID: 1010167134}
   questProgName: {fileID: 681685322}
@@ -57486,7 +57485,6 @@ MonoBehaviour:
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
   controller: {fileID: 0}
   dialogueUI: {fileID: 1856389047}
-  completeUI: {fileID: 1810874149}
   nameText: {fileID: 1324289736}
   dialogueText: {fileID: 1689673536}
   questProgName: {fileID: 681685322}
@@ -60669,7 +60667,7 @@ GameObject:
   - component: {fileID: 1007013001}
   - component: {fileID: 1007013000}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65979,7 +65977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1110821357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69967,7 +69965,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1995877994}
         m_TargetAssemblyTypeName: QuestBoard, Assembly-CSharp
         m_MethodName: OnQuestObjectClick
         m_Mode: 2
@@ -84086,8 +84084,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42.000065, y: 8.2}
-  m_SizeDelta: {x: 306.1543, y: 97.3012}
+  m_AnchoredPosition: {x: 10.5535, y: 8.2}
+  m_SizeDelta: {x: 243.2614, y: 97.3012}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1268083422
 PrefabInstance:
@@ -85730,7 +85728,6 @@ MonoBehaviour:
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
   controller: {fileID: 0}
   dialogueUI: {fileID: 1735550675}
-  completeUI: {fileID: 1810874149}
   nameText: {fileID: 1580947111}
   dialogueText: {fileID: 1904894478}
   questProgName: {fileID: 681685322}
@@ -96346,7 +96343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1553776589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97402,7 +97399,7 @@ GameObject:
   - component: {fileID: 1599057851}
   - component: {fileID: 1599057850}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: converse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101686,7 +101683,7 @@ GameObject:
   - component: {fileID: 1714369781}
   - component: {fileID: 1714369780}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106801,8 +106798,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42, y: 106}
-  m_SizeDelta: {x: 306.1543, y: 97.3012}
+  m_AnchoredPosition: {x: 10.5535, y: 106}
+  m_SizeDelta: {x: 243.2614, y: 97.3012}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!65 &1849384365
 BoxCollider:
@@ -118980,11 +118977,16 @@ MonoBehaviour:
   questConditionText: {fileID: 1185051826}
   questRewardText: {fileID: 2097166736}
   acceptButton: {fileID: 1120041719}
-  questLogName: {fileID: 1714369780}
+  questLogName:
+  - {fileID: 1714369780}
+  - {fileID: 1007013000}
+  - {fileID: 1599057850}
   questLogSelected: {fileID: 587364886}
   questLogDescription: {fileID: 560013017}
   questLogRewards: {fileID: 112967624}
-  questProgName: {fileID: 715683515}
+  questProgmonsterName: {fileID: 715683515}
+  questProgitemName: {fileID: 201066515}
+  questProgconverseName: {fileID: 681685322}
   quests:
   - {fileID: 11400000, guid: 738a6d604c2069e4e8cfade4ddc6f1b9, type: 2}
   - {fileID: 11400000, guid: 554968daf1f966c438f4542e43eb2462, type: 2}

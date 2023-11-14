@@ -121,10 +121,15 @@ public class QuestBoard : MonoBehaviour
             }
 
             
-            questLogSelected.text += acceptedQuest.questName;
-            questLogDescription.text += acceptedQuest.questDescription;
-            questLogRewards.text += acceptedQuest.questReward;
+            //questLogSelected.text += acceptedQuest.questName;
+            //questLogDescription.text += acceptedQuest.questDescription;
+            //questLogRewards.text += acceptedQuest.questReward;
         }
+
+        
+        questLogSelected.text = "";
+        questLogDescription.text = "";
+        questLogRewards.text = "";
         //foreach (var acceptedQuest in player.acceptQuest)
         //{
         //    questLogName.text += acceptedQuest.questName;
@@ -156,17 +161,17 @@ public class QuestBoard : MonoBehaviour
             foreach (var npc in selectedQuest.relatedNPCs)
             {
 
-                questProgmonsterName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
+                questProgconverseName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
 
             }
         }
-        else if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트
+        if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트
         {
             questProgitemName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
         else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트
         {
-            questProgconverseName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+            questProgmonsterName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
     }
    
