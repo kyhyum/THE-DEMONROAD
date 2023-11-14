@@ -1,0 +1,25 @@
+{
+    "name": "",
+    "level": 0,
+    "exp": 0,
+    "job": 0,
+    "stats": [],
+    "baseObject": {
+        "instanceID": 0
+    },
+    "playerIndex": 0,
+    "scene": 0,
+    "currentPlayerPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "currentPlayerRot": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "isDead": false,
+    "acceptQuest": []
+}
