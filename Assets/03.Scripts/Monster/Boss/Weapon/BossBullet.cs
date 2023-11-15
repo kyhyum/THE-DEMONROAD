@@ -7,7 +7,7 @@ public class BossBullet : BossWeapon
 {
     public event Action<BossBullet> BulletReturned;
     public float bulletSpeed = 10f;
-    public float bulletDuration = 10f;
+    public float bulletDuration = 11f;
 
     private Transform Target;
     void Awake()
