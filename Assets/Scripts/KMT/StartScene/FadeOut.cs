@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
+//using DG.Tweening;
 
 public class FadeOut : MonoBehaviour
 {
-    [SerializeField] Image blackImage;
+    /*[SerializeField] Image blackImage;
     Color a;
     private void Awake()
     {
@@ -22,5 +22,5 @@ public class FadeOut : MonoBehaviour
     {
         blackImage.color = a;
         this.gameObject.SetActive(false);
-    }
+    }*/
 }
