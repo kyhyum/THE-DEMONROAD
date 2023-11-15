@@ -11,7 +11,10 @@ public class EnemyHealthUI : MonoBehaviour
 
     [SerializeField] private GameObject healthGameObject;
     [SerializeField] private Slider healthSlider;
-    [SerializeField] private TextMeshProUGUI enemyName;
+    [SerializeField] private TextMeshProUGUI enemyName; 
+    
+    private Coroutine setActiveCoroutine; // Added Coroutine reference
+
     private int healthValue;
     void Awake()
     {
@@ -33,14 +36,17 @@ public class EnemyHealthUI : MonoBehaviour
         }
     }
 
-    public void InitSlider(int maxHealth,int health, string name)
+    public void InitSlider(int maxHealth, int health, string name)
     {
-        StopCoroutine(SetUnActiveSldier());
+        if (setActiveCoroutine != null)
+        {
+            StopCoroutine(setActiveCoroutine); // Stop the previous coroutine
+        }
         healthGameObject.SetActive(true);
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;
         enemyName.text = name;
-        StartCoroutine(SetUnActiveSldier());
+        setActiveCoroutine = StartCoroutine(SetUnActiveSldier());
     }
 
     IEnumerator SetUnActiveSldier()
