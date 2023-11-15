@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
 
     private void CreateInventory()
     {
-        inventoryObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Inventory");
+        inventoryObject = Resources.Load<GameObject>("Prefabs/UI/UI_Inventory");
         inventoryObject = Instantiate(inventoryObject, canvas);
         inventory = inventoryObject.GetComponent<Inventory>();
         inventoryObject.SetActive(false);
@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour
 
     private void CreateStorage()
     {
-        storageObject = Resources.Load<GameObject>("KH/Prefabs/UI/UI_Storage");
+        storageObject = Resources.Load<GameObject>("Prefabs/UI/UI_Storage");
         storageObject = Instantiate(storageObject, canvas);
         storage = storageObject.GetComponentInChildren<Storage>();
         storageObject.SetActive(false);
