@@ -225,8 +225,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 0.36335698, b: 0, a: 1}
-      maxColor: {r: 1, g: 0.6429338, b: 0.06132078, a: 1}
+      minColor: {r: 0.07081755, g: 0.4339623, b: 0.0671413, a: 1}
+      maxColor: {r: 0.06131257, g: 0.3584906, b: 0.048700586, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

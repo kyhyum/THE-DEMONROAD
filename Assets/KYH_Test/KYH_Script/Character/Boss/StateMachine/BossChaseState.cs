@@ -35,8 +35,8 @@ public class BossChaseState : BossBaseState
         else if (IsInAttackRange())
         {
             stateMachine.Boss.BossNavMeshAgent.ResetPath();
-            //stateMachine.ChangeState(stateMachine.AttackState);
-            //TODO: 체력에 비례해 공격 패턴 여러가지 설정
+            stateMachine.ChangeState(stateMachine.AttackState);
+            
             return;
         }
     }

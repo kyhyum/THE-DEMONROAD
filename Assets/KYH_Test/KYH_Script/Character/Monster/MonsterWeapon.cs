@@ -22,7 +22,7 @@ public class MonsterWeapon : MonoBehaviour
 
         alreadyColliderWith.Add(other);
 
-        if (other.TryGetComponent(out MonsterHealth health))
+        if (other.TryGetComponent(out Health health))
         {
             health.TakeDamage(damage);
         }
