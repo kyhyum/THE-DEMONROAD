@@ -20,7 +20,6 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        inputAction = InputManager.inputActions;
         EnableUI = new List<GameObject>();
 
         CreateStorage();
@@ -38,6 +37,11 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        inputAction = InputManager.inputActions;
+
+        inputAction.Player.Escape.Enable();
+        inputAction.Player.Escape.started += OnEscapeKey;
     }
 
     private void CreateInventory()
@@ -54,12 +58,6 @@ public class UIManager : MonoBehaviour
         storageObject = Instantiate(storageObject, canvas);
         storage = storageObject.GetComponentInChildren<Storage>();
         storageObject.SetActive(false);
-    }
-
-    private void OnEnable()
-    {
-        inputAction.Player.Escape.Enable();
-        inputAction.Player.Escape.started += OnEscapeKey;
     }
 
     public void OnUIInputEnable()

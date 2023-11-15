@@ -12,13 +12,13 @@ public class ItemSO : ScriptableObject
     [field: SerializeField] public string description { get; private set; }
     [field: SerializeField] public ItemType type { get; private set; }
     [field: SerializeField] public Rank rank { get; private set; }
-    [field: SerializeField] public Texture2D texture { get; private set; }
-    [field: SerializeField] public GameObject prefab { get; private set; }
+    [field: SerializeField] public string texture { get; private set; }
+    [field: SerializeField] public string prefab { get; private set; }
 
 
-    public GameObject CreateItem()
+    public virtual GameObject CreateItem()
     {
-        GameObject gameObject = Instantiate(prefab);
+        GameObject gameObject = Resources.Load<GameObject>(prefab);
         Item item;
 
         if (type == ItemType.Resources || type == ItemType.Gold)
