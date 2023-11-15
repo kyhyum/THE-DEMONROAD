@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < 30; i++)
         {
-            GameObject slot = Resources.Load<GameObject>("KH/Prefabs/UI/UI_ItemSlot");
+            GameObject slot = Resources.Load<GameObject>("Prefabs/UI/UI_ItemSlot");
             slot = Instantiate(slot, slots);
             slot.name = "InventorySlot" + i;
             inventorySlots[i] = slot.AddComponent<InventorySlot>();
