@@ -17,7 +17,7 @@ public class Monster : MonoBehaviour
     public Animator Animator { get; private set; }
     public CharacterController Controller { get; private set; }
 
-    private MonsterStateMachine stateMachine;        
+    public MonsterStateMachine stateMachine { get; private set; }
     [field: SerializeField] public MonsterWeapon Weapon { get; private set; }
     public MonsterHealth MonsterHealth { get; private set; }
     public ItemDropController itemDropController { get; private set; }
@@ -43,6 +43,12 @@ public class Monster : MonoBehaviour
     {
         EnemyNavMeshAgent.speed = Data.BaseSpeed;
         EnemyNavMeshAgent.autoBraking = false;
+    }
+
+    public void GetStun(float time)
+    {
+        stateMachine.StunState.SetStunTime(time);
+        stateMachine.ChangeState(stateMachine.StunState);
     }
 
     private void Start()
