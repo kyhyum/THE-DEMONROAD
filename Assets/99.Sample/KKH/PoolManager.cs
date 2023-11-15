@@ -6,7 +6,7 @@ public class PoolManager : MonoBehaviour
 {
     public static PoolManager Instance;
     List<GameObject>[] pools;
-    Dictionary<GameObject, int> objectIndex;
+    Dictionary<string, int> objectIndex;
 
     private void Start()
     {
@@ -21,35 +21,24 @@ public class PoolManager : MonoBehaviour
         }
 
         pools = new List<GameObject>[10];
-        objectIndex = new Dictionary<GameObject, int>();
+        objectIndex = new Dictionary<string, int>();
     }
 
-    public void Set(GameObject gameObject, int num)
+    public void Set(string key)
     {
-        if (objectIndex.ContainsKey(gameObject))
-        {
-
-        }
-        else
+        if (!objectIndex.ContainsKey(key))
         {
             int index = objectIndex.Count;
             pools[index] = new List<GameObject>();
-            objectIndex.Add(gameObject, objectIndex.Count);
-
-            for (int i = 0; i < num; i++)
-            {
-                GameObject aaa = Instantiate(gameObject, transform);
-                aaa.SetActive(false);
-                pools[index].Add(aaa);
-            }
+            objectIndex.Add(key, objectIndex.Count);
         }
     }
 
-    public GameObject Get(GameObject gameObject)
+    public GameObject Get(string key)
     {
         GameObject select = null;
 
-        if (objectIndex.TryGetValue(gameObject, out int index))
+        if (objectIndex.TryGetValue(key, out int index))
         {
             foreach (GameObject item in pools[index])
             {
