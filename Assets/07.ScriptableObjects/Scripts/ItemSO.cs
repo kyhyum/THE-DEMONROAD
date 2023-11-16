@@ -12,13 +12,13 @@ public class ItemSO : ScriptableObject
     [field: SerializeField] public string description { get; private set; }
     [field: SerializeField] public ItemType type { get; private set; }
     [field: SerializeField] public Rank rank { get; private set; }
-    [field: SerializeField] public string texture { get; private set; }
-    [field: SerializeField] public string prefab { get; private set; }
+    [field: SerializeField] public Texture2D texture { get; private set; }
+    [field: SerializeField] public GameObject prefab { get; private set; }
 
 
     public virtual GameObject CreateItem()
     {
-        GameObject gameObject = Resources.Load<GameObject>(prefab);
+        GameObject gameObject = Instantiate(prefab);
         Item item;
 
         if (type == ItemType.Resources || type == ItemType.Gold)
@@ -34,7 +34,7 @@ public class ItemSO : ScriptableObject
             item = new EquipItem(this);
         }
 
-        GameObject canvas = Instantiate(Resources.Load<GameObject>("KH/Prefabs/UI/UI_ItemLabel"), gameObject.transform);
+        GameObject canvas = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UI_ItemLabel"), gameObject.transform);
         TMP_Text text = canvas.GetComponentInChildren<TMP_Text>();
         text.text = itemName;
 
