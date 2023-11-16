@@ -15,7 +15,6 @@ public class EnemyHealthUI : MonoBehaviour
     
     private Coroutine setActiveCoroutine; // Added Coroutine reference
 
-    private int healthValue;
     void Awake()
     {
         if (null == instance)

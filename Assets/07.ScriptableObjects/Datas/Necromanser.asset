@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Necromanser
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Necromanser
-  <Health>k__BackingField: 100
-  <PlayerChasingRange>k__BackingField: 10
+  <Health>k__BackingField: 120
+  <PlayerChasingRange>k__BackingField: 13
   <AttackPatternInfoDatas>k__BackingField:
   - <IsLongRanged>k__BackingField: 0
     <AttackName>k__BackingField: Attack1
@@ -22,31 +22,31 @@ MonoBehaviour:
     <ForceTransitionTime>k__BackingField: 0
     <Force>k__BackingField: 0
     <Dealing_Start_TransitionTime>k__BackingField: 0
-    <Dealing_End_TransitionTime>k__BackingField: 0
-    <AttackRange>k__BackingField: 0
+    <Dealing_End_TransitionTime>k__BackingField: 0.606
+    <AttackRange>k__BackingField: 3
   - <IsLongRanged>k__BackingField: 0
     <AttackName>k__BackingField: Attack2
     <Damage>k__BackingField: 0
     <ForceTransitionTime>k__BackingField: 0
     <Force>k__BackingField: 0
-    <Dealing_Start_TransitionTime>k__BackingField: 0
-    <Dealing_End_TransitionTime>k__BackingField: 0
-    <AttackRange>k__BackingField: 0
+    <Dealing_Start_TransitionTime>k__BackingField: 0.157
+    <Dealing_End_TransitionTime>k__BackingField: 0.921
+    <AttackRange>k__BackingField: 10
   - <IsLongRanged>k__BackingField: 1
     <AttackName>k__BackingField: Attack3
     <Damage>k__BackingField: 0
     <ForceTransitionTime>k__BackingField: 0
     <Force>k__BackingField: 0
-    <Dealing_Start_TransitionTime>k__BackingField: 0
-    <Dealing_End_TransitionTime>k__BackingField: 0
-    <AttackRange>k__BackingField: 0
+    <Dealing_Start_TransitionTime>k__BackingField: 0.183
+    <Dealing_End_TransitionTime>k__BackingField: 0.9
+    <AttackRange>k__BackingField: 10
   - <IsLongRanged>k__BackingField: 1
     <AttackName>k__BackingField: Attack4
     <Damage>k__BackingField: 0
     <ForceTransitionTime>k__BackingField: 0
     <Force>k__BackingField: 0
-    <Dealing_Start_TransitionTime>k__BackingField: 0
-    <Dealing_End_TransitionTime>k__BackingField: 0
-    <AttackRange>k__BackingField: 0
-  <BaseSpeed>k__BackingField: 5
-  <BaseRotationDamping>k__BackingField: 1
+    <Dealing_Start_TransitionTime>k__BackingField: 0.35
+    <Dealing_End_TransitionTime>k__BackingField: 0.9
+    <AttackRange>k__BackingField: 5
+  <BaseSpeed>k__BackingField: 3.08
+  <BaseRotationDamping>k__BackingField: 10.06

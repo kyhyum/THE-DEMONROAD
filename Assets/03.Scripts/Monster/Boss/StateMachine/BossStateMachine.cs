@@ -12,7 +12,6 @@ public class BossStateMachine : BossBaseStateMachine
 
     public BossIdleState IdleState { get; private set;}
     public BossChaseState ChasingState { get; private set; }
-    public BossAttackState AttackState { get; private set; }
     public BossAttackOneState AttackOneState { get; private set;}
     public BossAttackTwoState AttackTwoState { get; private set;}
     public BossAttackThreeState AttackThreeState { get; private set;}
@@ -30,7 +29,6 @@ public class BossStateMachine : BossBaseStateMachine
 
         IdleState = new BossIdleState(this);
         ChasingState = new BossChaseState(this);
-        AttackState = new BossAttackState(this);
         AttackOneState = new BossAttackOneState(this);
         AttackTwoState = new BossAttackTwoState(this);
         AttackThreeState = new BossAttackThreeState(this);

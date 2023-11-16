@@ -12,14 +12,14 @@ public class Boss : MonoBehaviour
     [field: Header("Animations")]
     [field: SerializeField] public BossAnimationData bossAnimationData { get; private set; }
 
-    [field: Header("Animations")]
+    [field: Header("Bullet")]
     [field: SerializeField] private GameObject bossBullet1Obj;
     [field: SerializeField] private GameObject bossBullet2Obj;
+    [field: SerializeField] public Transform bulletSpawnPoint {get; private set;}
     public EnemyForceReceiver EnemyForceReceiver { get; private set; }
     public NavMeshAgent BossNavMeshAgent { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
-    public CharacterController Controller { get; private set; }
 
     private BossStateMachine stateMachine;        
     [field: SerializeField] public BossWeapon Weapon { get; private set; }
@@ -34,8 +34,6 @@ public class Boss : MonoBehaviour
 
         Rigidbody = GetComponent<Rigidbody>();
         Animator = GetComponent<Animator>();
-        Controller = GetComponent<CharacterController>();
-        EnemyForceReceiver = GetComponent<EnemyForceReceiver>();
         BossNavMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new BossStateMachine(this);
         BossHealth = GetComponent<BossHealth>();

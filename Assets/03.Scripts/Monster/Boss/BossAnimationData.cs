@@ -11,12 +11,14 @@ public class BossAnimationData
     [SerializeField] private string attack1ParameterName = "Attack1";
     [SerializeField] private string attack2ParameterName = "Attack2";
     [SerializeField] private string attack3ParameterName = "Attack3";
+    [SerializeField] private string attack4ParameterName = "Attack4";
 
     public int IdleParameterHash { get; private set; }
     public int ChaseParameterHash { get; private set; }
     public int Attack1ParameterHash { get; private set; }
     public int Attack2ParameterHash { get; private set; }
     public int Attack3ParameterHash { get; private set; }
+    public int Attack4ParameterHash { get; private set; }
 
     public void Initialize()
     {
@@ -25,5 +27,6 @@ public class BossAnimationData
         Attack1ParameterHash = Animator.StringToHash(attack1ParameterName);
         Attack2ParameterHash = Animator.StringToHash(attack2ParameterName);
         Attack3ParameterHash = Animator.StringToHash(attack3ParameterName);
+        Attack4ParameterHash = Animator.StringToHash(attack4ParameterName);
     }
 }
