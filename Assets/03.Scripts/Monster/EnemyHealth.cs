@@ -27,10 +27,11 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health = Mathf.Max(health - damage, 0);
-        Debug.Log(health);
         EnemyHealthUI.Instance.InitSlider(maxHealth, health, enemyName);
 
         if (health == 0)
+        {
             OnDie?.Invoke();
+        }
     }
 }

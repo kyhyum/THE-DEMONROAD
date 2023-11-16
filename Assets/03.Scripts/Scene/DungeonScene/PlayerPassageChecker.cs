@@ -9,6 +9,7 @@ public class PlayerPassageChecker : MonoBehaviour
     private DungeonManager dungeonManager;
     private void Start()
     {
+        dungeonManager = DungeonManager.Instance;
         fadeOutObject = new FadeOutObject(this.gameObject);
     }
 
@@ -19,6 +20,17 @@ public class PlayerPassageChecker : MonoBehaviour
             if (dungeonManager.CheckAllMonster())
             {
                 fadeOutObject.OnEnable();
+                dungeonManager.spawnIdx++;
+                if (dungeonManager.spawnList.Count == dungeonManager.spawnIdx)
+                {
+                    //TODO : 클리어 일단 시간 멈춰놓기
+                    Time.timeScale = 0;
+                }
+                else
+                {
+                    dungeonManager.Spawn();
+                }
+                
             }
         }
     }

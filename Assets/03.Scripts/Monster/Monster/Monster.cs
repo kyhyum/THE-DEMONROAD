@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class Monster : MonoBehaviour
     [field: SerializeField] public MonsterWeapon Weapon { get; private set; }
     public MonsterHealth MonsterHealth { get; private set; }
     public ItemDropController itemDropController { get; private set; }
+    public event Action<Monster> objectPoolReturn;
 
     private void Awake()
     {
@@ -57,7 +59,7 @@ public class Monster : MonoBehaviour
         MonsterHealth.health = Data.Health;
         stateMachine.ChangeState(stateMachine.IdleState);
         MonsterHealth.OnDie += OnDie;
-        MonsterHealth.OnDie += itemDropController.DropItem;
+        //MonsterHealth.OnDie += itemDropController.DropItem;
     }
 
     private void Update()
@@ -75,6 +77,12 @@ public class Monster : MonoBehaviour
     void OnDie()
     {
         Animator.SetTrigger("Die");
-        enabled = false;
+        Debug.Log(Animator.GetCurrentAnimatorStateInfo(0).length);
+        Invoke("AfterAnimationComplete", Animator.GetCurrentAnimatorStateInfo(0).length);
+    }
+
+    void AfterAnimationComplete()
+    {
+        objectPoolReturn?.Invoke(this);
     }
 }
