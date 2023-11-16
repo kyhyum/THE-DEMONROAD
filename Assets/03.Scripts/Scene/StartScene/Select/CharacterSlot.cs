@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Unity.VisualScripting.Member;
 
 public class CharacterSlot : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class CharacterSlot : MonoBehaviour
     PlayerCondition conditon;
     PlayerData data;
     GameManager gameManager;
-
+    VoiceClip clip;
+    AudioSource source;
     Animator animator;
     private void Awake()
     {
@@ -27,15 +29,22 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
+            character.SetActive(true);
+            Setting();
             conditon = character.GetComponent<PlayerCondition>();
             data = conditon.playerData;
-            animator = character.GetComponent<Animator>();
             TextUpdate(data);
         }
         else
         {
             TextOpen(false);
         }
+    }
+    private void Setting()
+    {
+        animator = character.GetComponent<Animator>();
+        clip = character.GetComponent<VoiceClip>();
+        source = character.GetComponent<AudioSource>();
     }
     public void CreateCharacter(GameObject obj, PlayerData data)
     {
@@ -45,7 +54,7 @@ public class CharacterSlot : MonoBehaviour
             character.SetActive(true);
             conditon = character.AddComponent<PlayerCondition>();
             conditon.playerData = data;
-            animator = character.GetComponent<Animator>();
+            Setting();
             conditon.Initialize();
         }
     }
@@ -83,10 +92,13 @@ public class CharacterSlot : MonoBehaviour
     }
     public void ChoiceSlot()
     {
-        if(character != null)
+        if(character == null)
         {
-            animator.SetTrigger("Choice");
+            return;
         }
+        animator.SetTrigger("Choice");
+        source.clip = clip.clips[1];
+        source.Play();
     }
     void TextOpen(bool isChar)
     {

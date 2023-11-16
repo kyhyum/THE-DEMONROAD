@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class DungeonSO : ScriptableObject
 {
     public Sprite sprite;
-    public Color color;
     public string dungeonName;
     public string explan;
     public string appropriateLevel;

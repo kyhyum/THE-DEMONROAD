@@ -8,7 +8,6 @@ public class DungeonExplanUI : MonoBehaviour
 {
     SceneType dungeon;
     [SerializeField] Image image;
-    [SerializeField] Image backGround;
     [SerializeField] TMP_Text dungeonName;
     [SerializeField] TMP_Text dungeonExplan;
     [SerializeField] TMP_Text dungeonApproLevel;
@@ -18,7 +17,6 @@ public class DungeonExplanUI : MonoBehaviour
         gameObject.SetActive(true);
         dungeon = dungeonSO.dungeon;
         image.sprite = dungeonSO.sprite;
-        backGround.color = dungeonSO.color;
         dungeonName.text= dungeonSO.name;
         dungeonExplan.text = dungeonSO.explan;
         dungeonApproLevel.text = dungeonSO.appropriateLevel;
