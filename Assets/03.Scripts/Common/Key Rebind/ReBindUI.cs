@@ -45,7 +45,7 @@ public class ReBindUI : MonoBehaviour
         InputManager.rebindComplete += UpdateUI;
         InputManager.rebindCanceled += UpdateUI;
     }
-    
+
     private void OnDisable()
     {
         InputManager.rebindComplete -= UpdateUI;
