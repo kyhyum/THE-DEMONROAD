@@ -3,5 +3,6 @@ public enum QuestType
 {
     MonsterQuest,
     ItemQuest,
-    ConversationQuest
+    ConversationQuest,
+    InfiniteMonsterQuest,
 }

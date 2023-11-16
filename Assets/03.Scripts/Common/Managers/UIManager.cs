@@ -94,7 +94,7 @@ public class UIManager : MonoBehaviour
         ActiveUIGameObject(inventoryObject);
     }
 
-    private void ActiveStorage()
+    public void ActiveStorage()
     {
         if (!storageObject.activeSelf)
         {

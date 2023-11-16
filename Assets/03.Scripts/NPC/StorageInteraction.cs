@@ -3,15 +3,15 @@ using UnityEngine;
 public class StorageInteraction : MonoBehaviour
 {
     Transform player;
-    public GameObject interactionPopup;
-    public GameObject storageUI;
+    public GameObject interactionPopup;   
     private bool isUIVisible = false;
 
-    public float activationDistance = 5f;
+    
+    private float activationDistance = 3f;
     void Start()
     {
         player = GameManager.Instance.Myplayer.transform;
-        storageUI.SetActive(false);
+        
     }
 
 
@@ -25,13 +25,13 @@ public class StorageInteraction : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 isUIVisible = !isUIVisible;               
-                storageUI.SetActive(true);
                 
+                UIManager.Instance.ActiveStorage();
             }
         }
         else
         {
-            storageUI.SetActive(false);
+            
             interactionPopup.SetActive(false);
         }
     }
