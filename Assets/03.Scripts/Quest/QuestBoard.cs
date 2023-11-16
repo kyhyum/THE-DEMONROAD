@@ -30,6 +30,7 @@ public class QuestBoard : MonoBehaviour
     [SerializeField] TMP_Text questProgmonsterName;
     [SerializeField] TMP_Text questProgitemName;
     [SerializeField] TMP_Text questProgconverseName;
+    [SerializeField] TMP_Text questProgInfinitemonsterName;
 
     [SerializeField] List<QuestSO> quests;
     public List<QuestSO> Quests { get { return quests; } }
@@ -172,6 +173,10 @@ public class QuestBoard : MonoBehaviour
         else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트
         {
             questProgmonsterName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+        }
+        else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //몬스터퀘스트
+        {
+            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
     }
    
