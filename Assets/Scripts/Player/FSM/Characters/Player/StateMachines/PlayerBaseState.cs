@@ -1,15 +1,23 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.UIElements;
 using UnityEngine.Windows;
 
 public class PlayerBaseState : IState
 {
     protected PlayerStateMachine stateMachine;
     protected readonly PlayerGroundData groundData;
+
+    
+    float cameraDistance;
+    [field: SerializeField] public float minCamDistance = 5.0f;
+    [field: SerializeField] public float maxCamDistance = 15.0f;
+    [field: SerializeField] float sensitivity = 1f;
 
     public PlayerBaseState(PlayerStateMachine playerStateMachine)
     {
@@ -19,7 +27,7 @@ public class PlayerBaseState : IState
 
     public virtual void Enter()
     {
-        AddInputActionsCallbacks();
+        AddInputActionsCallbacks();    
     }
 
     public virtual void Exit()
@@ -54,6 +62,8 @@ public class PlayerBaseState : IState
         input.PlayerActions.Attack.performed += OnAttackPerformed;
         // .canceled: (눌려져 있는) 해당 키가 떼어졌을 떄
         input.PlayerActions.Attack.canceled += OnAttackCanceled;
+        // 
+        input.PlayerActions.MouseScrollY.performed += OnMouseScrollYPerformed;
     }
 
     /// <summary>
@@ -65,6 +75,7 @@ public class PlayerBaseState : IState
         input.PlayerActions.Move.started -= OnMoveStarted;
         input.PlayerActions.Attack.performed -= OnAttackPerformed;
         input.PlayerActions.Attack.canceled -= OnAttackCanceled;
+        input.PlayerActions.MouseScrollY.performed -= OnMouseScrollYPerformed;
     }
 
     protected virtual void OnMoveStarted(InputAction.CallbackContext context)
@@ -86,6 +97,27 @@ public class PlayerBaseState : IState
         //Debug.Log("OnAttackCanceled 함수 호출한다.");
 
         stateMachine.Player.IsAttacking = false;
+    }
+
+    protected virtual void OnMouseScrollYPerformed(InputAction.CallbackContext context)
+    {
+        CinemachineComponentBase componentBase = stateMachine.Player.ComponentBase;
+
+        Debug.Log("OnMouseScrollYPerformed 함수 호출한다.");
+
+        cameraDistance = context.ReadValue<float>() * sensitivity;
+        
+        Debug.Log($"cameraDistance : {cameraDistance}");
+
+        if (componentBase is CinemachineFramingTransposer)
+        {
+            CinemachineFramingTransposer framingTransposer = componentBase as CinemachineFramingTransposer;
+
+            framingTransposer.m_CameraDistance -= cameraDistance;
+
+            framingTransposer.m_CameraDistance = Mathf.Clamp(framingTransposer.m_CameraDistance, minCamDistance, maxCamDistance);
+        }
+
     }
 
     /// <summary>
