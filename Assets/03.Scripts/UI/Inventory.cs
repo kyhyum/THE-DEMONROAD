@@ -124,12 +124,13 @@ public class Inventory : MonoBehaviour
     public void Equip(int slotA)
     {
         Item item = inventorySlots[slotA].GetItem();
-
-        EquipSlot equipSlot = equipSlots[(int)item.type];
-
-        AddItem(slotA, equipSlot.GetItem());
-
-        equipSlot.Equip(item);
+        if (item is EquipItem)
+        {
+            EquipItem equipItem = (EquipItem)item;
+            EquipSlot equipSlot = equipSlots[(int)equipItem.equipType];
+            AddItem(slotA, equipSlot.GetItem());
+            equipSlot.Equip(item);
+        }
     }
 
     public void UnEquip(int slotA, ItemType type)

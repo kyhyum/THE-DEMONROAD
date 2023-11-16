@@ -4,12 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Option
-{
-    public StatType type;
-    public int value;
-}
-
 [CreateAssetMenu(fileName = "EquipItem", menuName = "Create/EquipItem", order = 0)]
 public class EquipItemSO : ItemSO
 {
@@ -18,8 +12,10 @@ public class EquipItemSO : ItemSO
 
     public override GameObject CreateItem()
     {
-        Debug.Log("aaa");
 
-        return base.CreateItem();
+        GameObject gameObject = base.CreateItem();
+
+
+        return gameObject;
     }
 }
