@@ -166,7 +166,7 @@ public class QuestBoard : MonoBehaviour
         {
             questProgmonsterName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
-        else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //몬스터퀘스트
+        else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
         {
             questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
