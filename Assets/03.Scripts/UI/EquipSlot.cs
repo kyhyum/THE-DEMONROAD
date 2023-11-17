@@ -6,17 +6,16 @@ using UnityEngine.UI;
 
 public class EquipSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler, IPointerDownHandler
 {
-    public ItemType type;
+    public EquipItemType type;
     private GameObject itemClone;
     private Canvas canvas;
     private RectTransform rect;
-    private RawImage icon;
+    public RawImage icon;
     private Item item;
 
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
-        icon = GetComponentInChildren<RawImage>();
         item = null;
     }
 
