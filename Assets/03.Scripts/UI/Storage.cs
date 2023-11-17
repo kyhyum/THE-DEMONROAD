@@ -16,9 +16,9 @@ public class Storage : MonoBehaviour
         }
         set
         {
-            gold += value;
+            gold = value;
 
-            text.text = string.Format("{0:#,###}", gold);
+            text.text = string.Format("{0:N0}", gold);
         }
     }
     public TMP_Text text;
@@ -145,5 +145,10 @@ public class Storage : MonoBehaviour
 
             storageSlots[i].SetItem(item);
         }
+    }
+
+    public void CloseBtn()
+    {
+        UIManager.Instance.ActiveStorage();
     }
 }

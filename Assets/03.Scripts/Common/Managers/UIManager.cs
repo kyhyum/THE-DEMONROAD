@@ -89,9 +89,14 @@ public class UIManager : MonoBehaviour
         ActiveUIGameObject(settingObject);
     }
 
-    private void ActiveInventory(InputAction.CallbackContext context)
+    public void ActiveInventory()
     {
         ActiveUIGameObject(inventoryObject);
+    }
+
+    private void ActiveInventory(InputAction.CallbackContext context)
+    {
+        ActiveInventory();
     }
 
     public void ActiveStorage()

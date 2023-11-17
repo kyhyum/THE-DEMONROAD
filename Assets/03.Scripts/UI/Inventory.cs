@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
         {
             gold = value;
 
-            text.text = string.Format("{0:#,###}", gold);
+            text.text = string.Format("{0:N0}", gold);
         }
     }
     public TMP_Text text;
@@ -133,7 +133,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void UnEquip(int slotA, ItemType type)
+    public void UnEquip(int slotA, EquipItemType type)
     {
         EquipSlot equipSlot = equipSlots[(int)type];
         Item item = inventorySlots[slotA].GetItem();
@@ -143,7 +143,7 @@ public class Inventory : MonoBehaviour
             {
                 EquipItem equipItem = (EquipItem)item;
 
-                if (equipItem.type == type)
+                if (equipItem.equipType == type)
                 {
                     AddItem(slotA, equipSlot.GetItem());
                     equipSlot.UnEquip();
@@ -200,6 +200,18 @@ public class Inventory : MonoBehaviour
             {
                 inventorySlots[i - 7].SetItem(item);
             }
+        }
+    }
+
+    public void CloseBtn()
+    {
+        if (UIManager.Instance.storageOpen)
+        {
+            UIManager.Instance.ActiveStorage();
+        }
+        else
+        {
+            UIManager.Instance.ActiveInventory();
         }
     }
 }
