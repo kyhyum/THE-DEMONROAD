@@ -9,7 +9,7 @@ public class DungeonManager : MonoBehaviour
     public int spawnIdx = 0;
 
 
-    [field: Header("Prefabs")]
+    [field: Header("Audio")]
     [SerializeField] private AudioClip DungeonSound;
 
     [field: Header("Prefabs")]
@@ -17,12 +17,17 @@ public class DungeonManager : MonoBehaviour
     public GameObject goblinPrefab;
     public GameObject swordGoblinPrefab;
     public GameObject orkberserkerPrefab;
+    public GameObject necromanserPrefab;
 
     //TODO: 골드, (hp,mp포션), 퀘스트 템, 장비 (Item.class)
+    //Item ObjectPool
+
+    //Monster ObjectPool
     public ObjectPool<Monster> monsterObjectPool { get; private set; }
     public ObjectPool<Monster> goblinObjectPool { get; private set; }
     public ObjectPool<Monster> swordGoblinObjectPool { get; private set; }
     public ObjectPool<Monster> orkberserkerObjectPool { get; private set; }
+    public ObjectPool<Boss> necrmanserObjectPool { get; private set; }
 
     [field: Header("Checker")]
     public List<PlayerPassageChecker> checkerList = new List<PlayerPassageChecker>();
@@ -50,6 +55,7 @@ public class DungeonManager : MonoBehaviour
         goblinObjectPool = new ObjectPool<Monster>(goblinPrefab.GetComponent<Monster>(), 10);
         swordGoblinObjectPool = new ObjectPool<Monster>(swordGoblinPrefab.GetComponent<Monster>(), 20);
         orkberserkerObjectPool = new ObjectPool<Monster>(orkberserkerPrefab.GetComponent<Monster>(), 10);
+        necrmanserObjectPool = new ObjectPool<Boss>(necromanserPrefab.GetComponent<Boss>(), 1);
 
         Spawn();
     }
@@ -57,12 +63,25 @@ public class DungeonManager : MonoBehaviour
     public bool CheckAllMonster()
     {
         return monsterObjectPool.CheckListSize() && goblinObjectPool.CheckListSize()
-               && swordGoblinObjectPool.CheckListSize() && orkberserkerObjectPool.CheckListSize();
+               && swordGoblinObjectPool.CheckListSize() && orkberserkerObjectPool.CheckListSize()
+               && necrmanserObjectPool.CheckListSize();
     }
 
     public GameObject SpawnMonster(MonsterType monsterType, int spawnListIdx)
     {
         Vector3 spawnPos = spawnList[spawnListIdx].ReturnRandomPosition();
+
+        if(MonsterType.Necromanser == monsterType)
+        {
+            Boss boss = null;
+            boss = necrmanserObjectPool.GetObject();
+            boss.BossNavMeshAgent.enabled = false;
+            boss.gameObject.transform.position = spawnPos;
+            boss.BossNavMeshAgent.enabled = true;
+
+            return boss.gameObject;
+        }
+
         Monster monster = null;
         switch (monsterType)
         {
@@ -78,12 +97,11 @@ public class DungeonManager : MonoBehaviour
                 monster = monsterObjectPool.GetObject();
                 monster.objectPoolReturn += monsterObjectPool.ReturnObject;
                 break;
-            case MonsterType.orkBerserk:
+            case MonsterType.OrkBerserk:
                 monster = orkberserkerObjectPool.GetObject();
                 monster.objectPoolReturn += orkberserkerObjectPool.ReturnObject;
                 break;
         }
-
 
         monster.EnemyNavMeshAgent.enabled = false;
         monster.gameObject.transform.position = spawnPos;
@@ -94,11 +112,15 @@ public class DungeonManager : MonoBehaviour
 
     public void Spawn()
     {
-        for(MonsterType m = 0; (int)m < 4; m++)
+        for(int i = 0; i < spawnList[spawnIdx].spawnEnemyList.Count; i++)
         {
-            for(int i = 0; i < spawnList[spawnIdx].spawnList[(int)m].spawnCount; i++)
+            for(int j = 0; j < spawnList[spawnIdx].spawnEnemyList[i].spawnCount; j++)
             {
-                SpawnMonster(m, spawnIdx);
+                GameObject spawnedMonster = SpawnMonster(spawnList[spawnIdx].spawnEnemyList[i].monsterType, spawnIdx);
+                if (spawnedMonster == null)
+                {
+                    Debug.LogError("Failed to spawn monster of type: " + spawnList[spawnIdx].spawnEnemyList[i].monsterType);
+                }
             }
         }
     }

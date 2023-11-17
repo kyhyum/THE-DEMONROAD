@@ -9,7 +9,7 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth = 100;
     public int health;
     public event Action OnDie;
-
+    public bool IsDead => health == 0;
     public void InitEnemyHealth(int health, string enemyName)
     {
         this.enemyName= enemyName;
@@ -17,7 +17,6 @@ public class EnemyHealth : MonoBehaviour
         this.maxHealth = health;
     }
 
-    public bool IsDead => health == 0;
 
     private void Start()
     {
@@ -26,6 +25,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (IsDead ) return;
         health = Mathf.Max(health - damage, 0);
         EnemyHealthUI.Instance.InitSlider(maxHealth, health, enemyName);
 

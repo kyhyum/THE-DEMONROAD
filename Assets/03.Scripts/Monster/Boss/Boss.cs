@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,7 @@ public class Boss : MonoBehaviour
 
     public ObjectPool<BossBullet> pattern1Bullet { get; private set; }
     public ObjectPool<BossBullet> pattern2Bullet { get; private set; }
+    public event Action<Boss> objectPoolReturn;
 
     private void Awake()
     {
@@ -53,9 +55,14 @@ public class Boss : MonoBehaviour
     private void Start()
     {
         InitNavMesh();
-        BossHealth.health = Data.Health;
-        stateMachine.ChangeState(stateMachine.IdleState);
+        Initboss();
         BossHealth.OnDie += OnDie;
+    }
+    
+    private void Initboss()
+    {
+        BossHealth.InitEnemyHealth(Data.Health, Data.Name);
+        stateMachine.ChangeState(stateMachine.IdleState);
     }
 
     private void Update()
@@ -73,6 +80,13 @@ public class Boss : MonoBehaviour
     void OnDie()
     {
         Animator.SetTrigger("Die");
-        enabled = false;
+        Invoke("AfterAnimationComplete", Animator.GetCurrentAnimatorStateInfo(0).length);
     }
+
+    void AfterAnimationComplete()
+    {
+        objectPoolReturn?.Invoke(this);
+        Initboss();
+    }
+
 }
