@@ -16,7 +16,7 @@ public class EquipSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
-        item = null;
+        SetItem(null);
     }
 
     public void SetItem(Item item)
@@ -25,7 +25,7 @@ public class EquipSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
         if (item == null)
         {
-            Clear();
+            SetAlpha(0);
             return;
         }
 
@@ -38,11 +38,6 @@ public class EquipSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         return item;
     }
 
-
-    public void Clear()
-    {
-        SetAlpha(0);
-    }
 
     private void SetAlpha(float f)
     {
@@ -79,7 +74,6 @@ public class EquipSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log(item);
         if (item == null)
             return;
         itemClone = Instantiate(gameObject, canvas.GetComponent<Transform>());
@@ -90,6 +84,10 @@ public class EquipSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         Vector2 mousePosition = Input.mousePosition;
 
         rect.anchoredPosition = mousePosition;
+
+        EquipSlot slot = itemClone.GetComponent<EquipSlot>();
+        slot.SetItem(item);
+        slot.type = type;
 
         RawImage image = itemClone.GetComponentInChildren<RawImage>();
         Color color = image.color;
