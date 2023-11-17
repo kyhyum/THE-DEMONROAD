@@ -10,7 +10,7 @@ public class npcInteraction : MonoBehaviour
 
     public GameObject dialogueUI;
     public GameObject interactionPopup;
-    //public GameObject completeUI;
+    
 
     public TMP_Text nameText;
     public TMP_Text dialogueText;
