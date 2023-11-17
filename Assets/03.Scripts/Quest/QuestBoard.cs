@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class QuestBoard : MonoBehaviour
 {
     //gameobject
-    //public GameObject questListPanel;   
+       
     public GameObject acceptPopup;
     public GameObject cancelPopup;
     public GameObject questLogPanel;
@@ -122,22 +122,14 @@ public class QuestBoard : MonoBehaviour
             }
 
             
-            //questLogSelected.text += acceptedQuest.questName;
-            //questLogDescription.text += acceptedQuest.questDescription;
-            //questLogRewards.text += acceptedQuest.questReward;
+            
         }
 
         
         questLogSelected.text = "";
         questLogDescription.text = "";
         questLogRewards.text = "";
-        //foreach (var acceptedQuest in player.acceptQuest)
-        //{
-        //    questLogName.text += acceptedQuest.questName;
-        //    questLogSelected.text += acceptedQuest.questName;
-        //    questLogDescription.text += acceptedQuest.questDescription;
-        //    questLogRewards.text += acceptedQuest.questReward;
-        //}
+        
 
     }
 
