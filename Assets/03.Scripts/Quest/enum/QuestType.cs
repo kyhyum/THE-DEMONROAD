@@ -5,4 +5,5 @@ public enum QuestType
     ItemQuest,
     ConversationQuest,
     InfiniteMonsterQuest,
+    MainQuest,
 }
