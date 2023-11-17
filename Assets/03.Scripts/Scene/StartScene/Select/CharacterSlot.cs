@@ -21,9 +21,11 @@ public class CharacterSlot : MonoBehaviour
     VoiceClip clip;
     AudioSource source;
     Animator animator;
+    SoundManager soundManager;
     private void Awake()
     {
         gameManager = GameManager.Instance;
+        soundManager = SoundManager.Instance;
     }
     private void OnEnable()
     {
@@ -97,8 +99,7 @@ public class CharacterSlot : MonoBehaviour
             return;
         }
         animator.SetTrigger("Choice");
-        source.clip = clip.clips[1];
-        source.Play();
+        soundManager.SFXPlay(source, clip.clips[1]);
     }
     void TextOpen(bool isChar)
     {
