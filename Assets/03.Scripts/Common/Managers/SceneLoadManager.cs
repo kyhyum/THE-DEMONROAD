@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,7 +9,9 @@ public class SceneLoadManager : MonoBehaviour
 {
     public static string nextSceneName = string.Empty;
     public static int nextSceneNumber = -1;
-    [SerializeField] Slider progressBar;
+    [SerializeField] Image progressBar;
+    [SerializeField] Image pivot;
+    [SerializeField] TMP_Text barText;
 
     private void Start()
     {
@@ -49,16 +52,20 @@ public class SceneLoadManager : MonoBehaviour
             timer += Time.deltaTime;
             if (op.progress < 0.9f)
             {
-                progressBar.value = Mathf.Lerp(progressBar.value, op.progress, timer);
-                if (progressBar.value >= op.progress)
+                progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, op.progress, timer);
+                barText.text = string.Format("{0:F1}%", progressBar.fillAmount * 100);
+                pivot.rectTransform.anchoredPosition = new Vector2(1370 * progressBar.fillAmount, 0);
+                if (progressBar.fillAmount >= op.progress)
                 {
                     timer = 0f;
                 }
             }
             else
             {
-                progressBar.value = Mathf.Lerp(progressBar.value, 1f, timer);
-                if (progressBar.value == 1.0f)
+                progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, 1f, timer);
+                barText.text = string.Format("{0:F1}%", progressBar.fillAmount * 100);
+                pivot.rectTransform.anchoredPosition = new Vector2(1370 * progressBar.fillAmount, 0);
+                if (progressBar.fillAmount == 1.0f)
                 {
                     op.allowSceneActivation = true;
                     yield break;

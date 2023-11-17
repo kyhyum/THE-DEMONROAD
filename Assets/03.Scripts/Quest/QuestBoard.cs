@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class QuestBoard : MonoBehaviour
 {
     //gameobject
-    //public GameObject questListPanel;   
+       
     public GameObject acceptPopup;
     public GameObject cancelPopup;
     public GameObject questLogPanel;
@@ -30,6 +29,8 @@ public class QuestBoard : MonoBehaviour
     [SerializeField] TMP_Text questProgmonsterName;
     [SerializeField] TMP_Text questProgitemName;
     [SerializeField] TMP_Text questProgconverseName;
+    [SerializeField] TMP_Text questProgInfinitemonsterName;
+    [SerializeField] TMP_Text questProgmainName;
 
     [SerializeField] List<QuestSO> quests;
     public List<QuestSO> Quests { get { return quests; } }
@@ -121,22 +122,14 @@ public class QuestBoard : MonoBehaviour
             }
 
             
-            //questLogSelected.text += acceptedQuest.questName;
-            //questLogDescription.text += acceptedQuest.questDescription;
-            //questLogRewards.text += acceptedQuest.questReward;
+            
         }
 
         
         questLogSelected.text = "";
         questLogDescription.text = "";
         questLogRewards.text = "";
-        //foreach (var acceptedQuest in player.acceptQuest)
-        //{
-        //    questLogName.text += acceptedQuest.questName;
-        //    questLogSelected.text += acceptedQuest.questName;
-        //    questLogDescription.text += acceptedQuest.questDescription;
-        //    questLogRewards.text += acceptedQuest.questReward;
-        //}
+        
 
     }
 
@@ -165,13 +158,21 @@ public class QuestBoard : MonoBehaviour
 
             }
         }
-        if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트
+        if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트 = TODO:드롭되는 아이템 갯수 카운트 해서 '현재상황'에 반영
         {
             questProgitemName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
-        else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트
+        else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트 = TODO:sword goblin 처치 시마다 처치한 마릿수 카운트 
         {
             questProgmonsterName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+        }
+        else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
+        {
+            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+        }
+        else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 =  TODO:던전 입장시에 퀘스트 완료시키기
+        {
+            questProgmainName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
     }
    

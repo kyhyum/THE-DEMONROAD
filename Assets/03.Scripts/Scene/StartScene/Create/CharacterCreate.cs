@@ -6,12 +6,24 @@ public class CharacterCreate : MonoBehaviour
 {
     [SerializeField] GameObject jobCharacter, jobImage;
     public PlayerData playerData;
+    Animator animator;
+    VoiceClip voiceClip;
+    AudioSource audioSource;
+    public void Setting()
+    {
+        animator = jobCharacter.GetComponent<Animator>();
+        voiceClip = jobCharacter.GetComponent<VoiceClip>();
+        audioSource = jobCharacter.GetComponent<AudioSource>();
+    }
     public void ChoiceJob()
     {
-        if (jobCharacter.TryGetComponent<Animator>(out Animator animator))
+        if (animator == null)
         {
-            animator.SetTrigger("Slash");
+            return;
         }
+        animator.SetTrigger("Slash");
+        audioSource.clip = voiceClip.clips[0];
+        audioSource.Play();
     }
     public void ActiveObject(bool isActive)
     {

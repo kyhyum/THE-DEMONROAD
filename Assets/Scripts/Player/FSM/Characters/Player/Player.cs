@@ -30,12 +30,13 @@ public class Player : MonoBehaviour
     public PlayerCondition playerCondition { get; private set; }
 
     public Camera Camera { get; private set; }
+    [field: SerializeField] public CinemachineVirtualCamera VirtualCamera { get; set; }
+    [field: SerializeField] public CinemachineComponentBase ComponentBase { get; set; }
+
     public bool IsAttacking { get; set; }
 
     private PlayerStateMachine stateMachine;
 
-    private PlayerInput playerInput;
-    [field: SerializeField] public CinemachineVirtualCamera virtualCamera;
     [field: SerializeField] Transform cameraLookPoint;
 
     public Slider hpSlider;
@@ -54,8 +55,6 @@ public class Player : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
 
         stateMachine = new PlayerStateMachine(this);
-
-        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
@@ -82,10 +81,16 @@ public class Player : MonoBehaviour
 
         UIManager.Instance.OnUIInputEnable();
 
-        virtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
-        //virtualCamera = GameObject.FindWithTag("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
-        if (virtualCamera != null)
-            virtualCamera.Follow = cameraLookPoint;
+        VirtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+        if (VirtualCamera != null)
+        {
+            VirtualCamera.Follow = cameraLookPoint;
+        }
+
+        if (ComponentBase == null)
+        {
+            ComponentBase = VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
+        }
 
     }
 
@@ -96,14 +101,14 @@ public class Player : MonoBehaviour
         {
             //Debug.Log("마우스 포인터가 UI 위에 있다.");
 
-            playerInput.InputActions.Disable();
+            Input.InputActions.Disable();
         }
         //
         else
         {
             //Debug.Log("마우스 포인터가 UI 위에 없다.");
 
-            playerInput.InputActions.Enable();
+            Input.InputActions.Enable();
         }
 
         stateMachine.Update();

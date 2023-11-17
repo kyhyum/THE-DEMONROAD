@@ -8,13 +8,15 @@ public class FadeOut : MonoBehaviour
 {
     [SerializeField] Image blackImage;
     Color a;
+    Tween fadeTween;
     private void Awake()
     {
         a = blackImage.color;
+        
     }
     private void OnEnable()
     {
-        Tween fadeTween = blackImage.DOFade(0, 1f).SetDelay(0.2f);
+        fadeTween = blackImage.DOFade(0, 1f).SetDelay(0.2f);
 
         fadeTween.OnComplete(SetActice);
     }

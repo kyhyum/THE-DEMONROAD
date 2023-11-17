@@ -10,13 +10,13 @@ public class Item
     public Texture2D texture;
     public Rank rank;
     public ItemType type;
-    public string prefab;
+    public GameObject prefab;
 
     public Item(ItemSO itemSO)
     {
         itemName = itemSO.itemName;
         description = itemSO.description;
-        texture = Resources.Load<Texture2D>(itemSO.texture);
+        texture = itemSO.texture;
         rank = itemSO.rank;
         type = itemSO.type;
         prefab = itemSO.prefab;
