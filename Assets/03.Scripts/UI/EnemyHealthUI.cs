@@ -37,7 +37,7 @@ public class EnemyHealthUI : MonoBehaviour
 
     public void InitSlider(int maxHealth, int health, string name)
     {
-        if (setActiveCoroutine != null)
+        if (setActiveCoroutine != null || health == 0)
         {
             StopCoroutine(setActiveCoroutine); // Stop the previous coroutine
         }

@@ -7,20 +7,21 @@ public class PlayerPassageChecker : MonoBehaviour
 {
     [SerializeField] private List<FadeOutObject> fadeOutObjects;
     private DungeonManager dungeonManager;
+    private BoxCollider boxCollider;
     private void Start()
     {
         dungeonManager = DungeonManager.Instance;
+        boxCollider = gameObject.GetComponent<BoxCollider>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Collider!");
-            Debug.Log(dungeonManager.CheckAllMonster());
             if (dungeonManager.CheckAllMonster())
             {
-                for(int i = 0; i < fadeOutObjects.Count; i++)
+                boxCollider.enabled = false;
+                for (int i = 0; i < fadeOutObjects.Count; i++)
                 {
                     fadeOutObjects[i].FadeOut();
                 }

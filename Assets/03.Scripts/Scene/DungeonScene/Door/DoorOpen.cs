@@ -6,13 +6,18 @@ public class DoorOpen : MonoBehaviour
 {
     public GameObject leftDoor;
     public GameObject rightDoor;
+    private BoxCollider boxCollider;
+    private void Start()
+    {
+        boxCollider = gameObject.GetComponent<BoxCollider>();
+    }
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Open!!");
             OpenDoor();
+            boxCollider.enabled = false;
         }
     }
 
