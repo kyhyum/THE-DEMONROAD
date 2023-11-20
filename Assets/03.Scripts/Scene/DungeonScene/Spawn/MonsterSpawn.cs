@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MonsterSpawn : MonoBehaviour
 {
-    public float height;
-    public List<MonsterSpawnInfo> spawnList = new List<MonsterSpawnInfo>();
+    public List<MonsterSpawnInfo> spawnEnemyList = new List<MonsterSpawnInfo>();
     public List<BoxCollider> rangeCollider;
 
     public Vector3 ReturnRandomPosition()

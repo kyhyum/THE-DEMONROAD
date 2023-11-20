@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class Monster : MonoBehaviour
     [field: SerializeField] public MonsterWeapon Weapon { get; private set; }
     public MonsterHealth MonsterHealth { get; private set; }
     public ItemDropController itemDropController { get; private set; }
+    public event Action<Monster> objectPoolReturn;
 
     private void Awake()
     {
@@ -34,7 +36,6 @@ public class Monster : MonoBehaviour
         stateMachine = new MonsterStateMachine(this);
         MonsterHealth = GetComponent<MonsterHealth>();
         itemDropController = GetComponent<ItemDropController>();
-        MonsterHealth.InitEnemyHealth(Data.Health, Data.Name);
 
     }
 
@@ -54,10 +55,15 @@ public class Monster : MonoBehaviour
     private void Start()
     {
         InitNavMesh();
-        MonsterHealth.health = Data.Health;
-        stateMachine.ChangeState(stateMachine.IdleState);
+        InitMonster();
         MonsterHealth.OnDie += OnDie;
-        MonsterHealth.OnDie += itemDropController.DropItem;
+        //MonsterHealth.OnDie += itemDropController.DropItem;
+    }
+
+    public void InitMonster()
+    {
+        MonsterHealth.InitEnemyHealth(Data.Health, Data.Name);
+        stateMachine.ChangeState(stateMachine.IdleState);
     }
 
     private void Update()
@@ -74,7 +80,14 @@ public class Monster : MonoBehaviour
 
     void OnDie()
     {
+        gameObject.GetComponent<Collider>().enabled = false;
         Animator.SetTrigger("Die");
-        enabled = false;
+        Invoke("AfterAnimationComplete", Animator.GetCurrentAnimatorStateInfo(0).length);
+    }
+
+    void AfterAnimationComplete()
+    {
+        objectPoolReturn?.Invoke(this);
+        InitMonster();
     }
 }

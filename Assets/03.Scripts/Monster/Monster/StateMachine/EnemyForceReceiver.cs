@@ -8,12 +8,14 @@ public class EnemyForceReceiver : MonoBehaviour
 
     private Vector3 dampingVelocity;
     private Vector3 impact;
+    private float verticalVelocity;
 
-    public Vector3 Movement => impact + Vector3.up;
+    public Vector3 Movement => impact + Vector3.up * verticalVelocity;
 
     void Update()
     {
-        impact = Vector3.SmoothDamp(impact, Vector3.zero, ref dampingVelocity, drag);
+        verticalVelocity = Physics.gravity.y * Time.deltaTime;
+        impact = Vector3.SmoothDamp(impact, Vector3.zero, ref dampingVelocity, drag); 
     }
 
     public void Reset()

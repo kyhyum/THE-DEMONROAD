@@ -7,7 +7,7 @@ public class BossBullet : BossWeapon
 {
     public event Action<BossBullet> BulletReturned;
     public float bulletSpeed = 10f;
-    public float bulletDuration = 10f;
+    public float bulletDuration = 11f;
 
     private Transform Target;
     void Awake()
@@ -22,11 +22,11 @@ public class BossBullet : BossWeapon
     IEnumerator FlyTowardsTarget()
     {
         float elapsedTime = 0f;
+        // 플레이어 방향으로 회전
+        transform.LookAt(Target.position);
 
         while (elapsedTime < bulletDuration)
         {
-            // 플레이어 방향으로 회전
-            transform.LookAt(Target.position);
 
             // 총알을 플레이어 방향으로 날아가게 함
             transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);

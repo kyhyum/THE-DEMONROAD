@@ -9,6 +9,7 @@ public class ChoiceDungeon : MonoBehaviour
 
     [SerializeField] DungeonExplanUI dungeonExplanUI;
 
+    public GameObject dungeoninteractionPopup;
     private bool isUIVisible = false;
     Transform player;
 
@@ -26,6 +27,7 @@ public class ChoiceDungeon : MonoBehaviour
 
         if (distance <= activationDistance)
         {
+            dungeoninteractionPopup.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -39,6 +41,7 @@ public class ChoiceDungeon : MonoBehaviour
         else
         {
             isUIVisible = false;
+            dungeoninteractionPopup.SetActive(false);
             dungeonExplanUI.gameObject.SetActive(isUIVisible);
             dungeonUI.SetActive(isUIVisible);
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,14 +13,14 @@ public class Boss : MonoBehaviour
     [field: Header("Animations")]
     [field: SerializeField] public BossAnimationData bossAnimationData { get; private set; }
 
-    [field: Header("Animations")]
+    [field: Header("Bullet")]
     [field: SerializeField] private GameObject bossBullet1Obj;
     [field: SerializeField] private GameObject bossBullet2Obj;
+    [field: SerializeField] public Transform bulletSpawnPoint {get; private set;}
     public EnemyForceReceiver EnemyForceReceiver { get; private set; }
     public NavMeshAgent BossNavMeshAgent { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
-    public CharacterController Controller { get; private set; }
 
     private BossStateMachine stateMachine;        
     [field: SerializeField] public BossWeapon Weapon { get; private set; }
@@ -27,6 +28,7 @@ public class Boss : MonoBehaviour
 
     public ObjectPool<BossBullet> pattern1Bullet { get; private set; }
     public ObjectPool<BossBullet> pattern2Bullet { get; private set; }
+    public event Action<Boss> objectPoolReturn;
 
     private void Awake()
     {
@@ -34,8 +36,6 @@ public class Boss : MonoBehaviour
 
         Rigidbody = GetComponent<Rigidbody>();
         Animator = GetComponent<Animator>();
-        Controller = GetComponent<CharacterController>();
-        EnemyForceReceiver = GetComponent<EnemyForceReceiver>();
         BossNavMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new BossStateMachine(this);
         BossHealth = GetComponent<BossHealth>();
@@ -55,9 +55,14 @@ public class Boss : MonoBehaviour
     private void Start()
     {
         InitNavMesh();
-        BossHealth.health = Data.Health;
-        stateMachine.ChangeState(stateMachine.IdleState);
+        Initboss();
         BossHealth.OnDie += OnDie;
+    }
+    
+    private void Initboss()
+    {
+        BossHealth.InitEnemyHealth(Data.Health, Data.Name);
+        stateMachine.ChangeState(stateMachine.IdleState);
     }
 
     private void Update()
@@ -75,6 +80,13 @@ public class Boss : MonoBehaviour
     void OnDie()
     {
         Animator.SetTrigger("Die");
-        enabled = false;
+        Invoke("AfterAnimationComplete", Animator.GetCurrentAnimatorStateInfo(0).length);
     }
+
+    void AfterAnimationComplete()
+    {
+        objectPoolReturn?.Invoke(this);
+        Initboss();
+    }
+
 }

@@ -29,16 +29,10 @@ public class BossAttackOneState : BossBaseState
     {
         base.Update();
 
-        ForceMove();
-        float normalizedTime = GetNormalizedTime(stateMachine.Boss.Animator, "Attack1");
+        float normalizedTime = GetNormalizedTime(stateMachine.Boss.Animator);
+        Debug.Log(normalizedTime);
         if (normalizedTime < 1f)
         {
-            if (!stateMachine.Boss.Data.AttackPatternInfoDatas[0].IsLongRanged)
-            {
-                if (normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[0].ForceTransitionTime)
-                    TryApplyForce();
-            }
-
             if (!alreadyAppliedDealing && normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[0].Dealing_Start_TransitionTime)
             {
                 stateMachine.Boss.Weapon.SetAttack(stateMachine.Boss.Data.AttackPatternInfoDatas[0].Damage);
@@ -48,25 +42,11 @@ public class BossAttackOneState : BossBaseState
             {
                 stateMachine.Boss.Weapon.gameObject.SetActive(false);
                 alreadyAppliedDealing = false; 
-                if (IsInChaseRange())
-                {
-                    stateMachine.ChangeState(stateMachine.ChasingState);
-                    return;
-                }
+                stateMachine.ChangeState(stateMachine.ChasingState);
+                return;
             }
 
         }
-    }
-
-    private void TryApplyForce()
-    {
-        if (alreadyAppliedForce) return;
-        alreadyAppliedForce = true;
-
-        stateMachine.Boss.EnemyForceReceiver.Reset();
-
-        stateMachine.Boss.EnemyForceReceiver.AddForce(stateMachine.Boss.transform.forward * stateMachine.Boss.Data.AttackPatternInfoDatas[0].Force);
-
     }
 
 }

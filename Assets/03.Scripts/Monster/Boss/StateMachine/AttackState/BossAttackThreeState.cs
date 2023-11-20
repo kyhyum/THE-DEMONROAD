@@ -5,44 +5,50 @@ using UnityEngine;
 //일반 원거리 공격
 public class BossAttackThreeState : BossBaseState
 {
-    private bool alreadyAppliedDealing;
-    private bool alreadyAppliedForce;
+
+    private float timer = 0f;
+    public float interval = 1.2f;
+
     public BossAttackThreeState(BossStateMachine bossStateMachine) : base(bossStateMachine)
     {
         stateMachine = bossStateMachine;
     }
     public override void Enter()
     {
-        alreadyAppliedForce = false;
-        alreadyAppliedDealing = false;
         base.Enter();
-        StartAnimation(stateMachine.Boss.bossAnimationData.Attack2ParameterHash);
+        StartAnimation(stateMachine.Boss.bossAnimationData.Attack3ParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
-        StopAnimation(stateMachine.Boss.bossAnimationData.Attack2ParameterHash);
+        StopAnimation(stateMachine.Boss.bossAnimationData.Attack3ParameterHash);
     }
 
     public override void Update()
     {
-
-        float normalizedTime = GetNormalizedTime(stateMachine.Boss.Animator, "Attack3");
+        base.Update();
+        float normalizedTime = GetNormalizedTime(stateMachine.Boss.Animator);
         if (normalizedTime < 1f)
         {
+            Debug.Log(normalizedTime);
             if (normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[2].Dealing_Start_TransitionTime)
             {
-                BossBullet bossBullet = stateMachine.Boss.pattern1Bullet.GetObject();
-                bossBullet.BulletReturned += stateMachine.Boss.pattern1Bullet.ReturnObject;
-                bossBullet.Shooting();
+                timer += Time.deltaTime;
+                if (timer >= interval)
+                {
+                    BossBullet bossBullet = stateMachine.Boss.pattern1Bullet.GetObject();
+                    bossBullet.gameObject.transform.position = stateMachine.Boss.bulletSpawnPoint.position;
+                    bossBullet.BulletReturned += stateMachine.Boss.pattern1Bullet.ReturnObject;
+                    bossBullet.Shooting();
+                    timer = 0f; // 타이머 초기화
+                }
             }
-            else if (normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[2].Dealing_End_TransitionTime)
-            {
-                stateMachine.ChangeState(stateMachine.ChasingState);
-                return;
-            }
-
+        }
+        else
+        {
+            stateMachine.ChangeState(stateMachine.ChasingState);
+            return;
         }
     }
 

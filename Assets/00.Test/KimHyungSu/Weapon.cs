@@ -6,7 +6,7 @@ public class Weapon : MonoBehaviour
 {
     private Collider myCollider;
 
-    private int damage;
+    private int damage = 10;
 
     // 이미 충돌한 상태
     private List<Collider> alreadyColliderWith = new List<Collider>();
@@ -23,14 +23,15 @@ public class Weapon : MonoBehaviour
         if (alreadyColliderWith.Contains(other)) return;
 
         alreadyColliderWith.Add(other);
-        //if (other.TryGetComponent(out EnemyHealth enemyHealth))
-        //{
-        //    enemyHealth.TakeDamage(damage);
-        //}
-        if (other.TryGetComponent(out Monster monster))
+        if (other.TryGetComponent(out EnemyHealth enemyHealth))
         {
-            monster.GetStun(10f);
+            enemyHealth.TakeDamage(damage);
+            alreadyColliderWith.Clear();
         }
+        //if (other.TryGetComponent(out Monster monster))
+        //{
+        //    monster.GetStun(10f);
+        //}
         // Component.TryGetComponent(): 지정된 타입의 컴포넌트(있는 경우)를 가져온다.
         if (other.TryGetComponent(out Health health))
         {

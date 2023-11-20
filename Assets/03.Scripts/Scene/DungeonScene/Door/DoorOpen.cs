@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class DoorOpen : MonoBehaviour
 {
-    public BoxCollider boxCollider;
     public GameObject leftDoor;
     public GameObject rightDoor;
+    private BoxCollider boxCollider;
+    private void Start()
+    {
+        boxCollider = gameObject.GetComponent<BoxCollider>();
+    }
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             OpenDoor();
+            boxCollider.enabled = false;
         }
     }
 
@@ -32,6 +37,7 @@ public class DoorOpen : MonoBehaviour
 
         while (elapsedTime < duration)
         {
+            Debug.Log(elapsedTime);
             doorTransform.rotation = Quaternion.Slerp(startingRotation, targetRotation, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;

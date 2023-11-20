@@ -11525,7 +11525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8698102752148032828
 Transform:
   m_ObjectHideFlags: 0
@@ -12487,6 +12487,37 @@ Transform:
   - {fileID: 7848070142296637469}
   m_Father: {fileID: 7420179075809104015}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4895524703425187693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4950322547666283391}
+  m_Layer: 0
+  m_Name: BulletPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4950322547666283391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4895524703425187693}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.26, y: 1.45, z: 0.6}
+  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3329664008872148554}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4915084328428311209
 GameObject:
@@ -13546,8 +13577,8 @@ GameObject:
   - component: {fileID: 286550206285499595}
   - component: {fileID: 3340733895789524207}
   - component: {fileID: 120932572825889851}
-  - component: {fileID: 6319914114680821634}
   - component: {fileID: 5549459766245515089}
+  - component: {fileID: 3524503319444131864}
   m_Layer: 0
   m_Name: Necromanser Prefab
   m_TagString: Untagged
@@ -13563,10 +13594,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5377540179740515954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: -4, z: -178}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4950322547666283391}
   - {fileID: 112192229292023904}
   - {fileID: 6326345568596926433}
   - {fileID: 4306721742242556784}
@@ -13575,7 +13607,7 @@ Transform:
   - {fileID: 6388808101309996262}
   - {fileID: 2947168453115402203}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &286550206285499595
 Animator:
@@ -13618,6 +13650,12 @@ MonoBehaviour:
     attack1ParameterName: Attack1
     attack2ParameterName: Attack2
     attack3ParameterName: Attack3
+    attack4ParameterName: Attack4
+  bossBullet1Obj: {fileID: 1900756431413560, guid: a824d9d99892e7a41a3d31126735aa07,
+    type: 3}
+  bossBullet2Obj: {fileID: 1789005739015704, guid: 6717e1e078f0c7541aef6a8540960383,
+    type: 3}
+  <bulletSpawnPoint>k__BackingField: {fileID: 4950322547666283391}
   <Weapon>k__BackingField: {fileID: 5480286711778001823}
 --- !u!195 &120932572825889851
 NavMeshAgent:
@@ -13641,19 +13679,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6319914114680821634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5377540179740515954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cec921851efe3984e9b93f2fe3383981, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drag: 0.3
 --- !u!114 &5549459766245515089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13669,6 +13694,29 @@ MonoBehaviour:
   enemyName: 
   maxHealth: 100
   health: 0
+--- !u!136 &3524503319444131864
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5377540179740515954}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.9
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5380555575274222288
 GameObject:
   m_ObjectHideFlags: 0
