@@ -51,7 +51,11 @@ public class DisplayManager : MonoBehaviour
     {
         screenMode = isFull? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
     }
-    public void ChangeDisplay()
+    public void OpenPopUp()
+    {
+        UIManager.Instance.popUpUI.OpenPopUpUI("디스플레이", "환경 설정을 변경 하시겠습니까?", ChangeDisplay);
+    }
+    void ChangeDisplay()
     {
         Screen.SetResolution(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height, screenMode);
     }
