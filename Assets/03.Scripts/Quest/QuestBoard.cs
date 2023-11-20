@@ -222,11 +222,17 @@ public class QuestBoard : MonoBehaviour
                     // 해당 아이템 퀘스트의 조건 충족 및 보상 처리
                     if(dropResourceitemcount >= selectQuest.questComplete) //완료조건보다 많거나 같을때
                     {
-                        
+                        controller.ShowPopup();
+                        controller.Invoke("HidePopup", 2f);
                     }
                 }
+                else if(acceptedQuest.questIndex == 2) // 대화퀘스트
+                {
+                    if(npcs.conversationCount >= selectQuest.questComplete)
+                    {
 
-                //대화퀘스트 보상은 npcInteraction에
+                    }
+                }        
 
                 else if (acceptedQuest.questIndex == 0) //몬스터 퀘스트
                 {
@@ -235,7 +241,7 @@ public class QuestBoard : MonoBehaviour
                     {
                         // 몬스터 퀘스트 완료 처리 로직 추가
                         controller.ShowPopup();
-                        
+                        controller.Invoke("HidePopup", 2f);
                     }
                 }
                 else if (acceptedQuest.questIndex == 3) //무한 몬스터 퀘스트
@@ -244,6 +250,7 @@ public class QuestBoard : MonoBehaviour
                     if (goblinKills >= acceptedQuest.questComplete)
                     {
                         // 무한 몬스터 퀘스트 완료 처리 로직 추가
+                        // 다음 무한 퀘스트 추가 해주기
                     }
                 }
                 else if(acceptedQuest.questIndex == 4) // 메인 퀘스트
@@ -260,11 +267,7 @@ public class QuestBoard : MonoBehaviour
         }
 
     }
-    //private void OnGoblinKilled(Monster goblin)
-    //{
-    //    int goblinKillCount = dungeonManager.goblinkillCount;
-    //    Debug.Log("고블린 몬스터를 잡은 횟수: " + goblinKillCount);
-    //}
+    
 
     
 }

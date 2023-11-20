@@ -7,6 +7,7 @@ public class npcInteraction : MonoBehaviour
     public NPCSO npc;
     public QuestSO quest;
     private QuestController controller;
+    private QuestBoard board;
 
     public GameObject dialogueUI;
     public GameObject interactionPopup;
@@ -149,8 +150,8 @@ public class npcInteraction : MonoBehaviour
 
         questProgName.color = Color.green;
         //보상
-        
 
+       
 
 
 
