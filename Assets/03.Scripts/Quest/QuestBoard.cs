@@ -176,6 +176,13 @@ public class QuestBoard : MonoBehaviour
         else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트 = TODO:goblin 처치 시마다 처치한 마릿수 카운트 
         {
             questProgmonsterName.text = selectedQuest.questName + "\n - " + goblinKills  + "/ " + selectedQuest.questComplete;
+
+            if(goblinKills >= selectedQuest.questComplete)
+            {
+                questProgmonsterName.color = Color.green;
+                //여기에 ItemAddTest추가
+                //ItemAddTest(selectedQuest);
+            }
         }
         else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
         {
@@ -190,10 +197,7 @@ public class QuestBoard : MonoBehaviour
     {
         dropResourceitemcount++;
     }
-    //public void CurrentGoblinKillCount() // 고블린 타입의 몬스터 죽일때마다 카운트
-    //{
-    //    goblinKillCount++;
-    //}
+    
 
     public void ItemAddTest(ItemSO itemSO)
     {
@@ -226,13 +230,7 @@ public class QuestBoard : MonoBehaviour
                         controller.Invoke("HidePopup", 2f);
                     }
                 }
-                else if(acceptedQuest.questIndex == 2) // 대화퀘스트
-                {
-                    if(npcs.conversationCount >= selectQuest.questComplete)
-                    {
-
-                    }
-                }        
+               // 대화퀘스트 완료처리는 npcInteraction에       
 
                 else if (acceptedQuest.questIndex == 0) //몬스터 퀘스트
                 {
@@ -265,6 +263,10 @@ public class QuestBoard : MonoBehaviour
             // 팝업 띄워줘서 인벤토리가 꽉찼습니다.
             // 정리하고 다시 완료 버튼 누르게
         }
+
+    }
+    private void QuestComplete()
+    {
 
     }
     

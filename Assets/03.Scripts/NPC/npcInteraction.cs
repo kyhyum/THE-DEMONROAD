@@ -149,7 +149,7 @@ public class npcInteraction : MonoBehaviour
         Debug.Log("Quest completed!");
 
         questProgName.color = Color.green;
-        //보상
+        
 
        
 
