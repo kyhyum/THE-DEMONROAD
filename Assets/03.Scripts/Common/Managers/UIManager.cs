@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     private Storage storage;
 
     [SerializeField] private AudioClip[] clips;
+    [SerializeField] public PopUpUI popUpUI;
     private AudioSource audioSource;
     private SoundManager soundManager;
     private QuickSlot[] quickSlots;

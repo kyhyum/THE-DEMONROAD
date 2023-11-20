@@ -157,7 +157,11 @@ public class SelectCanvasManager : MonoBehaviour
             Debug.Log("이미 있는 이름입니다");
         }
     }
-    public void SlotChangeButton()
+    public void PopUpOpen()
+    {
+        UIManager.Instance.popUpUI.OpenPopUpUI("캐릭터 슬롯 변경", "정말 변경 하시겠습니까?", SlotChangeButton);
+    }
+    void SlotChangeButton()
     {
         for(int i = 0; i< playerDatas.Length; i++)
         {
