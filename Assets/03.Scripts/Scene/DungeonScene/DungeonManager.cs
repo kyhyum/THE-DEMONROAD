@@ -7,7 +7,7 @@ public class DungeonManager : MonoBehaviour
     public static DungeonManager Instance;
 
     public int spawnIdx = 0;
-
+    public int goblinkillCount = 0;
 
     [field: Header("Audio")]
     [SerializeField] private AudioClip DungeonSound;
@@ -88,6 +88,9 @@ public class DungeonManager : MonoBehaviour
             case MonsterType.Goblin:
                 monster = goblinObjectPool.GetObject();
                 monster.objectPoolReturn += goblinObjectPool.ReturnObject;
+
+                //고블린 몬스터타입이 죽을때마다 goblinKillCount가 늘어나게끔
+                monster.objectPoolReturn += GoblinKilled;
                 break;
             case MonsterType.SwordGoblin:
                 monster = swordGoblinObjectPool.GetObject();
@@ -108,6 +111,11 @@ public class DungeonManager : MonoBehaviour
         monster.EnemyNavMeshAgent.enabled = true;
 
         return monster.gameObject;
+    }
+    public void GoblinKilled(Monster goblin)
+    {
+        goblinkillCount++;
+        Debug.Log("잡은 고블린수: " + goblinkillCount);
     }
 
     public void Spawn()

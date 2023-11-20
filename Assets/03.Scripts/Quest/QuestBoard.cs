@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 public class QuestBoard : MonoBehaviour
 {
     //gameobject
-       
+
     public GameObject acceptPopup;
     public GameObject cancelPopup;
     public GameObject questLogPanel;
@@ -18,7 +19,7 @@ public class QuestBoard : MonoBehaviour
     public TMP_Text questConditionText;
     public TMP_Text questRewardText;
     [SerializeField] Button acceptButton;
-    
+
     //questlog
     [SerializeField] TMP_Text[] questLogName;
     public TMP_Text questLogSelected;
@@ -33,21 +34,31 @@ public class QuestBoard : MonoBehaviour
     [SerializeField] TMP_Text questProgmainName;
 
     [SerializeField] List<QuestSO> quests;
+    public static UIManager Instance;
+    private DungeonManager dungeonManager;
+    private int dropResourceitemcount;
+    private QuestController controller;
+    int goblinKills = DungeonManager.Instance.goblinkillCount;
+
+
     public List<QuestSO> Quests { get { return quests; } }
 
+    NPCSO npcs;
     QuestSO selectQuest;
     PlayerData player;
 
     public void Start()
     {
         player = GameManager.Instance.player;
+        dungeonManager = DungeonManager.Instance;
+       
         InitializeQuestList();
         acceptButton.onClick.AddListener(() => { AcceptQuest(selectQuest); });
     }
 
     private void InitializeQuestList()
     {
-        for(int i = 0; i < quests.Count; i++)
+        for (int i = 0; i < quests.Count; i++)
         {
             int index = i;
             questTitleText[i].text = quests[i].questName;
@@ -83,9 +94,9 @@ public class QuestBoard : MonoBehaviour
                 if (npc != null)
                 {
                     npc.hasQuest = true;
-                    
+
                 }
-                
+
             }
 
         }
@@ -96,7 +107,7 @@ public class QuestBoard : MonoBehaviour
         }
     }
 
-   
+
 
     private void UpdateQuestLogUI() //questLog에 선택된 퀘스트 정보 표시
     {
@@ -111,37 +122,37 @@ public class QuestBoard : MonoBehaviour
 
         foreach (var acceptedQuest in player.acceptQuest)
         {
-            
+
             int questIndex = acceptedQuest.questIndex;
 
-            
+
             if (questIndex >= 0 && questIndex < questLogName.Length)
             {
-                
+
                 questLogName[questIndex].text = acceptedQuest.questName;
             }
 
-            
-            
+
+
         }
 
-        
+
         questLogSelected.text = "";
         questLogDescription.text = "";
         questLogRewards.text = "";
-        
+
 
     }
 
     public void OnQuestObjectClick(QuestSO quest) //questLog에서 퀘스트를 하나하나 선택
     {
         ShowLogQuestDetails(quest);
-        
-    }  
+
+    }
 
     private void ShowLogQuestDetails(QuestSO selectedQuest) // questLog에서 선택된 퀘스트 정보 표시
     {
-        
+
         questLogSelected.text = selectedQuest.questName;
         questLogDescription.text = selectedQuest.questDescription;
         questLogRewards.text = selectedQuest.questReward;
@@ -162,22 +173,98 @@ public class QuestBoard : MonoBehaviour
         {
             questProgitemName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
-        else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트 = TODO:sword goblin 처치 시마다 처치한 마릿수 카운트 
+        else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트 = TODO:goblin 처치 시마다 처치한 마릿수 카운트 
         {
-            questProgmonsterName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+            questProgmonsterName.text = selectedQuest.questName + "\n - " + goblinKills  + "/ " + selectedQuest.questComplete;
         }
         else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
         {
             questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
-        else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 =  TODO:던전 입장시에 퀘스트 완료시키기
+        else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 =  TODO:던전 입구 도착시에 퀘스트 완료시키기
         {
             questProgmainName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
     }
-   
+    public void CurrentDropItemCount() //특정 리소스 아이템을 주울때마다 카운트 Up
+    {
+        dropResourceitemcount++;
+    }
+    //public void CurrentGoblinKillCount() // 고블린 타입의 몬스터 죽일때마다 카운트
+    //{
+    //    goblinKillCount++;
+    //}
 
+    public void ItemAddTest(ItemSO itemSO)
+    {
+        
+        Instance.OnUIInputEnable();
+        Item item;
+        switch (itemSO.type)
+        {
+            case ItemType.Equip:
+                item = new EquipItem(itemSO);
+                break;
+            case ItemType.Consumes:
+                item = new UseItem(itemSO);
+                break;
+            default:
+                item = new ResourceItem(itemSO);
+                break;
+        }
+        if (UIManager.Instance.GetInventory().AddItem(item))
+        {
+            // 퀘스트 완료처리
+            foreach (var acceptedQuest in player.acceptQuest)
+            {
+                if (acceptedQuest.questIndex == 1) // 아이템 퀘스트
+                {
+                    // 해당 아이템 퀘스트의 조건 충족 및 보상 처리
+                    if(dropResourceitemcount >= selectQuest.questComplete) //완료조건보다 많거나 같을때
+                    {
+                        
+                    }
+                }
 
+                //대화퀘스트 보상은 npcInteraction에
 
+                else if (acceptedQuest.questIndex == 0) //몬스터 퀘스트
+                {
+                    
+                    if (goblinKills >= acceptedQuest.questComplete)
+                    {
+                        // 몬스터 퀘스트 완료 처리 로직 추가
+                        controller.ShowPopup();
+                        
+                    }
+                }
+                else if (acceptedQuest.questIndex == 3) //무한 몬스터 퀘스트
+                {
+                    
+                    if (goblinKills >= acceptedQuest.questComplete)
+                    {
+                        // 무한 몬스터 퀘스트 완료 처리 로직 추가
+                    }
+                }
+                else if(acceptedQuest.questIndex == 4) // 메인 퀘스트
+                {
+                    //던전에 입장을 했을시에 퀘스트 완료 처리
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Failed to give gold reward.");
+            // 팝업 띄워줘서 인벤토리가 꽉찼습니다.
+            // 정리하고 다시 완료 버튼 누르게
+        }
 
+    }
+    //private void OnGoblinKilled(Monster goblin)
+    //{
+    //    int goblinKillCount = dungeonManager.goblinkillCount;
+    //    Debug.Log("고블린 몬스터를 잡은 횟수: " + goblinKillCount);
+    //}
+
+    
 }
