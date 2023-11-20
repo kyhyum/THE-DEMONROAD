@@ -15,6 +15,10 @@ public class UIManager : MonoBehaviour
     public GameObject settingObject;
     private Inventory inventory;
     private Storage storage;
+
+    [SerializeField] private AudioClip[] clips;
+    private AudioSource audioSource;
+    private SoundManager soundManager;
     private QuickSlot[] quickSlots;
     public bool storageOpen => storageObject.activeSelf;
     private Vector2 pos;
@@ -25,6 +29,7 @@ public class UIManager : MonoBehaviour
 
         CreateStorage();
         CreateInventory();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -43,6 +48,7 @@ public class UIManager : MonoBehaviour
 
         inputAction.Player.Escape.Enable();
         inputAction.Player.Escape.started += OnEscapeKey;
+        soundManager = SoundManager.Instance;
     }
 
     private void CreateInventory()
@@ -173,7 +179,14 @@ public class UIManager : MonoBehaviour
         {
             EnableUI.Insert(0, gameObject);
         }
-
+        if (gameObject.activeSelf)
+        {
+            UICloseSound();
+        }
+        else
+        {
+            UIOpenSound();
+        }
         gameObject.SetActive(!gameObject.activeSelf);
     }
 
@@ -205,12 +218,20 @@ public class UIManager : MonoBehaviour
 
         if (UIManager.Instance.GetInventory().AddItem(item))
         {
-            // 퀘스트 완료처리
+            // ����Ʈ �Ϸ�ó��
         }
         else
         {
-            // 팝업 띄워줘서 인벤토리가 꽉찼습니다.
-            // 정리하고 다시 완료 버튼 누르게
+            // �˾� ����༭ �κ��丮�� ��á���ϴ�.
+            // �����ϰ� �ٽ� �Ϸ� ��ư ������
         }
+    }
+    public void UIOpenSound()
+    {
+        soundManager.SFXPlay(audioSource, clips[0]);
+    }
+    public void UICloseSound()
+    {
+        soundManager.SFXPlay(audioSource, clips[1]);
     }
 }

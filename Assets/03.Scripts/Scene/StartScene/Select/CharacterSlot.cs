@@ -13,7 +13,7 @@ public class CharacterSlot : MonoBehaviour
     [SerializeField] GameObject createButton;
     [SerializeField] TextMeshProUGUI characterName, characterLevel, characterJob;
 
-    GameObject character;
+    [SerializeField] GameObject character;
 
     PlayerCondition conditon;
     PlayerData data;
@@ -28,6 +28,10 @@ public class CharacterSlot : MonoBehaviour
         soundManager = SoundManager.Instance;
     }
     private void OnEnable()
+    {
+        SlotSetting();
+    }
+    public void SlotSetting()
     {
         if (character != null)
         {

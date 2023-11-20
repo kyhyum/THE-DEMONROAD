@@ -34,7 +34,18 @@ public class SelectCanvasManager : MonoBehaviour
         }
         gameManager = GameManager.Instance;
         startSceneManager = StartSceneManager.Instance;
+       
+    }
+
+    private void OnEnable()
+    {
+        selectedSlot = -1;
+    }
+
+    private void Start()
+    {
         TextAsset[] jsons = Resources.LoadAll<TextAsset>("MyCharacter/");
+
         if (jsons.Length > 0)
         {
             for (int i = 0; i < jsons.Length; i++)
@@ -51,15 +62,14 @@ public class SelectCanvasManager : MonoBehaviour
                 }
             }
         }
-        for(int i = 0; i < characterSlots.Length; i++)
+
+        for (int i = 0; i < characterSlots.Length; i++)
         {
             characterSlots[i].gameObject.SetActive(true);
+            characterSlots[i].SlotSetting();
         }
     }
-    private void OnEnable()
-    {
-        selectedSlot = -1;
-    }
+
     public void StartButon()
     {
         if (selectedSlot == -1)
