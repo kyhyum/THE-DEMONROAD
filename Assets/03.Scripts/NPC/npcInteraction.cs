@@ -6,7 +6,8 @@ public class npcInteraction : MonoBehaviour
 {
     public NPCSO npc;
     public QuestSO quest;
-    public QuestController controller;
+    private QuestController controller;
+    private QuestBoard board;
 
     public GameObject dialogueUI;
     public GameObject interactionPopup;
@@ -17,7 +18,7 @@ public class npcInteraction : MonoBehaviour
 
     //progressui
     public TMP_Text questProgName;
-    public TMP_Text questComplete;
+    //public TMP_Text questComplete;
 
     private bool isUIVisible = false;
     private bool isTalking = false;
@@ -148,11 +149,14 @@ public class npcInteraction : MonoBehaviour
         Debug.Log("Quest completed!");
 
         questProgName.color = Color.green;
+        
 
+       
 
 
 
     }
+    
 
     void HideDialogue()
     {
