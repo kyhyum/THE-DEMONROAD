@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public GameObject settingObject;
     private Inventory inventory;
     private Storage storage;
+    private QuickSlot[] quickSlots;
     public bool storageOpen => storageObject.activeSelf;
     private Vector2 pos;
 
@@ -64,13 +65,28 @@ public class UIManager : MonoBehaviour
     {
         inputAction.Player.Inventory.Enable();
         inputAction.Player.SkillUI.Enable();
+        inputAction.Player.QuickSlot1.Enable();
+        inputAction.Player.QuickSlot2.Enable();
+        inputAction.Player.QuickSlot3.Enable();
+        inputAction.Player.QuickSlot4.Enable();
+        inputAction.Player.QuickSlot5.Enable();
         inputAction.Player.Inventory.started += ActiveInventory;
+        // inputAction.Player.QuickSlot1.started +=;
+        // inputAction.Player.QuickSlot2.started +=;
+        // inputAction.Player.QuickSlot3.started +=;
+        // inputAction.Player.QuickSlot4.started +=;
+        // inputAction.Player.QuickSlot5.started +=;
     }
 
     public void OnUIInputDisable()
     {
         inputAction.Player.Inventory.Disable();
         inputAction.Player.SkillUI.Disable();
+        inputAction.Player.QuickSlot1.Disable();
+        inputAction.Player.QuickSlot2.Disable();
+        inputAction.Player.QuickSlot3.Disable();
+        inputAction.Player.QuickSlot4.Disable();
+        inputAction.Player.QuickSlot5.Disable();
         inputAction.Player.Inventory.started -= ActiveInventory;
     }
 
@@ -171,7 +187,30 @@ public class UIManager : MonoBehaviour
     public void ItemAddTest(ItemSO itemSO)
     {
         OnUIInputEnable();
-        Item item = new EquipItem(itemSO);
-        GetInventory().AddItem(item);
+        Item item;
+
+        switch (itemSO.type)
+        {
+            case ItemType.Equip:
+                item = new EquipItem(itemSO);
+                break;
+            case ItemType.Consumes:
+                item = new UseItem(itemSO);
+                break;
+            default:
+                item = new ResourceItem(itemSO);
+                break;
+        }
+
+
+        if (UIManager.Instance.GetInventory().AddItem(item))
+        {
+            // 퀘스트 완료처리
+        }
+        else
+        {
+            // 팝업 띄워줘서 인벤토리가 꽉찼습니다.
+            // 정리하고 다시 완료 버튼 누르게
+        }
     }
 }
