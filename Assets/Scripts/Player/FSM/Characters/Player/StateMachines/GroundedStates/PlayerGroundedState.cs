@@ -30,6 +30,11 @@ public class PlayerGroundedState : PlayerBaseState
             OnAttack();
             return;
         }
+        else if(stateMachine.Player.IsAttackSkill1) 
+        { 
+            OnAttackSkill1(); 
+            return;
+        }
     }
 
     public override void LateUpdate()
@@ -69,5 +74,10 @@ public class PlayerGroundedState : PlayerBaseState
     protected virtual void OnAttack()
     {
         stateMachine.ChangeState(stateMachine.AttackState);
+    }
+
+    protected virtual void OnAttackSkill1()
+    {
+        stateMachine.ChangeState(stateMachine.AttackSkill1State);
     }
 }

@@ -11,6 +11,7 @@ public class PlayerAnimationData
     [SerializeField] private string walkParameterName = "Walk";
 
     [SerializeField] private string attackParameterName = "@Attack";
+    [SerializeField] private string attackSkill1ParameterName = "AttackSkill1";
 
     #region 프로퍼티
     public int GroundParameterHash { get; private set; }
@@ -18,6 +19,7 @@ public class PlayerAnimationData
     public int WalkParameterHash { get; private set; }
 
     public int AttackParameterHash { get; private set; }
+    public int AttackSkill1ParameterHash { get; private set; }
     #endregion 프로퍼티
 
     public void Initialize()
@@ -27,5 +29,6 @@ public class PlayerAnimationData
         WalkParameterHash = Animator.StringToHash(walkParameterName);
 
         AttackParameterHash = Animator.StringToHash(attackParameterName);
+        AttackSkill1ParameterHash = Animator.StringToHash(attackSkill1ParameterName);
     }
 }

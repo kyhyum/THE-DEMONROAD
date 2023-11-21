@@ -145,11 +145,15 @@ public class PlayerBaseState : IState
     protected virtual void OnQuickSlot1Performed(InputAction.CallbackContext context)
     {
         Debug.Log("OnQuickSlot1Performed 함수 호출한다.");
+
+        stateMachine.Player.IsAttackSkill1 = true;
     }
 
     protected virtual void OnQuickSlot1Canceled(InputAction.CallbackContext context)
     {
         Debug.Log("OnQuickSlot1Canceled 함수 호출한다.");
+
+        stateMachine.Player.IsAttackSkill1 = false;
     }
 
     protected virtual void OnQuickSlot2Performed(InputAction.CallbackContext context)
