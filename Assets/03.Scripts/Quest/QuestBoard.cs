@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,19 +32,23 @@ public class QuestBoard : MonoBehaviour
     [SerializeField] TMP_Text questProgitemName;
     [SerializeField] TMP_Text questProgconverseName;
     [SerializeField] TMP_Text questProgInfinitemonsterName;
-    [SerializeField] TMP_Text questProgmainName;
+    public TMP_Text questProgmainName;
 
     [SerializeField] List<QuestSO> quests;
     public static UIManager Instance;
     private DungeonManager dungeonManager;
     private int dropResourceitemcount;
+
+    
     private QuestController controller;
     int goblinKills = DungeonManager.Instance.goblinkillCount;
 
+    //메인퀘스트 관련
+    private ChoiceDungeon choiceDungeon;
 
     public List<QuestSO> Quests { get { return quests; } }
 
-    NPCSO npcs;
+    //NPCSO npcs;
     QuestSO selectQuest;
     PlayerData player;
 
@@ -51,9 +56,27 @@ public class QuestBoard : MonoBehaviour
     {
         player = GameManager.Instance.player;
         dungeonManager = DungeonManager.Instance;
-       
+
+        //이벤트 구독
+        choiceDungeon = FindObjectOfType<ChoiceDungeon>();
+        if (choiceDungeon != null)
+        {
+            ChoiceDungeon.DungeonInteractionPopupActivated += OnDungeonInteractionPopupActivated;
+        }
+
         InitializeQuestList();
         acceptButton.onClick.AddListener(() => { AcceptQuest(selectQuest); });
+    }
+    private void OnDungeonInteractionPopupActivated()
+    {
+        QuestSO selectedQuest = GetMainQuest();
+        UpdateMainQuestProgress(selectedQuest);
+    }
+
+    private QuestSO GetMainQuest()
+    {
+        QuestSO mainQuest = quests[4];
+        return mainQuest;
     }
 
     private void InitializeQuestList()
@@ -186,11 +209,48 @@ public class QuestBoard : MonoBehaviour
         }
         else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
         {
-            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " +goblinKills + "/ " + selectedQuest.questComplete;
+            if (goblinKills >= selectedQuest.questComplete)
+            {
+                questProgmonsterName.color = Color.green;
+                //여기에 새로운 퀘스트 추가 - 150마리 잡는 퀘스트
+                
+            }
         }
         else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 =  TODO:던전 입구 도착시에 퀘스트 완료시키기
         {
-            questProgmainName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+            questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
+            UpdateMainQuestProgress(selectedQuest);
+    
+        }
+    }
+    public void UpdateMainQuestProgress(QuestSO selectedQuest)
+    {
+
+        if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
+        {
+            Debug.Log("UpdateMainQuest이 null이 아니다");
+            // dungeonInteractionPopup이 활성화되어 있을 때       
+            questProgmainName.color = Color.green;
+            questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;
+        }
+        else if (choiceDungeon == null)
+        {
+            // choiceDungeon이 null 
+            Debug.Log("choiceDungeon이 Null입니다");
+        }
+        else
+        {
+            //dungeonInteractionPopup이 비활성화일 때
+            Debug.Log("popup이 비활성화 상태");
+        }
+    }
+    void OnDestroy()
+    {
+        // 이벤트 구독 해제
+        if (choiceDungeon != null)
+        {
+            ChoiceDungeon.DungeonInteractionPopupActivated -= OnDungeonInteractionPopupActivated;
         }
     }
     public void CurrentDropItemCount() //특정 리소스 아이템을 주울때마다 카운트 Up
@@ -249,11 +309,20 @@ public class QuestBoard : MonoBehaviour
                     {
                         // 무한 몬스터 퀘스트 완료 처리 로직 추가
                         // 다음 무한 퀘스트 추가 해주기
+                        controller.ShowPopup();
+                        controller.Invoke("HidePopup", 2f);
                     }
                 }
                 else if(acceptedQuest.questIndex == 4) // 메인 퀘스트
                 {
                     //던전에 입장을 했을시에 퀘스트 완료 처리
+                    
+                    if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
+                    {
+                        controller.ShowPopup();
+                        controller.Invoke("HidePopup", 2f);
+
+                    }
                 }
             }
         }
@@ -265,10 +334,7 @@ public class QuestBoard : MonoBehaviour
         }
 
     }
-    private void QuestComplete()
-    {
-
-    }
+    
     
 
     
