@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ChoiceDungeon : MonoBehaviour
@@ -12,6 +11,9 @@ public class ChoiceDungeon : MonoBehaviour
     public GameObject dungeoninteractionPopup;
     private bool isUIVisible = false;
     Transform player;
+
+    //이벤트
+    public static event Action DungeonInteractionPopupActivated;
 
     float activationDistance = 5f;
 
@@ -28,14 +30,18 @@ public class ChoiceDungeon : MonoBehaviour
         if (distance <= activationDistance)
         {
             dungeoninteractionPopup.SetActive(true);
+            
 
             if (Input.GetKeyDown(KeyCode.F))
             {
 
                 isUIVisible = !isUIVisible;
-
-
                 dungeonUI.SetActive(isUIVisible);
+
+                if (isUIVisible && DungeonInteractionPopupActivated != null)
+                {
+                    DungeonInteractionPopupActivated(); 
+                }
             }
         }
         else
@@ -49,5 +55,10 @@ public class ChoiceDungeon : MonoBehaviour
     public void OpenDungeon(DungeonSO dungeon)
     {
         dungeonExplanUI.OpenExplan(dungeon);
+    }
+
+    public bool IsDungeonInteractionPopupActive()
+    {
+        return dungeoninteractionPopup.activeSelf;
     }
 }
