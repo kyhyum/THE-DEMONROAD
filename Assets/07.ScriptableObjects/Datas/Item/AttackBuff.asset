@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd05855b9050047a5c42e06e34c0f8, type: 3}
+  m_Name: AttackBuff
+  m_EditorClassIdentifier: 
+  <itemName>k__BackingField: "\uACF5\uACA9\uB825 \uD3EC\uC158"
+  <description>k__BackingField: "\uACF5\uACA9\uB825\uC744 \uC62C\uB824\uC90D\uB2C8\uB2E4."
+  <type>k__BackingField: 1
+  <rank>k__BackingField: 0
+  <texture>k__BackingField: {fileID: 2800000, guid: 805736230f06ac449a72b0ecb951e522,
+    type: 3}
+  <prefab>k__BackingField: {fileID: 0}
+  count: 1
+  buffType: 0
+  duration: 120
+  value: 10

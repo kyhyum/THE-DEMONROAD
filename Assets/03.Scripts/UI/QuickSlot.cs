@@ -5,27 +5,52 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
     private GameObject itemClone;
     private Canvas canvas;
     private RectTransform rect;
     private RawImage icon;
-    private IUsable item;
+    private IUsable usable;
     private TMP_Text quantity;
-    public int slotID;
 
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
         icon = GetComponentInChildren<RawImage>();
         quantity = GetComponentInChildren<TMP_Text>();
-        item = null;
+        usable = null;
+    }
+
+    public void SetSlot(IUsable usable)
+    {
+        this.usable = usable;
+
+        if (usable == null)
+        {
+            SetAlpha(0);
+            return;
+        }
+
+        if (usable is IStackable)
+        {
+            IStackable stackable = (IStackable)usable;
+            quantity.text = stackable.Get().ToString();
+        }
+
+        SetAlpha(1);
+    }
+
+    private void SetAlpha(float f)
+    {
+        Color color = icon.color;
+        color.a = f;
+        icon.color = color;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (item == null)
+        if (usable == null)
             return;
         itemClone = Instantiate(gameObject, canvas.GetComponent<Transform>());
         rect = itemClone.GetComponent<RectTransform>();
@@ -59,5 +84,42 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         if (itemClone == null)
             return;
         Destroy(itemClone);
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        // 이벤트 데이터를 이용해 드롭 지점에서의 Raycast를 수행
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.TryGetComponent<QuickSlot>(out QuickSlot quickSlot))
+            {
+
+                return;
+            }
+        }
+
+        SetSlot(null);
+    }
+
+    public void Use()
+    {
+        if (usable == null)
+            return;
+
+        if (usable is IStackable)
+        {
+            IStackable stackable = (IStackable)usable;
+
+            if (stackable.Get() == 0)
+                return;
+
+            stackable.Sub(1);
+            quantity.text = stackable.Get().ToString();
+        }
+
+        usable.Use();
     }
 }

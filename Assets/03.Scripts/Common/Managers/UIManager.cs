@@ -208,35 +208,6 @@ public class UIManager : MonoBehaviour
         GetStorage().AddItem(slotB, item);
     }
 
-    public void ItemAddTest(ItemSO itemSO)
-    {
-        OnUIInputEnable();
-        Item item;
-
-        switch (itemSO.type)
-        {
-            case ItemType.Equip:
-                item = new EquipItem(itemSO);
-                break;
-            case ItemType.Consumes:
-                item = new UseItem(itemSO);
-                break;
-            default:
-                item = new ResourceItem(itemSO);
-                break;
-        }
-
-
-        if (UIManager.Instance.GetInventory().AddItem(item))
-        {
-            // ����Ʈ �Ϸ�ó��
-        }
-        else
-        {
-            // �˾� ����༭ �κ��丮�� ��á���ϴ�.
-            // �����ϰ� �ٽ� �Ϸ� ��ư ������
-        }
-    }
     public void UIOpenSound()
     {
         soundManager.SFXPlay(audioSource, clips[0]);

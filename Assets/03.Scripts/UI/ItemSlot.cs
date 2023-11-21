@@ -37,6 +37,8 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         {
             IStackable stackableItem = (IStackable)item;
             quantity.text = stackableItem.Get().ToString();
+
+            Debug.Log(stackableItem.Get());
         }
         else
         {

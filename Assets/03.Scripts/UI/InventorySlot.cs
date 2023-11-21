@@ -8,9 +8,6 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        // 드롭 대상의 RectTransform을 얻음
-        RectTransform dropTarget = this.transform as RectTransform;
-
         // 이벤트 데이터를 이용해 드롭 지점에서의 Raycast를 수행
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
@@ -55,6 +52,11 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
             else if (item is EquipItem)
             {
                 UIManager.Instance.GetInventory().Equip(slotID);
+            }
+            else if (item is UseItem)
+            {
+                UseItem useItem = (UseItem)item;
+                useItem.Use();
             }
         }
     }

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public EventSystem eventSystem;
 
-    PlayerCondition conditon;
+    public PlayerCondition conditon;
 
     WaitForSecondsRealtime wait;
     SlotItem slot;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
         wait = new WaitForSecondsRealtime(5f);
-        slot= new SlotItem();
+        slot = new SlotItem();
     }
     private void Start()
     {
@@ -71,22 +71,22 @@ public class GameManager : MonoBehaviour
     }
     public void SavePlayerDataToJson(string jsonPath, string characterName, PlayerData data)
     {
-          
+
         string jsonData = JsonUtility.ToJson(data, true);
-        
+
         string path = Path.Combine(jsonPath, $"{characterName}.json");
-        
+
         File.WriteAllText(path, jsonData);
     }
     public PlayerData LoadPlayerDataFromJson(string jsonPath, string characterName)
     {
-        
+
         string path = Path.Combine(jsonPath, $"{characterName}.json");
-        if(File.Exists(path))
+        if (File.Exists(path))
         {
 
             string jsonData = File.ReadAllText(path);
-            
+
             return JsonUtility.FromJson<PlayerData>(jsonData);
         }
         else
@@ -98,18 +98,18 @@ public class GameManager : MonoBehaviour
     public void SaveItemArrayToJson(string jsonPath, string itemArrayName, SlotItem data)
     {
         slot = data;
-         
+
         string jsonData = JsonUtility.ToJson(slot, true);
-        
+
         string path = Path.Combine(jsonPath, $"{itemArrayName}.json");
-        
+
         File.WriteAllText(path, jsonData);
     }
     public SlotItem LoadItemArrayFromJson(string jsonPath, string itemArrayName)
     {
-        
+
         string path = Path.Combine(jsonPath, $"{itemArrayName}.json");
-        if(File.Exists(path))
+        if (File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
             return JsonUtility.FromJson<SlotItem>(jsonData);
@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
     }
     public void HomeButton()
     {
-        if(SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start)
+        if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start)
         {
             SceneLoadManager.LoadScene((int)SceneType.Start);
             Save();
@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
     }
     public void Save()
     {
-        if(SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)SceneType.Loading)
+        if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)SceneType.Loading)
         {
             player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
             player.currentPlayerPos = Myplayer.transform.position;
