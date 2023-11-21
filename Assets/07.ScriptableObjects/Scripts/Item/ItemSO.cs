@@ -4,8 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-[CreateAssetMenu(fileName = "Item", menuName = "Create/Item", order = 0)]
 public class ItemSO : ScriptableObject
 {
     [field: SerializeField] public string itemName { get; private set; }

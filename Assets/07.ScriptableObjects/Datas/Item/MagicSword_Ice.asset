@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5465422b473d15e4f9dad66afecb25dc, type: 3}
-  m_Name: EquipItem
+  m_Name: MagicSword_Ice
   m_EditorClassIdentifier: 
   <itemName>k__BackingField: "\uB9C8\uBC95\uAC80(\uC5BC\uC74C)"
   <description>k__BackingField: "\uC5BC\uC74C \uC18D\uC131\uC744 \uAC00\uC9C4 \uB9C8\uBC95\uAC80\uC774\uB2E4"
