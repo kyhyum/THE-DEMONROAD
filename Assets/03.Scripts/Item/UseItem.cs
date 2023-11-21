@@ -8,6 +8,11 @@ public class UseItem : Item, IStackable, IUsable
 
     public UseItem(ItemSO itemSO) : base(itemSO)
     {
+        if (itemSO is UseItemSO)
+        {
+            UseItemSO useItemSO = (UseItemSO)itemSO;
+            count = useItemSO.count;
+        }
     }
 
     public void Add(int n)
@@ -25,8 +30,8 @@ public class UseItem : Item, IStackable, IUsable
         return count;
     }
 
-    public void Use()
+    public virtual void Use()
     {
-
+        Sub(1);
     }
 }
