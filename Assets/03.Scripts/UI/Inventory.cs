@@ -106,6 +106,8 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < 30; i++)
         {
+            if (inventorySlots[i].GetItem() == null)
+                continue;
             if (item.itemName.Equals(inventorySlots[i].GetItem().itemName))
                 return i;
         }
