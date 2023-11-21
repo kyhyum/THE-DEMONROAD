@@ -166,4 +166,58 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
 
         Debug.Log(currentHp);
     }
+
+    public void Buff(BuffType buffType, float duration, int value)
+    {
+        StartCoroutine(CBuff(buffType, duration, value));
+    }
+
+    IEnumerator CBuff(BuffType buffType, float duration, int value)
+    {
+        switch (buffType)
+        {
+            case BuffType.Atk:
+                atk += value;
+                break;
+            case BuffType.Def:
+                def += value;
+                break;
+            case BuffType.Str:
+                myStats[StatType.STR] += value;
+                break;
+            case BuffType.Dex:
+                myStats[StatType.DEX] += value;
+                break;
+            case BuffType.Int:
+                myStats[StatType.INT] += value;
+                break;
+            case BuffType.Con:
+                myStats[StatType.CON] += value;
+                break;
+        }
+
+        yield return new WaitForSecondsRealtime(duration);
+
+        switch (buffType)
+        {
+            case BuffType.Atk:
+                atk -= value;
+                break;
+            case BuffType.Def:
+                def -= value;
+                break;
+            case BuffType.Str:
+                myStats[StatType.STR] -= value;
+                break;
+            case BuffType.Dex:
+                myStats[StatType.DEX] -= value;
+                break;
+            case BuffType.Int:
+                myStats[StatType.INT] -= value;
+                break;
+            case BuffType.Con:
+                myStats[StatType.CON] -= value;
+                break;
+        }
+    }
 }
