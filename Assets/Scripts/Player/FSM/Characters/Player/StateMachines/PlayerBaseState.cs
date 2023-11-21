@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -8,7 +9,8 @@ using UnityEngine.InputSystem.Controls;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
 
-public class PlayerBaseState : IState
+[Serializable]
+public class PlayerBaseState : IState, IUsable
 {
     protected PlayerStateMachine stateMachine;
     protected readonly PlayerGroundData groundData;
@@ -251,5 +253,10 @@ public class PlayerBaseState : IState
         {
             return 0f;
         }
+    }
+
+    public void Use()
+    {
+        
     }
 }
