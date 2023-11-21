@@ -11,6 +11,7 @@ public class PlayerStateMachine : StateMachine
     public PlayerWalkState WalkState { get; }
 
     public PlayerAttackState AttackState { get; }
+    public PlayerAttackSkill1State AttackSkill1State { get; }
     #endregion States
 
     // 
@@ -30,6 +31,7 @@ public class PlayerStateMachine : StateMachine
         WalkState = new PlayerWalkState(this);
 
         AttackState = new PlayerAttackState(this);
+        AttackSkill1State = new PlayerAttackSkill1State(this);
 
         MovementSpeed = player.Data.GroundedData.BaseSpeed;
     }

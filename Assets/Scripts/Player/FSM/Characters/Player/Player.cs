@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public CinemachineComponentBase ComponentBase { get; set; }
 
     public bool IsAttacking { get; set; }
+    public bool IsAttackSkill1 { get; set; }
 
     private PlayerStateMachine stateMachine;
 
