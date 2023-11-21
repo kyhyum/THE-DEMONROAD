@@ -10,21 +10,15 @@ public class PopUpUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI title, explan;
     [SerializeField] Button yesButton, noButton, okButton;
-    private void Awake()
-    {
-        this.gameObject.SetActive(false);
-    }
 
     public void OpenPopUpUI(string titleText, string explanText, UnityAction action)
     {
-        this.gameObject.SetActive(true);
-
         title.text = titleText;
         explan.text = explanText;
 
-        yesButton.onClick.AddListener(action);
+        yesButton.onClick.RemoveAllListeners();
 
-        if(action == null)
+        if (action == null)
         {
             okButton.gameObject.SetActive(true);
             yesButton.gameObject.SetActive(false);
@@ -32,6 +26,7 @@ public class PopUpUI : MonoBehaviour
         }
         else
         {
+            yesButton.onClick.AddListener(action);
             okButton.gameObject.SetActive(false);
             yesButton.gameObject.SetActive(true);
             noButton.gameObject.SetActive(true);
