@@ -59,8 +59,14 @@ public class GameManager : MonoBehaviour
             uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
         }
     }
-    public void Finish()
+    public void FinishPopUp()
     {
+        uiManager.ActivePopUpUI("게임 종료", "정말 게임을 종료 하시겠습니까?", Finish);
+    }
+    void Finish()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
+
         Application.Quit();
     }
     public void SavePlayerDataToJson(string jsonPath, string characterName, PlayerData data)

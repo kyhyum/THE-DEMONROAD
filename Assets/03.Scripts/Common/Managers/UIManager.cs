@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
@@ -120,6 +121,15 @@ public class UIManager : MonoBehaviour
     private void ActiveInventory(InputAction.CallbackContext context)
     {
         ActiveInventory();
+    }
+    public void ActivePopUpUI(string title, string explan, UnityAction action)
+    {
+        ActiveUIGameObject(popUpUI.gameObject);
+        popUpUI.OpenPopUpUI(title, explan, action);
+    }
+    public void ActivePopUpUI()
+    {
+        ActiveUIGameObject(popUpUI.gameObject);
     }
 
     public void ActiveStorage()
