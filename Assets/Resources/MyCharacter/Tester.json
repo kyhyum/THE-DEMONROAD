@@ -1,0 +1,42 @@
+{
+    "name": "Tester",
+    "level": 1,
+    "exp": 0,
+    "job": 0,
+    "stats": [
+        {
+            "type": 0,
+            "statValue": 8
+        },
+        {
+            "type": 1,
+            "statValue": 4
+        },
+        {
+            "type": 2,
+            "statValue": 4
+        },
+        {
+            "type": 3,
+            "statValue": 50
+        }
+    ],
+    "baseObject": {
+        "instanceID": 38816
+    },
+    "playerIndex": 0,
+    "scene": 2,
+    "currentPlayerPos": {
+        "x": 0.0,
+        "y": -0.9420192241668701,
+        "z": 0.0
+    },
+    "currentPlayerRot": {
+        "x": 0.0,
+        "y": -0.8325656056404114,
+        "z": 0.0,
+        "w": 0.5539264678955078
+    },
+    "isDead": false,
+    "acceptQuest": []
+}
