@@ -39,7 +39,7 @@ public class npcInteraction : MonoBehaviour
         if (distance <= activationDistance)
         {
             //상호작용 가능시 팝업
-            Debug.Log("대화: F");
+            
             interactionPopup.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.F))

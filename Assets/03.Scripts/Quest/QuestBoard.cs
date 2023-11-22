@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -253,7 +251,7 @@ public class QuestBoard : MonoBehaviour
             ChoiceDungeon.DungeonInteractionPopupActivated -= OnDungeonInteractionPopupActivated;
         }
     }
-    public void CurrentDropItemCount() //특정 리소스 아이템을 주울때마다 카운트 Up
+    public void CurrentDropItemCount() //특정 리소스 아이템을 주울때마다 카운트 Up -- 완료 안됨 임시
     {
         dropResourceitemcount++;
     }
@@ -284,10 +282,11 @@ public class QuestBoard : MonoBehaviour
                 if (acceptedQuest.questIndex == 1) // 아이템 퀘스트
                 {
                     // 해당 아이템 퀘스트의 조건 충족 및 보상 처리
-                    if(dropResourceitemcount >= selectQuest.questComplete) //완료조건보다 많거나 같을때
+                    if(dropResourceitemcount >= selectQuest.questComplete) 
                     {
                         controller.ShowPopup();
                         controller.Invoke("HidePopup", 2f);
+                        ItemAddTest(itemSO);
                     }
                 }
                // 대화퀘스트 완료처리는 npcInteraction에       
@@ -300,6 +299,7 @@ public class QuestBoard : MonoBehaviour
                         // 몬스터 퀘스트 완료 처리 로직 추가
                         controller.ShowPopup();
                         controller.Invoke("HidePopup", 2f);
+                        ItemAddTest(itemSO);
                     }
                 }
                 else if (acceptedQuest.questIndex == 3) //무한 몬스터 퀘스트
@@ -311,6 +311,7 @@ public class QuestBoard : MonoBehaviour
                         // 다음 무한 퀘스트 추가 해주기
                         controller.ShowPopup();
                         controller.Invoke("HidePopup", 2f);
+                        
                     }
                 }
                 else if(acceptedQuest.questIndex == 4) // 메인 퀘스트
@@ -321,6 +322,7 @@ public class QuestBoard : MonoBehaviour
                     {
                         controller.ShowPopup();
                         controller.Invoke("HidePopup", 2f);
+                        ItemAddTest(itemSO);
 
                     }
                 }
@@ -328,7 +330,7 @@ public class QuestBoard : MonoBehaviour
         }
         else
         {
-            Debug.Log("Failed to give gold reward.");
+            Debug.Log("인벤토리가 꽉찼습니다.");
             // 팝업 띄워줘서 인벤토리가 꽉찼습니다.
             // 정리하고 다시 완료 버튼 누르게
         }
