@@ -269,7 +269,7 @@ public class QuestBoard : MonoBehaviour
                 break;
             case ItemType.Consumes:
                 item = new UseItem(itemSO);
-                break;
+                break;           
             default:
                 item = new ResourceItem(itemSO);
                 break;

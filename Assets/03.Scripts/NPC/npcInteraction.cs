@@ -29,8 +29,11 @@ public class npcInteraction : MonoBehaviour
     void Start()
     {
         controller = FindObjectOfType<QuestController>();
+        board = FindObjectOfType<QuestBoard>();
+
         dialogueUI.SetActive(false);
         player = GameManager.Instance.Myplayer.transform;
+        
     }
     void Update()
     {
@@ -149,12 +152,22 @@ public class npcInteraction : MonoBehaviour
         Debug.Log("Quest completed!");
 
         questProgName.color = Color.green;
-        
 
+        ItemSO goldItem = GetGoldItem();
+        board.ItemAddTest(goldItem);
        
 
 
 
+    }
+    ItemSO GetGoldItem()
+    {
+        Debug.Log("골드추가");
+        ItemSO goldItem = new ItemSO();
+        goldItem.type = ItemType.Gold; 
+        
+
+        return goldItem;
     }
     
 
