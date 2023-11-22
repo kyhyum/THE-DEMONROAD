@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 public class QuestBoard : MonoBehaviour
 {
     //gameobject
-
+    //public GameObject mainCompletePop;  
     public GameObject acceptPopup;
     public GameObject cancelPopup;
     public GameObject questLogPanel;
@@ -43,10 +44,12 @@ public class QuestBoard : MonoBehaviour
 
     //메인퀘스트 관련
     private ChoiceDungeon choiceDungeon;
+    //public float fadeDuration = 1f;
 
     public List<QuestSO> Quests { get { return quests; } }
 
     //NPCSO npcs;
+    //ItemSO itemSO;
     QuestSO selectQuest;
     PlayerData player;
 
@@ -54,6 +57,8 @@ public class QuestBoard : MonoBehaviour
     {
         player = GameManager.Instance.player;
         dungeonManager = DungeonManager.Instance;
+
+        controller = FindAnyObjectByType<QuestController>();
 
         //이벤트 구독
         choiceDungeon = FindObjectOfType<ChoiceDungeon>();
@@ -68,7 +73,7 @@ public class QuestBoard : MonoBehaviour
     private void OnDungeonInteractionPopupActivated()
     {
         QuestSO selectedQuest = GetMainQuest();
-        UpdateMainQuestProgress(selectedQuest);
+        UpdateMainQuestProgress(selectedQuest );
     }
 
     private QuestSO GetMainQuest()
@@ -231,6 +236,9 @@ public class QuestBoard : MonoBehaviour
             // dungeonInteractionPopup이 활성화되어 있을 때       
             questProgmainName.color = Color.green;
             questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;
+
+            ItemSO newItem = CreateNewItemFromQuest(selectedQuest);
+            ItemAddTest(newItem);
         }
         else if (choiceDungeon == null)
         {
@@ -242,6 +250,15 @@ public class QuestBoard : MonoBehaviour
             //dungeonInteractionPopup이 비활성화일 때
             Debug.Log("popup이 비활성화 상태");
         }
+    }
+    private ItemSO CreateNewItemFromQuest(QuestSO selectedQuest)
+    {
+        
+        ItemSO newItem = new ItemSO();
+        newItem.type = ItemType.Gold;
+        Debug.Log("Main퀘스트 보상받음");
+
+        return newItem;
     }
     void OnDestroy()
     {
@@ -259,8 +276,10 @@ public class QuestBoard : MonoBehaviour
 
     public void ItemAddTest(ItemSO itemSO)
     {
-        
-        Instance.OnUIInputEnable();
+        if(Instance != null)
+        {
+            Instance.OnUIInputEnable();
+        }
         Item item;
         switch (itemSO.type)
         {
@@ -284,12 +303,21 @@ public class QuestBoard : MonoBehaviour
                     // 해당 아이템 퀘스트의 조건 충족 및 보상 처리
                     if(dropResourceitemcount >= selectQuest.questComplete) 
                     {
-                        controller.ShowPopup();
-                        controller.Invoke("HidePopup", 2f);
-                        ItemAddTest(itemSO);
+                        if (controller != null)
+                        {
+                            controller.ShowPopup();
+                            controller.Invoke("HidePopup", 2f);
+
+                        }
+                        else if (controller == null)
+                        {
+                            Debug.Log("Null입니다");
+                        }
+
                     }
                 }
-               // 대화퀘스트 완료처리는 npcInteraction에       
+
+                // 대화퀘스트 완료처리는 npcInteraction에              
 
                 else if (acceptedQuest.questIndex == 0) //몬스터 퀘스트
                 {
@@ -297,9 +325,17 @@ public class QuestBoard : MonoBehaviour
                     if (goblinKills >= acceptedQuest.questComplete)
                     {
                         // 몬스터 퀘스트 완료 처리 로직 추가
-                        controller.ShowPopup();
-                        controller.Invoke("HidePopup", 2f);
-                        ItemAddTest(itemSO);
+                        if (controller != null)
+                        {
+                            controller.ShowPopup();
+                            controller.Invoke("HidePopup", 2f);
+
+                        }
+                        else if (controller == null)
+                        {
+                            Debug.Log("Null입니다");
+                        }
+
                     }
                 }
                 else if (acceptedQuest.questIndex == 3) //무한 몬스터 퀘스트
@@ -309,9 +345,17 @@ public class QuestBoard : MonoBehaviour
                     {
                         // 무한 몬스터 퀘스트 완료 처리 로직 추가
                         // 다음 무한 퀘스트 추가 해주기
-                        controller.ShowPopup();
-                        controller.Invoke("HidePopup", 2f);
-                        
+                        if (controller != null)
+                        {
+                            controller.ShowPopup();
+                            controller.Invoke("HidePopup", 2f);
+
+                        }
+                        else if (controller == null)
+                        {
+                            Debug.Log("Null입니다");
+                        }
+
                     }
                 }
                 else if(acceptedQuest.questIndex == 4) // 메인 퀘스트
@@ -320,9 +364,17 @@ public class QuestBoard : MonoBehaviour
                     
                     if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
                     {
-                        controller.ShowPopup();
-                        controller.Invoke("HidePopup", 2f);
-                        ItemAddTest(itemSO);
+                        if(controller != null)
+                        {
+                            controller.ShowPopup();
+                            controller.Invoke("HidePopup", 2f);
+
+                        }
+                        else if(controller == null)
+                        {
+                            Debug.Log("Null입니다");
+                        }
+                        
 
                     }
                 }
@@ -336,8 +388,12 @@ public class QuestBoard : MonoBehaviour
         }
 
     }
-    
+   
     
 
-    
+
+
+
+
+
 }
