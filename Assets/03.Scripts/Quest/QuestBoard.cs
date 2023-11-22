@@ -59,9 +59,8 @@ public class QuestBoard : MonoBehaviour
         dungeonManager = DungeonManager.Instance;
 
         controller = FindAnyObjectByType<QuestController>();
-
-        //이벤트 구독
         choiceDungeon = FindObjectOfType<ChoiceDungeon>();
+        //이벤트 구독
         if (choiceDungeon != null)
         {
             ChoiceDungeon.DungeonInteractionPopupActivated += OnDungeonInteractionPopupActivated;
