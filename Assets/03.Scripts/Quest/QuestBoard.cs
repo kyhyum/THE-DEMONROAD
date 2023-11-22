@@ -273,7 +273,7 @@ public class QuestBoard : MonoBehaviour
     }
     
 
-    public void ItemAddTest(ItemSO itemSO)
+    public void ItemAddTest(ItemSO itemSO) // 이건 예시고 이걸 비슷하게 해서 만드는걸로 수정...
     {
         if(Instance != null)
         {
