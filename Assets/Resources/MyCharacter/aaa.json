@@ -1,0 +1,49 @@
+{
+    "name": "aaa",
+    "level": 1,
+    "exp": 0,
+    "job": 0,
+    "stats": [
+        {
+            "type": 0,
+            "statValue": 8
+        },
+        {
+            "type": 1,
+            "statValue": 4
+        },
+        {
+            "type": 2,
+            "statValue": 4
+        },
+        {
+            "type": 3,
+            "statValue": 50
+        }
+    ],
+    "baseObject": {
+        "instanceID": 36762
+    },
+    "playerIndex": 0,
+    "scene": 3,
+    "currentPlayerPos": {
+        "x": -20.856536865234376,
+        "y": 0.08333215862512589,
+        "z": 18.595108032226564
+    },
+    "currentPlayerRot": {
+        "x": 0.0,
+        "y": 0.7370391488075256,
+        "z": 0.0,
+        "w": 0.6758500337600708
+    },
+    "isDead": false,
+    "acceptQuest": [
+        {
+            "instanceID": 36268
+        },
+        {
+            "instanceID": 35710
+        }
+    ]
+}
