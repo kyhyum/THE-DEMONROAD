@@ -47,10 +47,9 @@ public class PlayerGroundedState : PlayerBaseState
         base.PhysicsUpdate();
     }
 
-    //
-    protected override void OnMoveStarted(InputAction.CallbackContext context)
+    protected override void OnMovePerformed(InputAction.CallbackContext context)
     {
-        // 입력 처리가 안들어오면 
+
         if (stateMachine.Player.Agent.velocity != Vector3.zero)
         {
             return;
@@ -58,7 +57,12 @@ public class PlayerGroundedState : PlayerBaseState
 
         stateMachine.ChangeState(stateMachine.IdleState);
 
-        base.OnMoveStarted(context);
+        base.OnMovePerformed(context);
+    }
+
+    protected override void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        base.OnMoveCanceled(context);
     }
 
     protected virtual void OnStand()

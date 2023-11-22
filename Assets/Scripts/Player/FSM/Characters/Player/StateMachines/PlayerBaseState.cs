@@ -44,7 +44,7 @@ public class PlayerBaseState : IState, IUsable
 
     public virtual void Update()
     {
-
+        Move();
     }
 
     public virtual void LateUpdate()
@@ -59,7 +59,9 @@ public class PlayerBaseState : IState, IUsable
     {
         PlayerInput input = stateMachine.Player.Input;
         // .started: 해당 키가 눌려졌을 때
-        input.PlayerActions.Move.started += OnMoveStarted;
+        
+        input.PlayerActions.Move.performed += OnMovePerformed;
+        input.PlayerActions.Move.canceled += OnMoveCanceled;
         // .performed: 해당 키가 눌려지고 있는 동안에
         input.PlayerActions.Attack.performed += OnAttackPerformed;
         // .canceled: (눌려져 있는) 해당 키가 떼어졌을 떄
@@ -85,7 +87,9 @@ public class PlayerBaseState : IState, IUsable
     protected virtual void RemoveInputActionsCallbacks()
     {
         PlayerInput input = stateMachine.Player.Input;
-        input.PlayerActions.Move.started -= OnMoveStarted;
+        input.PlayerActions.Move.performed -= OnMovePerformed;
+        input.PlayerActions.Move.canceled -= OnMoveCanceled;
+
         input.PlayerActions.Attack.performed -= OnAttackPerformed;
         input.PlayerActions.Attack.canceled -= OnAttackCanceled;
         input.PlayerActions.MouseScrollY.performed -= OnMouseScrollYPerformed;
@@ -102,11 +106,20 @@ public class PlayerBaseState : IState, IUsable
         input.PlayerActions.QuickSlot5.canceled -= OnQuickSlot5Canceled;
     }
 
-    protected virtual void OnMoveStarted(InputAction.CallbackContext context)
+    protected virtual void OnMovePerformed(InputAction.CallbackContext context)
     {
-        //Debug.Log("OnMoveStarted 함수 호출한다.");
+        Debug.Log("OnMovePerformed 함수 호출한다.");
 
-        Move();
+        stateMachine.Player.IsMoving = true;
+
+
+    }
+
+    protected virtual void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        Debug.Log("OnMoveCanceled 함수 호출한다.");
+
+        stateMachine.Player.IsMoving = false;
     }
 
     protected virtual void OnAttackPerformed(InputAction.CallbackContext context)
@@ -203,6 +216,9 @@ public class PlayerBaseState : IState, IUsable
     /// </summary>
     protected void Move()
     {
+        if (!stateMachine.Player.IsMoving)
+            return;
+
         RaycastHit hit;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition), out hit, 100))
