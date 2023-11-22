@@ -35,17 +35,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    public IEnumerator RealTimeSave()
-    {
-        while (true)
-        {
-            if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start)
-            {
-                Save();
-            }
-            yield return wait;
-        }
-    }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (player.baseObject != null && scene.buildIndex != (int)SceneType.Start && scene.buildIndex != (int)SceneType.Loading)
@@ -130,7 +119,6 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         SceneLoadManager.LoadScene((int)player.scene);
-        StartCoroutine(RealTimeSave());
     }
     public void HomeButton()
     {
@@ -138,7 +126,6 @@ public class GameManager : MonoBehaviour
         {
             SceneLoadManager.LoadScene((int)SceneType.Start);
             Save();
-            StopCoroutine(RealTimeSave());
             player = null;
             Myplayer = null;
         }

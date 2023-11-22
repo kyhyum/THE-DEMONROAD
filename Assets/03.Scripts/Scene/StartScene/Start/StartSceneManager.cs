@@ -5,7 +5,7 @@ using UnityEngine;
 public class StartSceneManager : MonoBehaviour
 {
     public static StartSceneManager Instance;
-    [SerializeField] GameObject selectCanvas, createCanvas, startCanvas, fadeOutCanvas;
+    [SerializeField] GameObject selectCanvas, createCanvas, startCanvas, fadeOutCanvas, CreditCanvas, rootObject;
     [SerializeField] Camera mainCamera;
     private void Awake()
     {
@@ -41,5 +41,10 @@ public class StartSceneManager : MonoBehaviour
         createCanvas.SetActive(false);
         startCanvas.SetActive(false);
         mainCamera.gameObject.SetActive(false);
+    }
+    public void OpenCreditCanvas()
+    {
+        CreditCanvas.SetActive(true);
+        rootObject.SetActive(false);
     }
 }
