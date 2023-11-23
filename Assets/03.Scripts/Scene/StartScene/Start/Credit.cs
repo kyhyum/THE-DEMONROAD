@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using DG.Tweening.Core.Easing;
 
 public class Credit : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class Credit : MonoBehaviour
     {
         content = scrollVeiw.content;
         pos = content.position;
-        lastPos = new Vector2(0, pos.y * -1);
+        lastPos = new Vector2(0, 710);
     }
     private void OnEnable()
     {
@@ -28,6 +29,13 @@ public class Credit : MonoBehaviour
     private void Start()
     {
         tween.OnComplete(SetActive);
+    }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            tween.Complete();
+        }
     }
     private void SetActive()
     {

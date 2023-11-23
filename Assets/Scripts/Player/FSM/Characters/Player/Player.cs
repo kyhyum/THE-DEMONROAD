@@ -3,6 +3,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -41,10 +42,12 @@ public class Player : MonoBehaviour
 
     [field: SerializeField] Transform cameraLookPoint;
 
-    public Slider hpSlider;
-
-    public Slider mpSlider;
-
+    public Image hpImage;
+    [SerializeField] TextMeshProUGUI hpText;
+    public Image mpImage;
+    [SerializeField] TextMeshProUGUI mpText;
+    public Image expImage;
+    [SerializeField] TextMeshProUGUI expText;
 
     private void Awake()
     {
@@ -75,11 +78,10 @@ public class Player : MonoBehaviour
         playerCondition.OnDie += OnDie;
         playerCondition.OnHealthChanged += UpdateHealthUI;
         playerCondition.OnManaChanged += UpdateManaUI;
+        playerCondition.OnExpChanged += UpdateExpUI;
 
-        hpSlider.maxValue = playerCondition.maxHp;
-        hpSlider.value = playerCondition.maxHp;
-        mpSlider.maxValue = playerCondition.maxMp;
-        mpSlider.value = playerCondition.maxMp;
+        hpImage.fillAmount = playerCondition.currentHp / playerCondition.maxHp;
+        mpImage.fillAmount = playerCondition.currentMp / playerCondition.maxMp;
 
         UIManager.Instance.OnUIInputEnable();
 
@@ -148,11 +150,25 @@ public class Player : MonoBehaviour
 
     void UpdateHealthUI(float newHealth)
     {
-        hpSlider.value = newHealth;
+        playerCondition.currentHp = newHealth;
+        hpImage.fillAmount = playerCondition.currentHp / playerCondition.maxHp;
+        hpText.text = $"{playerCondition.currentHp.ToString("N0")} / {playerCondition.maxHp.ToString("N0")}";
     }
 
     void UpdateManaUI(float newMana)
     {
-        mpSlider.value = newMana;
+        playerCondition.currentMp = newMana;
+        mpImage.fillAmount = playerCondition.currentMp / playerCondition.maxMp;
+        mpText.text = $"{playerCondition.currentMp.ToString("N0")} / {playerCondition.maxMp.ToString("N0")}";
+    }
+
+    void UpdateExpUI(int newExp)
+    {
+        playerCondition.playerData.exp += newExp;
+        if(playerCondition.playerData.exp >= playerCondition.levelExp)
+        {
+            playerCondition.LevelUp();
+        }
+        expText.text = $"{playerCondition.playerData.exp} / {playerCondition.levelExp}";
     }
 }
