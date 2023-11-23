@@ -108,7 +108,7 @@ public class PlayerBaseState : IState, IUsable
 
     protected virtual void OnMovePerformed(InputAction.CallbackContext context)
     {
-        Debug.Log("OnMovePerformed 함수 호출한다.");
+        //Debug.Log("OnMovePerformed 함수 호출한다.");
 
         stateMachine.Player.IsMoving = true;
 
@@ -117,7 +117,7 @@ public class PlayerBaseState : IState, IUsable
 
     protected virtual void OnMoveCanceled(InputAction.CallbackContext context)
     {
-        Debug.Log("OnMoveCanceled 함수 호출한다.");
+        //Debug.Log("OnMoveCanceled 함수 호출한다.");
 
         stateMachine.Player.IsMoving = false;
     }

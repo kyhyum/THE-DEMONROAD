@@ -10,9 +10,13 @@ public class PlayerAttackState : PlayerBaseState
 
     public override void Enter()
     {
-        // 공격할 때 이동을 못하게 한다. 
-        stateMachine.MovementSpeedModifier = 0;
-        // agent.ResetPath();
+        Debug.Log("PlayerAttackState 클래스 Enter 함수 호출했다.");
+
+        Weapon weapon = stateMachine.Player.Weapon;
+
+        //stateMachine.Player.AttackSlash
+        Object.Instantiate(weapon.AttackSlash, weapon.transform.position, Quaternion.identity);
+        
         stateMachine.Player.Agent.ResetPath();
         base.Enter();
 
@@ -35,8 +39,10 @@ public class PlayerAttackState : PlayerBaseState
         {
             if (stateMachine.Player.IsAttacking)
             {
-
+                Debug.Log("공격한다.");
             }
+
+            Debug.Log("공격한다. 2");
         }
         else
         {
