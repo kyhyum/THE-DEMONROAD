@@ -37,7 +37,6 @@ public class DoorOpen : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            Debug.Log(elapsedTime);
             doorTransform.rotation = Quaternion.Slerp(startingRotation, targetRotation, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;

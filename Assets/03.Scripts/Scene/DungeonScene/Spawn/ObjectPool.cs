@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ObjectPool<T> where T : Component
 {
-    private List<T> pooledObjects;
+    public List<T> pooledObjects { get; private set; }
     private T prefab;
     private Transform parentTransform;
     private int listSize;

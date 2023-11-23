@@ -57,13 +57,14 @@ public class Monster : MonoBehaviour
         InitNavMesh();
         InitMonster();
         MonsterHealth.OnDie += OnDie;
-        //MonsterHealth.OnDie += itemDropController.DropItem;
+        MonsterHealth.OnDie += itemDropController.DropItem;
     }
 
     public void InitMonster()
     {
         MonsterHealth.InitEnemyHealth(Data.Health, Data.Name);
         stateMachine.ChangeState(stateMachine.IdleState);
+        gameObject.GetComponent<CapsuleCollider>().enabled = true;
     }
 
     private void Update()
@@ -80,7 +81,7 @@ public class Monster : MonoBehaviour
 
     void OnDie()
     {
-        gameObject.GetComponent<Collider>().enabled = false;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
         Animator.SetTrigger("Die");
         Invoke("AfterAnimationComplete", Animator.GetCurrentAnimatorStateInfo(0).length);
     }
@@ -89,5 +90,6 @@ public class Monster : MonoBehaviour
     {
         objectPoolReturn?.Invoke(this);
         InitMonster();
+        objectPoolReturn = null;
     }
 }

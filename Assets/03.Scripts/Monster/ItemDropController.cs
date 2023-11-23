@@ -24,8 +24,7 @@ public class ItemDropController : MonoBehaviour
             }
         }
 
-        GameObject dropItem = item[indexValue].CreateItem();
-        dropItem.transform.position = this.gameObject.transform.position;
+        ItemDropManager.Instance.SpawnItem(item[indexValue], this.gameObject.transform.position);
     }
 
     

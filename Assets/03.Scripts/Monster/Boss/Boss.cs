@@ -28,6 +28,7 @@ public class Boss : MonoBehaviour
 
     public ObjectPool<BossBullet> pattern1Bullet { get; private set; }
     public ObjectPool<BossBullet> pattern2Bullet { get; private set; }
+    public ItemDropController itemDropController { get; private set; }
     public event Action<Boss> objectPoolReturn;
 
     private void Awake()
@@ -43,6 +44,7 @@ public class Boss : MonoBehaviour
 
         pattern1Bullet = new ObjectPool<BossBullet>(bossBullet1Obj.GetComponent<BossBullet>(), 3);
         pattern2Bullet = new ObjectPool<BossBullet>(bossBullet2Obj.GetComponent<BossBullet>(), 1);
+        itemDropController = GetComponent<ItemDropController>();
     }
 
     //NavMeshAent 초기화
@@ -57,6 +59,7 @@ public class Boss : MonoBehaviour
         InitNavMesh();
         Initboss();
         BossHealth.OnDie += OnDie;
+        BossHealth.OnDie += itemDropController.DropItem;
     }
     
     private void Initboss()
