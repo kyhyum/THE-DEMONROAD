@@ -7,7 +7,7 @@ public class StorageInteraction : MonoBehaviour
     private bool isUIVisible = false;
 
     
-    private float activationDistance = 3f;
+    private float activationDistance = 4f;
     void Start()
     {
         player = GameManager.Instance.Myplayer.transform;
