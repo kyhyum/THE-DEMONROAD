@@ -41832,13 +41832,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: f0f69b6bd54ec3744b1bdfea587625f1, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
-  controller: {fileID: 0}
   dialogueUI: {fileID: 2043401718}
   interactionPopup: {fileID: 366699507}
   nameText: {fileID: 1608689205}
   dialogueText: {fileID: 1010167134}
   questProgName: {fileID: 681685322}
-  questComplete: {fileID: 0}
   activationDistance: 5
 --- !u!1 &715683513
 GameObject:
@@ -58519,13 +58517,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: cd1dfb6ddf4d3454e9f6e1773962761d, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
-  controller: {fileID: 0}
   dialogueUI: {fileID: 1856389047}
   interactionPopup: {fileID: 366699507}
   nameText: {fileID: 1324289736}
   dialogueText: {fileID: 1689673536}
   questProgName: {fileID: 681685322}
-  questComplete: {fileID: 0}
   activationDistance: 5
 --- !u!95 &962980818
 Animator:
@@ -87260,13 +87256,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: d3ce2970e3d24254e88844cc8be775e0, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
-  controller: {fileID: 0}
   dialogueUI: {fileID: 1735550675}
   interactionPopup: {fileID: 366699507}
   nameText: {fileID: 1580947111}
   dialogueText: {fileID: 1904894478}
   questProgName: {fileID: 681685322}
-  questComplete: {fileID: 0}
   activationDistance: 5
 --- !u!33 &1356693023
 MeshFilter:
@@ -135796,7 +135790,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 375
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -135937,6 +135931,7 @@ MonoBehaviour:
     idleParameterName: Idle
     walkParameterName: Walk
     attackParameterName: '@Attack'
+    attackSkill1ParameterName: AttackSkill1
   <Weapon>k__BackingField: {fileID: 0}
   <VirtualCamera>k__BackingField: {fileID: 0}
   <ComponentBase>k__BackingField: {fileID: 0}

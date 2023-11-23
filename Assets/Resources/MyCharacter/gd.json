@@ -1,0 +1,42 @@
+{
+    "name": "gd",
+    "level": 1,
+    "exp": 0,
+    "job": 0,
+    "stats": [
+        {
+            "type": 0,
+            "statValue": 8
+        },
+        {
+            "type": 1,
+            "statValue": 4
+        },
+        {
+            "type": 2,
+            "statValue": 4
+        },
+        {
+            "type": 3,
+            "statValue": 50
+        }
+    ],
+    "baseObject": {
+        "instanceID": 55170
+    },
+    "playerIndex": 0,
+    "scene": 3,
+    "currentPlayerPos": {
+        "x": 128.31588745117188,
+        "y": 0.07592451572418213,
+        "z": 89.67807006835938
+    },
+    "currentPlayerRot": {
+        "x": 0.0,
+        "y": 0.6686827540397644,
+        "z": 0.0,
+        "w": 0.7435478568077087
+    },
+    "isDead": false,
+    "acceptQuest": []
+}
