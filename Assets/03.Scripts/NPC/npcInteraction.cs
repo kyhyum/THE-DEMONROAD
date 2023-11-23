@@ -9,7 +9,7 @@ public class npcInteraction : MonoBehaviour
     public QuestSO quest;
     public ItemSO golditem;
     private QuestController controller;
-    private QuestBoard board;
+   
     public static UIManager Instance;
 
     public GameObject dialogueUI;
@@ -33,7 +33,7 @@ public class npcInteraction : MonoBehaviour
     void Start()
     {
         controller = FindObjectOfType<QuestController>();
-        board = FindObjectOfType<QuestBoard>();
+        
 
         dialogueUI.SetActive(false);
         player = GameManager.Instance.Myplayer.transform;
@@ -174,7 +174,7 @@ public class npcInteraction : MonoBehaviour
                 
                 ItemSO itemSO = golditem;
                 Item itemToAdd = new Item(itemSO); 
-                bool itemAdded = inventory.AddItem(itemToAdd); // 아이템을 Inventory에 추가
+                bool itemAdded = inventory.AddItem(itemToAdd); 
 
                 if (itemAdded)
                 {

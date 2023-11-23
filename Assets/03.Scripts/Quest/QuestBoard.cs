@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,8 +5,7 @@ using UnityEngine.UI;
 
 public class QuestBoard : MonoBehaviour
 {
-    //gameobject
-      
+    //gameobject 
     public GameObject acceptPopup;
     public GameObject cancelPopup;
     public GameObject questLogPanel;
@@ -35,28 +33,22 @@ public class QuestBoard : MonoBehaviour
 
     [SerializeField] List<QuestSO> quests;
     public static UIManager Instance;
-    private DungeonManager dungeonManager;
-    private int dropResourceitemcount;
 
-    
     private QuestController controller;
     int goblinKills = DungeonManager.Instance.goblinkillCount;
 
     //메인퀘스트 관련
     private ChoiceDungeon choiceDungeon;
-    
 
     public List<QuestSO> Quests { get { return quests; } }
-
-    //NPCSO npcs;
-    //ItemSO itemSO;
+    public ItemSO golditem;
     QuestSO selectQuest;
     PlayerData player;
 
     public void Start()
     {
         player = GameManager.Instance.player;
-        dungeonManager = DungeonManager.Instance;
+        
 
         controller = FindAnyObjectByType<QuestController>();
         choiceDungeon = FindObjectOfType<ChoiceDungeon>();
@@ -194,7 +186,7 @@ public class QuestBoard : MonoBehaviour
 
             }
         }
-        if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트 = TODO:드롭되는 아이템 갯수 카운트 해서 '현재상황'에 반영
+        else if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트 = TODO:드롭되는 아이템 갯수 카운트 해서 '현재상황'에 반영
         {
             questProgitemName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
         }
@@ -205,8 +197,8 @@ public class QuestBoard : MonoBehaviour
             if(goblinKills >= selectedQuest.questComplete)
             {
                 questProgmonsterName.color = Color.green;
-                //여기에 ItemAddTest추가
-                //ItemAddTest(selectedQuest);
+                
+                
             }
         }
         else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
@@ -219,7 +211,7 @@ public class QuestBoard : MonoBehaviour
                 
             }
         }
-        else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 =  TODO:던전 입구 도착시에 퀘스트 완료시키기
+        else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 
         {
             questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
             UpdateMainQuestProgress(selectedQuest);
@@ -232,12 +224,16 @@ public class QuestBoard : MonoBehaviour
         if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
         {
             Debug.Log("UpdateMainQuest이 null이 아니다");
-            // dungeonInteractionPopup이 활성화되어 있을 때       
-            questProgmainName.color = Color.green;
-            questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;
 
-            ItemSO newItem = CreateNewItemFromQuest(selectedQuest);
-            ItemAddTest(newItem);
+                
+            questProgmainName.color = Color.green;
+            questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;     
+
+            // 보상처리
+            MainQuestReward(selectedQuest);
+            
+
+
         }
         else if (choiceDungeon == null)
         {
@@ -250,15 +246,7 @@ public class QuestBoard : MonoBehaviour
             Debug.Log("popup이 비활성화 상태");
         }
     }
-    private ItemSO CreateNewItemFromQuest(QuestSO selectedQuest)
-    {
-        
-        ItemSO newItem = new ItemSO();
-        newItem.type = ItemType.Gold;
-        Debug.Log("Main퀘스트 보상받음");
-
-        return newItem;
-    }
+    
     void OnDestroy()
     {
         // 이벤트 구독 해제
@@ -267,125 +255,53 @@ public class QuestBoard : MonoBehaviour
             ChoiceDungeon.DungeonInteractionPopupActivated -= OnDungeonInteractionPopupActivated;
         }
     }
-    public void CurrentDropItemCount() //특정 리소스 아이템을 주울때마다 카운트 Up -- 완료 안됨 임시
-    {
-        dropResourceitemcount++;
-    }
+    
     
 
-    public void ItemAddTest(ItemSO itemSO) // 이건 예시고 이걸 비슷하게 해서 만드는걸로 수정...
+    
+    public void MainQuestReward(QuestSO selectedQuest)
     {
-        if(Instance != null)
+        if (controller != null)
         {
-            Instance.OnUIInputEnable();
+            controller.ShowPopup();
+            controller.Invoke("HidePopup", 2f);
+
         }
-        Item item;
-        switch (itemSO.type)
+        else if (controller == null)
         {
-            case ItemType.Equip:
-                item = new EquipItem(itemSO);
-                break;
-            case ItemType.Consumes:
-                item = new UseItem(itemSO);
-                break;           
-            default:
-                item = new ResourceItem(itemSO);
-                break;
+            Debug.Log("Null입니다");
         }
-        if (UIManager.Instance.GetInventory().AddItem(item))
+
+        if (selectedQuest != null && selectedQuest.questType == QuestType.MainQuest)
         {
-            // 퀘스트 완료처리
-            foreach (var acceptedQuest in player.acceptQuest)
+
+            Inventory inventory = UIManager.Instance.GetInventory();
+
+            if (inventory != null)
             {
-                if (acceptedQuest.questIndex == 1) // 아이템 퀘스트
+
+                ItemSO itemSO = golditem;
+                Item itemToAdd = new Item(itemSO);
+                bool itemAdded = inventory.AddItem(itemToAdd); // 아이템을 Inventory에 추가
+
+                if (itemAdded)
                 {
-                    // 해당 아이템 퀘스트의 조건 충족 및 보상 처리
-                    if(dropResourceitemcount >= selectQuest.questComplete) 
-                    {
-                        if (controller != null)
-                        {
-                            controller.ShowPopup();
-                            controller.Invoke("HidePopup", 2f);
-
-                        }
-                        else if (controller == null)
-                        {
-                            Debug.Log("Null입니다");
-                        }
-
-                    }
+                    // 금화 보상 추가
+                    inventory.Gold += selectedQuest.questRewardCoin;
+                    Debug.Log("보상으로 " + selectedQuest.questRewardCoin + "개의 금화 획득!");
                 }
-
-                // 대화퀘스트 완료처리는 npcInteraction에              
-
-                else if (acceptedQuest.questIndex == 0) //몬스터 퀘스트
+                else
                 {
-                    
-                    if (goblinKills >= acceptedQuest.questComplete)
-                    {
-                        // 몬스터 퀘스트 완료 처리 로직 추가
-                        if (controller != null)
-                        {
-                            controller.ShowPopup();
-                            controller.Invoke("HidePopup", 2f);
-
-                        }
-                        else if (controller == null)
-                        {
-                            Debug.Log("Null입니다");
-                        }
-
-                    }
-                }
-                else if (acceptedQuest.questIndex == 3) //무한 몬스터 퀘스트
-                {
-                    
-                    if (goblinKills >= acceptedQuest.questComplete)
-                    {
-                        // 무한 몬스터 퀘스트 완료 처리 로직 추가
-                        // 다음 무한 퀘스트 추가 해주기
-                        if (controller != null)
-                        {
-                            controller.ShowPopup();
-                            controller.Invoke("HidePopup", 2f);
-
-                        }
-                        else if (controller == null)
-                        {
-                            Debug.Log("Null입니다");
-                        }
-
-                    }
-                }
-                else if(acceptedQuest.questIndex == 4) // 메인 퀘스트
-                {
-                    //던전에 입장을 했을시에 퀘스트 완료 처리
-                    
-                    if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
-                    {
-                        if(controller != null)
-                        {
-                            controller.ShowPopup();
-                            controller.Invoke("HidePopup", 2f);
-
-                        }
-                        else if(controller == null)
-                        {
-                            Debug.Log("Null입니다");
-                        }
-                        
-
-                    }
+                    Debug.Log("아이템 추가에 실패했습니다.");
                 }
             }
-        }
-        else
-        {
-            Debug.Log("인벤토리가 꽉찼습니다.");
-            // 팝업 띄워줘서 인벤토리가 꽉찼습니다.
-            // 정리하고 다시 완료 버튼 누르게
-        }
+            else
+            {
+                Debug.Log("Inventory가 null입니다.");
+            }
 
+        }
+        //밑에 이제 다른 퀘스트들의 보상도 추가 예정
     }
    
     
