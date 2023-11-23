@@ -95,7 +95,7 @@ public class npcInteraction : MonoBehaviour
                 
                 if (npc.conversationCount == quest.questComplete) 
                 {
-                    // 퀘스트 완료 처리를 수행합니다.
+                    
                     CompleteConversationQuest(npc);
                 }
 
@@ -124,11 +124,17 @@ public class npcInteraction : MonoBehaviour
             foreach (var npc in selectedQuest.relatedNPCs)
             {
 
-                questProgName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
-
+                //questProgName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
+                questProgName.text = selectedQuest.questName + "\n - " +  " 1 / " + selectedQuest.questComplete;
             }
         }
         
+    }
+    void HideDialogue()
+    {
+        isTalking = false;
+        dialogueUI.SetActive(false);
+        interactionPopup.SetActive(false);
     }
 
 
@@ -171,12 +177,6 @@ public class npcInteraction : MonoBehaviour
     }
     
 
-    void HideDialogue()
-    {
-        isTalking = false;
-        dialogueUI.SetActive(false);
-        interactionPopup.SetActive(false);
-    }
 
     System.Collections.IEnumerator DisplayDialogue(string dialogue) 
     {
