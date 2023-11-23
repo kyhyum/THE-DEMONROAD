@@ -111,14 +111,14 @@ public class Player : MonoBehaviour
         // 마우스 포인터가 UI 위에 있으면
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("마우스 포인터가 UI 위에 있다.");
+            //Debug.Log("마우스 포인터가 UI 위에 있다.");
 
             Input.InputActions.Disable();
         }
         //
         else
         {
-            Debug.Log("마우스 포인터가 UI 위에 없다.");
+            //Debug.Log("마우스 포인터가 UI 위에 없다.");
 
             Input.InputActions.Enable();
         }
