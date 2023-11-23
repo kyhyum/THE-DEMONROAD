@@ -98,22 +98,30 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        MousePointerOverUI();
+
+        stateMachine.Update();
+    }
+
+    /// <summary>
+    /// 마우스 포인터가 UI 위에 있으면 입력을 비활성화하고, UI 위에 없으면 입력을 활성화한다.
+    /// </summary>
+    void MousePointerOverUI()
+    {
         // 마우스 포인터가 UI 위에 있으면
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            //Debug.Log("마우스 포인터가 UI 위에 있다.");
+            Debug.Log("마우스 포인터가 UI 위에 있다.");
 
             Input.InputActions.Disable();
         }
         //
         else
         {
-            //Debug.Log("마우스 포인터가 UI 위에 없다.");
+            Debug.Log("마우스 포인터가 UI 위에 없다.");
 
             Input.InputActions.Enable();
         }
-
-        stateMachine.Update();
     }
 
     private void LateUpdate()
