@@ -72,7 +72,7 @@ public class npcInteraction : MonoBehaviour
     void ShowDialogue()
     {
         isTalking = true;
-        StopAllCoroutines(); //초기화
+        StopAllCoroutines(); 
 
         dialogueUI.SetActive(true);
         nameText.text = npc.npcName;
