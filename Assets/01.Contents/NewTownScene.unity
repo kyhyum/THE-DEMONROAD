@@ -23896,6 +23896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: f0f69b6bd54ec3744b1bdfea587625f1, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
+  golditem: {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
   dialogueUI: {fileID: 2043401718}
   interactionPopup: {fileID: 904030889}
   nameText: {fileID: 1608689205}
@@ -35587,6 +35588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: cd1dfb6ddf4d3454e9f6e1773962761d, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
+  golditem: {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
   dialogueUI: {fileID: 1856389047}
   interactionPopup: {fileID: 2082806026}
   nameText: {fileID: 1324289736}
@@ -55418,6 +55420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: d3ce2970e3d24254e88844cc8be775e0, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
+  golditem: {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
   dialogueUI: {fileID: 1735550675}
   interactionPopup: {fileID: 366699507}
   nameText: {fileID: 1580947111}

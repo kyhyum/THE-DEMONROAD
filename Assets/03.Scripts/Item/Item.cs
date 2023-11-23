@@ -14,11 +14,19 @@ public class Item
 
     public Item(ItemSO itemSO)
     {
-        itemName = itemSO.itemName;
-        description = itemSO.description;
-        texture = itemSO.texture;
-        rank = itemSO.rank;
-        type = itemSO.type;
-        prefab = itemSO.prefab;
+        if (itemSO != null)
+        {
+            itemName = itemSO.itemName;
+            description = itemSO.description;
+            texture = itemSO.texture;
+            rank = itemSO.rank;
+            type = itemSO.type;
+            prefab = itemSO.prefab;
+        }
+        else
+        {
+            
+            Debug.LogError("ItemSO가 null입니다.");
+        }
     }
 }

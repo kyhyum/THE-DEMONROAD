@@ -21,4 +21,5 @@ MonoBehaviour:
   <questCondition>k__BackingField: "\uB358\uC804\uC758 \uC785\uAD6C \uCC3E\uAE30"
   <questComplete>k__BackingField: 1
   <questReward>k__BackingField: "\uAE08\uD654 1\uAC1C"
+  <questRewardCoin>k__BackingField: 1
   relatedNPCs: []

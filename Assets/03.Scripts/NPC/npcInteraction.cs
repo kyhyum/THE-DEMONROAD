@@ -1,13 +1,16 @@
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 public class npcInteraction : MonoBehaviour
 {
     public NPCSO npc;
     public QuestSO quest;
+    public ItemSO golditem;
     private QuestController controller;
-    private QuestBoard board;
+   
+    public static UIManager Instance;
 
     public GameObject dialogueUI;
     public GameObject interactionPopup;
@@ -25,11 +28,12 @@ public class npcInteraction : MonoBehaviour
     Transform player;
 
     public float activationDistance = 5f;
-
+       
+    
     void Start()
     {
         controller = FindObjectOfType<QuestController>();
-        board = FindObjectOfType<QuestBoard>();
+        
 
         dialogueUI.SetActive(false);
         player = GameManager.Instance.Myplayer.transform;
@@ -95,7 +99,7 @@ public class npcInteraction : MonoBehaviour
                 
                 if (npc.conversationCount == quest.questComplete) 
                 {
-                    // 퀘스트 완료 처리를 수행합니다.
+                    
                     CompleteConversationQuest(npc);
                 }
 
@@ -124,11 +128,17 @@ public class npcInteraction : MonoBehaviour
             foreach (var npc in selectedQuest.relatedNPCs)
             {
 
-                questProgName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
-
+                //questProgName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
+                questProgName.text = selectedQuest.questName + "\n - " +  " 1 / " + selectedQuest.questComplete;
             }
         }
         
+    }
+    void HideDialogue()
+    {
+        isTalking = false;
+        dialogueUI.SetActive(false);
+        interactionPopup.SetActive(false);
     }
 
 
@@ -153,30 +163,39 @@ public class npcInteraction : MonoBehaviour
 
         questProgName.color = Color.green;
 
-        ItemSO goldItem = GetGoldItem();
-        board.ItemAddTest(goldItem);
-       
+        //금화 보상 처리
+        if (quest != null && quest.questType == QuestType.ConversationQuest)
+        {
+            
+            Inventory inventory = UIManager.Instance.GetInventory();
 
+            if (inventory != null)
+            {
+                
+                ItemSO itemSO = golditem;
+                Item itemToAdd = new Item(itemSO); 
+                bool itemAdded = inventory.AddItem(itemToAdd); 
 
+                if (itemAdded)
+                {
+                    // 금화 보상 추가
+                    inventory.Gold += quest.questRewardCoin;
+                    Debug.Log("보상으로 " + quest.questRewardCoin + "개의 금화 획득!");
+                }
+                else
+                {
+                    Debug.Log("아이템 추가에 실패했습니다.");
+                }
+            }
+            else
+            {
+                Debug.Log("Inventory가 null입니다.");
+            }
+
+        }
 
     }
-    ItemSO GetGoldItem()
-    {
-        Debug.Log("골드추가");
-        ItemSO goldItem = new ItemSO();
-        goldItem.type = ItemType.Gold; 
-        
 
-        return goldItem;
-    }
-    
-
-    void HideDialogue()
-    {
-        isTalking = false;
-        dialogueUI.SetActive(false);
-        interactionPopup.SetActive(false);
-    }
 
     System.Collections.IEnumerator DisplayDialogue(string dialogue) 
     {
