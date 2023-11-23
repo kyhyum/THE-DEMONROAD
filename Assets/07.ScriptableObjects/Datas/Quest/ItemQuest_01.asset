@@ -22,4 +22,5 @@ MonoBehaviour:
     10\uAC1C"
   <questComplete>k__BackingField: 10
   <questReward>k__BackingField: "\uAE08\uD654 3\uAC1C"
+  <questRewardCoin>k__BackingField: 3
   relatedNPCs: []

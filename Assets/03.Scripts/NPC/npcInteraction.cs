@@ -1,13 +1,16 @@
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 public class npcInteraction : MonoBehaviour
 {
     public NPCSO npc;
     public QuestSO quest;
+    public ItemSO golditem;
     private QuestController controller;
     private QuestBoard board;
+    public static UIManager Instance;
 
     public GameObject dialogueUI;
     public GameObject interactionPopup;
@@ -25,7 +28,8 @@ public class npcInteraction : MonoBehaviour
     Transform player;
 
     public float activationDistance = 5f;
-
+       
+    
     void Start()
     {
         controller = FindObjectOfType<QuestController>();
@@ -159,23 +163,38 @@ public class npcInteraction : MonoBehaviour
 
         questProgName.color = Color.green;
 
-        ItemSO goldItem = GetGoldItem();
-        board.ItemAddTest(goldItem);
-       
+        //금화 보상 처리
+        if (quest != null && quest.questType == QuestType.ConversationQuest)
+        {
+            
+            Inventory inventory = UIManager.Instance.GetInventory();
 
+            if (inventory != null)
+            {
+                
+                ItemSO itemSO = golditem;
+                Item itemToAdd = new Item(itemSO); 
+                bool itemAdded = inventory.AddItem(itemToAdd); // 아이템을 Inventory에 추가
 
+                if (itemAdded)
+                {
+                    // 금화 보상 추가
+                    inventory.Gold += quest.questRewardCoin;
+                    Debug.Log("보상으로 " + quest.questRewardCoin + "개의 금화 획득!");
+                }
+                else
+                {
+                    Debug.Log("아이템 추가에 실패했습니다.");
+                }
+            }
+            else
+            {
+                Debug.Log("Inventory가 null입니다.");
+            }
+
+        }
 
     }
-    ItemSO GetGoldItem()
-    {
-        Debug.Log("골드추가");
-        ItemSO goldItem = new ItemSO();
-        goldItem.type = ItemType.Gold; 
-        
-
-        return goldItem;
-    }
-    
 
 
     System.Collections.IEnumerator DisplayDialogue(string dialogue) 

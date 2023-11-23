@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class QuestBoard : MonoBehaviour
 {
     //gameobject
-    //public GameObject mainCompletePop;  
+      
     public GameObject acceptPopup;
     public GameObject cancelPopup;
     public GameObject questLogPanel;
@@ -44,7 +44,7 @@ public class QuestBoard : MonoBehaviour
 
     //메인퀘스트 관련
     private ChoiceDungeon choiceDungeon;
-    //public float fadeDuration = 1f;
+    
 
     public List<QuestSO> Quests { get { return quests; } }
 
