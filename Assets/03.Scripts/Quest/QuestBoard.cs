@@ -39,6 +39,7 @@ public class QuestBoard : MonoBehaviour
 
     //메인퀘스트 관련
     private ChoiceDungeon choiceDungeon;
+    private bool isMainQuestProgressUpdated = false;
 
     public List<QuestSO> Quests { get { return quests; } }
     public ItemSO golditem;
@@ -196,9 +197,10 @@ public class QuestBoard : MonoBehaviour
 
             if(goblinKills >= selectedQuest.questComplete)
             {
-                questProgmonsterName.color = Color.green;
-                
-                
+                questProgmonsterName.color = Color.red;
+                questProgmonsterName.fontStyle |= FontStyles.Italic;
+                questProgmonsterName.fontStyle |= FontStyles.Strikethrough;
+
             }
         }
         else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
@@ -206,9 +208,11 @@ public class QuestBoard : MonoBehaviour
             questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " +goblinKills + "/ " + selectedQuest.questComplete;
             if (goblinKills >= selectedQuest.questComplete)
             {
-                questProgmonsterName.color = Color.green;
+                questProgInfinitemonsterName.color = Color.red;
+                questProgInfinitemonsterName.fontStyle |= FontStyles.Italic;
+                questProgInfinitemonsterName.fontStyle |= FontStyles.Strikethrough;
                 //여기에 새로운 퀘스트 추가 - 150마리 잡는 퀘스트
-                
+
             }
         }
         else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 
@@ -220,31 +224,38 @@ public class QuestBoard : MonoBehaviour
     }
     public void UpdateMainQuestProgress(QuestSO selectedQuest)
     {
-
-        if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
+        if (!isMainQuestProgressUpdated)
         {
-            Debug.Log("UpdateMainQuest이 null이 아니다");
+            if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
+            {
+                Debug.Log("UpdateMainQuest이 null이 아니다");
 
                 
-            questProgmainName.color = Color.green;
-            questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;     
+                questProgmainName.color = Color.red;
+                questProgmainName.fontStyle |= FontStyles.Italic;
+                questProgmainName.fontStyle |= FontStyles.Strikethrough;
 
-            // 보상처리
-            MainQuestReward(selectedQuest);
-            
+                questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;     
 
+                // 보상처리
+                MainQuestReward(selectedQuest);
+                isMainQuestProgressUpdated = true;
+
+
+            }
+            else if (choiceDungeon == null)
+            {
+                // choiceDungeon이 null 
+                Debug.Log("choiceDungeon이 Null입니다");
+            }
+            else
+            {
+                //dungeonInteractionPopup이 비활성화일 때
+                Debug.Log("popup이 비활성화 상태");
+            }
 
         }
-        else if (choiceDungeon == null)
-        {
-            // choiceDungeon이 null 
-            Debug.Log("choiceDungeon이 Null입니다");
-        }
-        else
-        {
-            //dungeonInteractionPopup이 비활성화일 때
-            Debug.Log("popup이 비활성화 상태");
-        }
+
     }
     
     void OnDestroy()
