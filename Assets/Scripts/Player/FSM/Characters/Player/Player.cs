@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public CinemachineVirtualCamera VirtualCamera { get; set; }
     [field: SerializeField] public CinemachineComponentBase ComponentBase { get; set; }
 
-    public bool IsMoving { get; set; }
+    public bool IsMovePerformed { get; set; }
     public bool IsAttacking { get; set; }
     public bool IsAttackSkill1 { get; set; }
 
