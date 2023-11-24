@@ -11,7 +11,6 @@ public class PlayerWalkState : PlayerGroundedState
 
     public override void Enter()
     {
-        stateMachine.MovementSpeedModifier = groundData.WalkSpeedModifier;
         base.Enter();
         StartAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
     }
@@ -34,15 +33,22 @@ public class PlayerWalkState : PlayerGroundedState
         }
     }
 
-    protected override void OnMovePerformed(InputAction.CallbackContext context)
+    protected override void OnMoveStarted(InputAction.CallbackContext context)
     {
-        base.OnMovePerformed(context);
+        base.OnMoveStarted(context);
 
         Move();
     }
 
-    protected override void OnMoveCanceled(InputAction.CallbackContext context)
-    {
-        base.OnMoveCanceled(context);
-    }
+    //protected override void OnMovePerformed(InputAction.CallbackContext context)
+    //{
+    //    base.OnMovePerformed(context);
+    //
+    //    Move();
+    //}
+
+    //protected override void OnMoveCanceled(InputAction.CallbackContext context)
+    //{
+    //    base.OnMoveCanceled(context);
+    //}
 }
