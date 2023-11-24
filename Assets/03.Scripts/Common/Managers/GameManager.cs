@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
 
     public PlayerCondition conditon;
 
-    WaitForSecondsRealtime wait;
     SlotItem slot;
     private void Awake()
     {
@@ -28,7 +27,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-        wait = new WaitForSecondsRealtime(5f);
+
         slot = new SlotItem();
     }
     private void Start()
@@ -37,6 +36,17 @@ public class GameManager : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if(player.name == "Tester")
+        {
+            Myplayer = Instantiate<GameObject>(player.baseObject, player.currentPlayerPos, player.currentPlayerRot);
+            conditon = Myplayer.AddComponent<PlayerCondition>();
+            conditon.playerData = player;
+            conditon.Initialize();
+            uiManager.gameObject.SetActive(true);
+            uiManager.GetInventory().Set(LoadItemArrayFromJson(StringManager.TestItemJsonPath, player.name));
+            uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.TestItemJsonPath, StringManager.TestStorageName));
+            return;
+        }
         if (player.baseObject != null && scene.buildIndex != (int)SceneType.Start && scene.buildIndex != (int)SceneType.Loading)
         {
             Myplayer = Instantiate<GameObject>(player.baseObject, player.currentPlayerPos, player.currentPlayerRot);
@@ -133,6 +143,16 @@ public class GameManager : MonoBehaviour
     }
     public void Save()
     {
+        if (player.name == "Tester")
+        {
+            player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
+            player.currentPlayerPos = Myplayer.transform.position;
+            player.currentPlayerRot = Myplayer.transform.rotation;
+            SaveItemArrayToJson(StringManager.ItemJsonPath, player.name, uiManager.GetInventory().Get());
+            SaveItemArrayToJson(StringManager.ItemJsonPath, StringManager.StorageName, uiManager.GetStorage().Get());
+            SavePlayerDataToJson(StringManager.TestJsonPath, player.name, player);
+            return;
+        }
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)SceneType.Loading)
         {
             player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
