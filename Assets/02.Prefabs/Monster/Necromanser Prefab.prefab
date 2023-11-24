@@ -13580,6 +13580,7 @@ GameObject:
   - component: {fileID: 120932572825889851}
   - component: {fileID: 5549459766245515089}
   - component: {fileID: 3524503319444131864}
+  - component: {fileID: -5485361593876064734}
   m_Layer: 0
   m_Name: Necromanser Prefab
   m_TagString: Untagged
@@ -13735,6 +13736,32 @@ CapsuleCollider:
   m_Height: 1.9
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!143 &-5485361593876064734
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5377540179740515954}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5380555575274222288
 GameObject:
   m_ObjectHideFlags: 0

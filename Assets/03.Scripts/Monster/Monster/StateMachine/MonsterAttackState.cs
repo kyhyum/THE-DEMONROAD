@@ -29,16 +29,9 @@ public class MonsterAttackState : MonsterBaseState
     {
         base.Update();
 
-        ForceMove();
         float normalizedTime = GetNormalizedTime(stateMachine.Monster.Animator, "Attack");
         if (normalizedTime < 1f)
         {
-            if (!stateMachine.Monster.Data.IsLongRanged)
-            {
-                if (normalizedTime >= stateMachine.Monster.Data.ForceTransitionTime)
-                    TryApplyForce();
-            }
-
             if (!alreadyAppliedDealing && normalizedTime >= stateMachine.Monster.Data.Dealing_Start_TransitionTime)
             {
                 stateMachine.Monster.Weapon.SetAttack(stateMachine.Monster.Data.Damage);
@@ -58,15 +51,6 @@ public class MonsterAttackState : MonsterBaseState
         }
     }
 
-    private void TryApplyForce()
-    {
-        if (alreadyAppliedForce) return;
-        alreadyAppliedForce = true;
-
-        stateMachine.Monster.EnemyForceReceiver.Reset();
-
-        stateMachine.Monster.EnemyForceReceiver.AddForce(stateMachine.Monster.transform.forward * stateMachine.Monster.Data.Force);
-
-    }
+   
 
 }

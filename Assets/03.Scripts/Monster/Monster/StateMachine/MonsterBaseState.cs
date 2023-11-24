@@ -43,11 +43,6 @@ public class MonsterBaseState : MonsterIState
         Rotate(movementDirection);
     }
 
-    protected void ForceMove()
-    {
-        stateMachine.Monster.Controller.Move(stateMachine.Monster.EnemyForceReceiver.Movement * Time.deltaTime);
-    }
-
     // 
     private Vector3 GetMovementDirection()
     {
