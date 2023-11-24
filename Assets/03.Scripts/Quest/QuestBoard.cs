@@ -35,7 +35,7 @@ public class QuestBoard : MonoBehaviour
     public static UIManager Instance;
 
     private QuestController controller;
-    int goblinKills = DungeonManager.Instance.goblinkillCount;
+    //int goblinKills = DungeonManager.Instance.goblinkillCount;
 
     //메인퀘스트 관련
     private ChoiceDungeon choiceDungeon;
@@ -193,27 +193,27 @@ public class QuestBoard : MonoBehaviour
         }
         else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트 = TODO:goblin 처치 시마다 처치한 마릿수 카운트 
         {
-            questProgmonsterName.text = selectedQuest.questName + "\n - " + goblinKills  + "/ " + selectedQuest.questComplete;
+            questProgmonsterName.text = selectedQuest.questName + "\n - "  + "0 / " + selectedQuest.questComplete;
 
-            if(goblinKills >= selectedQuest.questComplete)
-            {
-                questProgmonsterName.color = Color.red;
-                questProgmonsterName.fontStyle |= FontStyles.Italic;
-                questProgmonsterName.fontStyle |= FontStyles.Strikethrough;
+            //if(goblinKills >= selectedQuest.questComplete)
+            //{
+            //    questProgmonsterName.color = Color.red;
+            //    questProgmonsterName.fontStyle |= FontStyles.Italic;
+            //    questProgmonsterName.fontStyle |= FontStyles.Strikethrough;
 
-            }
+            //}
         }
         else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
         {
-            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " +goblinKills + "/ " + selectedQuest.questComplete;
-            if (goblinKills >= selectedQuest.questComplete)
-            {
-                questProgInfinitemonsterName.color = Color.red;
-                questProgInfinitemonsterName.fontStyle |= FontStyles.Italic;
-                questProgInfinitemonsterName.fontStyle |= FontStyles.Strikethrough;
-                //여기에 새로운 퀘스트 추가 - 150마리 잡는 퀘스트
+            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - "  + "0 / " + selectedQuest.questComplete;
+            //if (goblinKills >= selectedQuest.questComplete)
+            //{
+            //    questProgInfinitemonsterName.color = Color.red;
+            //    questProgInfinitemonsterName.fontStyle |= FontStyles.Italic;
+            //    questProgInfinitemonsterName.fontStyle |= FontStyles.Strikethrough;
+            //    //여기에 새로운 퀘스트 추가 - 150마리 잡는 퀘스트
 
-            }
+            //}
         }
         else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 
         {
