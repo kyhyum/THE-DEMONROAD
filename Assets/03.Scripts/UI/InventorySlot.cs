@@ -14,6 +14,19 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
 
         foreach (RaycastResult result in results)
         {
+            if (result.gameObject.TryGetComponent<QuickSlot>(out QuickSlot quickSlot))
+            {
+                Item item = GetItem();
+
+                Debug.Log(item);
+                if (item is UseItem)
+                {
+                    Debug.Log(item);
+                    quickSlot.SetSlot((UseItem)item);
+                }
+                return;
+            }
+
             if (result.gameObject.TryGetComponent<InventorySlot>(out InventorySlot inventorySlot))
             {
                 if (inventorySlot.slotID == slotID)

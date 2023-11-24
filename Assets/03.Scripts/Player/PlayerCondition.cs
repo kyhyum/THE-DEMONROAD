@@ -56,15 +56,10 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
 
     public event Action OnDie;
 
-    public delegate void HealthChangedDelegate(float newHealth);
-    public event HealthChangedDelegate OnHealthChanged;
-
-
-    public delegate void ManaChangedDelegate(float newMana);
-    public event ManaChangedDelegate OnManaChanged;
-
-    public delegate void ExpChangedDelegate(int newExp);
-    public event ExpChangedDelegate OnExpChanged;
+    public delegate void ValueChangedDelegate(float newValue, float maxValue);
+    public event ValueChangedDelegate OnHpChanged;
+    public event ValueChangedDelegate OnMpChanged;
+    public event ValueChangedDelegate OnExpChanged;
 
     public bool IsDead => currentHp == 0;
     public void Initialize()
@@ -158,6 +153,7 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
             other.GetComponent<ITakeDamage>().TakeDamage(atk);
         }
     }
+
     public void TakeDamage(float damage)
     {
         if (currentHp == 0) return;
@@ -165,7 +161,7 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
         float result = currentHp - damage;
         currentHp = Mathf.Max(result, 0);
 
-        OnHealthChanged?.Invoke(currentHp);
+        OnHpChanged?.Invoke(currentHp, maxHp);
 
         if (currentHp == 0)
             OnDie?.Invoke();

@@ -14,24 +14,25 @@ public class UIManager : MonoBehaviour
     private GameObject inventoryObject;
     private GameObject storageObject;
     public GameObject settingObject;
+    public GameObject playerUIObject;
     private Inventory inventory;
     private Storage storage;
+    public PlayerUI playerUI { get; private set; }
 
     [SerializeField] private AudioClip[] clips;
     [SerializeField] public PopUpUI popUpUI;
     private AudioSource audioSource;
-    private SoundManager soundManager;
-    private QuickSlot[] quickSlots;
     public bool storageOpen => storageObject.activeSelf;
     private Vector2 pos;
 
     private void Awake()
     {
         EnableUI = new List<GameObject>();
+        audioSource = GetComponent<AudioSource>();
+        playerUI = playerUIObject.GetComponent<PlayerUI>();
 
         CreateStorage();
         CreateInventory();
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -50,7 +51,6 @@ public class UIManager : MonoBehaviour
 
         inputAction.Player.Escape.Enable();
         inputAction.Player.Escape.started += OnEscapeKey;
-        soundManager = SoundManager.Instance;
     }
 
     private void CreateInventory()
@@ -73,28 +73,13 @@ public class UIManager : MonoBehaviour
     {
         inputAction.Player.Inventory.Enable();
         inputAction.Player.SkillUI.Enable();
-        inputAction.Player.QuickSlot1.Enable();
-        inputAction.Player.QuickSlot2.Enable();
-        inputAction.Player.QuickSlot3.Enable();
-        inputAction.Player.QuickSlot4.Enable();
-        inputAction.Player.QuickSlot5.Enable();
         inputAction.Player.Inventory.started += ActiveInventory;
-        // inputAction.Player.QuickSlot1.started +=;
-        // inputAction.Player.QuickSlot2.started +=;
-        // inputAction.Player.QuickSlot3.started +=;
-        // inputAction.Player.QuickSlot4.started +=;
-        // inputAction.Player.QuickSlot5.started +=;
     }
 
     public void OnUIInputDisable()
     {
         inputAction.Player.Inventory.Disable();
         inputAction.Player.SkillUI.Disable();
-        inputAction.Player.QuickSlot1.Disable();
-        inputAction.Player.QuickSlot2.Disable();
-        inputAction.Player.QuickSlot3.Disable();
-        inputAction.Player.QuickSlot4.Disable();
-        inputAction.Player.QuickSlot5.Disable();
         inputAction.Player.Inventory.started -= ActiveInventory;
     }
 
@@ -122,11 +107,18 @@ public class UIManager : MonoBehaviour
     {
         ActiveInventory();
     }
+
     public void ActivePopUpUI(string title, string explan, UnityAction action)
     {
         ActiveUIGameObject(popUpUI.gameObject);
         popUpUI.OpenPopUpUI(title, explan, action);
     }
+
+    public void ActivePlayerUI(bool flag)
+    {
+        playerUIObject.SetActive(flag);
+    }
+
     public void ActivePopUpUI()
     {
         ActiveUIGameObject(popUpUI.gameObject);
@@ -190,6 +182,7 @@ public class UIManager : MonoBehaviour
         {
             EnableUI.Insert(0, gameObject);
         }
+
         if (gameObject.activeSelf)
         {
             UICloseSound();
@@ -198,6 +191,7 @@ public class UIManager : MonoBehaviour
         {
             UIOpenSound();
         }
+
         gameObject.SetActive(!gameObject.activeSelf);
     }
 
@@ -210,10 +204,10 @@ public class UIManager : MonoBehaviour
 
     public void UIOpenSound()
     {
-        soundManager.SFXPlay(audioSource, clips[0]);
+        SoundManager.Instance.SFXPlay(audioSource, clips[0]);
     }
     public void UICloseSound()
     {
-        soundManager.SFXPlay(audioSource, clips[1]);
+        SoundManager.Instance.SFXPlay(audioSource, clips[1]);
     }
 }

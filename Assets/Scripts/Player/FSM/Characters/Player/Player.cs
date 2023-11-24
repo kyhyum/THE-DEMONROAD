@@ -42,13 +42,6 @@ public class Player : MonoBehaviour
 
     [field: SerializeField] Transform cameraLookPoint;
 
-    public Image hpImage;
-    [SerializeField] TextMeshProUGUI hpText;
-    public Image mpImage;
-    [SerializeField] TextMeshProUGUI mpText;
-    public Image expImage;
-    [SerializeField] TextMeshProUGUI expText;
-
     private void Awake()
     {
         AnimationData.Initialize();
@@ -76,12 +69,13 @@ public class Player : MonoBehaviour
         stateMachine.ChangeState(stateMachine.IdleState);
 
         playerCondition.OnDie += OnDie;
-        playerCondition.OnHealthChanged += UpdateHealthUI;
-        playerCondition.OnManaChanged += UpdateManaUI;
-        playerCondition.OnExpChanged += UpdateExpUI;
+        playerCondition.OnHpChanged += UIManager.Instance.playerUI.UpdateHpUI;
+        playerCondition.OnMpChanged += UIManager.Instance.playerUI.UpdateMpUI;
+        playerCondition.OnExpChanged += UIManager.Instance.playerUI.UpdateExpUI;
 
-        hpImage.fillAmount = playerCondition.currentHp / playerCondition.maxHp;
-        mpImage.fillAmount = playerCondition.currentMp / playerCondition.maxMp;
+        UIManager.Instance.playerUI.UpdateHpUI(playerCondition.currentHp, playerCondition.maxHp);
+        UIManager.Instance.playerUI.UpdateMpUI(playerCondition.currentMp, playerCondition.maxMp);
+        // UIManager.Instance.playerUI.UpdateExpUI(playerCondition.playerData.exp, maxExp);
 
         UIManager.Instance.OnUIInputEnable();
 
@@ -146,29 +140,5 @@ public class Player : MonoBehaviour
         Animator.SetTrigger("Die");
         // Player.cs를 false로 만든다.
         enabled = false;
-    }
-
-    void UpdateHealthUI(float newHealth)
-    {
-        playerCondition.currentHp = newHealth;
-        hpImage.fillAmount = playerCondition.currentHp / playerCondition.maxHp;
-        hpText.text = $"{playerCondition.currentHp.ToString("N0")} / {playerCondition.maxHp.ToString("N0")}";
-    }
-
-    void UpdateManaUI(float newMana)
-    {
-        playerCondition.currentMp = newMana;
-        mpImage.fillAmount = playerCondition.currentMp / playerCondition.maxMp;
-        mpText.text = $"{playerCondition.currentMp.ToString("N0")} / {playerCondition.maxMp.ToString("N0")}";
-    }
-
-    void UpdateExpUI(int newExp)
-    {
-        playerCondition.playerData.exp += newExp;
-        if(playerCondition.playerData.exp >= playerCondition.levelExp)
-        {
-            playerCondition.LevelUp();
-        }
-        expText.text = $"{playerCondition.playerData.exp} / {playerCondition.levelExp}";
     }
 }

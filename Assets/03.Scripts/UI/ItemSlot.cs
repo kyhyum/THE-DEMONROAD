@@ -14,35 +14,47 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private Item item;
     private TMP_Text quantity;
     public int slotID;
+    private bool isClone;
 
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
         icon = GetComponentInChildren<RawImage>();
         quantity = GetComponentInChildren<TMP_Text>();
-        item = null;
+        isClone = false;
+        SetItem(null);
     }
 
-    public void SetItem(Item item)
+    public void SetItem(Item newItem)
     {
-        this.item = item;
+        if (item is UseItem)
+        {
+            UseItem useItem = (UseItem)item;
+            useItem.OnCountChanged -= SetQuantity;
+        }
 
-        if (item == null)
+        if (newItem == null)
         {
             Clear();
+            item = null;
             return;
         }
 
+        item = newItem;
+
         if (item is IStackable)
         {
-            IStackable stackableItem = (IStackable)item;
-            quantity.text = stackableItem.Get().ToString();
-
-            Debug.Log(stackableItem.Get());
+            SetQuantity(((IStackable)item).Get());
         }
         else
         {
             quantity.text = string.Empty;
+        }
+
+        if (item is UseItem && !isClone)
+        {
+            UseItem useItem = (UseItem)item;
+            useItem.OnCountChanged += SetQuantity;
         }
 
         icon.texture = item.texture;
@@ -68,15 +80,31 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void Clear()
     {
-        SetAlpha(0);
         quantity.text = string.Empty;
+        SetAlpha(0);
     }
 
-    private void SetAlpha(float f)
+    public void SetAlpha(float f)
     {
         Color color = icon.color;
         color.a = f;
         icon.color = color;
+    }
+
+    public void SetQuantity(int count)
+    {
+        if (count == 0)
+        {
+            SetItem(null);
+            return;
+        }
+
+        quantity.text = count.ToString();
+    }
+
+    public void SetClone()
+    {
+        isClone = true;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -85,6 +113,9 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             return;
         itemClone = Instantiate(gameObject, canvas.GetComponent<Transform>());
         rect = itemClone.GetComponent<RectTransform>();
+        ItemSlot itemSlot = itemClone.GetComponent<ItemSlot>();
+        itemSlot.SetClone();
+        itemSlot.SetItem(item);
 
         rect.sizeDelta = new Vector2(70, 70);
 
