@@ -14,7 +14,7 @@ public class SelectCanvasManager : MonoBehaviour
     [SerializeField] CharacterSlot[] characterSlots;
     [SerializeField] GameObject[] baseCharacters;
     
-    private List<string> playerName = new List<string>();
+    public List<string> playerName = new List<string>();
 
     private PlayerData[] playerDatas = new PlayerData[4];
     public PlayerData[] PlayerDatas { get { return playerDatas; } }
@@ -141,6 +141,11 @@ public class SelectCanvasManager : MonoBehaviour
     }
     public void CreateCharacter(string name, PlayerData data)
     {
+        if(name.Length > 6)
+        {
+            gameManager.uiManager.ActivePopUpUI("캐릭터 생성", "이름은 최대 6자 까지입니다.", null);
+            return;
+        }
         if (!playerName.Contains(name))
         {
             data.name = name;
@@ -155,7 +160,7 @@ public class SelectCanvasManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("이미 있는 이름입니다");
+            gameManager.uiManager.ActivePopUpUI("캐릭터 생성", "이미 있는 이름입니다.", null);
         }
     }
     public void PopUpOpen()

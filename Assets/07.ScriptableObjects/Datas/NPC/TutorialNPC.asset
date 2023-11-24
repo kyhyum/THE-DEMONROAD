@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d959fa556359c54bb56448b5ab7c28a, type: 3}
+  m_Name: TutorialNPC
+  m_EditorClassIdentifier: 
+  <npcIndex>k__BackingField: 999
+  <npcName>k__BackingField: "\uC824\uB9AC"
+  <npcDialogue>k__BackingField:
+  - "\uBC18\uAC11\uC2B5\uB2C8\uB2E4. \uBAA8\uD5D8\uC790\uB2D8 \uC800\uB294 \uB2F9\uC2E0\uC758
+    \uBAA8\uD5D8\uC744 \uB3C4\uC640\uC904 \uC824\uB9AC\uB77C\uACE0 \uD569\uB2C8\uB2E4."
+  - "\uB9CC\uC57D \uB3C4\uC6C0\uC774 \uD544\uC694\uD558\uC9C0 \uC54A\uC73C\uC2DC\uB2E4\uBA74
+    \uC5B8\uC81C\uB4E0\uC9C0 \uC624\uB978\uCABD \uC0C1\uB2E8\uC758 \uBC84\uD2BC\uC744
+    \uB20C\uB7EC \uB3CC\uC544\uAC00\uC2DC\uBA74 \uB429\uB2C8\uB2E4."
+  - "\uADF8\uB7FC \uC2DC\uC791\uD574\uB3C4 \uB420\uAE4C\uC694?"
+  <completeDialogue>k__BackingField:
+  - "\uD589\uC6B4\uC744 \uBE4C\uAC8C\uC694.  \uBAA8\uD5D8\uC790\uB2D8"
+  <hasQuest>k__BackingField: 0
+  <questType>k__BackingField: 2
+  <conversationCount>k__BackingField: 0

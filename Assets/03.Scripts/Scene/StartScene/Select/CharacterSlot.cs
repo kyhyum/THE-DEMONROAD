@@ -92,6 +92,7 @@ public class CharacterSlot : MonoBehaviour
     }
     public void ClearSlot()
     {
+        SelectCanvasManager.Instance.playerName.Remove(character.name);
         Destroy(character);
         TextOpen(false);
         character = null;
@@ -119,7 +120,7 @@ public class CharacterSlot : MonoBehaviour
         character.transform.localScale = new Vector3(3, 3, 3);
         character.transform.rotation = look;
         characterName.text = character.name;
-        characterLevel.text = data.level.ToString();
+        characterLevel.text = "Lv. " + data.level.ToString();
         characterJob.text = data.job.ToString();
         TextOpen(true);
     }
