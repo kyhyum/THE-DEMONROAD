@@ -161,7 +161,9 @@ public class npcInteraction : MonoBehaviour
         // 퀘스트 완료 처리를 수행할 코드 작성
         Debug.Log("Quest completed!");
 
-        questProgName.color = Color.green;
+        questProgName.color = Color.red;
+        questProgName.fontStyle |= FontStyles.Italic;
+        questProgName.fontStyle |= FontStyles.Strikethrough;
 
         //금화 보상 처리
         if (quest != null && quest.questType == QuestType.ConversationQuest)
