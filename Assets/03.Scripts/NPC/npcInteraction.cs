@@ -11,7 +11,7 @@ public class npcInteraction : MonoBehaviour
     private QuestController controller;
    
     public static UIManager Instance;
-
+    
     public GameObject dialogueUI;
     public GameObject interactionPopup;
     
@@ -55,26 +55,33 @@ public class npcInteraction : MonoBehaviour
                 if (isUIVisible)
                 {
                     ShowDialogue();
+                    
                 }
                 else
                 {
                     HideDialogue();
-                    
+                    UIManager.Instance.ActivePlayerUI(true);
+
                 }
             }
         }
         else
         {
             HideDialogue();
+            UIManager.Instance.ActivePlayerUI(true);
         }
         if (isUIVisible && Input.GetKeyDown(KeyCode.F) && !isTalking)
         {
             HideDialogue();
+            UIManager.Instance.ActivePlayerUI(true);
         }
 
     }
     void ShowDialogue()
     {
+        //player Ui off
+        UIManager.Instance.ActivePlayerUI(false);
+
         isTalking = true;
         StopAllCoroutines(); 
 
@@ -139,6 +146,7 @@ public class npcInteraction : MonoBehaviour
         isTalking = false;
         dialogueUI.SetActive(false);
         interactionPopup.SetActive(false);
+        
     }
 
 
