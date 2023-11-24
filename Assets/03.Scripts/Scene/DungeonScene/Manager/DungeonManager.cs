@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class DungeonManager : MonoBehaviour
@@ -18,9 +20,6 @@ public class DungeonManager : MonoBehaviour
     public GameObject swordGoblinPrefab;
     public GameObject orkberserkerPrefab;
     public GameObject necromanserPrefab;
-
-    //TODO: 골드, (hp,mp포션), 퀘스트 템, 장비 (Item.class)
-    //Item ObjectPool
 
     //Monster ObjectPool
     public ObjectPool<Monster> monsterObjectPool { get; private set; }
@@ -86,6 +85,7 @@ public class DungeonManager : MonoBehaviour
         switch (monsterType)
         {
             case MonsterType.Goblin:
+
                 monster = goblinObjectPool.GetObject();
                 monster.objectPoolReturn += goblinObjectPool.ReturnObject;
 
