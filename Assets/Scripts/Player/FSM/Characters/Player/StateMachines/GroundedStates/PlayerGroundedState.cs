@@ -59,23 +59,23 @@ public class PlayerGroundedState : PlayerBaseState
         base.OnMoveStarted(context);
     }
 
-    //protected override void OnMovePerformed(InputAction.CallbackContext context)
-    //{
-    //
-    //    if (stateMachine.Player.Agent.velocity != Vector3.zero)
-    //    {
-    //        return;
-    //    }
-    //
-    //    stateMachine.ChangeState(stateMachine.IdleState);
-    //
-    //    base.OnMovePerformed(context);
-    //}
+    protected override void OnMovePerformed(InputAction.CallbackContext context)
+    {
 
-    //protected override void OnMoveCanceled(InputAction.CallbackContext context)
-    //{
-    //    base.OnMoveCanceled(context);
-    //}
+        if (stateMachine.Player.Agent.velocity != Vector3.zero)
+        {
+            return;
+        }
+
+        stateMachine.ChangeState(stateMachine.IdleState);
+
+        base.OnMovePerformed(context);
+    }
+
+    protected override void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        base.OnMoveCanceled(context);
+    }
 
     protected virtual void OnStand()
     {

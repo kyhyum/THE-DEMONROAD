@@ -40,15 +40,15 @@ public class PlayerWalkState : PlayerGroundedState
         Move();
     }
 
-    //protected override void OnMovePerformed(InputAction.CallbackContext context)
-    //{
-    //    base.OnMovePerformed(context);
-    //
-    //    Move();
-    //}
+    protected override void OnMovePerformed(InputAction.CallbackContext context)
+    {
+        base.OnMovePerformed(context);
 
-    //protected override void OnMoveCanceled(InputAction.CallbackContext context)
-    //{
-    //    base.OnMoveCanceled(context);
-    //}
+        PerformedMove();
+    }
+
+    protected override void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        base.OnMoveCanceled(context);
+    }
 }

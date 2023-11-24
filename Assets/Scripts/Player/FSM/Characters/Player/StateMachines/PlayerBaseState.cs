@@ -21,6 +21,8 @@ public class PlayerBaseState : IState, IUsable
     [field: SerializeField] public float maxCamDistance = 15.0f;
     [field: SerializeField] float sensitivity = 1f;
 
+    RaycastHit hit;
+
     public PlayerBaseState(PlayerStateMachine playerStateMachine)
     {
         stateMachine = playerStateMachine;
@@ -44,7 +46,7 @@ public class PlayerBaseState : IState, IUsable
 
     public virtual void Update()
     {
-        //Move();
+        PerformedMove();
     }
 
     public virtual void LateUpdate()
@@ -61,8 +63,8 @@ public class PlayerBaseState : IState, IUsable
         // .started: 해당 키가 눌려졌을 때
         
         input.PlayerActions.Move.started += OnMoveStarted;
-        //input.PlayerActions.Move.performed += OnMovePerformed;
-        //input.PlayerActions.Move.canceled += OnMoveCanceled;
+        input.PlayerActions.Move.performed += OnMovePerformed;
+        input.PlayerActions.Move.canceled += OnMoveCanceled;
         // .performed: 해당 키가 눌려지고 있는 동안에
         input.PlayerActions.Attack.performed += OnAttackPerformed;
         // .canceled: (눌려져 있는) 해당 키가 떼어졌을 떄
@@ -90,8 +92,8 @@ public class PlayerBaseState : IState, IUsable
         PlayerInput input = stateMachine.Player.Input;
 
         input.PlayerActions.Move.started -= OnMoveStarted;
-        //input.PlayerActions.Move.performed -= OnMovePerformed;
-        //input.PlayerActions.Move.canceled -= OnMoveCanceled;
+        input.PlayerActions.Move.performed -= OnMovePerformed;
+        input.PlayerActions.Move.canceled -= OnMoveCanceled;
 
         input.PlayerActions.Attack.performed -= OnAttackPerformed;
         input.PlayerActions.Attack.canceled -= OnAttackCanceled;
@@ -111,24 +113,24 @@ public class PlayerBaseState : IState, IUsable
 
     protected virtual void OnMoveStarted(InputAction.CallbackContext context)
     {
-        Debug.Log("OnMoveStarted 함수 호출한다.");
+        //Debug.Log("OnMoveStarted 함수 호출한다.");
 
         Move();
     }
 
-    //protected virtual void OnMovePerformed(InputAction.CallbackContext context)
-    //{
-    //    Debug.Log("OnMovePerformed 함수 호출한다.");
-    //
-    //    stateMachine.Player.IsMovePerformed = true;
-    //}
+    protected virtual void OnMovePerformed(InputAction.CallbackContext context)
+    {
+        //Debug.Log("OnMovePerformed 함수 호출한다.");
 
-    //protected virtual void OnMoveCanceled(InputAction.CallbackContext context)
-    //{
-    //    Debug.Log("OnMoveCanceled 함수 호출한다.");
-    //
-    //    stateMachine.Player.IsMovePerformed = false;
-    //}
+        stateMachine.Player.IsMovePerformed = true;
+    }
+
+    protected virtual void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        //Debug.Log("OnMoveCanceled 함수 호출한다.");
+
+        stateMachine.Player.IsMovePerformed = false;
+    }
 
     protected virtual void OnAttackPerformed(InputAction.CallbackContext context)
     {
@@ -224,10 +226,19 @@ public class PlayerBaseState : IState, IUsable
     /// </summary>
     protected void Move()
     {
-        //if (!stateMachine.Player.IsMoving)
-        //    return;
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition), out hit, 100))
+        {
+            //Debug.Log($"hit.collider.name: {hit.collider.name}");
+            //Debug.Log($"hit.point: {hit.point}");
 
-        RaycastHit hit;
+            stateMachine.Player.Agent.SetDestination(hit.point);
+        }
+    }
+
+    protected void PerformedMove()
+    {
+        if (!stateMachine.Player.IsMovePerformed)
+            return;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition), out hit, 100))
         {
