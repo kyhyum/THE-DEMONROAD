@@ -12,11 +12,10 @@ public class PlayerAttackState : PlayerBaseState
     {
         Debug.Log("PlayerAttackState 클래스 Enter 함수 호출한다.");
 
-        Player player = stateMachine.Player;
         Weapon weapon = stateMachine.Player.Weapon;
 
         //stateMachine.Player.AttackSlash
-        Object.Instantiate(weapon.AttackSlash, player.AttackVfxPoint.transform.position, Quaternion.identity);
+        Object.Instantiate(weapon.AttackSlash, weapon.transform.position, Quaternion.identity);
         
         stateMachine.Player.Agent.ResetPath();
         base.Enter();
@@ -35,17 +34,15 @@ public class PlayerAttackState : PlayerBaseState
     {
         base.Update();
 
-        Debug.Log("PlayerAttackState 클래스 Update 함수 호출한다.");
-
         float normalizedTime = GetNormalizedTime(stateMachine.Player.Animator, "Attack");
         if (normalizedTime < 0.8f)
         {
             if (stateMachine.Player.IsAttacking)
             {
-                Debug.Log("PlayerAttackState 클래스 Update 함수 호출2한다.");
+                Debug.Log("PlayerAttackState 클래스 Update 함수 호출한다.");
             }
 
-            Debug.Log("PlayerAttackState 클래스 Update 함수 호출3한다.");
+            Debug.Log("PlayerAttackState 클래스 Update2 함수 호출한다. 2");
         }
         else
         {

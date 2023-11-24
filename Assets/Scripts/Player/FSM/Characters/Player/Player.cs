@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public Weapon Weapon { get; private set; }
     public PlayerCondition playerCondition { get; private set; }
 
+    public Camera Camera { get; private set; }
     [field: SerializeField] public CinemachineVirtualCamera VirtualCamera { get; set; }
     [field: SerializeField] public CinemachineComponentBase ComponentBase { get; set; }
 
@@ -39,7 +40,6 @@ public class Player : MonoBehaviour
     private PlayerStateMachine stateMachine;
 
     [field: SerializeField] Transform cameraLookPoint;
-    [field: SerializeField] public Transform AttackVfxPoint { get; private set; }
 
     public Slider hpSlider;
 
@@ -63,6 +63,8 @@ public class Player : MonoBehaviour
     {
         Agent.updatePosition = false;
         Agent.updateRotation = true;
+
+        Camera = Camera.main;
 
         playerCondition = GetComponent<PlayerCondition>();
 
