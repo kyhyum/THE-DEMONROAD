@@ -5831,6 +5831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84760c0fe7a146145b146857a04384bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <AttackSlash>k__BackingField: {fileID: 0}
 --- !u!65 &126072966
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26818,14 +26819,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.07058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 52372e41d43225843ac11da166feeb1c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -63374,14 +63375,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.07058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 52372e41d43225843ac11da166feeb1c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -77786,6 +77787,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
   - {fileID: 11400000, guid: 269e052d7f4539a4b920b4806a9bf570, type: 2}
   - {fileID: 11400000, guid: f7c5fff364b97c143963901176d62c58, type: 2}
+  golditem: {fileID: 0}
 --- !u!1001 &1996853397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78353,14 +78355,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.07058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 52372e41d43225843ac11da166feeb1c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -87263,8 +87265,12 @@ MonoBehaviour:
   <VirtualCamera>k__BackingField: {fileID: 0}
   <ComponentBase>k__BackingField: {fileID: 0}
   cameraLookPoint: {fileID: 0}
-  hpSlider: {fileID: 0}
-  mpSlider: {fileID: 0}
+  hpImage: {fileID: 0}
+  hpText: {fileID: 0}
+  mpImage: {fileID: 0}
+  mpText: {fileID: 0}
+  expImage: {fileID: 0}
+  expText: {fileID: 0}
 --- !u!195 &8440457663451584108
 NavMeshAgent:
   m_ObjectHideFlags: 0
