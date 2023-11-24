@@ -39,6 +39,7 @@ public class QuestBoard : MonoBehaviour
 
     //메인퀘스트 관련
     private ChoiceDungeon choiceDungeon;
+    private bool isMainQuestProgressUpdated = false;
 
     public List<QuestSO> Quests { get { return quests; } }
     public ItemSO golditem;
@@ -220,9 +221,10 @@ public class QuestBoard : MonoBehaviour
     }
     public void UpdateMainQuestProgress(QuestSO selectedQuest)
     {
-
-        if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
+        if (!isMainQuestProgressUpdated)
         {
+            if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
+            {
             Debug.Log("UpdateMainQuest이 null이 아니다");
 
                 
@@ -231,20 +233,23 @@ public class QuestBoard : MonoBehaviour
 
             // 보상처리
             MainQuestReward(selectedQuest);
-            
+            isMainQuestProgressUpdated = true;
 
 
+            }
+            else if (choiceDungeon == null)
+            {
+                // choiceDungeon이 null 
+                Debug.Log("choiceDungeon이 Null입니다");
+            }
+            else
+            {
+                //dungeonInteractionPopup이 비활성화일 때
+                Debug.Log("popup이 비활성화 상태");
+            }
+
         }
-        else if (choiceDungeon == null)
-        {
-            // choiceDungeon이 null 
-            Debug.Log("choiceDungeon이 Null입니다");
-        }
-        else
-        {
-            //dungeonInteractionPopup이 비활성화일 때
-            Debug.Log("popup이 비활성화 상태");
-        }
+
     }
     
     void OnDestroy()
