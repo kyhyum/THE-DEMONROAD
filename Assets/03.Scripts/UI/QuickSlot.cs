@@ -2,24 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
     private GameObject itemClone;
     private Canvas canvas;
     private RectTransform rect;
-    private RawImage icon;
     private IUsable usable;
-    private TMP_Text quantity;
+    [field: SerializeField] private RawImage icon;
+    [field: SerializeField] private TMP_Text keyBinding;
+    [field: SerializeField] private TMP_Text quantity;
+    [field: SerializeField] private InputActionReference inputActionReference;
+    public int slotID;
 
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
-        icon = GetComponentInChildren<RawImage>();
-        quantity = GetComponentInChildren<TMP_Text>();
-        usable = null;
+        SetSlot(null);
+    }
+
+    private void Start()
+    {
+        keyBinding.text = InputManager.GetBindingName(inputActionReference.action.name);
+        inputActionReference.action.Enable();
+        inputActionReference.action.started += Use;
     }
 
     public void SetSlot(IUsable usable)
@@ -37,6 +46,15 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
             IStackable stackable = (IStackable)usable;
             quantity.text = stackable.Get().ToString();
         }
+
+        if (usable is UseItem)
+        {
+            UseItem useItem = (UseItem)usable;
+            useItem.OnCountChanged += SetQuantity;
+            icon.texture = useItem.texture;
+        }
+
+
 
         SetAlpha(1);
     }
@@ -104,8 +122,14 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         SetSlot(null);
     }
 
-    public void Use()
+    private void SetQuantity(int count)
     {
+        quantity.text = count.ToString();
+    }
+
+    private void Use(InputAction.CallbackContext context)
+    {
+        Debug.Log("QuickSlot" + slotID + "Clicked");
         if (usable == null)
             return;
 
@@ -116,10 +140,11 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
             if (stackable.Get() == 0)
                 return;
 
-            stackable.Sub(1);
-            quantity.text = stackable.Get().ToString();
+            usable.Use();
         }
+        else
+        {
 
-        usable.Use();
+        }
     }
 }

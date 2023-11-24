@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
             conditon.playerData = player;
             conditon.Initialize();
             uiManager.gameObject.SetActive(true);
+            uiManager.ActivePlayerUI(true);
             uiManager.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, player.name));
             uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
         }

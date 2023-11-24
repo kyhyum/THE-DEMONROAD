@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class UseItem : Item, IStackable, IUsable
 {
     private int count;
+    public event CountChangedDelegate OnCountChanged;
+    public delegate void CountChangedDelegate(int count);
 
     public UseItem(ItemSO itemSO) : base(itemSO)
     {
@@ -33,5 +36,6 @@ public class UseItem : Item, IStackable, IUsable
     public virtual void Use()
     {
         Sub(1);
+        OnCountChanged?.Invoke(count);
     }
 }

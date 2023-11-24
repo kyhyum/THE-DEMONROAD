@@ -41,10 +41,6 @@ public class Player : MonoBehaviour
 
     [field: SerializeField] Transform cameraLookPoint;
 
-    public Slider hpSlider;
-
-    public Slider mpSlider;
-
 
     private void Awake()
     {
@@ -73,13 +69,13 @@ public class Player : MonoBehaviour
         stateMachine.ChangeState(stateMachine.IdleState);
 
         playerCondition.OnDie += OnDie;
-        playerCondition.OnHealthChanged += UpdateHealthUI;
-        playerCondition.OnManaChanged += UpdateManaUI;
+        playerCondition.OnHpChanged += UIManager.Instance.playerUI.UpdateHpUI;
+        playerCondition.OnMpChanged += UIManager.Instance.playerUI.UpdateMpUI;
+        playerCondition.OnExpChanged += UIManager.Instance.playerUI.UpdateExpUI;
 
-        hpSlider.maxValue = playerCondition.maxHp;
-        hpSlider.value = playerCondition.maxHp;
-        mpSlider.maxValue = playerCondition.maxMp;
-        mpSlider.value = playerCondition.maxMp;
+        UIManager.Instance.playerUI.UpdateHpUI(playerCondition.currentHp, playerCondition.maxHp);
+        UIManager.Instance.playerUI.UpdateMpUI(playerCondition.currentMp, playerCondition.maxMp);
+        // UIManager.Instance.playerUI.UpdateExpUI(playerCondition.playerData.exp, maxExp);
 
         UIManager.Instance.OnUIInputEnable();
 
@@ -144,15 +140,5 @@ public class Player : MonoBehaviour
         Animator.SetTrigger("Die");
         // Player.cs를 false로 만든다.
         enabled = false;
-    }
-
-    void UpdateHealthUI(float newHealth)
-    {
-        hpSlider.value = newHealth;
-    }
-
-    void UpdateManaUI(float newMana)
-    {
-        mpSlider.value = newMana;
     }
 }
