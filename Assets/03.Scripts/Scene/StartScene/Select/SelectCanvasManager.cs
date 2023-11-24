@@ -74,10 +74,11 @@ public class SelectCanvasManager : MonoBehaviour
     {
         if (selectedSlot == -1)
         {
-            Debug.Log("캐릭터를 선택해주세요");
+            gameManager.uiManager.ActivePopUpUI("게임 시작", "캐릭터를 선택해 주세요.", null);
             return;
         }
         characterSlots[selectedSlot].StartCharacter();
+        gameManager.GameStart();
     }
     public void DeleteButton()
     {

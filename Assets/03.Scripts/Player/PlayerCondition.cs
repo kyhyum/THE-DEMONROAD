@@ -34,6 +34,7 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
 {
     public PlayerData playerData;
     StatType mainStat;
+
     public float atk;
     public float def;
     public float speed;
@@ -41,6 +42,7 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     public float maxHp;
     public float currentMp;
     public float maxMp;
+    public int levelExp;
 
     float atkRatio;
     float defRatio;
@@ -59,7 +61,10 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
 
 
     public delegate void ManaChangedDelegate(float newMana);
-    public event HealthChangedDelegate OnManaChanged;
+    public event ManaChangedDelegate OnManaChanged;
+
+    public delegate void ExpChangedDelegate(int newExp);
+    public event ExpChangedDelegate OnExpChanged;
 
     public bool IsDead => currentHp == 0;
     public void Initialize()
@@ -83,9 +88,9 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
         RaitoSet(playerData.job);
         StatSynchronization();
     }
-    private void LevelUp()
+    public void LevelUp()
     {
-        playerData.exp -= playerData.level;
+        playerData.exp -= (playerData.level * 100);
         playerData.level++;
         StatUp();
         StatSynchronization();
@@ -140,6 +145,7 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
         currentHp = maxHp;
         maxMp = myStats[StatType.INT] * mpRatio;
         currentMp = maxMp;
+        levelExp = playerData.level * 100;
         for (int i = 0; i < playerData.stats.Count; i++)
         {
             playerData.stats[i].statValue = myStats[playerData.stats[i].type];
