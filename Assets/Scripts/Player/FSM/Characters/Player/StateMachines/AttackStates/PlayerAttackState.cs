@@ -15,7 +15,7 @@ public class PlayerAttackState : PlayerBaseState
         Weapon weapon = stateMachine.Player.Weapon;
 
         //stateMachine.Player.AttackSlash
-        Object.Instantiate(weapon.AttackSlash, weapon.transform.position, Quaternion.identity);
+        //Object.Instantiate(weapon.AttackSlash, weapon.transform.position, Quaternion.identity);
         
         stateMachine.Player.Agent.ResetPath();
         base.Enter();
