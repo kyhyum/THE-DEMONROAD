@@ -42,7 +42,7 @@ public class PlayerAttackState : PlayerBaseState
                 Debug.Log("PlayerAttackState 클래스 Update 함수 호출한다.");
             }
 
-            Debug.Log("PlayerAttackState 클래스 Update2 함수 호출한다.");
+            Debug.Log("PlayerAttackState 클래스 Update2 함수 호출한다. 2");
         }
         else
         {
