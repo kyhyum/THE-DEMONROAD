@@ -16,6 +16,7 @@ public class CreateCanvasManager : MonoBehaviour
     SelectCanvasManager selectCanvasManager;
     [SerializeField] Camera mainCamera;
     Tween tween;
+    UIManager uIManager;
     private void Awake()
     {
         if (Instance == null)
@@ -27,7 +28,7 @@ public class CreateCanvasManager : MonoBehaviour
             Destroy(this);
         }
         selectCanvasManager = SelectCanvasManager.Instance;
-        
+        uIManager = GameManager.Instance.uiManager;
     }
     private void OnEnable()
     {
@@ -46,10 +47,15 @@ public class CreateCanvasManager : MonoBehaviour
         {
             selectCanvasManager.CreateCharacter(nameCreate.text, job[selectJobIndex].playerData);
         }
+        else
+        {
+            uIManager.ActivePopUpUI("캐릭터 생성", "현재 생성이 불가능한 캐릭입니다.", null);
+        }
     }
     public void ChangeJob(int jobIndex)
     {
         empty.SetActive(false);
+        nameCreate.text = null;
         for (int i = 0; i < job.Length; i++)
         {
             job[i].ActiveObject(false);
