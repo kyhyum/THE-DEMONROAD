@@ -184,21 +184,29 @@ public class PlayerBaseState : IState, IUsable
     protected virtual void OnQuickSlot2Performed(InputAction.CallbackContext context)
     {
         Debug.Log("OnQuickSlot2Performed 함수 호출한다.");
+
+        stateMachine.Player.IsAttackSkill2 = true;
     }
 
     protected virtual void OnQuickSlot2Canceled(InputAction.CallbackContext context)
     {
         Debug.Log("OnQuickSlot2Canceled 함수 호출한다.");
+
+        stateMachine.Player.IsAttackSkill2 = false;
     }
 
     protected virtual void OnQuickSlot3Performed(InputAction.CallbackContext context)
     {
         Debug.Log("OnQuickSlot3Performed 함수 호출한다.");
+
+        stateMachine.Player.IsAttackSkill3 = true;
     }
 
     protected virtual void OnQuickSlot3Canceled(InputAction.CallbackContext context)
     {
         Debug.Log("OnQuickSlot3Canceled 함수 호출한다.");
+
+        stateMachine.Player.IsAttackSkill3 = false;
     }
 
     protected virtual void OnQuickSlot4Performed(InputAction.CallbackContext context)
