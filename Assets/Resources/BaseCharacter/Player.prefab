@@ -159,6 +159,8 @@ MonoBehaviour:
     walkParameterName: Walk
     attackParameterName: '@Attack'
     attackSkill1ParameterName: AttackSkill1
+    attackSkill2ParameterName: AttackSkill2
+    attackSkill3ParameterName: AttackSkill3
   <Weapon>k__BackingField: {fileID: 490669892648355455}
   <VirtualCamera>k__BackingField: {fileID: 0}
   <ComponentBase>k__BackingField: {fileID: 0}
@@ -490,7 +492,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5335034112823148004}
   - component: {fileID: 7640688706397121350}
-  - component: {fileID: 8963481340088887740}
   - component: {fileID: 7571205209000426745}
   m_Layer: 0
   m_Name: MiniMapCamera
@@ -565,14 +566,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8963481340088887740
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9078696229447543745}
-  m_Enabled: 1
 --- !u!114 &7571205209000426745
 MonoBehaviour:
   m_ObjectHideFlags: 0
