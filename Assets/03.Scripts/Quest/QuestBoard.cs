@@ -193,7 +193,8 @@ public class QuestBoard : MonoBehaviour
         }
         else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트 
         {
-            int goblinKills = DungeonManager.Instance.goblinkillCount;
+            //int goblinKills = DungeonManager.Instance.goblinkillCount;
+            int goblinKills = 0;
             questProgmonsterName.text = selectedQuest.questName + "\n - "  +goblinKills+ " / " + selectedQuest.questComplete;
 
             if (goblinKills >= selectedQuest.questComplete)
@@ -206,7 +207,8 @@ public class QuestBoard : MonoBehaviour
         }
         else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
         {
-            int goblinKills = DungeonManager.Instance.goblinkillCount;
+            int goblinKills = 0;
+            //int goblinKills = DungeonManager.Instance.goblinkillCount;
             questProgInfinitemonsterName.text = selectedQuest.questName + "\n - "  +goblinKills+ " / " + selectedQuest.questComplete;
             if (goblinKills >= selectedQuest.questComplete)
             {
@@ -277,23 +279,21 @@ public class QuestBoard : MonoBehaviour
             Debug.Log("Null입니다");
         }
 
-        if (selectedQuest != null && selectedQuest.questType == QuestType.MainQuest)
+        if (selectQuest != null && selectQuest.questType == QuestType.MainQuest)
         {
-
             Inventory inventory = UIManager.Instance.GetInventory();
 
             if (inventory != null)
             {
+                ItemSO goldItem = Resources.Load<ItemSO>("Gold");
 
-                ItemSO itemSO = golditem;
-                Item itemToAdd = new Item(itemSO);
-                bool itemAdded = inventory.AddItem(itemToAdd);
+                Item itemToAdd = new Item(goldItem);
 
-                if (itemAdded)
+                // 금화 아이템을 Inventory에 추가하는 로직
+                if (inventory.AddItem(itemToAdd))
                 {
-                    // 금화 보상 추가
-                    inventory.Gold += selectedQuest.questRewardCoin;
-                    Debug.Log("보상으로 " + selectedQuest.questRewardCoin + "개의 금화 획득!");
+                    inventory.Gold += selectQuest.questRewardCoin;
+                    Debug.Log("보상으로 " + selectQuest.questRewardCoin + "개의 금화 획득!");
                 }
                 else
                 {
@@ -304,7 +304,6 @@ public class QuestBoard : MonoBehaviour
             {
                 Debug.Log("Inventory가 null입니다.");
             }
-
         }
     }
     //밑에 이제 다른 퀘스트들의 보상도 추가 예정
@@ -322,23 +321,21 @@ public class QuestBoard : MonoBehaviour
             Debug.Log("Null입니다");
         }
 
-        if (selectedQuest != null && selectedQuest.questType == QuestType.MonsterQuest)
+        if (selectQuest != null && selectQuest.questType == QuestType.MonsterQuest)
         {
-
             Inventory inventory = UIManager.Instance.GetInventory();
 
             if (inventory != null)
             {
+                ItemSO goldItem = Resources.Load<ItemSO>("Gold");
 
-                ItemSO itemSO = golditem;
-                Item itemToAdd = new Item(itemSO);
-                bool itemAdded = inventory.AddItem(itemToAdd);
+                Item itemToAdd = new Item(goldItem);
 
-                if (itemAdded)
+                // 금화 아이템을 Inventory에 추가하는 로직
+                if (inventory.AddItem(itemToAdd))
                 {
-                    // 금화 보상 추가
-                    inventory.Gold += selectedQuest.questRewardCoin;
-                    Debug.Log("보상으로 " + selectedQuest.questRewardCoin + "개의 금화 획득!");
+                    inventory.Gold += selectQuest.questRewardCoin;
+                    Debug.Log("보상으로 " + selectQuest.questRewardCoin + "개의 금화 획득!");
                 }
                 else
                 {
@@ -349,7 +346,6 @@ public class QuestBoard : MonoBehaviour
             {
                 Debug.Log("Inventory가 null입니다.");
             }
-
         }
     }
     public void InfiniteMonsterQuestReward(QuestSO selectedQuest)
@@ -365,23 +361,21 @@ public class QuestBoard : MonoBehaviour
             Debug.Log("Null입니다");
         }
 
-        if (selectedQuest != null && selectedQuest.questType == QuestType.InfiniteMonsterQuest)
+        if (selectQuest != null && selectQuest.questType == QuestType.InfiniteMonsterQuest)
         {
-
             Inventory inventory = UIManager.Instance.GetInventory();
 
             if (inventory != null)
             {
+                ItemSO goldItem = Resources.Load<ItemSO>("Gold");
 
-                ItemSO itemSO = golditem;
-                Item itemToAdd = new Item(itemSO);
-                bool itemAdded = inventory.AddItem(itemToAdd);
+                Item itemToAdd = new Item(goldItem);
 
-                if (itemAdded)
+                // 금화 아이템을 Inventory에 추가하는 로직
+                if (inventory.AddItem(itemToAdd))
                 {
-                    // 금화 보상 추가
-                    inventory.Gold += selectedQuest.questRewardCoin;
-                    Debug.Log("보상으로 " + selectedQuest.questRewardCoin + "개의 금화 획득!");
+                    inventory.Gold += selectQuest.questRewardCoin;
+                    Debug.Log("보상으로 " + selectQuest.questRewardCoin + "개의 금화 획득!");
                 }
                 else
                 {
@@ -392,7 +386,6 @@ public class QuestBoard : MonoBehaviour
             {
                 Debug.Log("Inventory가 null입니다.");
             }
-
         }
     }
 

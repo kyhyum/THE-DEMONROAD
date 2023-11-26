@@ -75,17 +75,7 @@ public class Inventory : MonoBehaviour
             return AddItem(FindIndex(), item);
         }
     }
-    public void AddGold(Item item)
-    {
-        IStackable stackableItem = (IStackable)item;
-        gold += stackableItem.Get();
-    }
-
-    // 금화를 가져오는 메서드
-    public int GetGold()
-    {
-        return gold;
-    }
+    
 
     public bool AddItem(int index, Item item)
     {
