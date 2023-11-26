@@ -8,7 +8,7 @@ public class npcInteraction : MonoBehaviour
 {
     public NPCSO npc;
     public QuestSO quest;
-    public ItemSO golditem;
+    //public ItemSO goldItem;
     [SerializeField] List<ItemSO> allItems;
     private QuestController controller;
    
@@ -177,79 +177,6 @@ public class npcInteraction : MonoBehaviour
         questProgName.fontStyle |= FontStyles.Strikethrough;
 
         //금화 보상 처리
-
-        //방법1
-        //Inventory inventory = UIManager.Instance.GetInventory();
-        //if (inventory != null)
-        //{
-        //    ItemSO goldItem = null; 
-        //    foreach (var item in allItems)
-        //    {
-        //        if (item != null && item.type == ItemType.Gold && item.itemName == "금화")
-        //        {
-        //            goldItem = item;
-        //            break;
-        //        }
-        //    }
-        //    int goldAmount = quest.questRewardCoin;
-
-
-        //    if (goldItem is IStackable)
-        //    {
-        //        IStackable stackableGoldItem = (IStackable)goldItem;
-        //        stackableGoldItem.Add(goldAmount);
-        //    }
-
-        //}
-
-
-        //방법2
-        //아래코드는"IStackable을 구현하지 않은 아이템입니다." 오류생성
-
-        //if (quest != null && quest.questType == QuestType.ConversationQuest)
-        //{
-        //    Inventory inventory = UIManager.Instance.GetInventory();
-
-        //    if (inventory != null)
-        //    {
-
-        //        ItemSO itemSO = golditem;
-        //        Item itemToAdd = new Item(itemSO);
-
-        //        // 아이템이 IStackable을 구현하는지 확인
-        //        if (itemToAdd is IStackable)
-        //        {
-        //            IStackable stackableItem = itemToAdd as IStackable;
-
-        //            if (stackableItem != null)
-        //            {
-        //                bool itemAdded = inventory.AddItem(itemToAdd);
-
-        //                if (itemAdded)
-        //                {
-        //                    inventory.Gold += quest.questRewardCoin;
-        //                    Debug.Log("보상으로 " + quest.questRewardCoin + "개의 금화 획득!");
-        //                }
-        //                else
-        //                {
-        //                    Debug.Log("아이템 추가에 실패했습니다.");
-        //                }
-        //            }
-        //            else
-        //            {
-        //                Debug.Log("IStackable로 캐스팅할 수 없는 아이템입니다.");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            Debug.Log("IStackable을 구현하지 않은 아이템입니다.");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Inventory가 null입니다.");
-        //    }
-        //}
 
         //방법3
         if (quest != null && quest.questType == QuestType.ConversationQuest)
