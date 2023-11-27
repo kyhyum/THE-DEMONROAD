@@ -10,6 +10,9 @@ public class PlayerAttackSkill3State : PlayerBaseState
 
     public override void Enter()
     {
+        KnightSkill knightSkill = stateMachine.Player.KnightSkill;
+        knightSkill.Use(knightSkill.whirlingCleaveSO, 1);
+
         stateMachine.Player.Agent.ResetPath();
         base.Enter();
 

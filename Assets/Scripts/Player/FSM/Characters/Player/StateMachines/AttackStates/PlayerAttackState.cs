@@ -10,7 +10,7 @@ public class PlayerAttackState : PlayerBaseState
 
     public override void Enter()
     {
-        Debug.Log("PlayerAttackState 클래스 Enter 함수 호출한다.");
+        //Debug.Log("PlayerAttackState 클래스 Enter 함수 호출한다.");
 
         Weapon weapon = stateMachine.Player.Weapon;
 
@@ -39,10 +39,10 @@ public class PlayerAttackState : PlayerBaseState
         {
             if (stateMachine.Player.IsAttacking)
             {
-                Debug.Log("PlayerAttackState 클래스 Update 함수 호출한다.");
+                //Debug.Log("PlayerAttackState 클래스 Update 함수 호출한다.");
             }
 
-            Debug.Log("PlayerAttackState 클래스 Update2 함수 호출한다. 2");
+            //Debug.Log("PlayerAttackState 클래스 Update2 함수 호출한다. 2");
         }
         else
         {

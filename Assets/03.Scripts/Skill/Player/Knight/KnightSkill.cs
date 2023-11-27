@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class KnightSkill : MonoBehaviour
 {
-    [field: SerializeField] SkillSO strikeSkillSO;
-    [field: SerializeField] SkillSO shieldStrikeSO;
-    [field: SerializeField] SkillSO whirlingCleaveSO;
+    [field: SerializeField] public SkillSO strikeSkillSO;
+    [field: SerializeField] public SkillSO shieldStrikeSO;
+    [field: SerializeField] public SkillSO whirlingCleaveSO;
 
     string strikeSkillName = "Strike";
     string shieldStrikeSkillName = "ShieldStrike";
@@ -22,9 +22,9 @@ public class KnightSkill : MonoBehaviour
 
     private void Start()
     {
-        Use(strikeSkillSO, 1);
-        Use(shieldStrikeSO, 2);
-        Use(whirlingCleaveSO, 3);
+        //Use(strikeSkillSO, 1);
+        //Use(shieldStrikeSO, 2);
+        //Use(whirlingCleaveSO, 3);
     }
 
     public void Use(SkillSO skillSO, int level)
