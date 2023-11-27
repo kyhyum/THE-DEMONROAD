@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class SkillSlot : MonoBehaviour
 {
-    
+    private Skill skill;
 }
