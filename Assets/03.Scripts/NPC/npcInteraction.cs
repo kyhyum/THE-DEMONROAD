@@ -185,20 +185,9 @@ public class npcInteraction : MonoBehaviour
 
             if (inventory != null)
             {
-                ItemSO goldItem = Resources.Load<ItemSO>("Gold");  
-
-                Item itemToAdd = new Item(goldItem);
-
-                // 금화 아이템을 Inventory에 추가하는 로직
-                if (inventory.AddItem(itemToAdd))
-                {
-                    inventory.Gold += quest.questRewardCoin;
-                    Debug.Log("보상으로 " + quest.questRewardCoin + "개의 금화 획득!");
-                }
-                else
-                {
-                    Debug.Log("아이템 추가에 실패했습니다.");
-                }
+                inventory.Gold += quest.questRewardCoin;
+                Debug.Log("보상으로 " + quest.questRewardCoin + "개의 금화 획득!");
+ 
             }
             else
             {

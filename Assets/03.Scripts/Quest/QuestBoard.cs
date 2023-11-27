@@ -90,7 +90,9 @@ public class QuestBoard : MonoBehaviour
         questRewardText.text = selectedQuest.questReward;
         selectQuest = selectedQuest;
     }
-    private bool IsQuestAlreadyAccepted(QuestSO quest) // 같은 타입의 퀘스트는 한번만 받게끔
+
+    // 같은 타입의 퀘스트는 한번만 받게끔
+    private bool IsQuestAlreadyAccepted(QuestSO quest) 
     {
         if (player.acceptQuest.Contains(quest))
         {
@@ -223,7 +225,7 @@ public class QuestBoard : MonoBehaviour
         else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 
         {
             questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
-            UpdateMainQuestProgress(selectedQuest);
+            
     
         }
     }
@@ -285,20 +287,8 @@ public class QuestBoard : MonoBehaviour
 
             if (inventory != null)
             {
-                ItemSO goldItem = Resources.Load<ItemSO>("Gold");
-
-                Item itemToAdd = new Item(goldItem);
-
-                // 금화 아이템을 Inventory에 추가하는 로직
-                if (inventory.AddItem(itemToAdd))
-                {
-                    inventory.Gold += selectQuest.questRewardCoin;
-                    Debug.Log("보상으로 " + selectQuest.questRewardCoin + "개의 금화 획득!");
-                }
-                else
-                {
-                    Debug.Log("아이템 추가에 실패했습니다.");
-                }
+                inventory.Gold += selectQuest.questRewardCoin;
+                Debug.Log("보상으로 " + selectQuest.questRewardCoin + "개의 금화 획득!");
             }
             else
             {
@@ -306,7 +296,7 @@ public class QuestBoard : MonoBehaviour
             }
         }
     }
-    //밑에 이제 다른 퀘스트들의 보상도 추가 예정
+    
 
     public void MonsterQuestReward(QuestSO selectedQuest)
     {
@@ -327,20 +317,8 @@ public class QuestBoard : MonoBehaviour
 
             if (inventory != null)
             {
-                ItemSO goldItem = Resources.Load<ItemSO>("Gold");
-
-                Item itemToAdd = new Item(goldItem);
-
-                // 금화 아이템을 Inventory에 추가하는 로직
-                if (inventory.AddItem(itemToAdd))
-                {
-                    inventory.Gold += selectQuest.questRewardCoin;
-                    Debug.Log("보상으로 " + selectQuest.questRewardCoin + "개의 금화 획득!");
-                }
-                else
-                {
-                    Debug.Log("아이템 추가에 실패했습니다.");
-                }
+                inventory.Gold += selectQuest.questRewardCoin;
+                Debug.Log("보상으로 " + selectQuest.questRewardCoin + "개의 금화 획득!");
             }
             else
             {
@@ -367,20 +345,8 @@ public class QuestBoard : MonoBehaviour
 
             if (inventory != null)
             {
-                ItemSO goldItem = Resources.Load<ItemSO>("Gold");
-
-                Item itemToAdd = new Item(goldItem);
-
-                // 금화 아이템을 Inventory에 추가하는 로직
-                if (inventory.AddItem(itemToAdd))
-                {
-                    inventory.Gold += selectQuest.questRewardCoin;
-                    Debug.Log("보상으로 " + selectQuest.questRewardCoin + "개의 금화 획득!");
-                }
-                else
-                {
-                    Debug.Log("아이템 추가에 실패했습니다.");
-                }
+                inventory.Gold += selectQuest.questRewardCoin;
+                Debug.Log("보상으로 " + selectQuest.questRewardCoin + "개의 금화 획득!");
             }
             else
             {
