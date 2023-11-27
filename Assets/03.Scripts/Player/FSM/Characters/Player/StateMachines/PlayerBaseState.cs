@@ -54,6 +54,11 @@ public class PlayerBaseState : IState, IUsable
         LateMove();
     }
 
+    public virtual void OnTriggerEnter(Collider other)
+    {
+
+    }
+
     /// <summary>
     /// Add
     /// </summary>

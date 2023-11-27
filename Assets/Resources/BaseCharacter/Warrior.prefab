@@ -201,8 +201,8 @@ MonoBehaviour:
   <ComponentBase>k__BackingField: {fileID: 0}
   cameraLookPoint: {fileID: 8219408792071906567}
   <KnightSkill>k__BackingField: {fileID: 0}
-  range1: {fileID: 9162241371379645549}
-  range2: {fileID: 7732136632135426830}
+  range1: {fileID: 7934230390281088300}
+  range2: {fileID: 1280478433804946331}
 --- !u!114 &7725758992122052757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,9 +272,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e25912602c3acb4fb9224f45b8d08e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strikeSkillSO: {fileID: 11400000, guid: 8dff0b66396890d49972a22894ef6105, type: 2}
+  strikeSkillSO: {fileID: 11400000, guid: bb9d81f73485a484d8d137f2f8921a51, type: 2}
   shieldStrikeSO: {fileID: 11400000, guid: de2e5bc02f41d2146aaaeab49d682206, type: 2}
   whirlingCleaveSO: {fileID: 11400000, guid: 4d28caaae11e7f3498c3141f400aa062, type: 2}
+  totalDamage: 0
 --- !u!1 &5341204779959012001
 GameObject:
   m_ObjectHideFlags: 0
