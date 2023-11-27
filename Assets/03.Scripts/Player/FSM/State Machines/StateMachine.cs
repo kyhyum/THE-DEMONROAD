@@ -30,4 +30,9 @@ public abstract class StateMachine
     {
         currentState?.PhysicsUpdate();
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        currentState?.OnTriggerEnter(other);
+    }
 }

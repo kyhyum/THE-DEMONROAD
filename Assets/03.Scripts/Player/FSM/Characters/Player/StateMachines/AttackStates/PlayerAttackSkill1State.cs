@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // Knight - Strike
@@ -42,6 +43,27 @@ public class PlayerAttackSkill1State : PlayerBaseState
         else
         {
             stateMachine.ChangeState(stateMachine.IdleState);
+        }
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+
+        KnightSkill knightSkill = stateMachine.Player.KnightSkill;
+
+        Debug.Log("PlayerAttackSkill1State 클래스 OnTriggerEnter 함수 호출한다.");
+
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log("적을 공격했다.");
+
+            if (other.TryGetComponent(out Health health))
+            {
+                Debug.Log($"데미지 {knightSkill.totalDamage}를 입혔다.");
+
+                health.TakeDamage(knightSkill.totalDamage);
+            }
         }
     }
 }

@@ -45,8 +45,8 @@ public class Player : MonoBehaviour
     [field: SerializeField] public KnightSkill KnightSkill { get; set; }
 
     [field: Header("AttackRange")]
-    [field: SerializeField] public GameObject range1;
-    [field: SerializeField] public GameObject range2;
+    [field: SerializeField] public Collider range1;
+    [field: SerializeField] public Collider range2;
 
     private PlayerStateMachine stateMachine;
 
@@ -138,6 +138,12 @@ public class Player : MonoBehaviour
     {
         stateMachine.PhysicsUpdate();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        stateMachine.OnTriggerEnter(other);
+    }
+
 
     private void OnDestroy()
     {

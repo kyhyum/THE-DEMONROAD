@@ -12,6 +12,9 @@ public class KnightSkill : MonoBehaviour
     string shieldStrikeSkillName = "ShieldStrike";
     string whirlingCleaveSkillName = "WhirlingCleave";
 
+    public int totalDamage;
+    float totalStunTime;
+
     //public int level;
     //public int damage;
     //public int increasedDamagePerLevel;
@@ -53,7 +56,7 @@ public class KnightSkill : MonoBehaviour
     {
         Debug.Log("KnightSkill 클래스 Strike 함수 호출한다.");
 
-        int totalDamage = 0;
+        //int totalDamage = 0;
 
         // 데미지 + 레벨당 데미지
         totalDamage = strikeSkillSO.damage + level * strikeSkillSO.increasedDamagePerLevel;
@@ -67,8 +70,8 @@ public class KnightSkill : MonoBehaviour
     {
         Debug.Log("KnightSkill 클래스 ShieldStrike 함수 호출한다.");
 
-        int totalDamage = 0;
-        float totalStunTime = 0;
+        //int totalDamage = 0;
+        //float totalStunTime = 0;
 
         // 데미지 + 레벨당 데미지
         totalDamage = shieldStrikeSO.damage + level * shieldStrikeSO.increasedDamagePerLevel;
@@ -86,7 +89,7 @@ public class KnightSkill : MonoBehaviour
     {
         Debug.Log("KnightSkill 클래스 WhirlingCleave 함수 호출한다.");
 
-        int totalDamage = 0;
+        //int totalDamage = 0;
 
         // 데미지 + 레벨당 데미지
         totalDamage = whirlingCleaveSO.damage + level * whirlingCleaveSO.increasedDamagePerLevel;
