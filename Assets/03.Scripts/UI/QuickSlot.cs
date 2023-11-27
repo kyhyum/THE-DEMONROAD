@@ -15,6 +15,7 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
     [field: SerializeField] private RawImage icon;
     [field: SerializeField] private TMP_Text keyBinding;
     [field: SerializeField] private TMP_Text quantity;
+    [field: SerializeField] private Image cooltime;
     [field: SerializeField] private InputActionReference inputActionReference;
     public int slotID;
 
@@ -53,7 +54,6 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
             useItem.OnCountChanged += SetQuantity;
             icon.texture = useItem.texture;
         }
-
 
 
         SetAlpha(1);
@@ -129,9 +129,11 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
     private void Use(InputAction.CallbackContext context)
     {
-        Debug.Log("QuickSlot" + slotID + "Clicked");
         if (usable == null)
             return;
+
+        // if (cooltime.fillAmount != 0)
+        //     return;
 
         if (usable is IStackable)
         {
@@ -146,5 +148,10 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         {
 
         }
+    }
+
+    private void SetCoolTime(float value)
+    {
+        cooltime.fillAmount = value;
     }
 }
