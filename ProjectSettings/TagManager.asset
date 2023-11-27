@@ -10,7 +10,6 @@ TagManager:
   - potionNPC
   - Enemy
   - VirtualCamera
-  - PlayerAttack
   layers:
   - Default
   - TransparentFX

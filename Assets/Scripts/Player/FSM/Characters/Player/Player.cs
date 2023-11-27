@@ -43,10 +43,9 @@ public class Player : MonoBehaviour
 
     [field: Header("Skill")]
     [field: SerializeField] public KnightSkill KnightSkill { get; set; }
-
-    [field: Header("AttackRange")]
-    [field: SerializeField] public GameObject attackRange1;
-    [field: SerializeField] public GameObject attackRange2;
+    //[field: SerializeField] public SkillSO strikeSkillSO;
+    //[field: SerializeField] public SkillSO shieldStrikeSO;
+    //[field: SerializeField] public SkillSO whirlingCleaveSO;
 
     private PlayerStateMachine stateMachine;
 
