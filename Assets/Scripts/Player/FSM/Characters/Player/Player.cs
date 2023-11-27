@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     [field: Header("Camera")]
     [field: SerializeField] public CinemachineVirtualCamera VirtualCamera { get; set; }
     [field: SerializeField] public CinemachineComponentBase ComponentBase { get; set; }
+    [field: SerializeField] Transform cameraLookPoint;
 
     public bool IsMovePerformed { get; set; }
     public bool IsAttacking { get; set; }
@@ -40,9 +41,15 @@ public class Player : MonoBehaviour
     public bool IsAttackSkill2 { get; set; }
     public bool IsAttackSkill3 { get; set; }
 
+    [field: Header("Skill")]
+    [field: SerializeField] public KnightSkill KnightSkill { get; set; }
+    //[field: SerializeField] public SkillSO strikeSkillSO;
+    //[field: SerializeField] public SkillSO shieldStrikeSO;
+    //[field: SerializeField] public SkillSO whirlingCleaveSO;
+
     private PlayerStateMachine stateMachine;
 
-    [field: SerializeField] Transform cameraLookPoint;
+    
 
     private void Awake()
     {
@@ -53,6 +60,7 @@ public class Player : MonoBehaviour
         Input = GetComponent<PlayerInput>();
         Controller = GetComponent<CharacterController>();
         Agent = GetComponent<NavMeshAgent>();
+        KnightSkill = GetComponent<KnightSkill>();
 
         stateMachine = new PlayerStateMachine(this);
     }

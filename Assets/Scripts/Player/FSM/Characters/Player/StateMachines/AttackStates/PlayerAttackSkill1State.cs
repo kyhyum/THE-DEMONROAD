@@ -11,6 +11,9 @@ public class PlayerAttackSkill1State : PlayerBaseState
 
     public override void Enter()
     {
+        KnightSkill knightSkill = stateMachine.Player.KnightSkill;
+        knightSkill.Use(knightSkill.strikeSkillSO, 1);
+
         stateMachine.Player.Agent.ResetPath();
         base.Enter();
 

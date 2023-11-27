@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 7725758992122052757}
   - component: {fileID: 393066641193517922}
   - component: {fileID: -432404944769503272}
+  - component: {fileID: 1739064005844166843}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Player
@@ -165,6 +166,10 @@ MonoBehaviour:
   <VirtualCamera>k__BackingField: {fileID: 0}
   <ComponentBase>k__BackingField: {fileID: 0}
   cameraLookPoint: {fileID: 8219408792071906567}
+  <KnightSkill>k__BackingField: {fileID: 0}
+  strikeSkillSO: {fileID: 11400000, guid: 8dff0b66396890d49972a22894ef6105, type: 2}
+  shieldStrikeSO: {fileID: 11400000, guid: de2e5bc02f41d2146aaaeab49d682206, type: 2}
+  whirlingCleaveSO: {fileID: 11400000, guid: 4d28caaae11e7f3498c3141f400aa062, type: 2}
 --- !u!114 &7725758992122052757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +227,21 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1739064005844166843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5181127313120891243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e25912602c3acb4fb9224f45b8d08e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strikeSkillSO: {fileID: 11400000, guid: 8dff0b66396890d49972a22894ef6105, type: 2}
+  shieldStrikeSO: {fileID: 11400000, guid: de2e5bc02f41d2146aaaeab49d682206, type: 2}
+  whirlingCleaveSO: {fileID: 11400000, guid: 4d28caaae11e7f3498c3141f400aa062, type: 2}
 --- !u!1 &5341204779959012001
 GameObject:
   m_ObjectHideFlags: 0
