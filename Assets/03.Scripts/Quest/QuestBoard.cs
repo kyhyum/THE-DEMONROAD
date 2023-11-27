@@ -281,27 +281,33 @@ public class QuestBoard : MonoBehaviour
         {
             Debug.Log("Null입니다");
         }
-
-        if (selectQuest != null && selectQuest.questType == QuestType.MainQuest)
+        if (selectedQuest != null)
         {
-            Inventory inventory = UIManager.Instance.GetInventory();
-
-            if (inventory != null)
+            if (selectedQuest.questType == QuestType.MainQuest)
             {
-                inventory.Gold += selectedQuest.questRewardCoin;
-                Debug.Log("보상으로 " + selectedQuest.questRewardCoin + "개의 금화 획득!");
+                Inventory inventory = UIManager.Instance.GetInventory();
 
-                
+                if (inventory != null)
+                {
+                    inventory.Gold += selectQuest.questRewardCoin;
+                    Debug.Log("보상으로 " + selectQuest.questRewardCoin + "개의 금화를 획득했습니다!");
+                }
+                else
+                {
+                    Debug.Log("Inventory가 null입니다.");
+                }
             }
             else
             {
-                Debug.Log("Inventory가 null입니다.");
+                Debug.Log("MainQuest가 아닙니다.");
             }
         }
-        else if(selectQuest == null)
+        else
         {
-            Debug.Log("selectQuest == null");
+            Debug.Log("selectQuest가 null입니다.");
         }
+
+        
     }
     
 
@@ -318,7 +324,7 @@ public class QuestBoard : MonoBehaviour
             Debug.Log("Null입니다");
         }
 
-        if (selectQuest != null && selectQuest.questType == QuestType.MonsterQuest)
+        if (selectedQuest != null && selectedQuest.questType == QuestType.MonsterQuest)
         {
             Inventory inventory = UIManager.Instance.GetInventory();
 
@@ -332,7 +338,7 @@ public class QuestBoard : MonoBehaviour
                 Debug.Log("Inventory가 null입니다.");
             }
         }
-        else if (selectQuest == null)
+        else if (selectedQuest == null)
         {
             Debug.Log("selectQuest == null");
         }
@@ -350,7 +356,7 @@ public class QuestBoard : MonoBehaviour
             Debug.Log("Null입니다");
         }
 
-        if (selectQuest != null && selectQuest.questType == QuestType.InfiniteMonsterQuest)
+        if (selectedQuest != null && selectedQuest.questType == QuestType.InfiniteMonsterQuest)
         {
             Inventory inventory = UIManager.Instance.GetInventory();
 
