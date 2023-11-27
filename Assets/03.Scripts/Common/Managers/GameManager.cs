@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public EventSystem eventSystem;
 
     public PlayerCondition conditon;
+    public int goblinkillCount ; // 고블린 잡은 횟수
 
     SlotItem slot;
 
@@ -145,6 +146,7 @@ public class GameManager : MonoBehaviour
             Myplayer = null;
         }
     }
+    
     public void Save()
     {
         if (player.name == "Tester")
@@ -172,4 +174,5 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
         Save();
     }
+
 }
