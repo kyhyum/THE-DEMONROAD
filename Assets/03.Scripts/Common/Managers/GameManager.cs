@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public EventSystem eventSystem;
 
     public PlayerCondition conditon;
-    public int goblinkillCount ; // 고블린 잡은 횟수
+    public int goblinkillCount= 0; // 고블린 잡은 횟수
 
     SlotItem slot;
 

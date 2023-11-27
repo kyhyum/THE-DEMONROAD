@@ -7,8 +7,8 @@ using UnityEngine;
 public class DungeonManager : MonoBehaviour
 {
     public static DungeonManager Instance;
-    private GameManager gameManager;
-    public int goblinkill = 0;
+
+    
     public int spawnIdx = 0;
     
 
@@ -115,9 +115,9 @@ public class DungeonManager : MonoBehaviour
     }
     public void DungeonGoblinKilled(Monster Goblin)
     {
-        goblinkill = gameManager.goblinkillCount;
-        goblinkill++;
-        Debug.Log("잡은 고블린수: " + goblinkill);
+        GameManager.Instance.goblinkillCount++;
+        
+        Debug.Log("잡은 고블린수: " + GameManager.Instance.goblinkillCount);
     }
 
     public void Spawn()
