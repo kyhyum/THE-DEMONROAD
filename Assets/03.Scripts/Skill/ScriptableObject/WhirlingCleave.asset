@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: WhirlingCleave
   description: "\uD68C\uC804\uD558\uBA74\uC11C \uAC80\uC744 \uD718\uB450\uB978\uB2E4."
+  damage: 100
+  increasedDamagePerLevel: 10
+  stunTime: 0
+  increasedStunTimePerLevel: 0
+  manaCost: 15
   coolTime: 3
-  ManaCost: 15

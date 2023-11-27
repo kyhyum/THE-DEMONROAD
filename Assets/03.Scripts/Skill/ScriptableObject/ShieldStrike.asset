@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: ShieldStrike
   description: "\uC801\uC744 \uBC29\uD328\uB85C \uAC00\uACA9\uD558\uC5EC \uAE30\uC808\uC2DC\uD0A8\uB2E4. "
+  damage: 10
+  increasedDamagePerLevel: 5
+  stunTime: 1
+  increasedStunTimePerLevel: 0.1
+  manaCost: 10
   coolTime: 2
-  ManaCost: 10
