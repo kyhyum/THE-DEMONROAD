@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b9fb77a6cd2894ba4f49dfda6c4c84, type: 3}
+  m_Name: TutorialQuest_03
+  m_EditorClassIdentifier: 
+  <questIndex>k__BackingField: 992
+  <questName>k__BackingField: "\uACF5\uACA9\uC744 \uD574\uBCF4\uC790!"
+  <questType>k__BackingField: 2
+  <questDescription>k__BackingField: "\uC5F0\uC2B5\uC6A9 \uD5C8\uC218\uC544\uBE44
+    \uD55C\uD14C \uB2E4\uAC00\uAC00\uC11C \uACF5\uACA9\uC744 \uD574\uBCF4\uC790!"
+  <questCondition>k__BackingField: "\uACF5\uACA9 \uD574\uBCF4\uAE30"
+  <questComplete>k__BackingField: 1
+  <questReward>k__BackingField: 
+  <questRewardCoin>k__BackingField: 0
+  relatedNPCs: []
