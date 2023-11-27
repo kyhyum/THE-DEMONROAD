@@ -14,6 +14,7 @@ public class CharacterCreate : MonoBehaviour
         animator = jobCharacter.GetComponent<Animator>();
         voiceClip = jobCharacter.GetComponent<VoiceClip>();
         audioSource = jobCharacter.GetComponent<AudioSource>();
+        playerData.baseObjectPath = StringManager.BaseObjectPath + this.gameObject.name;
     }
     public void ChoiceJob()
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class StringManager
 {
+    private static string baseObjcetPath = "BaseCharacter/";
     private static string jsonPath = "Assets/Resources/MyCharacter/";
     private static string testJsonPath = "Assets/Resources/Tester/";
     private static string itemJsonPath = "Assets/Resources/MyInventory/";
@@ -16,6 +17,7 @@ public static class StringManager
     public static string TestJsonPath { get { return testJsonPath; } }
     public static string TestItemJsonPath { get { return testItemJsonPath; } }
     public static string TestStorageName { get { return testStorageName; } }
+    public static string BaseObjectPath { get { return baseObjcetPath; } }
 }
 public enum Job
 {
