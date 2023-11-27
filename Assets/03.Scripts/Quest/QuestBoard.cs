@@ -225,8 +225,9 @@ public class QuestBoard : MonoBehaviour
         else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 
         {
             questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
-            
-    
+            //UpdateMainQuestProgress(selectedQuest);
+
+
         }
     }
     public void UpdateMainQuestProgress(QuestSO selectedQuest)
@@ -287,8 +288,18 @@ public class QuestBoard : MonoBehaviour
 
             if (inventory != null)
             {
-                inventory.Gold += selectQuest.questRewardCoin;
-                Debug.Log("보상으로 " + selectQuest.questRewardCoin + "개의 금화 획득!");
+                ItemSO goldItem = Resources.Load<ItemSO>("Gold");
+                Item itemToAdd = new Item(goldItem);
+                // 금화 아이템을 Inventory에 추가하는 로직
+                if (inventory.AddItem(itemToAdd))
+                {
+                    inventory.Gold += selectedQuest.questRewardCoin;
+                    Debug.Log("보상으로 " + selectedQuest.questRewardCoin + "개의 금화 획득!");
+                }
+                else
+                {
+                    Debug.Log("아이템 추가에 실패했습니다.");
+                }
             }
             else
             {
