@@ -3,13 +3,9 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -83,7 +79,7 @@ public class Player : MonoBehaviour
 
         UIManager.Instance.playerUI.UpdateHpUI(playerCondition.currentHp, playerCondition.maxHp);
         UIManager.Instance.playerUI.UpdateMpUI(playerCondition.currentMp, playerCondition.maxMp);
-        // UIManager.Instance.playerUI.UpdateExpUI(playerCondition.playerData.exp, maxExp);
+        UIManager.Instance.playerUI.UpdateExpUI(playerCondition.playerData.exp, playerCondition.playerData.level * 100);
 
         UIManager.Instance.OnUIInputEnable();
 

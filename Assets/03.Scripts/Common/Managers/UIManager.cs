@@ -11,12 +11,17 @@ public class UIManager : MonoBehaviour
     private PlayerInputAction inputAction;
     [field: SerializeField] private Transform canvas;
     private List<GameObject> EnableUI;
+
     private GameObject inventoryObject;
     private GameObject storageObject;
     public GameObject settingObject;
     public GameObject playerUIObject;
+
+    private GameObject clickedUI;
+
     private Inventory inventory;
     private Storage storage;
+
     public PlayerUI playerUI { get; private set; }
 
     [SerializeField] private AudioClip[] clips;
@@ -136,14 +141,14 @@ public class UIManager : MonoBehaviour
             }
 
             inventoryObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(-510, 0);
-            inventoryObject.GetComponentInChildren<InventoryDragAndDrop>().enabled = false;
+            inventoryObject.GetComponentInChildren<DragAndDrop>().enabled = false;
 
             OnUIInputDisable();
         }
         else
         {
             inventoryObject.GetComponent<RectTransform>().anchoredPosition = pos;
-            inventoryObject.GetComponentInChildren<InventoryDragAndDrop>().enabled = true;
+            inventoryObject.GetComponentInChildren<DragAndDrop>().enabled = true;
 
             ActiveUIGameObject(inventoryObject);
 
