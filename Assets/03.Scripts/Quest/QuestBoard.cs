@@ -195,8 +195,8 @@ public class QuestBoard : MonoBehaviour
         }
         else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트 
         {
-            //int goblinKills = DungeonManager.Instance.goblinkillCount;
-            int goblinKills = 0;
+            int goblinKills = GameManager.Instance.goblinkillCount;
+            //int goblinKills = 0;
             questProgmonsterName.text = selectedQuest.questName + "\n - "  +goblinKills+ " / " + selectedQuest.questComplete;
 
             if (goblinKills >= selectedQuest.questComplete)
@@ -209,8 +209,8 @@ public class QuestBoard : MonoBehaviour
         }
         else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
         {
-            int goblinKills = 0;
-            //int goblinKills = DungeonManager.Instance.goblinkillCount;
+            //int goblinKills = 0;
+            int goblinKills = GameManager.Instance.goblinkillCount;
             questProgInfinitemonsterName.text = selectedQuest.questName + "\n - "  +goblinKills+ " / " + selectedQuest.questComplete;
             if (goblinKills >= selectedQuest.questComplete)
             {
