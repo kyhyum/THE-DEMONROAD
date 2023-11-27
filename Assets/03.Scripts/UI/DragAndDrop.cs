@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InventoryDragAndDrop : MonoBehaviour, IDragHandler
+public class DragAndDrop : MonoBehaviour, IDragHandler
 {
     [field: SerializeField] private RectTransform rect;
     private Canvas canvas;

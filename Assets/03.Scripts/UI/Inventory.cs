@@ -6,7 +6,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-
 public class Inventory : MonoBehaviour
 {
     [field: SerializeField] private Transform slots;
@@ -75,7 +74,7 @@ public class Inventory : MonoBehaviour
             return AddItem(FindIndex(), item);
         }
     }
-    
+
 
     public bool AddItem(int index, Item item)
     {
