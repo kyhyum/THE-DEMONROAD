@@ -31637,7 +31637,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: f0f69b6bd54ec3744b1bdfea587625f1, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
-  goldItem: {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
   allItems:
   - {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
   dialogueUI: {fileID: 2043401718}
@@ -43176,7 +43175,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: cd1dfb6ddf4d3454e9f6e1773962761d, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
-  goldItem: {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
   allItems:
   - {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
   dialogueUI: {fileID: 1856389047}
@@ -60389,7 +60387,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: d3ce2970e3d24254e88844cc8be775e0, type: 2}
   quest: {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
-  goldItem: {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
   allItems:
   - {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
   dialogueUI: {fileID: 1735550675}
@@ -81602,7 +81599,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2045392300}
   - component: {fileID: 2045392299}
-  - component: {fileID: 2045392298}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: VirtualCamera
@@ -81610,36 +81606,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2045392298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045392297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CollideAgainst:
-    serializedVersion: 2
-    m_Bits: 1
-  m_IgnoreTag: 
-  m_TransparentLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_MinimumDistanceFromTarget: 0.1
-  m_AvoidObstacles: 1
-  m_DistanceLimit: 0
-  m_MinimumOcclusionTime: 0
-  m_CameraRadius: 0.1
-  m_Strategy: 1
-  m_MaximumEffort: 4
-  m_SmoothingTime: 0
-  m_Damping: 0.1
-  m_DampingWhenOccluded: 0
-  m_OptimalTargetDistance: 0
 --- !u!114 &2045392299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90257,6 +90223,9 @@ MonoBehaviour:
   <VirtualCamera>k__BackingField: {fileID: 0}
   <ComponentBase>k__BackingField: {fileID: 0}
   cameraLookPoint: {fileID: 0}
+  <KnightSkill>k__BackingField: {fileID: 0}
+  range1: {fileID: 0}
+  range2: {fileID: 0}
 --- !u!195 &8440457663451584108
 NavMeshAgent:
   m_ObjectHideFlags: 0
