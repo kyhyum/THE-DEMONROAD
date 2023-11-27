@@ -58,11 +58,16 @@ public class PlayerAttackSkill1State : PlayerBaseState
         {
             Debug.Log("적을 공격했다.");
 
-            if (other.TryGetComponent(out Health health))
-            {
-                Debug.Log($"데미지 {knightSkill.totalDamage}를 입혔다.");
+            //if (other.TryGetComponent(out Health health))
+            //{
+            //    Debug.Log($"데미지 {knightSkill.totalDamage}를 입혔다.");
+            //
+            //    health.TakeDamage(knightSkill.totalDamage);
+            //}
 
-                health.TakeDamage(knightSkill.totalDamage);
+            if (other.TryGetComponent(out EnemyHealth enemyHealth))
+            {
+                enemyHealth.TakeDamage(knightSkill.totalDamage);
             }
         }
     }
