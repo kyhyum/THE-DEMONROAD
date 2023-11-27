@@ -186,7 +186,7 @@ public class npcInteraction : MonoBehaviour
             if (inventory != null)
             {
                 inventory.Gold += quest.questRewardCoin;
-                Debug.Log("보상으로 " + quest.questRewardCoin + "개의 금화 획득!");
+                Debug.Log(quest.questName+"보상으로 " + quest.questRewardCoin + "개의 금화 획득했습니다!");
  
             }
             else
