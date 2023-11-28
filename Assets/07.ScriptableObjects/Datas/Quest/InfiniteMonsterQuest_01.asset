@@ -20,6 +20,6 @@ MonoBehaviour:
     \uBC14\uB798!"
   <questCondition>k__BackingField: "\uACE0\uBE14\uB9B0 100\uB9C8\uB9AC \uCC98\uCE58"
   <questComplete>k__BackingField: 100
-  <questReward>k__BackingField: "\uAE08\uD654 5\uAC1C"
-  <questRewardCoin>k__BackingField: 5
+  <questReward>k__BackingField: "\uAE08\uD654 10\uAC1C"
+  <questRewardCoin>k__BackingField: 10
   relatedNPCs: []
