@@ -186,8 +186,6 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  <Data>k__BackingField: {fileID: 11400000, guid: 64bffd7005e15e6429b1d670bab8bd45,
-    type: 2}
   <AnimationData>k__BackingField:
     groundParameterName: '@Ground'
     idleParameterName: Idle
@@ -200,9 +198,8 @@ MonoBehaviour:
   <VirtualCamera>k__BackingField: {fileID: 0}
   <ComponentBase>k__BackingField: {fileID: 0}
   cameraLookPoint: {fileID: 8219408792071906567}
-  <KnightSkill>k__BackingField: {fileID: 0}
-  range1: {fileID: 7934230390281088300}
-  range2: {fileID: 1280478433804946331}
+  <Strike>k__BackingField: {fileID: 4215151398305761063}
+  <TrailRenderer>k__BackingField: {fileID: 2060720765943931176}
 --- !u!114 &7725758992122052757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,12 +458,12 @@ GameObject:
   - component: {fileID: 7729600335772756963}
   - component: {fileID: 2060720765943931176}
   m_Layer: 0
-  m_Name: TrailEffect
+  m_Name: TrailRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7729600335772756963
 Transform:
   m_ObjectHideFlags: 0
@@ -766,6 +763,7 @@ GameObject:
   - component: {fileID: 2124327235588095051}
   - component: {fileID: 7934230390281088300}
   - component: {fileID: 2362068732394730226}
+  - component: {fileID: 4215151398305761063}
   m_Layer: 0
   m_Name: Range1
   m_TagString: PlayerAttack
@@ -844,6 +842,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4215151398305761063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162241371379645549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2fdbc647e6b564b8b9ad6fe98a30c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  level: 0
+  damage: 0
+  increasedDamagePerLevel: 0
+  stunTime: 0
+  increasedStunTimePerLevel: 0
+  manaCost: 0
+  coolTime: 0
+  player: {fileID: 253929875917010689}
 --- !u!1001 &8389435689674916573
 PrefabInstance:
   m_ObjectHideFlags: 0

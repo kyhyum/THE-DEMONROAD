@@ -12,4 +12,15 @@ public class Skill : MonoBehaviour
     public float increasedStunTimePerLevel;
     public int manaCost;
     public float coolTime;
+
+    public void Set(SkillSO skillSO)
+    {
+        skillName = skillSO.skillName;
+        damage = skillSO.damage;
+        increasedDamagePerLevel = skillSO.increasedDamagePerLevel;
+        stunTime = skillSO.stunTime;
+        increasedStunTimePerLevel = skillSO.increasedStunTimePerLevel;
+        manaCost = skillSO.manaCost;
+        coolTime = skillSO.coolTime;
+    }
 }

@@ -11,9 +11,6 @@ public class Player : MonoBehaviour
 {
     public LayerMask groundLayerMask;
 
-    [field: Header("References")]
-    [field: SerializeField] public PlayerSO Data { get; private set; }
-
     [field: Header("Animations")]
     [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
 
@@ -38,15 +35,12 @@ public class Player : MonoBehaviour
     public bool IsAttackSkill3 { get; set; }
 
     [field: Header("Skill")]
-    [field: SerializeField] public KnightSkill KnightSkill { get; set; }
+    [field: SerializeField] public Strike Strike { get; set; }
 
-    [field: Header("AttackRange")]
-    [field: SerializeField] public Collider range1;
-    [field: SerializeField] public Collider range2;
+    [field: Header(" ")]
+    [field:SerializeField] public TrailRenderer TrailRenderer { get; set; }
 
     private PlayerStateMachine stateMachine;
-
-    
 
     private void Awake()
     {
@@ -57,7 +51,6 @@ public class Player : MonoBehaviour
         Input = GetComponent<PlayerInput>();
         Controller = GetComponent<CharacterController>();
         Agent = GetComponent<NavMeshAgent>();
-        KnightSkill = GetComponent<KnightSkill>();
 
         stateMachine = new PlayerStateMachine(this);
     }

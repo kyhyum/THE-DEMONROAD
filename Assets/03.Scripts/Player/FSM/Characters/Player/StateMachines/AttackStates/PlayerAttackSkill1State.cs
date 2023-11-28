@@ -12,8 +12,8 @@ public class PlayerAttackSkill1State : PlayerBaseState
 
     public override void Enter()
     {
-        KnightSkill knightSkill = stateMachine.Player.KnightSkill;
-        knightSkill.Use(knightSkill.strikeSkillSO, 1);
+        //KnightSkill knightSkill = stateMachine.Player.KnightSkill;
+        //knightSkill.Use(knightSkill.strikeSkillSO, 1);
 
         stateMachine.Player.Agent.ResetPath();
         base.Enter();
@@ -46,29 +46,32 @@ public class PlayerAttackSkill1State : PlayerBaseState
         }
     }
 
-    public override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-
-        KnightSkill knightSkill = stateMachine.Player.KnightSkill;
-
-        Debug.Log("PlayerAttackSkill1State 클래스 OnTriggerEnter 함수 호출한다.");
-
-        if (other.CompareTag("Enemy"))
-        {
-            Debug.Log("적을 공격했다.");
-
-            //if (other.TryGetComponent(out Health health))
-            //{
-            //    Debug.Log($"데미지 {knightSkill.totalDamage}를 입혔다.");
-            //
-            //    health.TakeDamage(knightSkill.totalDamage);
-            //}
-
-            if (other.TryGetComponent(out EnemyHealth enemyHealth))
-            {
-                enemyHealth.TakeDamage(knightSkill.totalDamage);
-            }
-        }
-    }
+    //public override void OnTriggerEnter(Collider other)
+    //{
+    //    base.OnTriggerEnter(other);
+    //
+    //    KnightSkill knightSkill = stateMachine.Player.KnightSkill;
+    //
+    //    Debug.Log("PlayerAttackSkill1State 클래스 OnTriggerEnter 함수 호출한다.");
+    //
+    //    //if (other.CompareTag("Enemy"))
+    //    if (other.gameObject.tag == "Enemy")
+    //    {
+    //        Debug.Log("적을 공격했다.");
+    //
+    //        //if (other.TryGetComponent(out Health health))
+    //        //{
+    //        //    Debug.Log($"데미지 {knightSkill.totalDamage}를 입혔다.");
+    //        //
+    //        //    health.TakeDamage(knightSkill.totalDamage);
+    //        //}
+    //
+    //        if (other.TryGetComponent(out EnemyHealth enemyHealth))
+    //        {
+    //            Debug.Log($"데미지 {knightSkill.totalDamage}를 입혔다.");
+    //
+    //            enemyHealth.TakeDamage(knightSkill.totalDamage);
+    //        }
+    //    }
+    //}
 }
