@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniMapSourceRotateController : MonoBehaviour
+public class MiniMapRotateController : MonoBehaviour
 {
     Transform playerTrs;
     void Start()
