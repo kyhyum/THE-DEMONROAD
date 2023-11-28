@@ -4,33 +4,43 @@ using UnityEngine;
 
 public class KnightSkill : MonoBehaviour
 {
-    public Dictionary<string, Dictionary<int, float>> activeSkillDataDict;
+    [field: SerializeField] public SkillSO strikeSkillSO;
+    [field: SerializeField] public SkillSO shieldStrikeSO;
+    [field: SerializeField] public SkillSO whirlingCleaveSO;
 
     string strikeSkillName = "Strike";
-    string shieldStrikeSkillName = "Shield Strike";
-    string whirlingCleaveSkillName = "Whirling Cleave";
+    string shieldStrikeSkillName = "ShieldStrike";
+    string whirlingCleaveSkillName = "WhirlingCleave";
+
+    public int totalDamage;
+    float totalStunTime;
+
+    //public int level;
+    //public int damage;
+    //public int increasedDamagePerLevel;
+    //public float stunTime;
+    //public float increasedStunTimePerLevel;
+    //public int manaCost;
+    //public float coolTime;
 
     private void Start()
     {
-        SkillDataParser parser = GetComponent<SkillDataParser>();
-        activeSkillDataDict = parser.ParseSkillData();
-
-        Use(strikeSkillName, 1);
-        Use(shieldStrikeSkillName, 1);
-        Use(whirlingCleaveSkillName, 3);
+        //Use(strikeSkillSO, 1);
+        //Use(shieldStrikeSO, 2);
+        //Use(whirlingCleaveSO, 3);
     }
 
-    public void Use(string name, int level)
+    public void Use(SkillSO skillSO, int level)
     {
-        if (name == strikeSkillName)
+        if (skillSO.skillName == strikeSkillName)
         {
             Strike(level);
         }
-        else if (name == shieldStrikeSkillName)
+        else if (skillSO.skillName == shieldStrikeSkillName)
         {
             ShieldStrike(level);
         }
-        else if (name == whirlingCleaveSkillName)
+        else if (skillSO.skillName == whirlingCleaveSkillName)
         {
             WhirlingCleave(level);
         }
@@ -44,53 +54,46 @@ public class KnightSkill : MonoBehaviour
     // 스킬 레벨 당 데미지를 준다.  
     private void Strike(int level)
     {
-        Dictionary<int, float> levelDamageDict = activeSkillDataDict[strikeSkillName];
+        Debug.Log("KnightSkill 클래스 Strike 함수 호출한다.");
 
-        if (levelDamageDict.ContainsKey(level))
-        {
-            float damageAtLevel = levelDamageDict[level];
-            UnityEngine.Debug.Log($"스킬을 사용했다. 이름:{strikeSkillName}, 레벨:{level}, 데미지:{damageAtLevel}");
-            // 여기에서 damageAtLevel을 이용하여 스킬 효과를 적용할 수 있다.
-        }
-        else
-        {
-            UnityEngine.Debug.LogError($"해당 레벨의 데미지가 없다. 이름:{strikeSkillName}, 레벨:{level}");
-        }
+        //int totalDamage = 0;
+
+        // 데미지 + 레벨당 데미지
+        totalDamage = strikeSkillSO.damage + level * strikeSkillSO.increasedDamagePerLevel;
+
+        Debug.Log($"Strike 데미지: {totalDamage}");
     }
 
     // Shield Strike;방패 강타
     // 스킬 레벨 당 스턴 시간을 준다.
     private void ShieldStrike(int level)
     {
-        Dictionary<int, float> levelDamageDict = activeSkillDataDict[shieldStrikeSkillName];
+        Debug.Log("KnightSkill 클래스 ShieldStrike 함수 호출한다.");
 
-        if (levelDamageDict.ContainsKey(level))
-        {
-            float stunAtLevel = levelDamageDict[level];
-            UnityEngine.Debug.Log($"스킬을 사용했다. 이름:{strikeSkillName}, 레벨:{level}, 스턴 시간:{stunAtLevel}");
-            // 여기에서 stunAtLevel 이용하여 스킬 효과를 적용할 수 있다.
-        }
-        else
-        {
-            UnityEngine.Debug.LogError($"해당 레벨의 스턴 시간이 없다. 이름:{strikeSkillName}, 레벨:{level}");
-        }
+        //int totalDamage = 0;
+        //float totalStunTime = 0;
+
+        // 데미지 + 레벨당 데미지
+        totalDamage = shieldStrikeSO.damage + level * shieldStrikeSO.increasedDamagePerLevel;
+
+        // 스턴 시간 + 레벨당 스턴 시간
+        totalStunTime = shieldStrikeSO.stunTime + level * shieldStrikeSO.increasedStunTimePerLevel;
+
+        Debug.Log($"ShieldStrike 데미지: {totalDamage}");
+        Debug.Log($"ShieldStrike 스턴 시간: {totalStunTime}");
     }
 
     // Whirling Cleave;회전 베기
     // 스킬 레벨 당 데미지를 준다.
     private void WhirlingCleave(int level)
     {
-        Dictionary<int, float> levelDamageDict = activeSkillDataDict[whirlingCleaveSkillName];
+        Debug.Log("KnightSkill 클래스 WhirlingCleave 함수 호출한다.");
 
-        if (levelDamageDict.ContainsKey(level))
-        {
-            float damageAtLevel = levelDamageDict[level];
-            UnityEngine.Debug.Log($"스킬을 사용했다. 이름:{strikeSkillName}, 레벨:{level}, 데미지:{damageAtLevel}");
-            // 여기에서 damageAtLevel을 이용하여 스킬 효과를 적용할 수 있다.
-        }
-        else
-        {
-            UnityEngine.Debug.LogError($"해당 레벨의 데미지가 없다. 이름:{strikeSkillName}, 레벨:{level}");
-        }
+        //int totalDamage = 0;
+
+        // 데미지 + 레벨당 데미지
+        totalDamage = whirlingCleaveSO.damage + level * whirlingCleaveSO.increasedDamagePerLevel;
+
+        Debug.Log($"WhirlingCleave 데미지: {totalDamage}");
     }
 }

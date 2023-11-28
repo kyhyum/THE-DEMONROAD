@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using static UnityEditor.Progress;
@@ -7,11 +8,13 @@ public class npcInteraction : MonoBehaviour
 {
     public NPCSO npc;
     public QuestSO quest;
-    public ItemSO golditem;
+    //public ItemSO goldItem;
+    [SerializeField] List<ItemSO> allItems;
     private QuestController controller;
    
     public static UIManager Instance;
-
+    
+    
     public GameObject dialogueUI;
     public GameObject interactionPopup;
     
@@ -55,26 +58,33 @@ public class npcInteraction : MonoBehaviour
                 if (isUIVisible)
                 {
                     ShowDialogue();
+                    
                 }
                 else
                 {
                     HideDialogue();
-                    
+                    UIManager.Instance.ActivePlayerUI(true);
+
                 }
             }
         }
         else
         {
             HideDialogue();
+            UIManager.Instance.ActivePlayerUI(true);
         }
         if (isUIVisible && Input.GetKeyDown(KeyCode.F) && !isTalking)
         {
             HideDialogue();
+            UIManager.Instance.ActivePlayerUI(true);
         }
 
     }
     void ShowDialogue()
     {
+        //player Ui off
+        UIManager.Instance.ActivePlayerUI(false);
+
         isTalking = true;
         StopAllCoroutines(); 
 
@@ -128,7 +138,7 @@ public class npcInteraction : MonoBehaviour
             foreach (var npc in selectedQuest.relatedNPCs)
             {
 
-                //questProgName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
+                
                 questProgName.text = selectedQuest.questName + "\n - " +  " 1 / " + selectedQuest.questComplete;
             }
         }
@@ -139,6 +149,7 @@ public class npcInteraction : MonoBehaviour
         isTalking = false;
         dialogueUI.SetActive(false);
         interactionPopup.SetActive(false);
+        
     }
 
 
@@ -166,37 +177,27 @@ public class npcInteraction : MonoBehaviour
         questProgName.fontStyle |= FontStyles.Strikethrough;
 
         //금화 보상 처리
+
+        //방법3
         if (quest != null && quest.questType == QuestType.ConversationQuest)
         {
-            
             Inventory inventory = UIManager.Instance.GetInventory();
 
             if (inventory != null)
             {
-                
-                ItemSO itemSO = golditem;
-                Item itemToAdd = new Item(itemSO); 
-                bool itemAdded = inventory.AddItem(itemToAdd); 
-
-                if (itemAdded)
-                {
-                    // 금화 보상 추가
-                    inventory.Gold += quest.questRewardCoin;
-                    Debug.Log("보상으로 " + quest.questRewardCoin + "개의 금화 획득!");
-                }
-                else
-                {
-                    Debug.Log("아이템 추가에 실패했습니다.");
-                }
+                inventory.Gold += quest.questRewardCoin;
+                Debug.Log(quest.questName+"보상으로 " + quest.questRewardCoin + "개의 금화 획득했습니다!");
+ 
             }
             else
             {
                 Debug.Log("Inventory가 null입니다.");
             }
-
         }
 
     }
+
+
 
 
     System.Collections.IEnumerator DisplayDialogue(string dialogue) 

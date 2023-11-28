@@ -11,7 +11,7 @@ public class PlayerData
     public int exp;
     public Job job;
     public List<Stat> stats;
-    public GameObject baseObject;
+    public string baseObjectPath;
 
     public int playerIndex;
 

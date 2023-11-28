@@ -15,8 +15,11 @@ public class GameManager : MonoBehaviour
     public EventSystem eventSystem;
 
     public PlayerCondition conditon;
+    public int goblinkillCount= 0; // 고블린 잡은 횟수
 
     SlotItem slot;
+
+    GameObject obj;
     private void Awake()
     {
         if (Instance == null)
@@ -38,7 +41,8 @@ public class GameManager : MonoBehaviour
     {
         if(player.name == "Tester")
         {
-            Myplayer = Instantiate<GameObject>(player.baseObject, player.currentPlayerPos, player.currentPlayerRot);
+            obj = Resources.Load<GameObject>(player.baseObjectPath);
+            Myplayer = Instantiate<GameObject>(obj, player.currentPlayerPos, player.currentPlayerRot);
             conditon = Myplayer.AddComponent<PlayerCondition>();
             conditon.playerData = player;
             conditon.Initialize();
@@ -47,9 +51,10 @@ public class GameManager : MonoBehaviour
             uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.TestItemJsonPath, StringManager.TestStorageName));
             return;
         }
-        if (player.baseObject != null && scene.buildIndex != (int)SceneType.Start && scene.buildIndex != (int)SceneType.Loading)
+        if (player.baseObjectPath != null && scene.buildIndex != (int)SceneType.Start && scene.buildIndex != (int)SceneType.Loading)
         {
-            Myplayer = Instantiate<GameObject>(player.baseObject, player.currentPlayerPos, player.currentPlayerRot);
+            obj = Resources.Load<GameObject>(player.baseObjectPath);
+            Myplayer = Instantiate<GameObject>(obj, player.currentPlayerPos, player.currentPlayerRot);
             conditon = Myplayer.AddComponent<PlayerCondition>();
             conditon.playerData = player;
             conditon.Initialize();
@@ -141,6 +146,7 @@ public class GameManager : MonoBehaviour
             Myplayer = null;
         }
     }
+    
     public void Save()
     {
         if (player.name == "Tester")
@@ -148,8 +154,8 @@ public class GameManager : MonoBehaviour
             player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
             player.currentPlayerPos = Myplayer.transform.position;
             player.currentPlayerRot = Myplayer.transform.rotation;
-            SaveItemArrayToJson(StringManager.ItemJsonPath, player.name, uiManager.GetInventory().Get());
-            SaveItemArrayToJson(StringManager.ItemJsonPath, StringManager.StorageName, uiManager.GetStorage().Get());
+            SaveItemArrayToJson(StringManager.TestItemJsonPath, player.name, uiManager.GetInventory().Get());
+            SaveItemArrayToJson(StringManager.TestItemJsonPath, StringManager.TestStorageName, uiManager.GetStorage().Get());
             SavePlayerDataToJson(StringManager.TestJsonPath, player.name, player);
             return;
         }
@@ -168,4 +174,5 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
         Save();
     }
+
 }

@@ -21,21 +21,19 @@
             "statValue": 50
         }
     ],
-    "baseObject": {
-        "instanceID": 36814
-    },
+    "baseObjectPath": "BaseCharacter/Warrior",
     "playerIndex": 0,
     "scene": 2,
     "currentPlayerPos": {
-        "x": -32.7467041015625,
+        "x": 1.94814133644104,
         "y": -0.9571113586425781,
-        "z": -23.38604736328125
+        "z": -23.59619903564453
     },
     "currentPlayerRot": {
         "x": 0.0,
-        "y": -0.2409806102514267,
+        "y": 0.6595165729522705,
         "z": 0.0,
-        "w": 0.9705299735069275
+        "w": 0.7516900897026062
     },
     "isDead": false,
     "acceptQuest": []

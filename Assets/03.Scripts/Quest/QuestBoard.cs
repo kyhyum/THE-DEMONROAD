@@ -90,7 +90,9 @@ public class QuestBoard : MonoBehaviour
         questRewardText.text = selectedQuest.questReward;
         selectQuest = selectedQuest;
     }
-    private bool IsQuestAlreadyAccepted(QuestSO quest) // 같은 타입의 퀘스트는 한번만 받게끔
+
+    // 같은 타입의 퀘스트는 한번만 받게끔
+    private bool IsQuestAlreadyAccepted(QuestSO quest) 
     {
         if (player.acceptQuest.Contains(quest))
         {
@@ -187,39 +189,45 @@ public class QuestBoard : MonoBehaviour
 
             }
         }
-        else if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트 = TODO:드롭되는 아이템 갯수 카운트 해서 '현재상황'에 반영
+        else if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트 = TODO:드롭되는 아이템 갯수 카운트 해서 '0'에 반영
         {
-            questProgitemName.text = selectedQuest.questName + "\n - " + "현재상황 / " + selectedQuest.questComplete;
+            questProgitemName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
         }
-        else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트 = TODO:goblin 처치 시마다 처치한 마릿수 카운트 
+        else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트 
         {
-            questProgmonsterName.text = selectedQuest.questName + "\n - "  + "0 / " + selectedQuest.questComplete;
+            int goblinKills = GameManager.Instance.goblinkillCount;
+            
+            questProgmonsterName.text = selectedQuest.questName + "\n - "  +goblinKills+ " / " + selectedQuest.questComplete;
 
-            //if(goblinKills >= selectedQuest.questComplete)
-            //{
-            //    questProgmonsterName.color = Color.red;
-            //    questProgmonsterName.fontStyle |= FontStyles.Italic;
-            //    questProgmonsterName.fontStyle |= FontStyles.Strikethrough;
-
-            //}
+            if (goblinKills >= selectedQuest.questComplete)
+            {
+                questProgmonsterName.color = Color.red;
+                questProgmonsterName.fontStyle |= FontStyles.Italic;
+                questProgmonsterName.fontStyle |= FontStyles.Strikethrough;
+                MonsterQuestReward(selectedQuest);
+            }
         }
         else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
         {
-            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - "  + "0 / " + selectedQuest.questComplete;
-            //if (goblinKills >= selectedQuest.questComplete)
-            //{
-            //    questProgInfinitemonsterName.color = Color.red;
-            //    questProgInfinitemonsterName.fontStyle |= FontStyles.Italic;
-            //    questProgInfinitemonsterName.fontStyle |= FontStyles.Strikethrough;
-            //    //여기에 새로운 퀘스트 추가 - 150마리 잡는 퀘스트
+            
+            int goblinKills = GameManager.Instance.goblinkillCount;
+            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - "  +goblinKills+ " / " + selectedQuest.questComplete;
+            if (goblinKills >= selectedQuest.questComplete)
+            {
+                questProgInfinitemonsterName.color = Color.red;
+                questProgInfinitemonsterName.fontStyle |= FontStyles.Italic;
+                questProgInfinitemonsterName.fontStyle |= FontStyles.Strikethrough;
+                InfiniteMonsterQuestReward(selectedQuest);
+                //여기에 새로운 퀘스트 추가 - 150마리 잡는 퀘스트.. 시간되면
 
-            //}
+            }
         }
         else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 
         {
             questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
             UpdateMainQuestProgress(selectedQuest);
-    
+
+
         }
     }
     public void UpdateMainQuestProgress(QuestSO selectedQuest)
@@ -243,21 +251,12 @@ public class QuestBoard : MonoBehaviour
 
 
             }
-            else if (choiceDungeon == null)
-            {
-                // choiceDungeon이 null 
-                Debug.Log("choiceDungeon이 Null입니다");
-            }
-            else
-            {
-                //dungeonInteractionPopup이 비활성화일 때
-                Debug.Log("popup이 비활성화 상태");
-            }
+            
 
         }
 
     }
-    
+
     void OnDestroy()
     {
         // 이벤트 구독 해제
@@ -266,10 +265,10 @@ public class QuestBoard : MonoBehaviour
             ChoiceDungeon.DungeonInteractionPopupActivated -= OnDungeonInteractionPopupActivated;
         }
     }
-    
-    
 
-    
+
+
+
     public void MainQuestReward(QuestSO selectedQuest)
     {
         if (controller != null)
@@ -282,43 +281,114 @@ public class QuestBoard : MonoBehaviour
         {
             Debug.Log("Null입니다");
         }
-
-        if (selectedQuest != null && selectedQuest.questType == QuestType.MainQuest)
+        if (selectedQuest != null)
         {
-
-            Inventory inventory = UIManager.Instance.GetInventory();
-
-            if (inventory != null)
+            if (selectedQuest.questType == QuestType.MainQuest)
             {
+                Inventory inventory = UIManager.Instance.GetInventory();
 
-                ItemSO itemSO = golditem;
-                Item itemToAdd = new Item(itemSO);
-                bool itemAdded = inventory.AddItem(itemToAdd); // 아이템을 Inventory에 추가
-
-                if (itemAdded)
+                if (inventory != null)
                 {
-                    // 금화 보상 추가
                     inventory.Gold += selectedQuest.questRewardCoin;
-                    Debug.Log("보상으로 " + selectedQuest.questRewardCoin + "개의 금화 획득!");
+                    Debug.Log(selectedQuest.questName + "보상으로 " + selectedQuest.questRewardCoin + "개의 금화를 획득했습니다!");
                 }
                 else
                 {
-                    Debug.Log("아이템 추가에 실패했습니다.");
+                    Debug.Log("Inventory가 null입니다.");
                 }
             }
             else
             {
-                Debug.Log("Inventory가 null입니다.");
+                Debug.Log("MainQuest가 아닙니다.");
             }
-
         }
-        //밑에 이제 다른 퀘스트들의 보상도 추가 예정
+        else
+        {
+            Debug.Log("selectQuest가 null입니다.");
+        }
+
+        
     }
-   
     
 
+    public void MonsterQuestReward(QuestSO selectedQuest)
+    {
+        if (controller != null)
+        {
+            controller.ShowPopup();
+            controller.Invoke("HidePopup", 2f);
 
+        }
+        else if (controller == null)
+        {
+            Debug.Log("Null입니다");
+        }
 
+        if (selectedQuest != null)
+        {
+            if (selectedQuest.questType == QuestType.MonsterQuest)
+            {
+                Inventory inventory = UIManager.Instance.GetInventory();
+
+                if (inventory != null)
+                {
+                    inventory.Gold += selectedQuest.questRewardCoin;
+                    Debug.Log(selectedQuest.questName + "보상으로 " + selectedQuest.questRewardCoin + "개의 금화를 획득했습니다!");
+                }
+                else
+                {
+                    Debug.Log("Inventory가 null입니다.");
+                }
+            }
+            else
+            {
+                Debug.Log("MainQuest가 아닙니다.");
+            }
+        }
+        else
+        {
+            Debug.Log("selectQuest가 null입니다.");
+        }
+    }
+    public void InfiniteMonsterQuestReward(QuestSO selectedQuest)
+    {
+        if (controller != null)
+        {
+            controller.ShowPopup();
+            controller.Invoke("HidePopup", 2f);
+
+        }
+        else if (controller == null)
+        {
+            Debug.Log("Null입니다");
+        }
+
+        if (selectedQuest != null)
+        {
+            if (selectedQuest.questType == QuestType.InfiniteMonsterQuest)
+            {
+                Inventory inventory = UIManager.Instance.GetInventory();
+
+                if (inventory != null)
+                {
+                    inventory.Gold += selectedQuest.questRewardCoin;
+                    Debug.Log(selectedQuest.questName + "보상으로 " + selectedQuest.questRewardCoin + "개의 금화를 획득했습니다!");
+                }
+                else
+                {
+                    Debug.Log("Inventory가 null입니다.");
+                }
+            }
+            else
+            {
+                Debug.Log("MainQuest가 아닙니다.");
+            }
+        }
+        else
+        {
+            Debug.Log("selectQuest가 null입니다.");
+        }
+    }
 
 
 

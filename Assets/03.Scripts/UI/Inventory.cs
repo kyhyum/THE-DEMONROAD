@@ -4,7 +4,7 @@ using TMPro;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -74,6 +74,7 @@ public class Inventory : MonoBehaviour
             return AddItem(FindIndex(), item);
         }
     }
+
 
     public bool AddItem(int index, Item item)
     {

@@ -9715,9 +9715,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6796711405822698239}
   - {fileID: 6480376004526939534}
   - {fileID: 9036553321900046998}
-  - {fileID: 6796711405822698239}
   m_Father: {fileID: 3301103573955664019}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15167,7 +15167,7 @@ MonoBehaviour:
     exp: 0
     job: 0
     stats: []
-    baseObject: {fileID: 0}
+    baseObjectPath: 
     playerIndex: 0
     scene: 0
     currentPlayerPos: {x: 0, y: 0, z: 0}
