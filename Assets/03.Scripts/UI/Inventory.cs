@@ -75,7 +75,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
     public bool AddItem(int index, Item item)
     {
         if (index == -1)
@@ -216,5 +215,10 @@ public class Inventory : MonoBehaviour
         {
             UIManager.Instance.ActiveInventory();
         }
+    }
+
+    public void ClickUI()
+    {
+        UIManager.Instance.ClickInventory();
     }
 }

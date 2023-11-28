@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragAndDrop : MonoBehaviour, IDragHandler
+public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler
 {
     [field: SerializeField] private RectTransform rect;
     private Canvas canvas;
@@ -20,6 +20,11 @@ public class DragAndDrop : MonoBehaviour, IDragHandler
         canvasWidth = canvas.GetComponent<RectTransform>().rect.width / 2;
         canvasHeight = canvas.GetComponent<RectTransform>().rect.height / 2;
     }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         rect.anchoredPosition += eventData.delta / canvas.scaleFactor;

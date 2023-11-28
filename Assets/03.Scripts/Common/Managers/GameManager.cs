@@ -10,11 +10,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public UIManager uiManager;
     public PlayerData player;
-    public GameObject Myplayer;
-
-    public EventSystem eventSystem;
-
     public PlayerCondition conditon;
+    public GameObject Myplayer;
+    public EventSystem eventSystem;
 
     SlotItem slot;
 
@@ -38,7 +36,7 @@ public class GameManager : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(player.name == "Tester")
+        if (player.name == "Tester")
         {
             obj = Resources.Load<GameObject>(player.baseObjectPath);
             Myplayer = Instantiate<GameObject>(obj, player.currentPlayerPos, player.currentPlayerRot);

@@ -4,9 +4,7 @@
     "exp": 0,
     "job": 0,
     "stats": [],
-    "baseObject": {
-        "instanceID": 0
-    },
+    "baseObjectPath": "",
     "playerIndex": 0,
     "scene": 0,
     "currentPlayerPos": {
