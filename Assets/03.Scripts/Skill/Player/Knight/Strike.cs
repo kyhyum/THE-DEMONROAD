@@ -22,7 +22,7 @@ public class Strike : Skill, IUsable
 
     public void Use()
     {
-        player.IsAttackSkill1 = true;
+        //player.IsAttackSkill1 = true;
         StartCoroutine(strike());
         totalDamage = damage + level * increasedDamagePerLevel;
     }

@@ -13,13 +13,11 @@ public class PlayerAttackState : PlayerBaseState
         //Debug.Log("PlayerAttackState 클래스 Enter 함수 호출한다.");
 
         Weapon weapon = stateMachine.Player.Weapon;
-
-        //stateMachine.Player.AttackSlash
-        //Object.Instantiate(weapon.AttackSlash, weapon.transform.position, Quaternion.identity);
         
         stateMachine.Player.Agent.ResetPath();
         base.Enter();
 
+        stateMachine.Player.TrailRenderer.enabled = true;
         StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
     }
 
@@ -28,6 +26,7 @@ public class PlayerAttackState : PlayerBaseState
         base.Exit();
 
         StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
+        stateMachine.Player.TrailRenderer.enabled = false;
     }
 
     public override void Update()
