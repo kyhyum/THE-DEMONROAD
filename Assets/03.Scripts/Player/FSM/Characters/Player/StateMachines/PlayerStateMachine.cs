@@ -36,7 +36,5 @@ public class PlayerStateMachine : StateMachine
         AttackSkill1State = new PlayerAttackSkill1State(this);
         AttackSkill2State = new PlayerAttackSkill2State(this);
         AttackSkill3State = new PlayerAttackSkill3State(this);
-
-        MovementSpeed = player.Data.GroundedData.BaseSpeed;
     }
 }

@@ -13,9 +13,7 @@ using UnityEngine.Windows;
 public class PlayerBaseState : IState, IUsable
 {
     protected PlayerStateMachine stateMachine;
-    protected readonly PlayerGroundData groundData;
 
-    
     float cameraDistance;
     [field: SerializeField] public float minCamDistance = 5.0f;
     [field: SerializeField] public float maxCamDistance = 15.0f;
@@ -26,7 +24,6 @@ public class PlayerBaseState : IState, IUsable
     public PlayerBaseState(PlayerStateMachine playerStateMachine)
     {
         stateMachine = playerStateMachine;
-        groundData = playerStateMachine.Player.Data.GroundedData;
     }
 
     public virtual void Enter()
@@ -76,17 +73,6 @@ public class PlayerBaseState : IState, IUsable
         input.PlayerActions.Attack.canceled += OnAttackCanceled;
         // 
         input.PlayerActions.MouseScrollY.performed += OnMouseScrollYPerformed;
-        //
-        input.PlayerActions.QuickSlot1.performed += OnQuickSlot1Performed;
-        input.PlayerActions.QuickSlot1.canceled += OnQuickSlot1Canceled;
-        input.PlayerActions.QuickSlot2.performed += OnQuickSlot2Performed;
-        input.PlayerActions.QuickSlot2.canceled += OnQuickSlot2Canceled;
-        input.PlayerActions.QuickSlot3.performed += OnQuickSlot3Performed;
-        input.PlayerActions.QuickSlot3.canceled += OnQuickSlot3Canceled;
-        input.PlayerActions.QuickSlot4.performed += OnQuickSlot4Performed;
-        input.PlayerActions.QuickSlot4.canceled += OnQuickSlot4Canceled;
-        input.PlayerActions.QuickSlot5.performed += OnQuickSlot5Performed;
-        input.PlayerActions.QuickSlot5.canceled += OnQuickSlot5Canceled;
     }
 
     /// <summary>
@@ -103,17 +89,6 @@ public class PlayerBaseState : IState, IUsable
         input.PlayerActions.Attack.performed -= OnAttackPerformed;
         input.PlayerActions.Attack.canceled -= OnAttackCanceled;
         input.PlayerActions.MouseScrollY.performed -= OnMouseScrollYPerformed;
-
-        input.PlayerActions.QuickSlot1.performed -= OnQuickSlot1Performed;
-        input.PlayerActions.QuickSlot1.canceled -= OnQuickSlot1Canceled;
-        input.PlayerActions.QuickSlot2.performed -= OnQuickSlot2Performed;
-        input.PlayerActions.QuickSlot2.canceled -= OnQuickSlot2Canceled;
-        input.PlayerActions.QuickSlot3.performed -= OnQuickSlot3Performed;
-        input.PlayerActions.QuickSlot3.canceled -= OnQuickSlot3Canceled;
-        input.PlayerActions.QuickSlot4.performed -= OnQuickSlot4Performed;
-        input.PlayerActions.QuickSlot4.canceled -= OnQuickSlot4Canceled;
-        input.PlayerActions.QuickSlot5.performed -= OnQuickSlot5Performed;
-        input.PlayerActions.QuickSlot5.canceled -= OnQuickSlot5Canceled;
     }
 
     protected virtual void OnMoveStarted(InputAction.CallbackContext context)
@@ -170,68 +145,6 @@ public class PlayerBaseState : IState, IUsable
             framingTransposer.m_CameraDistance = Mathf.Clamp(framingTransposer.m_CameraDistance, minCamDistance, maxCamDistance);
         }
 
-    }
-
-    protected virtual void OnQuickSlot1Performed(InputAction.CallbackContext context)
-    {
-        //Debug.Log("OnQuickSlot1Performed 함수 호출한다.");
-
-        stateMachine.Player.IsAttackSkill1 = true;
-    }
-
-    protected virtual void OnQuickSlot1Canceled(InputAction.CallbackContext context)
-    {
-        //Debug.Log("OnQuickSlot1Canceled 함수 호출한다.");
-
-        stateMachine.Player.IsAttackSkill1 = false;
-    }
-
-    protected virtual void OnQuickSlot2Performed(InputAction.CallbackContext context)
-    {
-        //Debug.Log("OnQuickSlot2Performed 함수 호출한다.");
-
-        stateMachine.Player.IsAttackSkill2 = true;
-    }
-
-    protected virtual void OnQuickSlot2Canceled(InputAction.CallbackContext context)
-    {
-        //Debug.Log("OnQuickSlot2Canceled 함수 호출한다.");
-
-        stateMachine.Player.IsAttackSkill2 = false;
-    }
-
-    protected virtual void OnQuickSlot3Performed(InputAction.CallbackContext context)
-    {
-        //Debug.Log("OnQuickSlot3Performed 함수 호출한다.");
-
-        stateMachine.Player.IsAttackSkill3 = true;
-    }
-
-    protected virtual void OnQuickSlot3Canceled(InputAction.CallbackContext context)
-    {
-        //Debug.Log("OnQuickSlot3Canceled 함수 호출한다.");
-
-        stateMachine.Player.IsAttackSkill3 = false;
-    }
-
-    protected virtual void OnQuickSlot4Performed(InputAction.CallbackContext context)
-    {
-        Debug.Log("OnQuickSlot4Performed 함수 호출한다.");
-    }
-
-    protected virtual void OnQuickSlot4Canceled(InputAction.CallbackContext context)
-    {
-        Debug.Log("OnQuickSlot4Canceled 함수 호출한다.");
-    }
-
-    protected virtual void OnQuickSlot5Performed(InputAction.CallbackContext context)
-    {
-        Debug.Log("OnQuickSlot5Performed 함수 호출한다.");
-    }
-
-    protected virtual void OnQuickSlot5Canceled(InputAction.CallbackContext context)
-    {
-        Debug.Log("OnQuickSlot5Canceled 함수 호출한다.");
     }
 
     /// <summary>
