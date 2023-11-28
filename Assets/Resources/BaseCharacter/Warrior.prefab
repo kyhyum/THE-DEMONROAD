@@ -199,6 +199,7 @@ MonoBehaviour:
   <ComponentBase>k__BackingField: {fileID: 0}
   cameraLookPoint: {fileID: 8219408792071906567}
   <Strike>k__BackingField: {fileID: 4215151398305761063}
+  <TrailRenderer>k__BackingField: {fileID: 2060720765943931176}
 --- !u!114 &7725758992122052757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,12 +458,12 @@ GameObject:
   - component: {fileID: 7729600335772756963}
   - component: {fileID: 2060720765943931176}
   m_Layer: 0
-  m_Name: TrailEffect
+  m_Name: TrailRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7729600335772756963
 Transform:
   m_ObjectHideFlags: 0
@@ -853,8 +854,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2fdbc647e6b564b8b9ad6fe98a30c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: 
+  level: 0
+  damage: 0
+  increasedDamagePerLevel: 0
+  stunTime: 0
+  increasedStunTimePerLevel: 0
+  manaCost: 0
+  coolTime: 0
   player: {fileID: 253929875917010689}
-  skill: {fileID: 0}
 --- !u!1001 &8389435689674916573
 PrefabInstance:
   m_ObjectHideFlags: 0

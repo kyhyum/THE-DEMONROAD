@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     [field: Header("Skill")]
     [field: SerializeField] public Strike Strike { get; set; }
 
+    [field: Header(" ")]
+    [field:SerializeField] public TrailRenderer TrailRenderer { get; set; }
+
     private PlayerStateMachine stateMachine;
 
     private void Awake()
