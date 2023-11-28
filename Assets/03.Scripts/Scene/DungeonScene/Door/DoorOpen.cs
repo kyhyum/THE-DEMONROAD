@@ -6,10 +6,15 @@ public class DoorOpen : MonoBehaviour
 {
     public GameObject leftDoor;
     public GameObject rightDoor;
-    private BoxCollider boxCollider;
+    private BoxCollider boxCollider; 
+    
+    public AudioClip doorOpenSound; 
+    private AudioSource audioSource;
     private void Start()
     {
         boxCollider = gameObject.GetComponent<BoxCollider>();
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = doorOpenSound;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -23,6 +28,7 @@ public class DoorOpen : MonoBehaviour
 
     private void OpenDoor()
     {
+        audioSource.Play();
         Quaternion leftTargetRotation = Quaternion.Euler(0, -90, 0);
         StartCoroutine(RotateOverTime(leftDoor.transform, leftTargetRotation, 1f));
 
