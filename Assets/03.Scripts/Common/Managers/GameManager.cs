@@ -10,12 +10,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public UIManager uiManager;
     public PlayerData player;
-    public GameObject Myplayer;
-
-    public EventSystem eventSystem;
-
     public PlayerCondition conditon;
-    public int goblinkillCount= 0; // 고블린 잡은 횟수
+    public int goblinkillCount = 0; // 고블린 잡은 횟수
+    public GameObject Myplayer;
+    public EventSystem eventSystem;
 
     SlotItem slot;
 
@@ -39,7 +37,7 @@ public class GameManager : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(player.name == "Tester")
+        if (player.name == "Tester")
         {
             obj = Resources.Load<GameObject>(player.baseObjectPath);
             Myplayer = Instantiate<GameObject>(obj, player.currentPlayerPos, player.currentPlayerRot);
@@ -146,7 +144,7 @@ public class GameManager : MonoBehaviour
             Myplayer = null;
         }
     }
-    
+
     public void Save()
     {
         if (player.name == "Tester")

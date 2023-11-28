@@ -13,13 +13,13 @@ public class UIManager : MonoBehaviour
 
     private GameObject inventoryObject;
     private GameObject storageObject;
+    private GameObject skillObject;
     public GameObject settingObject;
     public GameObject playerUIObject;
 
-    private GameObject clickedUI;
-
     private Inventory inventory;
     private Storage storage;
+    private SkillUI skill;
 
     public PlayerUI playerUI { get; private set; }
 
@@ -33,10 +33,10 @@ public class UIManager : MonoBehaviour
     {
         EnableUI = new List<GameObject>();
         audioSource = GetComponent<AudioSource>();
-        playerUI = playerUIObject.GetComponent<PlayerUI>();
 
         CreateStorage();
         CreateInventory();
+        CreateSkill();
     }
 
     private void Start()
@@ -55,22 +55,30 @@ public class UIManager : MonoBehaviour
 
         inputAction.Player.Escape.Enable();
         inputAction.Player.Escape.started += OnEscapeKey;
+
+        playerUI = playerUIObject.GetComponent<PlayerUI>();
+
     }
 
     private void CreateInventory()
     {
-        inventoryObject = Resources.Load<GameObject>("Prefabs/UI/UI_Inventory");
-        inventoryObject = Instantiate(inventoryObject, canvas);
-        inventory = inventoryObject.GetComponent<Inventory>();
+        inventoryObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UI_Inventory"), canvas);
+        inventory = inventoryObject.GetComponentInChildren<Inventory>();
         inventoryObject.SetActive(false);
     }
 
     private void CreateStorage()
     {
-        storageObject = Resources.Load<GameObject>("Prefabs/UI/UI_Storage");
-        storageObject = Instantiate(storageObject, canvas);
+        storageObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UI_Storage"), canvas);
         storage = storageObject.GetComponentInChildren<Storage>();
         storageObject.SetActive(false);
+    }
+
+    private void CreateSkill()
+    {
+        skillObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UI_Skill"), transform);
+        skill = skillObject.GetComponentInChildren<SkillUI>();
+        skillObject.SetActive(false);
     }
 
     public void OnUIInputEnable()
@@ -78,6 +86,7 @@ public class UIManager : MonoBehaviour
         inputAction.Player.Inventory.Enable();
         inputAction.Player.SkillUI.Enable();
         inputAction.Player.Inventory.started += ActiveInventory;
+        inputAction.Player.SkillUI.started += ActiveSkill;
     }
 
     public void OnUIInputDisable()
@@ -85,6 +94,7 @@ public class UIManager : MonoBehaviour
         inputAction.Player.Inventory.Disable();
         inputAction.Player.SkillUI.Disable();
         inputAction.Player.Inventory.started -= ActiveInventory;
+        inputAction.Player.SkillUI.started -= ActiveSkill;
     }
 
     public Inventory GetInventory()
@@ -95,6 +105,11 @@ public class UIManager : MonoBehaviour
     public Storage GetStorage()
     {
         return storage;
+    }
+
+    public SkillUI GetSkill()
+    {
+        return skill;
     }
 
     public void ActiveSettingWindow()
@@ -110,6 +125,16 @@ public class UIManager : MonoBehaviour
     private void ActiveInventory(InputAction.CallbackContext context)
     {
         ActiveInventory();
+    }
+
+    public void ActiveSkill()
+    {
+        ActiveUIGameObject(skillObject);
+    }
+
+    private void ActiveSkill(InputAction.CallbackContext context)
+    {
+        ActiveSkill();
     }
 
     public void ActivePopUpUI(string title, string explan, UnityAction action)
@@ -181,6 +206,7 @@ public class UIManager : MonoBehaviour
         if (EnableUI.Contains(gameObject))
         {
             EnableUI.RemoveAt(EnableUI.IndexOf(gameObject));
+            gameObject.GetComponentInParent<Canvas>().sortingOrder = 40;
         }
         else
         {
@@ -204,6 +230,35 @@ public class UIManager : MonoBehaviour
         Item item = GetInventory().GetItem(slotA);
         GetInventory().AddItem(slotA, GetStorage().GetItem(slotB));
         GetStorage().AddItem(slotB, item);
+    }
+
+    public void ClickInventory()
+    {
+        UIClick(inventoryObject);
+    }
+
+    public void ClickSkillUI()
+    {
+        UIClick(skillObject);
+    }
+
+    private void UIClick(GameObject uiObject)
+    {
+        if (EnableUI.Count == 1)
+            return;
+
+        if (uiObject.Equals(EnableUI[0]))
+            return;
+
+        if (!EnableUI.Contains(uiObject))
+            return;
+
+        EnableUI[0].GetComponentInParent<Canvas>().sortingOrder = 40;
+
+        EnableUI.RemoveAt(EnableUI.IndexOf(uiObject));
+        EnableUI.Insert(0, uiObject);
+
+        uiObject.GetComponentInParent<Canvas>().sortingOrder = 50;
     }
 
     public void UIOpenSound()

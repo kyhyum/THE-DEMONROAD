@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class SkillUI : MonoBehaviour
 {
+    public SkillSlot[] slots;
 
+    public void ClickUI()
+    {
+        UIManager.Instance.ClickSkillUI();
+    }
 }
