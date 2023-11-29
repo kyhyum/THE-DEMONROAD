@@ -10,8 +10,12 @@ public class ShopManager : MonoBehaviour
     public GameObject potionNPCtalk;
     public GameObject potionInteractionPop;
     public GameObject confirmationPopUp;
+    public GameObject outofGoldPop;
+
     public TMP_Text confirmationText;
     public Button confirmationButton;
+
+    private int itemCountToBuy = 1;
     ItemSO item;
     
     
@@ -20,6 +24,7 @@ public class ShopManager : MonoBehaviour
     {
         potionShop.SetActive(false);
         confirmationPopUp.SetActive(false);
+        outofGoldPop.SetActive(false);
         
     }
 
@@ -68,6 +73,7 @@ public class ShopManager : MonoBehaviour
             else
             {
                 Debug.Log("골드가 부족합니다.");
+                outofGoldPop.SetActive(true);
             }
         }
         else
@@ -75,6 +81,10 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Inventory가 null입니다.");
         }
         confirmationPopUp.SetActive(false);
+    }
+    public void ClosePop()
+    {
+        outofGoldPop.SetActive(false);
     }
 
     
