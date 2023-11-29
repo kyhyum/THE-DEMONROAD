@@ -11,6 +11,7 @@ public class SkillSlot : MonoBehaviour
     public TMP_Text nameTxt;
     public TMP_Text descriptionTxt;
     public TMP_Text levelTxt;
+    public int slotID;
 
     public Button addBtn;
     public Button subBtn;
