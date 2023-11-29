@@ -137,7 +137,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            gameManager.player.data = data;
+            gameManager.data = data;
         }
         else
         {

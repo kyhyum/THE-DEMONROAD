@@ -50,7 +50,7 @@ public class TutorialNPC : MonoBehaviour
         gameManager = GameManager.Instance;
         player = gameManager.Myplayer.transform;
 
-        data = gameManager.player.data;
+        data = gameManager.data;
 
         playerUI = gameManager.uiManager.playerUIObject;
 
@@ -140,7 +140,7 @@ public class TutorialNPC : MonoBehaviour
         }
         else
         {
-            if (talkIndex ==2 || talkIndex == 3 || (talkIndex >= 5 && talkIndex <= 9))
+            if (talkIndex == 2 || talkIndex == 3 || (talkIndex >= 5 && talkIndex <= 9))
             {
                 return;
             }
