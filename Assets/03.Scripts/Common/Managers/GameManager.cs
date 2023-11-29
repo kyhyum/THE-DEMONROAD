@@ -157,6 +157,7 @@ public class GameManager : MonoBehaviour
             SavePlayerDataToJson(StringManager.TestJsonPath, player.name, player);
             return;
         }
+
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)SceneType.Loading)
         {
             player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
