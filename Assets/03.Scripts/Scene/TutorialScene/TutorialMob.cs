@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialMob : MonoBehaviour
+public class TutorialMob : MonoBehaviour, ITakeDamage
 {
     [SerializeField] TutorialNPC npc;
-    private void OnTriggerEnter(Collider other)
+    public void TakeDamage(float damage)
     {
-        if(other.gameObject.tag == "Player")
-        {
-            npc.QuestClear(npc.quest[1]);
-        }
+        npc.QuestClear(npc.quest[2]);
+        Debug.Log("h");
     }
 }

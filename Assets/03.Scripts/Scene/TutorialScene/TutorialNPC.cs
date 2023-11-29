@@ -12,7 +12,7 @@ public class TutorialNPC : MonoBehaviour
     [SerializeField] NPCSO npc;
     public List<QuestSO> quest;
 
-    [SerializeField] GameObject dialogueUI;
+    public GameObject dialogueUI;
     [SerializeField] GameObject npcCanvas;
     GameObject playerUI;
 
@@ -32,6 +32,8 @@ public class TutorialNPC : MonoBehaviour
     const float textDelay = 0.05f;
 
     int lastTalkIndex;
+
+    int saveLastTalk;
 
     [SerializeField] int talkIndex;
 
@@ -90,6 +92,7 @@ public class TutorialNPC : MonoBehaviour
         if(distance > activationDistance)
         {
             npcCanvas.SetActive(false);
+            DialogueUISetActive(false);
         }
 
         if (distance <= activationDistance)
@@ -125,6 +128,8 @@ public class TutorialNPC : MonoBehaviour
             yield return new WaitForSeconds(textDelay);
         }
 
+        Invoke("UISetActive", 0.5f);
+
         yield break;
     }
     public void ClickTalk()
@@ -135,6 +140,10 @@ public class TutorialNPC : MonoBehaviour
         }
         else
         {
+            if (talkIndex ==2 || talkIndex == 3 || (talkIndex >= 5 && talkIndex <= 9))
+            {
+                return;
+            }
             Talk();
         }
     }
@@ -213,8 +222,10 @@ public class TutorialNPC : MonoBehaviour
     }
     private void Cancel()
     {
+        saveLastTalk = talkIndex;
         talkIndex = 2;
         Talk();
+        lastTalkIndex = saveLastTalk;
     }
     public void QuestClear(QuestSO quest)
     {
@@ -222,6 +233,8 @@ public class TutorialNPC : MonoBehaviour
         {
             return;
         }
+
+        Debug.Log(quest.questName);
 
         isClear = true;
 

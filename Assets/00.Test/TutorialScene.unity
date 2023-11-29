@@ -585,7 +585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &20593907
 Transform:
   m_ObjectHideFlags: 0
@@ -613,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49ca1a0bb8c78145b3436a4023c3b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 0}
+  npc: {fileID: 1576416797}
 --- !u!4 &35378147
 Transform:
   m_ObjectHideFlags: 0
@@ -80157,7 +80157,7 @@ MonoBehaviour:
   cancelButton: {fileID: 213336106}
   nameText: {fileID: 193949518}
   dialogueText: {fileID: 1919919410}
-  isTalking: 0
+  isClear: 0
   activationDistance: 6
   talkIndex: 0
 --- !u!65 &1577340243
@@ -96201,7 +96201,7 @@ GameObject:
   - component: {fileID: 1967272054}
   m_Layer: 0
   m_Name: TutorialMob
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96221,11 +96221,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1967272055
 MeshRenderer:
@@ -96304,7 +96304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621ea52960244b14a82dfb7a55625bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 0}
+  npc: {fileID: 1576416797}
 --- !u!4 &1969663369 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 399879703629403034, guid: c0fbe600050d2e0468a8d5631cb56dab,
