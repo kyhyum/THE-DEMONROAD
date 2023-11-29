@@ -11,8 +11,9 @@ public class PlayerData
     public int exp;
     public Job job;
     public List<Stat> stats;
+    public int skillPoint;
+    public int[] skilllevels = new int[3];
     public string baseObjectPath;
-
     public int playerIndex;
 
     public SceneType scene;
@@ -90,6 +91,13 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
         StatUp();
         StatSynchronization();
     }
+
+    public void SkillLevelChange(int index, bool flag)
+    {
+        playerData.skilllevels[index] += (flag) ? 1 : -1;
+        playerData.skillPoint--;
+    }
+
     void StatUp()
     {
         foreach (var stat in myStats.Keys)

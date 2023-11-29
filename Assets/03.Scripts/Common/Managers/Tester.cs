@@ -23,7 +23,7 @@ public class Tester : MonoBehaviour
         {
             Instantiate(managers);
         }
-        if(SceneManager.GetActiveScene().name == "TestTownScene")
+        if (SceneManager.GetActiveScene().name == "TestTownScene")
         {
             scene = (int)SceneType.Town;
         }
@@ -37,7 +37,7 @@ public class Tester : MonoBehaviour
         gameManager = GameManager.Instance;
         tester = gameManager.LoadPlayerDataFromJson(StringManager.TestJsonPath, "Tester");
         tester.currentPlayerPos = Vector3.zero;
-        gameManager.player = tester;
+        gameManager.player.data = tester;
         SceneLoad();
     }
     void SceneLoad()

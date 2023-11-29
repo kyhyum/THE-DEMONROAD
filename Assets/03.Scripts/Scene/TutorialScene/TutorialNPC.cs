@@ -48,14 +48,14 @@ public class TutorialNPC : MonoBehaviour
         gameManager = GameManager.Instance;
         player = gameManager.Myplayer.transform;
 
-        data = gameManager.player;
+        data = gameManager.player.data;
 
         playerUI = gameManager.uiManager.playerUIObject;
 
         acceptButton.onClick.AddListener(Accept);
         cancelButton.onClick.AddListener(Cancel);
         activationDistance = 200f;
-        for (int i = 0; i< quest.Count; i++)
+        for (int i = 0; i < quest.Count; i++)
         {
             if (data.acceptQuest.Contains(quest[i]))
             {
@@ -63,10 +63,10 @@ public class TutorialNPC : MonoBehaviour
                 switch (i)
                 {
                     case 0:
-                         talkIndex = 5; 
+                        talkIndex = 5;
                         break;
                     case 1:
-                         talkIndex = 6;
+                        talkIndex = 6;
                         break;
                     case 2:
                         talkIndex = 7;
@@ -87,7 +87,7 @@ public class TutorialNPC : MonoBehaviour
     {
         distance = Vector3.Distance(this.gameObject.transform.position, player.position);
 
-        if(distance > activationDistance)
+        if (distance > activationDistance)
         {
             npcCanvas.SetActive(false);
         }
@@ -96,7 +96,7 @@ public class TutorialNPC : MonoBehaviour
         {
             npcCanvas.SetActive(true);
 
-            if(Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 QuestClear(quest[0]);
 
@@ -106,13 +106,13 @@ public class TutorialNPC : MonoBehaviour
     }
     private IEnumerator textPrint()
     {
-        if(talkIndex >= npc.npcDialogue.Length)
+        if (talkIndex >= npc.npcDialogue.Length)
         {
             yield break;
         }
 
         DialogueUISetActive(true);
-        
+
         dialogueText.text = null;
 
         lastTalkIndex = talkIndex;
@@ -228,7 +228,7 @@ public class TutorialNPC : MonoBehaviour
         switch (quest.questIndex)
         {
             case 990:
-                if(isClear)
+                if (isClear)
                 {
                     lastTalkIndex = 6;
                     ClearQuestEvent(quest);
