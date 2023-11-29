@@ -13,6 +13,4 @@ public class SkillUI : MonoBehaviour
             slots[i].Set(skills[i]);
         }
     }
-
-
 }
