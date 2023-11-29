@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
+
 
 public class ShopManager : MonoBehaviour
 {
@@ -23,9 +21,11 @@ public class ShopManager : MonoBehaviour
     public GameObject outofGoldPop;
 
     public TMP_Text confirmationText;
+    public TMP_Text sellconfirmationText;
     public TMP_Text itemCountText;
 
     public Button confirmationButton;
+    public Button sellButton;
     public Button increaseButton; 
     public Button decreaseButton;
 
@@ -64,8 +64,14 @@ public class ShopManager : MonoBehaviour
             confirmationPopUp.SetActive(true);
             confirmationText.text = "구매하시겠습니까? " + "\n" + item.itemName; 
                                      
-
+            //아이템 구매버튼 이벤트 설정
             confirmationButton.onClick.AddListener(BuyItem);
+
+            //아이템 판매버튼 이벤트
+            //sellconfirmationText.text = "판매하시겠습니까? " + "\n" + item.itemName;
+
+            //sellButton.onClick.RemoveAllListeners(); 
+            //sellButton.onClick.AddListener(() => SellItem(item));
 
         }
         else
@@ -106,6 +112,36 @@ public class ShopManager : MonoBehaviour
         }
         confirmationPopUp.SetActive(false);
     }
+    //public void SellItem(ItemSO soldItem)
+    //{
+    //    Inventory inventory = UIManager.Instance.GetInventory();
+
+    //    if (inventory != null && soldItem != null)
+    //    {
+    //        // 판매할 아이템이 인벤토리에 있는지 확인
+    //        for (int i = 0; i < inventory.inventorySlots.Length; i++)
+    //        {
+    //            Item currentItem = inventory.GetItem(i);
+
+                
+    //            if (currentItem != null && currentItem.itemName == soldItem.itemName)
+    //            {
+                    
+    //                inventory.inventorySlots[i].Clear();
+    //                inventory.Gold += soldItem.itemPrice;
+
+    //                Debug.Log(soldItem.itemName + "을(를) 판매하였습니다. 금화 +" + soldItem.itemPrice);
+    //                return; 
+    //            }
+    //        }
+
+    //        Debug.Log(soldItem.itemName + "을(를) 인벤토리에서 찾을 수 없습니다.");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Inventory가 null이거나 판매할 아이템이 null입니다.");
+    //    }
+    //}
     public void IncreaseItemCount()
     {
         

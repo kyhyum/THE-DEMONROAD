@@ -9,7 +9,7 @@ using static UnityEditor.Progress;
 public class Inventory : MonoBehaviour
 {
     [field: SerializeField] private Transform slots;
-    private ItemSlot[] inventorySlots;
+    public ItemSlot[] inventorySlots;
     public EquipSlot[] equipSlots;
     SlotItem data;
     private int gold;
