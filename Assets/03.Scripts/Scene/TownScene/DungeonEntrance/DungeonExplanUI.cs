@@ -23,7 +23,7 @@ public class DungeonExplanUI : MonoBehaviour
     }
     public void InDungeon()
     {
-        GameManager.Instance.player.data.currentPlayerPos = Vector3.zero;
+        GameManager.Instance.data.currentPlayerPos = Vector3.zero;
         SceneLoadManager.LoadScene((int)dungeon);
     }
 }

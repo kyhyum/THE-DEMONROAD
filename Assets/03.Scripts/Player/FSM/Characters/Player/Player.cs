@@ -11,8 +11,6 @@ public class Player : MonoBehaviour
 {
     public LayerMask groundLayerMask;
 
-    public PlayerData data;
-    public PlayerCondition conditon;
 
     [field: Header("Animations")]
     [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
