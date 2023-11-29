@@ -26,6 +26,7 @@ public class PlayerAttackState : PlayerBaseState
         base.Exit();
 
         StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
+
         stateMachine.Player.TrailRenderer.enabled = false;
     }
 

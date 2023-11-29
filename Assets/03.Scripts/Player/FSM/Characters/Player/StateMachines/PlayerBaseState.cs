@@ -117,6 +117,7 @@ public class PlayerBaseState : IState, IUsable
         //Debug.Log("OnAttackPerformed 함수 호출한다.");
 
         stateMachine.Player.IsAttacking = true;
+        stateMachine.Player.IsMovePerformed = false;
     }
 
     protected virtual void OnAttackCanceled(InputAction.CallbackContext context)
