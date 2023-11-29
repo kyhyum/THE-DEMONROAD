@@ -10,7 +10,7 @@ public class TransparentObject : MonoBehaviour
     private Renderer meshRenderer;
 
     //타운맵
-    private Material[] TransparentMaterials;
+    public List<Material> TransparentMaterials;
     private Material[] originalMaterials;
 
     //던전맵
@@ -30,21 +30,11 @@ public class TransparentObject : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         if (TransparentMaterial == null)
         {
-            originalMaterials = meshRenderer.materials;
-            TransparentMaterials = new Material[originalMaterials.Length];
-            for(int i = 0; i < originalMaterials.Length; i++)
-            {
-                TransparentMaterials[i] = new Material(originalMaterials[i]);
-                TransparentMaterials[i].SetFloat("_Surface", 1.0f);
-                TransparentMaterials[i].SetFloat("_Cull", (float)CullMode.Off);
-                TransparentMaterials[i].color = new Color(1, 1, 1, 0.3f);
-            }
-
+            originalMaterials = meshRenderer.sharedMaterials;
         }
         else
         {
             originalMaterial = meshRenderer.material;
-
         }
     }
 
@@ -63,51 +53,55 @@ public class TransparentObject : MonoBehaviour
     //타운맵에서 사용//
     public void SetTransparent()
     {
-        float lerpValue;
+        //float lerpValue;
         setTransparentCoroutine = StartCoroutine(SetUnTransparent());
         if (isTransparent)
         {
             StopCoroutine(setTransparentCoroutine); // Stop the previous coroutine
             return;
         }
-        while (elapsedTime <= 1.0f)
-        {
-            lerpValue = Mathf.Lerp(0f, 1f, elapsedTime / 1.0f);
 
-            for (int i = 0; i < originalMaterials.Length; i++)
-            {
-                meshRenderer.materials[i].Lerp(originalMaterials[i], TransparentMaterials[i], lerpValue);
-            }
-            // 경과 시간 업데이트
-            elapsedTime += Time.deltaTime;
-        }
+        //while (elapsedTime <= 1.0f)
+        //{
+        //    lerpValue = Mathf.Lerp(1f, 0f, elapsedTime / 1.0f);
 
-        for (int i = 0; i < originalMaterials.Length; i++)
-        {
-            meshRenderer.materials[i] = TransparentMaterials[i];
-        }
+        //    for (int i = 0; i < originalMaterials.Length; i++)
+        //    {
+        //        meshRenderer.sharedMaterials[i = new Color(1, 1, 1, lerpValue);
+        //    }
+        //    // 경과 시간 업데이트
+        //    elapsedTime += Time.deltaTime;
+        //}
+
+        //for (int i = 0; i < originalMaterials.Length; i++)
+        //{
+        //    meshRenderer.materials[i] = TransparentMaterials[i];
+        //}
+
+        meshRenderer.sharedMaterials = TransparentMaterials.ToArray();
         isTransparent = true;
     }
 
     IEnumerator SetUnTransparent()
     {
         yield return new WaitForSeconds(1f);
-        float lerpValue;
-        while (elapsedTime <= 1.0f)
-        {
-            lerpValue = Mathf.Lerp(0f, 1f, elapsedTime / 1.0f);
-            for (int i = 0; i < originalMaterials.Length; i++)
-            {
-                meshRenderer.materials[i].Lerp(TransparentMaterials[i], originalMaterials[i], lerpValue);
-            }
-            // 경과 시간 업데이트
-            elapsedTime += Time.deltaTime;
-        }
-        
-        for (int i = 0; i < originalMaterials.Length; i++)
-        {
-            meshRenderer.materials[i] = originalMaterials[i];
-        }
+        //float lerpValue;
+        //while (elapsedTime <= 1.0f)
+        //{
+        //    lerpValue = Mathf.Lerp(0f, 1f, elapsedTime / 1.0f);
+        //    for (int i = 0; i < originalMaterials.Length; i++)
+        //    {
+        //        meshRenderer.materials[i].Lerp(TransparentMaterials[i], originalMaterials[i], lerpValue);
+        //    }
+        //    // 경과 시간 업데이트
+        //    elapsedTime += Time.deltaTime;
+        //}
+        //for (int i = 0; i < originalMaterials.Length; i++)
+        //{
+        //    meshRenderer.materials[i] = originalMaterials[i];
+        //}
+
+        meshRenderer.sharedMaterials = originalMaterials;
 
         isTransparent = false;
     }
