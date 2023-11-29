@@ -11,8 +11,6 @@ public class PlayerAttackState : PlayerBaseState
     public override void Enter()
     {
         //Debug.Log("PlayerAttackState 클래스 Enter 함수 호출한다.");
-
-        Weapon weapon = stateMachine.Player.Weapon;
         
         stateMachine.Player.Agent.ResetPath();
         base.Enter();
