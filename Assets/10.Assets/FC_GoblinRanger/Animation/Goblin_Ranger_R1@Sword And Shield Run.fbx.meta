@@ -23,7 +23,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 0
+    importConstraints: 1
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -31,7 +31,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Sword And Shield Run
+      takeName: mixamo.com
+      internalID: -203655887218126122
+      firstFrame: 0
+      lastFrame: 21
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -81,8 +110,298 @@ ModelImporter:
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
-    human: []
-    skeleton: []
+    human:
+    - boneName: BN_Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: BN_RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Goblin_Ranger_R1@Sword And Shield Run(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root
+      parentName: Goblin_Ranger_R1@Sword And Shield Run(Clone)
+      position: {x: -0.08819413, y: -0.02959179, z: -0.25420493}
+      rotation: {x: 0.16884878, y: 0.0968395, z: -0.043365177, w: 0.9799141}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BN_Hips
+      parentName: Root
+      position: {x: -0.0034233704, y: 0.78566855, z: -0.022216305}
+      rotation: {x: -0.05091826, y: -0.18786998, z: -0.66224015, w: 0.7235677}
+      scale: {x: 1.0000006, y: 1.0000005, z: 1.0000001}
+    - name: BN_LeftUpLeg
+      parentName: BN_Hips
+      position: {x: 0.021976419, y: -0.09061055, z: 0}
+      rotation: {x: -0.0000000074505797, y: -0.000000014901159, z: 0.99991435, w: -0.013089647}
+      scale: {x: 0.9999996, y: 0.99999994, z: 1.0000004}
+    - name: BN_LeftLeg
+      parentName: BN_LeftUpLeg
+      position: {x: -0.30207008, y: -1.7763568e-17, z: 0.0005200025}
+      rotation: {x: 6.593153e-10, y: -0.05377536, z: -0.0000000018574009, w: 0.9985531}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000002}
+    - name: BN_LeftFoot
+      parentName: BN_LeftLeg
+      position: {x: -0.3163676, y: -1.7763568e-17, z: 8.881784e-18}
+      rotation: {x: 0.007081185, y: 0.54092824, z: -0.011008875, w: 0.84096694}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: BN_LeftToeBase
+      parentName: BN_LeftFoot
+      position: {x: -0.11265231, y: 8.881784e-18, z: -8.881784e-18}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1.0000002, y: 1, z: 1}
+    - name: BN_Spine
+      parentName: BN_Hips
+      position: {x: -0.11062691, y: -3.1554436e-32, z: 0}
+      rotation: {x: 0.000000014901159, y: -0.000000014901159, z: -0.0000000046566124,
+        w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: BN_Spine1
+      parentName: BN_Spine
+      position: {x: -0.115682654, y: -6.082018e-32, z: 0}
+      rotation: {x: 1.270033e-10, y: -0.026176944, z: -0.000000028482528, w: 0.99965733}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000002}
+    - name: BN_LeftShoulder
+      parentName: BN_Spine1
+      position: {x: -0.15692678, y: -0.05477924, z: -0.011729045}
+      rotation: {x: 0.035232995, y: 0.035233047, z: 0.7062285, w: 0.7062285}
+      scale: {x: 0.9999998, y: 1.0000001, z: 1}
+    - name: BN_LeftArm
+      parentName: BN_LeftShoulder
+      position: {x: -0.12758213, y: 0.0000013739999, z: 0.0028935398}
+      rotation: {x: -0.000000037252896, y: -0.000000061467276, z: 0.022905217, w: 0.9997376}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: BN_LeftForeArm
+      parentName: BN_LeftArm
+      position: {x: -0.19503084, y: 0, z: 0}
+      rotation: {x: 0.0000000045346056, y: -0.000000049817427, z: -1.2229802e-15,
+        w: 1}
+      scale: {x: 0.9999998, y: 1.0000001, z: 1.0000006}
+    - name: BN_LeftHand
+      parentName: BN_LeftForeArm
+      position: {x: -0.16164586, y: -4.2632563e-16, z: 1.7763568e-17}
+      rotation: {x: -0.000000011442785, y: -0.000000014770048, z: 0.10886684, w: 0.99405634}
+      scale: {x: 1.0000001, y: 1, z: 1.0000002}
+    - name: BN_Neck
+      parentName: BN_Spine1
+      position: {x: -0.232434, y: -5.68353e-18, z: 2.7124003e-17}
+      rotation: {x: -0.00000001517776, y: 0.107599184, z: -0.00000001817072, w: 0.9941944}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1}
+    - name: BN_Head
+      parentName: BN_Neck
+      position: {x: -0.11, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -2.2204458e-16, w: 1}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1}
+    - name: BN_RightShoulder
+      parentName: BN_Spine1
+      position: {x: -0.15692544, y: 0.054779198, z: -0.011729131}
+      rotation: {x: 0.70622844, y: 0.70622855, z: -0.035233043, w: -0.035233025}
+      scale: {x: 0.99999994, y: 1.0000006, z: 1.0000006}
+    - name: BN_RightArm
+      parentName: BN_RightShoulder
+      position: {x: 0.12758179, y: -0.0000069127427, z: -0.0028933138}
+      rotation: {x: -0.00000026449555, y: -0.00000052712846, z: 0.022897774, w: 0.99973786}
+      scale: {x: 1, y: 0.9999996, z: 0.9999998}
+    - name: BN_RightForeArm
+      parentName: BN_RightArm
+      position: {x: 0.195034, y: 0.000002809465, z: -0.00000020136275}
+      rotation: {x: 4.773604e-10, y: -0.0000000012275372, z: 0.000000059604645, w: 1}
+      scale: {x: 1, y: 1.0000004, z: 1.0000005}
+    - name: BN_RightHand
+      parentName: BN_RightForeArm
+      position: {x: 0.16164604, y: -0.00000069980354, z: -0.000000006797883}
+      rotation: {x: 0.0000000036693537, y: 0.000000015291507, z: 0.10886696, w: 0.9940564}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000004}
+    - name: BN_RightUpLeg
+      parentName: BN_Hips
+      position: {x: 0.021976905, y: 0.0906106, z: 0}
+      rotation: {x: -0.99991435, y: 0.013089523, z: 0.0000000037252903, w: 0.000000014901161}
+      scale: {x: 1, y: 1, z: 1.0000006}
+    - name: BN_RightLeg
+      parentName: BN_RightUpLeg
+      position: {x: 0.30206951, y: 0.000000041993044, z: -0.00052000297}
+      rotation: {x: -0.000000007566995, y: -0.053775348, z: 0.00000011082737, w: 0.99855304}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000005}
+    - name: BN_RightFoot
+      parentName: BN_RightLeg
+      position: {x: 0.31636772, y: 0.000000055424817, z: -0.000000037043343}
+      rotation: {x: 0.0070812157, y: 0.54092807, z: -0.011009003, w: 0.84096706}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000002}
+    - name: BN_RightToeBase
+      parentName: BN_RightFoot
+      position: {x: 0.11265232, y: -0.000000011499156, z: 0.0000000299809}
+      rotation: {x: -0, y: -0, z: 2.3283064e-10, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000004}
+    - name: mesh
+      parentName: Goblin_Ranger_R1@Sword And Shield Run(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5

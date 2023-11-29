@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a85c1e8d04a874c9fe56767c44abdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Data>k__BackingField: {fileID: 11400000, guid: 4dc714fe6e3c7594caf77abf20b27506,
+  <Data>k__BackingField: {fileID: 11400000, guid: eccbfc97a1c9ef84799877f0107cf325,
     type: 2}
   <monsterAnimationData>k__BackingField:
     idleParameterName: Idle

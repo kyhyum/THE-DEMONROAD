@@ -11,7 +11,6 @@ public class MonsterIdleState : MonsterBaseState
 
     public override void Enter()
     {
-        stateMachine.MovementSpeedModifier = 0f;
         base.Enter();
         StartAnimation(stateMachine.Monster.monsterAnimationData.IdleParameterHash);
     }

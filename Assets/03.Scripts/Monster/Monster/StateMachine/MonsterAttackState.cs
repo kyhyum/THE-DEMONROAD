@@ -49,6 +49,12 @@ public class MonsterAttackState : MonsterBaseState
             }
 
         }
+        else
+        {
+            stateMachine.Monster.Weapon.gameObject.SetActive(false);
+            stateMachine.ChangeState(stateMachine.ChasingState);
+            return;
+        }
     }
 
    

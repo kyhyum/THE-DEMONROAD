@@ -13,7 +13,6 @@ public class MonsterChaseState : MonsterBaseState
 
     public override void Enter()
     {
-        stateMachine.MovementSpeedModifier = 1;
         base.Enter();
         StartAnimation(stateMachine.Monster.monsterAnimationData.ChaseParameterHash);
     }
@@ -30,6 +29,7 @@ public class MonsterChaseState : MonsterBaseState
         stateMachine.Monster.EnemyNavMeshAgent.SetDestination(stateMachine.Target.transform.position);
         if (!IsInChaseRange())
         {
+            stateMachine.Monster.EnemyNavMeshAgent.ResetPath();
             stateMachine.ChangeState(stateMachine.IdleState);
             return;
         }

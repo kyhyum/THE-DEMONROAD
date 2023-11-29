@@ -14,6 +14,7 @@ public class Monster : MonoBehaviour
 
     public EnemyForceReceiver EnemyForceReceiver { get; private set; }
     public NavMeshAgent EnemyNavMeshAgent { get; private set; }
+
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
     public CharacterController Controller { get; private set; }
@@ -70,7 +71,6 @@ public class Monster : MonoBehaviour
     private void Update()
     {
         stateMachine.HandleInput();
-
         stateMachine.Update();
     }
 
