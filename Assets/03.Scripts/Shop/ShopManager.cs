@@ -7,9 +7,18 @@ using System;
 
 public class ShopManager : MonoBehaviour
 {
+    //potionShop
     public GameObject potionShop;
     public GameObject potionNPCtalk;
-    public GameObject potionInteractionPop;
+    
+
+    //EquipShop
+    public GameObject equipShop;
+    public GameObject equipNPCtalk;
+
+    private bool isPotionShopOpen = false;
+    private bool isEquipShopOpen = false;
+
     public GameObject confirmationPopUp;
     public GameObject outofGoldPop;
 
@@ -29,6 +38,8 @@ public class ShopManager : MonoBehaviour
     public void Start()
     {
         potionShop.SetActive(false);
+        equipShop.SetActive(false);
+
         confirmationPopUp.SetActive(false);
         outofGoldPop.SetActive(false);
 
@@ -122,23 +133,40 @@ public class ShopManager : MonoBehaviour
     public void ClosePop()
     {
         outofGoldPop.SetActive(false);
-    }
-
-    
-
+    }    
    
 
     public void OpenShopUI()
     {
         potionShop.SetActive(true);
         potionNPCtalk.SetActive(false);
-        potionInteractionPop.SetActive(false);
+        
+        isPotionShopOpen = true;
+        isEquipShopOpen = false;
+
+        UIManager.Instance.ActiveInventory();
+    }
+    public void OpenEquipShopUI()
+    {
+        equipShop.SetActive(true);
+        equipNPCtalk.SetActive(false);
+
+        isEquipShopOpen = true;
+        isPotionShopOpen = false;
+
         UIManager.Instance.ActiveInventory();
     }
 
     private void CloseShopUI()
     {
-        potionShop.SetActive(false);
+        if (isPotionShopOpen) 
+        {
+            potionShop.SetActive(false);
+        }
+        else if(isEquipShopOpen) 
+        {
+            equipShop.SetActive(false);
+        }
         confirmationPopUp.SetActive(false);
     }
 
