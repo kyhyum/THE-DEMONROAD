@@ -97,13 +97,13 @@ public class ShopManager : MonoBehaviour
     }
     public void IncreaseItemCount()
     {
-        // 아이템 갯수를 증가시키는 함수
+        
         itemCountToBuy++;
         UpdateItemCount();
     }
     public void DecreaseItemCount()
     {
-        // 아이템 갯수를 감소시키는 함수
+        
         itemCountToBuy = Mathf.Max(itemCountToBuy - 1, 1);
         UpdateItemCount();
     }

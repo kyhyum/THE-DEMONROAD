@@ -9,6 +9,7 @@ public class QuestBoard : MonoBehaviour
     public GameObject acceptPopup;
     public GameObject cancelPopup;
     public GameObject questLogPanel;
+    public GameObject questacceptCheckPop;
     [SerializeField] Button[] questButton;
 
     //quest board
@@ -49,7 +50,8 @@ public class QuestBoard : MonoBehaviour
     public void Start()
     {
         player = GameManager.Instance.player;
-        
+        questacceptCheckPop.SetActive(false);
+
 
         controller = FindAnyObjectByType<QuestController>();
         choiceDungeon = FindObjectOfType<ChoiceDungeon>();
@@ -60,7 +62,18 @@ public class QuestBoard : MonoBehaviour
         }
 
         InitializeQuestList();
-        acceptButton.onClick.AddListener(() => { AcceptQuest(selectQuest); });
+        acceptButton.onClick.AddListener(AcceptButtonClicked);
+    }
+    private void AcceptButtonClicked()
+    {
+        if (selectQuest == null)
+        {
+            Debug.Log("퀘스트를 선택해주세요.");
+            questacceptCheckPop.SetActive(true);
+            return;
+        }
+
+        AcceptQuest(selectQuest);
     }
     private void OnDungeonInteractionPopupActivated()
     {
