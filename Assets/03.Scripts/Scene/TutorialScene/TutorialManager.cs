@@ -6,6 +6,7 @@ public class TutorialManager : MonoBehaviour
 {
     GameManager gameManager;
     UIManager uiManager;
+    [SerializeField] TutorialNPC npc;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,18 @@ public class TutorialManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            npc.QuestClear(npc.quest[2]);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            npc.QuestClear(npc.quest[3]);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            npc.QuestClear(npc.quest[4]);
+        }
     }
 
     public void EndTutorialPopUpUI()
@@ -25,6 +37,6 @@ public class TutorialManager : MonoBehaviour
     private void EndTutorial()
     {
         gameManager.player.currentPlayerPos = Vector3.zero;
-        SceneLoadManager.LoadScene((int)SceneType.Start);
+        SceneLoadManager.LoadScene((int)SceneType.Town);
     }
 }
