@@ -18,6 +18,7 @@ public class ShopManager : MonoBehaviour
     private bool isEquipShopOpen = false;
 
     public GameObject confirmationPopUp;
+    public GameObject sellconfirmationPopup;
     public GameObject outofGoldPop;
 
     public TMP_Text confirmationText;
@@ -41,6 +42,7 @@ public class ShopManager : MonoBehaviour
         equipShop.SetActive(false);
 
         confirmationPopUp.SetActive(false);
+        sellconfirmationPopup.SetActive(false);
         outofGoldPop.SetActive(false);
 
         increaseButton.onClick.AddListener(IncreaseItemCount);
