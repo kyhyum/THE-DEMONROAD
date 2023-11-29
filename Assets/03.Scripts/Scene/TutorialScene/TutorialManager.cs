@@ -34,7 +34,7 @@ public class TutorialManager : MonoBehaviour
             Debug.Log("E");
         }
 
-        if(npc.dialogueUI.gameObject.activeSelf)
+        if (npc.dialogueUI.gameObject.activeSelf)
         {
             player.enabled = false;
         }
@@ -50,7 +50,7 @@ public class TutorialManager : MonoBehaviour
     }
     private void EndTutorial()
     {
-        gameManager.player.data.currentPlayerPos = Vector3.zero;
+        gameManager.data.currentPlayerPos = Vector3.zero;
         SceneLoadManager.LoadScene((int)SceneType.Town);
     }
 }

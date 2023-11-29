@@ -37,7 +37,7 @@ public class Tester : MonoBehaviour
         gameManager = GameManager.Instance;
         tester = gameManager.LoadPlayerDataFromJson(StringManager.TestJsonPath, "Tester");
         tester.currentPlayerPos = Vector3.zero;
-        gameManager.player.data = tester;
+        gameManager.data = tester;
         SceneLoad();
     }
     void SceneLoad()

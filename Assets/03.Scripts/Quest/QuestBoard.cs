@@ -49,7 +49,7 @@ public class QuestBoard : MonoBehaviour
 
     public void Start()
     {
-        player = GameManager.Instance.player.data;
+        player = GameManager.Instance.data;
         questacceptCheckPop.SetActive(false);
 
 
