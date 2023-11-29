@@ -6,8 +6,11 @@ public class SkillUI : MonoBehaviour
 {
     public SkillSlot[] slots;
 
-    public void ClickUI()
+    public void Set(Skill[] skills)
     {
-        UIManager.Instance.ClickSkillUI();
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i].Set(skills[i]);
+        }
     }
 }

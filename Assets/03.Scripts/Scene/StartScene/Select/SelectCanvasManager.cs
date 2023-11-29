@@ -165,7 +165,7 @@ public class SelectCanvasManager : MonoBehaviour
     }
     public void PopUpOpen()
     {
-        UIManager.Instance.popUpUI.OpenPopUpUI("캐릭터 슬롯 변경", "정말 변경 하시겠습니까?", SlotChangeButton);
+       gameManager.uiManager.ActivePopUpUI("캐릭터 슬롯 변경", "정말 변경 하시겠습니까?", SlotChangeButton);
     }
     void SlotChangeButton()
     {

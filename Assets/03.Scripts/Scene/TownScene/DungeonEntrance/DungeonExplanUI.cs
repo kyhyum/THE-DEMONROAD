@@ -17,13 +17,13 @@ public class DungeonExplanUI : MonoBehaviour
         gameObject.SetActive(true);
         dungeon = dungeonSO.dungeon;
         image.sprite = dungeonSO.sprite;
-        dungeonName.text= dungeonSO.name;
+        dungeonName.text = dungeonSO.name;
         dungeonExplan.text = dungeonSO.explan;
         dungeonApproLevel.text = dungeonSO.appropriateLevel;
     }
     public void InDungeon()
     {
-        GameManager.Instance.player.currentPlayerPos = Vector3.zero;
+        GameManager.Instance.data.currentPlayerPos = Vector3.zero;
         SceneLoadManager.LoadScene((int)dungeon);
     }
 }

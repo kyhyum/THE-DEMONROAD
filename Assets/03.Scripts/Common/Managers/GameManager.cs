@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public UIManager uiManager;
-    public PlayerData player;
-    public PlayerCondition conditon;
+    public Player player;
+    public PlayerData data;
+    public PlayerCondition condition;
     public int goblinkillCount = 0; // 고블린 잡은 횟수
     public GameObject Myplayer;
     public EventSystem eventSystem;
@@ -35,43 +36,49 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (player.name == "Tester")
+        if (data.name == "Tester")
         {
-            obj = Resources.Load<GameObject>(player.baseObjectPath);
-            Myplayer = Instantiate<GameObject>(obj, player.currentPlayerPos, player.currentPlayerRot);
-            conditon = Myplayer.AddComponent<PlayerCondition>();
-            conditon.playerData = player;
-            conditon.Initialize();
+            obj = Resources.Load<GameObject>(data.baseObjectPath);
+            Myplayer = Instantiate<GameObject>(obj, data.currentPlayerPos, data.currentPlayerRot);
+            condition = Myplayer.AddComponent<PlayerCondition>();
+            condition.playerData = data;
+            condition.Initialize();
             uiManager.gameObject.SetActive(true);
             uiManager.GetInventory().Set(LoadItemArrayFromJson(StringManager.TestItemJsonPath, player.name));
             uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.TestItemJsonPath, StringManager.TestStorageName));
             return;
         }
-        if (player.baseObjectPath != null && scene.buildIndex != (int)SceneType.Start && scene.buildIndex != (int)SceneType.Loading)
+
+        if (data.baseObjectPath != null && scene.buildIndex != (int)SceneType.Start && scene.buildIndex != (int)SceneType.Loading)
         {
-            obj = Resources.Load<GameObject>(player.baseObjectPath);
-            Myplayer = Instantiate<GameObject>(obj, player.currentPlayerPos, player.currentPlayerRot);
-            conditon = Myplayer.AddComponent<PlayerCondition>();
-            conditon.playerData = player;
-            conditon.Initialize();
+            obj = Resources.Load<GameObject>(data.baseObjectPath);
+            Myplayer = Instantiate<GameObject>(obj, data.currentPlayerPos, data.currentPlayerRot);
+            player = Myplayer.GetComponent<Player>();
+            condition = Myplayer.AddComponent<PlayerCondition>();
+            condition.playerData = data;
+            condition.Initialize();
             uiManager.gameObject.SetActive(true);
             uiManager.ActivePlayerUI(true);
-            uiManager.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, player.name));
+            uiManager.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, data.name));
             uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
         }
     }
+
     public void FinishPopUp()
     {
         uiManager.ActivePopUpUI("게임 종료", "정말 게임을 종료 하시겠습니까?", Finish);
     }
+
     void Finish()
     {
         UnityEditor.EditorApplication.isPlaying = false;
 
         Application.Quit();
     }
+
     public void SavePlayerDataToJson(string jsonPath, string characterName, PlayerData data)
     {
 
@@ -81,6 +88,7 @@ public class GameManager : MonoBehaviour
 
         File.WriteAllText(path, jsonData);
     }
+
     public PlayerData LoadPlayerDataFromJson(string jsonPath, string characterName)
     {
 
@@ -98,6 +106,7 @@ public class GameManager : MonoBehaviour
             return null;
         }
     }
+
     public void SaveItemArrayToJson(string jsonPath, string itemArrayName, SlotItem data)
     {
         slot = data;
@@ -108,6 +117,7 @@ public class GameManager : MonoBehaviour
 
         File.WriteAllText(path, jsonData);
     }
+
     public SlotItem LoadItemArrayFromJson(string jsonPath, string itemArrayName)
     {
 
@@ -119,6 +129,7 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
+
     public bool DeleteCharacter(string jsonPath, string characterName)
     {
         string path = Path.Combine(jsonPath, $"{characterName}.json");
@@ -129,11 +140,13 @@ public class GameManager : MonoBehaviour
         }
         return result;
     }
+
     public void GameStart()
     {
         DontDestroyOnLoad(this.gameObject);
-        SceneLoadManager.LoadScene((int)player.scene);
+        SceneLoadManager.LoadScene((int)data.scene);
     }
+
     public void HomeButton()
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start)
@@ -141,31 +154,33 @@ public class GameManager : MonoBehaviour
             SceneLoadManager.LoadScene((int)SceneType.Start);
             Save();
             player = null;
+            data = null;
             Myplayer = null;
         }
     }
 
     public void Save()
     {
-        if (player.name == "Tester")
+        if (data.name == "Tester")
         {
-            player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
-            player.currentPlayerPos = Myplayer.transform.position;
-            player.currentPlayerRot = Myplayer.transform.rotation;
-            SaveItemArrayToJson(StringManager.TestItemJsonPath, player.name, uiManager.GetInventory().Get());
+            data.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
+            data.currentPlayerPos = Myplayer.transform.position;
+            data.currentPlayerRot = Myplayer.transform.rotation;
+            SaveItemArrayToJson(StringManager.TestItemJsonPath, data.name, uiManager.GetInventory().Get());
             SaveItemArrayToJson(StringManager.TestItemJsonPath, StringManager.TestStorageName, uiManager.GetStorage().Get());
-            SavePlayerDataToJson(StringManager.TestJsonPath, player.name, player);
+            SavePlayerDataToJson(StringManager.TestJsonPath, data.name, data);
             return;
         }
+
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)SceneType.Loading)
         {
-            player.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
-            player.currentPlayerPos = Myplayer.transform.position;
-            player.currentPlayerRot = Myplayer.transform.rotation;
+            data.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
+            data.currentPlayerPos = Myplayer.transform.position;
+            data.currentPlayerRot = Myplayer.transform.rotation;
             SaveItemArrayToJson(StringManager.ItemJsonPath, player.name, uiManager.GetInventory().Get());
             SaveItemArrayToJson(StringManager.ItemJsonPath, StringManager.StorageName, uiManager.GetStorage().Get());
         }
-        SavePlayerDataToJson(StringManager.JsonPath, player.name, player);
+        SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
     }
     private void OnApplicationQuit()
     {

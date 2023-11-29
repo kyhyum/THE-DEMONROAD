@@ -9,6 +9,7 @@ public class QuestBoard : MonoBehaviour
     public GameObject acceptPopup;
     public GameObject cancelPopup;
     public GameObject questLogPanel;
+    public GameObject questacceptCheckPop;
     [SerializeField] Button[] questButton;
 
     //quest board
@@ -48,8 +49,9 @@ public class QuestBoard : MonoBehaviour
 
     public void Start()
     {
-        player = GameManager.Instance.player;
-        
+        player = GameManager.Instance.data;
+        questacceptCheckPop.SetActive(false);
+
 
         controller = FindAnyObjectByType<QuestController>();
         choiceDungeon = FindObjectOfType<ChoiceDungeon>();
@@ -60,12 +62,23 @@ public class QuestBoard : MonoBehaviour
         }
 
         InitializeQuestList();
-        acceptButton.onClick.AddListener(() => { AcceptQuest(selectQuest); });
+        acceptButton.onClick.AddListener(AcceptButtonClicked);
+    }
+    private void AcceptButtonClicked()
+    {
+        if (selectQuest == null)
+        {
+            Debug.Log("퀘스트를 선택해주세요.");
+            questacceptCheckPop.SetActive(true);
+            return;
+        }
+
+        AcceptQuest(selectQuest);
     }
     private void OnDungeonInteractionPopupActivated()
     {
         QuestSO selectedQuest = GetMainQuest();
-        UpdateMainQuestProgress(selectedQuest );
+        UpdateMainQuestProgress(selectedQuest);
     }
 
     private QuestSO GetMainQuest()
@@ -92,7 +105,7 @@ public class QuestBoard : MonoBehaviour
     }
 
     // 같은 타입의 퀘스트는 한번만 받게끔
-    private bool IsQuestAlreadyAccepted(QuestSO quest) 
+    private bool IsQuestAlreadyAccepted(QuestSO quest)
     {
         if (player.acceptQuest.Contains(quest))
         {
@@ -196,8 +209,8 @@ public class QuestBoard : MonoBehaviour
         else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트 
         {
             int goblinKills = GameManager.Instance.goblinkillCount;
-            
-            questProgmonsterName.text = selectedQuest.questName + "\n - "  +goblinKills+ " / " + selectedQuest.questComplete;
+
+            questProgmonsterName.text = selectedQuest.questName + "\n - " + goblinKills + " / " + selectedQuest.questComplete;
 
             if (goblinKills >= selectedQuest.questComplete)
             {
@@ -209,9 +222,9 @@ public class QuestBoard : MonoBehaviour
         }
         else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
         {
-            
+
             int goblinKills = GameManager.Instance.goblinkillCount;
-            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - "  +goblinKills+ " / " + selectedQuest.questComplete;
+            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " + goblinKills + " / " + selectedQuest.questComplete;
             if (goblinKills >= selectedQuest.questComplete)
             {
                 questProgInfinitemonsterName.color = Color.red;
@@ -238,12 +251,12 @@ public class QuestBoard : MonoBehaviour
             {
                 Debug.Log("UpdateMainQuest이 null이 아니다");
 
-                
+
                 questProgmainName.color = Color.red;
                 questProgmainName.fontStyle |= FontStyles.Italic;
                 questProgmainName.fontStyle |= FontStyles.Strikethrough;
 
-                questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;     
+                questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;
 
                 // 보상처리
                 MainQuestReward(selectedQuest);
@@ -251,7 +264,7 @@ public class QuestBoard : MonoBehaviour
 
 
             }
-            
+
 
         }
 
@@ -307,9 +320,9 @@ public class QuestBoard : MonoBehaviour
             Debug.Log("selectQuest가 null입니다.");
         }
 
-        
+
     }
-    
+
 
     public void MonsterQuestReward(QuestSO selectedQuest)
     {

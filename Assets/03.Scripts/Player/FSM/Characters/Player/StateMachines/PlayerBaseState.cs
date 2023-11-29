@@ -1,13 +1,7 @@
 using Cinemachine;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.UIElements;
-using UnityEngine.Windows;
 
 [Serializable]
 public class PlayerBaseState : IState, IUsable
@@ -20,6 +14,10 @@ public class PlayerBaseState : IState, IUsable
     [field: SerializeField] float sensitivity = 1f;
 
     RaycastHit hit;
+
+    Vector3 destPosition;
+    Vector3 direction;
+    Quaternion lookTarget;
 
     public PlayerBaseState(PlayerStateMachine playerStateMachine)
     {
@@ -116,6 +114,8 @@ public class PlayerBaseState : IState, IUsable
     {
         //Debug.Log("OnAttackPerformed 함수 호출한다.");
 
+        Rotate();
+
         stateMachine.Player.IsAttacking = true;
         stateMachine.Player.IsMovePerformed = false;
     }
@@ -167,7 +167,7 @@ public class PlayerBaseState : IState, IUsable
         if (!stateMachine.Player.IsMovePerformed)
             return;
 
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition), out hit, 100))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
             //Debug.Log($"hit.collider.name: {hit.collider.name}");
             //Debug.Log($"hit.point: {hit.point}");
@@ -179,6 +179,21 @@ public class PlayerBaseState : IState, IUsable
     private void LateMove()
     {
         stateMachine.Player.transform.position = stateMachine.Player.Agent.nextPosition;
+    }
+
+    private void Rotate()
+    {
+        Player player = stateMachine.Player;
+
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+        {
+            destPosition = new Vector3(hit.point.x, player.transform.position.y, hit.point.z);
+
+            direction = destPosition - player.transform.position;
+
+            lookTarget = Quaternion.LookRotation(direction);
+            player.transform.rotation = lookTarget;
+        }
     }
 
     #region State용 애니메이션 처리 함수

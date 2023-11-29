@@ -10,9 +10,11 @@ public class TutorialNPC : MonoBehaviour
     Transform player;
 
     [SerializeField] NPCSO npc;
-    [SerializeField] List<QuestSO> quest;
+    public List<QuestSO> quest;
 
-    [SerializeField] GameObject dialogueUI;
+    public GameObject dialogueUI;
+    [SerializeField] GameObject npcCanvas;
+    GameObject playerUI;
 
     [SerializeField] Button acceptButton;
     [SerializeField] Button cancelButton;
@@ -21,72 +23,247 @@ public class TutorialNPC : MonoBehaviour
     [SerializeField] TMP_Text dialogueText;
 
     private bool isUIVisible = false;
-    [SerializeField] bool isTalking = false;
+
+    [SerializeField] bool isClear = false;
 
     [SerializeField] float activationDistance;
+    float distance;
 
     const float textDelay = 0.05f;
-    int index;
+
+    int lastTalkIndex;
+
+    int saveLastTalk;
+
+    [SerializeField] int talkIndex;
+
+    PlayerData data;
+
+    Coroutine talkCoroutine;
+    private void Awake()
+    {
+        nameText.text = npc.npcName;
+        npcCanvas.SetActive(false);
+    }
     private void Start()
     {
-        /*gameManager = GameManager.Instance;
-        player = gameManager.Myplayer.transform;*/
-        index = 0;
-        nameText.text = npc.npcName;
-        StartCoroutine(textPrint());
+        gameManager = GameManager.Instance;
+        player = gameManager.Myplayer.transform;
+
+        data = gameManager.data;
+
+        playerUI = gameManager.uiManager.playerUIObject;
+
+        acceptButton.onClick.AddListener(Accept);
+        cancelButton.onClick.AddListener(Cancel);
+        activationDistance = 200f;
+        for (int i = 0; i < quest.Count; i++)
+        {
+            if (data.acceptQuest.Contains(quest[i]))
+            {
+                activationDistance = 5f;
+                switch (i)
+                {
+                    case 0:
+                        talkIndex = 5;
+                        break;
+                    case 1:
+                        talkIndex = 6;
+                        break;
+                    case 2:
+                        talkIndex = 7;
+                        break;
+                    case 3:
+                        talkIndex = 8;
+                        break;
+                    case 4:
+                        talkIndex = 9;
+                        break;
+                }
+            }
+        }
+
+        talkCoroutine = StartCoroutine(textPrint());
+    }
+    private void Update()
+    {
+        distance = Vector3.Distance(this.gameObject.transform.position, player.position);
+
+        if (distance > activationDistance)
+        {
+            npcCanvas.SetActive(false);
+            DialogueUISetActive(false);
+        }
+
+        if (distance <= activationDistance)
+        {
+            npcCanvas.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                QuestClear(quest[0]);
+
+                StartTalk();
+            }
+        }
     }
     private IEnumerator textPrint()
     {
-        isTalking = true;
+        if (talkIndex >= npc.npcDialogue.Length)
+        {
+            yield break;
+        }
+
+        DialogueUISetActive(true);
+
         dialogueText.text = null;
-        for (int i = 0; i < npc.npcDialogue[index].Length; i++)
+
+        lastTalkIndex = talkIndex;
+
+        ButtonSetActive(false);
+
+        for (int i = 0; i < npc.npcDialogue[talkIndex].Length; i++)
         {
-            if (isTalking)
-            {
-                dialogueText.text += npc.npcDialogue[index][i].ToString();
-                yield return new WaitForSeconds(textDelay);
-            }
-            else
-            {
-                yield break;
-            }
+            dialogueText.text += npc.npcDialogue[talkIndex][i].ToString();
+            yield return new WaitForSeconds(textDelay);
         }
-        if(index == 3)
-        {
-            yield return new WaitForSeconds(2f);
-            dialogueUI.gameObject.SetActive(false);
-        }
+
+        Invoke("UISetActive", 0.5f);
+
+        yield break;
     }
     public void ClickTalk()
     {
-        if (isTalking)
+        if (talkCoroutine != null)
         {
             EndTalk();
         }
         else
         {
+            if (talkIndex == 2 || talkIndex == 3 || (talkIndex >= 5 && talkIndex <= 9))
+            {
+                return;
+            }
             Talk();
         }
     }
+    private void StartTalk()
+    {
+        talkIndex = lastTalkIndex;
+        talkCoroutine = StartCoroutine(textPrint());
+    }
     private void EndTalk()
     {
-        isTalking = false;
-        dialogueText.text = npc.npcDialogue[index];
+        StopCoroutine(talkCoroutine);
+        talkCoroutine = null;
+        dialogueText.text = npc.npcDialogue[talkIndex];
+
+        Invoke("UISetActive", 0.5f);
+    }
+    void UISetActive()
+    {
+        if (talkIndex == 3)
+        {
+            lastTalkIndex = 2;
+            DialogueUISetActive(false);
+        }
+        else if (talkIndex == 5)
+        {
+            activationDistance = 5f;
+            DialogueUISetActive(false);
+        }
+        else if ((talkIndex >= 6 && talkIndex <= 9) || talkIndex == 2)
+        {
+            ButtonSetActive(true);
+        }
+        else
+        {
+            return;
+        }
     }
     private void Talk()
     {
-        isTalking = true;
-        index++;
-        StartCoroutine(textPrint());
+        talkIndex++;
+        talkCoroutine = StartCoroutine(textPrint());
+    }
+    private void DialogueUISetActive(bool active)
+    {
+        dialogueUI.SetActive(active);
+        playerUI.SetActive(!active);
+    }
+    private void ButtonSetActive(bool active)
+    {
+        acceptButton.gameObject.SetActive(active);
+        cancelButton.gameObject.SetActive(active);
     }
 
     private void Accept()
     {
-        //switch()
+        switch (talkIndex)
+        {
+            case 2:
+                data.acceptQuest.Add(quest[0]);
+                talkIndex++;
+                Talk();
+                break;
+            case 6:
+                QuestAccept(quest[1]);
+                break;
+            case 7:
+                QuestAccept(quest[2]);
+                break;
+            case 8:
+                QuestAccept(quest[3]);
+                break;
+            case 9:
+                QuestAccept(quest[4]);
+                break;
+        }
     }
     private void Cancel()
     {
-        index = 2;
+        saveLastTalk = talkIndex;
+        talkIndex = 2;
         Talk();
+        lastTalkIndex = saveLastTalk;
+    }
+    public void QuestClear(QuestSO quest)
+    {
+        if (!data.acceptQuest.Contains(quest))
+        {
+            return;
+        }
+
+        Debug.Log(quest.questName);
+
+        isClear = true;
+
+        switch (quest.questIndex)
+        {
+            case 990:
+                if (isClear)
+                {
+                    lastTalkIndex = 6;
+                    ClearQuestEvent(quest);
+                }
+                break;
+            default:
+                if (isClear)
+                {
+                    lastTalkIndex++;
+                    ClearQuestEvent(quest);
+                }
+                break;
+        }
+        isClear = false;
+    }
+    void QuestAccept(QuestSO quest)
+    {
+        data.acceptQuest.Add(quest);
+        DialogueUISetActive(false);
+    }
+    void ClearQuestEvent(QuestSO quest)
+    {
+        data.acceptQuest.Remove(quest);
     }
 }

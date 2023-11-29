@@ -18,7 +18,7 @@ public class BuffItem : UseItem
 
     public override void Use()
     {
-        GameManager.Instance.conditon.Buff(buffType, duration, value);
+        GameManager.Instance.condition.Buff(buffType, duration, value);
 
         base.Use();
     }
