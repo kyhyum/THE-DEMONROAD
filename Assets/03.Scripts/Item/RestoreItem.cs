@@ -14,7 +14,7 @@ public class RestoreItem : UseItem
 
     public override void Use()
     {
-        PlayerCondition condition = GameManager.Instance.conditon;
+        PlayerCondition condition = GameManager.Instance.player.conditon;
 
         switch (restoreType)
         {

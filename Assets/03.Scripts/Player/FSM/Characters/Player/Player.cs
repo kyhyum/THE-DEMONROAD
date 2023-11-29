@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
 {
     public LayerMask groundLayerMask;
 
+    public PlayerData data;
+    public PlayerCondition conditon;
+
     [field: Header("Animations")]
     [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
 
@@ -38,7 +41,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public Strike Strike { get; set; }
 
     [field: Header(" ")]
-    [field:SerializeField] public TrailRenderer TrailRenderer { get; set; }
+    [field: SerializeField] public TrailRenderer TrailRenderer { get; set; }
 
     private PlayerStateMachine stateMachine;
 

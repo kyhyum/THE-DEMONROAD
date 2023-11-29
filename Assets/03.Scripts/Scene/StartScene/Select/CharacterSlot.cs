@@ -54,7 +54,7 @@ public class CharacterSlot : MonoBehaviour
     }
     public void CreateCharacter(GameObject obj, PlayerData data)
     {
-        if(character == null)
+        if (character == null)
         {
             character = Instantiate(obj);
             character.SetActive(true);
@@ -66,7 +66,7 @@ public class CharacterSlot : MonoBehaviour
     }
     public void SetActiceCharacter()
     {
-        if(character == null)
+        if (character == null)
         {
             return;
         }
@@ -99,7 +99,7 @@ public class CharacterSlot : MonoBehaviour
     }
     public void ChoiceSlot()
     {
-        if(character == null)
+        if (character == null)
         {
             return;
         }
@@ -124,9 +124,9 @@ public class CharacterSlot : MonoBehaviour
         characterJob.text = data.job.ToString();
         TextOpen(true);
     }
-    public void ChangeSlot(GameObject obj,PlayerData data)
+    public void ChangeSlot(GameObject obj, PlayerData data)
     {
-        if(character != null)
+        if (character != null)
         {
             ClearSlot();
         }
@@ -137,7 +137,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            gameManager.player = data;
+            gameManager.player.data = data;
         }
         else
         {
