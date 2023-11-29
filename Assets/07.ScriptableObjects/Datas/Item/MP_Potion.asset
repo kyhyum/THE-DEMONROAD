@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1255d585337de45978c77697df2d1d, type: 3}
+  m_Name: MP_Potion
+  m_EditorClassIdentifier: 
+  <itemName>k__BackingField: "MP \uBB3C\uC57D"
+  <description>k__BackingField: "MP\uB97C \uCC44\uC6CC\uC8FC\uB294 \uBB3C\uC57D\uC785\uB2C8\uB2E4."
+  <type>k__BackingField: 1
+  <rank>k__BackingField: 0
+  <texture>k__BackingField: {fileID: 2800000, guid: 1903b56808762a34bb92dee190017b96,
+    type: 3}
+  <prefab>k__BackingField: {fileID: 0}
+  <itemPrice>k__BackingField: 1
+  count: 0
+  restoreType: 1
+  value: 10

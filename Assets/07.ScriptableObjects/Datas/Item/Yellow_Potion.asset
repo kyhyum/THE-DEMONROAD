@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1255d585337de45978c77697df2d1d, type: 3}
+  m_Name: Yellow_Potion
+  m_EditorClassIdentifier: 
+  <itemName>k__BackingField: "\uB178\uB780 \uBB3C\uC57D"
+  <description>k__BackingField: "HP\uB97C 30\uD68C\uBCF5\uC2DC\uD0B5\uB2C8\uB2E4."
+  <type>k__BackingField: 1
+  <rank>k__BackingField: 0
+  <texture>k__BackingField: {fileID: 2800000, guid: ebe8a431f31e1ba4e81c9c50c8f512d8,
+    type: 3}
+  <prefab>k__BackingField: {fileID: 0}
+  <itemPrice>k__BackingField: 3
+  count: 0
+  restoreType: 0
+  value: 30
