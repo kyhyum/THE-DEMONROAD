@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class AttackRange1 : MonoBehaviour
 {
-    [field:SerializeField] public Player player;
-    [field:SerializeField] public PlayerStateMachine stateMachine;
-    KnightSkill knightSkill;
+    [field: SerializeField] public Player player;
+    [field: SerializeField] public PlayerStateMachine stateMachine;
     private void Awake()
     {
-        knightSkill = GetComponent<KnightSkill>();
+
     }
 
     private void OnTriggerEnter(Collider other)

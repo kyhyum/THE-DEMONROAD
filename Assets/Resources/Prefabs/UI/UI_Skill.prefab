@@ -1677,6 +1677,11 @@ PrefabInstance:
       objectReference: {fileID: 8180774634504806826}
     - target: {fileID: 7265065248448071858, guid: a6444b20d30c52b4383bb3f390361f12,
         type: 3}
+      propertyPath: slotID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265065248448071858, guid: a6444b20d30c52b4383bb3f390361f12,
+        type: 3}
       propertyPath: subBtn
       value: 
       objectReference: {fileID: 343554572170355950}
@@ -2301,6 +2306,11 @@ PrefabInstance:
       propertyPath: addBtn
       value: 
       objectReference: {fileID: 1622852664536255316}
+    - target: {fileID: 7265065248448071858, guid: a6444b20d30c52b4383bb3f390361f12,
+        type: 3}
+      propertyPath: slotID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7265065248448071858, guid: a6444b20d30c52b4383bb3f390361f12,
         type: 3}
       propertyPath: subBtn
