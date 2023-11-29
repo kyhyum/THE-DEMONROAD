@@ -39,9 +39,5 @@ public class PlayerPassageChecker : MonoBehaviour
             }
         }
     }
-    public void SetDungeonManager(DungeonManager manager)
-    {
-        dungeonManager = manager;
-    }
 
 }
