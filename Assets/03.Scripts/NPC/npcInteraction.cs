@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class npcInteraction : MonoBehaviour
 {
     public NPCSO npc;
     public QuestSO quest;
-    //public ItemSO goldItem;
+    
     [SerializeField] List<ItemSO> allItems;
     private QuestController controller;
    
@@ -23,7 +24,7 @@ public class npcInteraction : MonoBehaviour
 
     //progressui
     public TMP_Text questProgName;
-    //public TMP_Text questComplete;
+    
 
     private bool isUIVisible = false;
     private bool isTalking = false;
@@ -47,7 +48,7 @@ public class npcInteraction : MonoBehaviour
 
         if (distance <= activationDistance)
         {
-            //상호작용 가능시 팝업
+            
             
             interactionPopup.SetActive(true);
 
@@ -81,7 +82,7 @@ public class npcInteraction : MonoBehaviour
     }
     void ShowDialogue()
     {
-        //player Ui off
+        
         UIManager.Instance.ActivePlayerUI(false);
 
         isTalking = true;
@@ -132,13 +133,16 @@ public class npcInteraction : MonoBehaviour
     }
     public void ConversationQuestProgress(QuestSO selectedQuest) 
     {
-        if (selectedQuest.questType == QuestType.ConversationQuest) //대화퀘스트
+        if (selectedQuest.questType == QuestType.ConversationQuest) 
         {
+            StringBuilder questProgress = new StringBuilder();
             foreach (var npc in selectedQuest.relatedNPCs)
             {
-
+                questProgress.Append(selectedQuest.questName)
+                    .Append("\n - 1 /")
+                    .Append(selectedQuest.questComplete);
                 
-                questProgName.text = selectedQuest.questName + "\n - " +  " 1 / " + selectedQuest.questComplete;
+                //questProgName.text = selectedQuest.questName + "\n - " +  " 1 / " + selectedQuest.questComplete;
             }
         }
         
@@ -168,16 +172,16 @@ public class npcInteraction : MonoBehaviour
         }
 
 
-        // 퀘스트 완료 처리를 수행할 코드 작성
+        
         Debug.Log("Quest completed!");
 
         questProgName.color = Color.red;
         questProgName.fontStyle |= FontStyles.Italic;
         questProgName.fontStyle |= FontStyles.Strikethrough;
 
-        //금화 보상 처리
+        
 
-        //방법3
+        
         if (quest != null && quest.questType == QuestType.ConversationQuest)
         {
             Inventory inventory = UIManager.Instance.GetInventory();
@@ -209,7 +213,7 @@ public class npcInteraction : MonoBehaviour
             dialogueText.text += letter; 
             yield return new WaitForSeconds(0.05f); 
         }
-        if (isCompleteDialogue) // 퀘스트 완료 팝업 띄우고 2초뒤에 닫기
+        if (isCompleteDialogue) 
         {
             controller.ShowPopup();
 

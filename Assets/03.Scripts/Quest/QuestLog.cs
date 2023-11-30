@@ -23,7 +23,7 @@ public class QuestLog : MonoBehaviour
         
     }
 
-    public void UpdateQuestLogUI() //questLog에 선택된 퀘스트 정보 표시
+    public void UpdateQuestLogUI() 
     {
         if (player != null && player.acceptQuest != null)
         {
@@ -62,13 +62,13 @@ public class QuestLog : MonoBehaviour
     }
 
 
-    public void OnQuestObjectClick(QuestSO quest) //questLog에서 퀘스트를 하나하나 선택
+    public void OnQuestObjectClick(QuestSO quest) 
     {
         ShowLogQuestDetails(quest);
 
     }
 
-    private void ShowLogQuestDetails(QuestSO selectedQuest) // questLog에서 선택된 퀘스트 정보 표시
+    private void ShowLogQuestDetails(QuestSO selectedQuest) 
     {
 
         questLogSelected.text = selectedQuest.questName;
