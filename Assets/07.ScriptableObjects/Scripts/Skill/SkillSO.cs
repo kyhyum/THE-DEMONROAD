@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SkillSO : ScriptableObject
 {
-    [field: SerializeField] public int index;
     [field: SerializeField] public string skillName;
     [field: SerializeField] public string description;
     [field: SerializeField] public Sprite icon;

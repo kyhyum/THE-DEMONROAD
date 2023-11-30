@@ -12,7 +12,7 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
     private Canvas canvas;
     private RectTransform rect;
     private IUsable usable;
-    [field: SerializeField] private RawImage icon;
+    [field: SerializeField] private Image icon;
     [field: SerializeField] private TMP_Text keyBinding;
     [field: SerializeField] private TMP_Text quantity;
     [field: SerializeField] private Image cooltime;
@@ -34,6 +34,7 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
     public void SetSlot(IUsable usable)
     {
+        Debug.Log(usable);
         this.usable = usable;
 
         if (usable == null)
@@ -52,7 +53,13 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         {
             UseItem useItem = (UseItem)usable;
             useItem.OnCountChanged += SetQuantity;
-            icon.texture = useItem.texture;
+            icon.sprite = Sprite.Create(useItem.texture, new Rect(0, 0, useItem.texture.width, useItem.texture.height), Vector2.one * 0.5f);
+        }
+
+        if (usable is AttackSkill)
+        {
+            AttackSkill skill = (AttackSkill)usable;
+            icon.sprite = skill.icon;
         }
 
 
@@ -142,12 +149,8 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
             if (stackable.Get() == 0)
                 return;
 
-            usable.Use();
         }
-        else
-        {
-
-        }
+        usable.Use();
     }
 
     private void SetCoolTime(float value)

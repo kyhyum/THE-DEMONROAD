@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: WhirlingCleave
   description: "\uD68C\uC804\uD558\uBA74\uC11C \uAC80\uC744 \uD718\uB450\uB978\uB2E4."
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ae2c02e5fe128b946becedc35a2bc85b, type: 3}
   type: 0
   manaCost: 15
   coolTime: 3
