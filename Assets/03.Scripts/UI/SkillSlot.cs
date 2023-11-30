@@ -20,9 +20,12 @@ public class SkillSlot : MonoBehaviour
     {
         this.skill = skill;
 
+        icon.sprite = skill.icon;
         nameTxt.text = skill.skillName;
         descriptionTxt.text = skill.description;
         levelTxt.text = string.Format("{0} / 5", skill.level);
+
+        slotID = skill.index;
 
         if (skill.level == 0)
         {

@@ -177,6 +177,18 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
         Debug.Log(currentHp);
     }
 
+    public bool ConsumeMp(float value)
+    {
+        if (value > currentMp)
+            return false;
+
+        currentMp -= value;
+
+        OnMpChanged?.Invoke(currentMp, maxMp);
+
+        return true;
+    }
+
     public void Buff(BuffType buffType, float duration, int value)
     {
         StartCoroutine(CBuff(buffType, duration, value));
