@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     [field: Header("Skill")]
     public SkillSO[] skillSOs;
     public Skill[] skills { get; private set; }
+    public Collider[] skillRange;
 
 
     [field: Header(" ")]
@@ -63,6 +64,7 @@ public class Player : MonoBehaviour
             skills[i] = new AttackSkill(skillSOs[i]);
             skills[i].level = GameManager.Instance.data.skilllevels[i];
             skills[i].index = i;
+            ((AttackSkill)skills[i]).SetRange(skillRange[i]);
         }
     }
 

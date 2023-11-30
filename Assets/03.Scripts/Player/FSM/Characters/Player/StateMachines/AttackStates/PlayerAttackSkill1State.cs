@@ -37,11 +37,12 @@ public class PlayerAttackSkill1State : PlayerBaseState
         {
             if (stateMachine.Player.IsAttackSkill[0])
             {
-
+                ((AttackSkill)stateMachine.Player.skills[0]).GetRange().SetActive(true);
             }
         }
         else
         {
+            ((AttackSkill)stateMachine.Player.skills[0]).GetRange().SetActive(false);
             stateMachine.Player.IsAttackSkill[0] = false;
             stateMachine.ChangeState(stateMachine.IdleState);
         }
