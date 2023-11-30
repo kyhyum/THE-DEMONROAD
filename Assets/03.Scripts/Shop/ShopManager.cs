@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 
 public class ShopManager : MonoBehaviour
@@ -14,17 +15,21 @@ public class ShopManager : MonoBehaviour
     public GameObject equipShop;
     public GameObject equipNPCtalk;
 
+    //bool
     private bool isPotionShopOpen = false;
     private bool isEquipShopOpen = false;
 
+    //Pop
     public GameObject confirmationPopUp;
     public GameObject sellconfirmationPopup;
     public GameObject outofGoldPop;
 
+    //Text
     public TMP_Text confirmationText;
     public TMP_Text sellconfirmationText;
     public TMP_Text itemCountText;
 
+    //Button
     public Button confirmationButton;
     public Button sellButton;
     public Button increaseButton; 
@@ -33,8 +38,9 @@ public class ShopManager : MonoBehaviour
     private int itemCountToBuy = 1;
     
     ItemSO item;
-    
-    
+    public List<ItemSO> itemList;
+
+
 
     public void Start()
     {
@@ -69,9 +75,10 @@ public class ShopManager : MonoBehaviour
             confirmationPopUp.SetActive(true);
             confirmationText.text = "구매하시겠습니까? " + "\n" + item.itemName;                                       
 
-            //아이템 판매버튼 이벤트
+
             sellconfirmationText.text = "판매하시겠습니까? " + "\n" + item.itemName;
 
+            //아이템 판매버튼 이벤트
             sellButton.onClick.RemoveAllListeners();
             sellButton.onClick.AddListener(() => SellItem(item));
 
@@ -81,7 +88,7 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Item이 null입니다.");
         }
         
-    }
+    }   
     public void BuyItem()
     {
         Inventory inventory = UIManager.Instance.GetInventory();
@@ -89,32 +96,48 @@ public class ShopManager : MonoBehaviour
         if (inventory != null && item != null)
         {
             int totalPrice = item.itemPrice * itemCountToBuy;
+            ItemSO foundItemSO = null;
 
-            if (inventory.Gold >= totalPrice)
+            // itemList 리스트를 반복하여 아이템 이름으로 검색
+            foreach (ItemSO itemSO in itemList)
             {
-                for (int i = 0; i < itemCountToBuy; i++)
+                if (itemSO.itemName == item.itemName)
                 {
-                    ItemSO itemSO = Resources.Load<ItemSO>(item.itemName);
-                    Item itemToAdd = new Item(itemSO);
-                    inventory.AddItem(itemToAdd);
+                    foundItemSO = itemSO;
+                    break; 
                 }
+            }
 
-                // 골드 차감
-                inventory.Gold -= totalPrice;
-                confirmationPopUp.SetActive(false);
+            if (foundItemSO != null)
+            {
+                if (inventory.Gold >= totalPrice)
+                {
+                    for (int i = 0; i < itemCountToBuy; i++)
+                    {
+                        Item itemToAdd = new Item(foundItemSO);
+                        inventory.AddItem(itemToAdd);
+                    }
+
+                    // 골드 차감
+                    inventory.Gold -= totalPrice;
+                    confirmationPopUp.SetActive(false);
+                }
+                else
+                {
+                    Debug.Log("골드가 부족합니다.");
+                    outofGoldPop.SetActive(true);
+                    confirmationPopUp.SetActive(false);
+                }
             }
             else
             {
-                Debug.Log("골드가 부족합니다.");
-                outofGoldPop.SetActive(true);
-                confirmationPopUp.SetActive(false);
+                Debug.LogError("해당 아이템을 찾을 수 없습니다.");
             }
         }
         else
         {
             Debug.Log("Inventory가 null입니다.");
         }
-        
     }
     public void SellItem(ItemSO soldItem)
     {

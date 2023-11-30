@@ -69512,6 +69512,15 @@ MonoBehaviour:
   sellButton: {fileID: 824620454}
   increaseButton: {fileID: 22166285}
   decreaseButton: {fileID: 1997962290}
+  itemList:
+  - {fileID: 11400000, guid: 21631c5a4575c5940a9ced3cbc64bd9d, type: 2}
+  - {fileID: 11400000, guid: e674822d86f953c49b9fd6d1cc290ede, type: 2}
+  - {fileID: 11400000, guid: 021f3c39e254b8347a308b81ffc9eb3e, type: 2}
+  - {fileID: 11400000, guid: 2ef863011a6ee544f91e0b91bb01dae7, type: 2}
+  - {fileID: 11400000, guid: 4d5b05aa79c95e946bc6931ceb651672, type: 2}
+  - {fileID: 11400000, guid: a1b371ee9d122e1429730f8419367036, type: 2}
+  - {fileID: 11400000, guid: 8f3a5c08c7762e244a9351e8a12177d7, type: 2}
+  - {fileID: 11400000, guid: dfce7a7fe6321694e9a3db8a2e408693, type: 2}
 --- !u!4 &1360750912
 Transform:
   m_ObjectHideFlags: 0
