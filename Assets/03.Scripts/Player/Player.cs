@@ -138,12 +138,6 @@ public class Player : MonoBehaviour
         stateMachine.PhysicsUpdate();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        stateMachine.OnTriggerEnter(other);
-    }
-
-
     private void OnDestroy()
     {
         UIManager.Instance.OnUIInputDisable();

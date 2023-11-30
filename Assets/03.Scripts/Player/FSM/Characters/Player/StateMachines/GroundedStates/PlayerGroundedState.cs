@@ -30,21 +30,21 @@ public class PlayerGroundedState : PlayerBaseState
             OnAttack();
             return;
         }
-        else if (stateMachine.Player.IsAttackSkill[0]) 
-        { 
-            OnAttackSkill1(); 
-            return;
-        }
-        else if (stateMachine.Player.IsAttackSkill[1])
-        {
-            OnAttackSkill2();
-            return;
-        }
-        else if (stateMachine.Player.IsAttackSkill[2])
-        {
-            OnAttackSkill3();
-            return;
-        }
+        //else if (stateMachine.Player.IsAttackSkill[0])
+        //{
+        //    OnAttackSkill1();
+        //    return;
+        //}
+        //else if (stateMachine.Player.IsAttackSkill[1])
+        //{
+        //    OnAttackSkill2();
+        //    return;
+        //}
+        //else if (stateMachine.Player.IsAttackSkill[2])
+        //{
+        //    OnAttackSkill3();
+        //    return;
+        //}
     }
 
     public override void LateUpdate()
