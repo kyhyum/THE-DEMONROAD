@@ -51,9 +51,7 @@ public class QuestLog : MonoBehaviour
                     Debug.LogWarning("acceptedQuest가 null입니다.");
                 }
             }
-            //questLogSelected.text = "";
-            //questLogDescription.text = "";
-            //questLogRewards.text = "";
+            
 
         }
         else
