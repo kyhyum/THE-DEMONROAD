@@ -3,6 +3,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -31,12 +32,12 @@ public class Player : MonoBehaviour
 
     public bool IsMovePerformed { get; set; }
     public bool IsAttacking { get; set; }
-    public bool IsAttackSkill1 { get; set; }
-    public bool IsAttackSkill2 { get; set; }
-    public bool IsAttackSkill3 { get; set; }
+    public bool[] IsAttackSkill { get; set; }
 
     [field: Header("Skill")]
-    [field: SerializeField] public Strike Strike { get; set; }
+    public SkillSO[] skillSOs;
+    private Skill[] skills;
+
 
     [field: Header(" ")]
     [field: SerializeField] public TrailRenderer TrailRenderer { get; set; }
@@ -54,6 +55,14 @@ public class Player : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
 
         stateMachine = new PlayerStateMachine(this);
+        IsAttackSkill = new bool[skillSOs.Length];
+        skills = new Skill[skillSOs.Length];
+
+        for (int i = 0; i < skills.Length; i++)
+        {
+            skills[i] = new AttackSkill(skillSOs[i]);
+            skills[i].level = GameManager.Instance.data.skilllevels[i];
+        }
     }
 
     private void Start()
@@ -145,5 +154,17 @@ public class Player : MonoBehaviour
         Animator.SetTrigger("Die");
         // Player.cs를 false로 만든다.
         enabled = false;
+    }
+
+    public bool IsAttack()
+    {
+        bool flag = IsAttacking;
+
+        foreach (bool b in IsAttackSkill)
+        {
+            flag = flag || b;
+        }
+
+        return flag;
     }
 }
