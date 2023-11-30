@@ -54,7 +54,7 @@ public class ShopManager : MonoBehaviour
         increaseButton.onClick.AddListener(IncreaseItemCount);
         decreaseButton.onClick.AddListener(DecreaseItemCount);
 
-        //아이템 구매버튼 이벤트 설정
+        
         confirmationButton.onClick.AddListener(BuyItem);
     }
 
@@ -98,7 +98,7 @@ public class ShopManager : MonoBehaviour
             int totalPrice = item.itemPrice * itemCountToBuy;
             ItemSO foundItemSO = null;
 
-            // itemList 리스트를 반복하여 아이템 이름으로 검색
+            
             foreach (ItemSO itemSO in itemList)
             {
                 if (itemSO.itemName == item.itemName)
@@ -118,7 +118,7 @@ public class ShopManager : MonoBehaviour
                         inventory.AddItem(itemToAdd);
                     }
 
-                    // 골드 차감
+                    
                     inventory.Gold -= totalPrice;
                     confirmationPopUp.SetActive(false);
                 }
@@ -145,7 +145,7 @@ public class ShopManager : MonoBehaviour
 
         if (inventory != null && soldItem != null)
         {
-            // 판매할 아이템이 인벤토리에 있는지 확인
+            
             for (int i = 0; i < inventory.inventorySlots.Length; i++)
             {
                 Item currentItem = inventory.GetItem(i);

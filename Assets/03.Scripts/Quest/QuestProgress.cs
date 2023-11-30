@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
@@ -19,9 +20,9 @@ public class QuestProgress : MonoBehaviour
 
     
 
-    public void ShowQuestProgress(QuestSO selectedQuest) //questProgress 표시창
+    public void ShowQuestProgress(QuestSO selectedQuest) 
     {
-        if (selectedQuest.questType == QuestType.ConversationQuest) //대화퀘스트
+        if (selectedQuest.questType == QuestType.ConversationQuest) 
         {
             foreach (var npc in selectedQuest.relatedNPCs)
             {
@@ -34,7 +35,7 @@ public class QuestProgress : MonoBehaviour
         {
             questProgitemName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
         }
-        else if (selectedQuest.questType == QuestType.MonsterQuest) //몬스터퀘스트 
+        else if (selectedQuest.questType == QuestType.MonsterQuest)  
         {
             int goblinKills = GameManager.Instance.goblinkillCount;
 
@@ -48,7 +49,7 @@ public class QuestProgress : MonoBehaviour
                 MonsterQuestReward(selectedQuest);
             }
         }
-        else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) //무한몬스터퀘스트
+        else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) 
         {
 
             int goblinKills = GameManager.Instance.goblinkillCount;
@@ -59,13 +60,18 @@ public class QuestProgress : MonoBehaviour
                 questProgInfinitemonsterName.fontStyle |= FontStyles.Italic;
                 questProgInfinitemonsterName.fontStyle |= FontStyles.Strikethrough;
                 InfiniteMonsterQuestReward(selectedQuest);
-                //여기에 새로운 퀘스트 추가 - 150마리 잡는 퀘스트.. 시간되면
+                
 
             }
         }
-        else if (selectedQuest.questType == QuestType.MainQuest) //메인퀘스트 
+        else if (selectedQuest.questType == QuestType.MainQuest)  
         {
-            questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
+            StringBuilder questProgmainName = new StringBuilder();
+            questProgmainName.Append(selectedQuest.questName)
+                .Append("\n - 0 /")
+                .Append(selectedQuest.questComplete);
+
+            //questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
             UpdateMainQuestProgress(selectedQuest);
 
 
@@ -86,7 +92,7 @@ public class QuestProgress : MonoBehaviour
 
                 questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;
 
-                // 보상처리
+                
                 MainQuestReward(selectedQuest);
                 isMainQuestProgressUpdated = true;
 

@@ -21,9 +21,6 @@ public class QuestBoard : MonoBehaviour
     [SerializeField] List<QuestSO> quests;
     public static UIManager Instance;
 
-   
-    
-
     //메인퀘스트 관련
     private ChoiceDungeon choiceDungeon;
     
@@ -52,7 +49,7 @@ public class QuestBoard : MonoBehaviour
 
         
         choiceDungeon = FindObjectOfType<ChoiceDungeon>();
-        //이벤트 구독
+        
         if (choiceDungeon != null)
         {
             ChoiceDungeon.DungeonInteractionPopupActivated += OnDungeonInteractionPopupActivated;
@@ -93,7 +90,7 @@ public class QuestBoard : MonoBehaviour
             questButton[i].onClick.AddListener(() => { ShowQuestDetails(quests[index]); });
         }
     }
-    private void ShowQuestDetails(QuestSO selectedQuest) //questBoard에서 표시되는 퀘스트 정보
+    private void ShowQuestDetails(QuestSO selectedQuest) 
     {
         questDescriptionText.text = selectedQuest.questDescription;
         questConditionText.text = selectedQuest.questCondition;
@@ -101,7 +98,7 @@ public class QuestBoard : MonoBehaviour
         selectQuest = selectedQuest;
     }
 
-    // 같은 타입의 퀘스트는 한번만 받게끔
+    
     private bool IsQuestAlreadyAccepted(QuestSO quest)
     {
         if (player.acceptQuest.Contains(quest))
@@ -110,7 +107,7 @@ public class QuestBoard : MonoBehaviour
         }
         return false;
     }
-    private void AcceptQuest(QuestSO quest) // questBoard에서 퀘스트를 수락
+    private void AcceptQuest(QuestSO quest) 
     {
         if (!IsQuestAlreadyAccepted(quest))
         {
@@ -139,7 +136,7 @@ public class QuestBoard : MonoBehaviour
 
     void OnDestroy()
     {
-        // 이벤트 구독 해제
+        
         if (choiceDungeon != null)
         {
             ChoiceDungeon.DungeonInteractionPopupActivated -= OnDungeonInteractionPopupActivated;
