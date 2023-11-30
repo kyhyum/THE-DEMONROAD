@@ -47,6 +47,9 @@ public class ShopManager : MonoBehaviour
 
         increaseButton.onClick.AddListener(IncreaseItemCount);
         decreaseButton.onClick.AddListener(DecreaseItemCount);
+
+        //아이템 구매버튼 이벤트 설정
+        confirmationButton.onClick.AddListener(BuyItem);
     }
 
     private void Update()
@@ -64,10 +67,7 @@ public class ShopManager : MonoBehaviour
         if (item != null)
         {
             confirmationPopUp.SetActive(true);
-            confirmationText.text = "구매하시겠습니까? " + "\n" + item.itemName; 
-                                     
-            //아이템 구매버튼 이벤트 설정
-            confirmationButton.onClick.AddListener(BuyItem);
+            confirmationText.text = "구매하시겠습니까? " + "\n" + item.itemName;                                       
 
             //아이템 판매버튼 이벤트
             sellconfirmationText.text = "판매하시겠습니까? " + "\n" + item.itemName;
