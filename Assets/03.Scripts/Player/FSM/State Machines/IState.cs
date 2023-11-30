@@ -28,10 +28,4 @@ public interface IState
     /// State용 물리적 update 함수이다. 
     /// </summary>
     public void PhysicsUpdate();
-
-    /// <summary>
-    /// State용 OnTriggerEnter 함수이다. 
-    /// </summary>
-    /// <param name="other"></param>
-    public void OnTriggerEnter(Collider other);
 }
