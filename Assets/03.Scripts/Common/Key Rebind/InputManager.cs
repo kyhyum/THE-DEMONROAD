@@ -16,7 +16,6 @@ public class InputManager : MonoBehaviour
     static List<InputBinding> bindings = new List<InputBinding>();
     static InputActionRebindingExtensions.RebindingOperation beforeRebindingAction = null;
 
-    static GameManager gameManager;
     private void Awake()
     {
         if (inputActions == null)
@@ -29,13 +28,9 @@ public class InputManager : MonoBehaviour
             LoadBindingOverride(inputActionReferences[i].action.name);
         }
     }
-    private void Start()
-    {
-        gameManager = GameManager.Instance;
-    }
     public static void StartRebind(string actionName, Text statusText, int num)
     {
-        gameManager.eventSystem.enabled = false;
+        GameManager.Instance.eventSystem.enabled = false;
         InputAction action = inputActions.asset.FindAction(actionName);
         DoRebind(action, statusText, num);
     }
@@ -110,7 +105,7 @@ public class InputManager : MonoBehaviour
             rebindCanceled?.Invoke();
         });
 
-        gameManager.eventSystem.enabled = true;
+        GameManager.Instance.eventSystem.enabled = true;
     }
 
     public static string GetBindingName(string actionName)
