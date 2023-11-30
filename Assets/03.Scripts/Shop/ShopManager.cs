@@ -15,17 +15,21 @@ public class ShopManager : MonoBehaviour
     public GameObject equipShop;
     public GameObject equipNPCtalk;
 
+    //bool
     private bool isPotionShopOpen = false;
     private bool isEquipShopOpen = false;
 
+    //Pop
     public GameObject confirmationPopUp;
     public GameObject sellconfirmationPopup;
     public GameObject outofGoldPop;
 
+    //Text
     public TMP_Text confirmationText;
     public TMP_Text sellconfirmationText;
     public TMP_Text itemCountText;
 
+    //Button
     public Button confirmationButton;
     public Button sellButton;
     public Button increaseButton; 
@@ -84,41 +88,7 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Item이 null입니다.");
         }
         
-    }
-    //public void BuyItem()
-    //{
-    //    Inventory inventory = UIManager.Instance.GetInventory();
-
-    //    if (inventory != null && item != null)
-    //    {
-    //        int totalPrice = item.itemPrice * itemCountToBuy;
-
-    //        if (inventory.Gold >= totalPrice)
-    //        {
-    //            for (int i = 0; i < itemCountToBuy; i++)
-    //            {
-    //                ItemSO itemSO = Resources.Load<ItemSO>(item.itemName);
-    //                Item itemToAdd = new Item(itemSO);
-    //                inventory.AddItem(itemToAdd);
-    //            }
-
-    //            // 골드 차감
-    //            inventory.Gold -= totalPrice;
-    //            confirmationPopUp.SetActive(false);
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("골드가 부족합니다.");
-    //            outofGoldPop.SetActive(true);
-    //            confirmationPopUp.SetActive(false);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Inventory가 null입니다.");
-    //    }
-
-    //}
+    }   
     public void BuyItem()
     {
         Inventory inventory = UIManager.Instance.GetInventory();
@@ -134,7 +104,7 @@ public class ShopManager : MonoBehaviour
                 if (itemSO.itemName == item.itemName)
                 {
                     foundItemSO = itemSO;
-                    break; // 원하는 아이템을 찾으면 반복문을 빠져나옴
+                    break; 
                 }
             }
 
