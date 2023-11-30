@@ -31836,6 +31836,11 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1131402574899710677, guid: 4936f5e6443ad0b43951c3c611f9005f,
+        type: 3}
+      propertyPath: playerUIObject
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1181809638457511114, guid: 4936f5e6443ad0b43951c3c611f9005f,
         type: 3}
       propertyPath: icon
@@ -31916,6 +31921,11 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3817004573174333103, guid: 4936f5e6443ad0b43951c3c611f9005f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4623413459788018428, guid: 4936f5e6443ad0b43951c3c611f9005f,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -31951,6 +31961,7 @@ PrefabInstance:
     - {fileID: 5894192386290664288, guid: 4936f5e6443ad0b43951c3c611f9005f, type: 3}
     - {fileID: 4471592499451628101, guid: 4936f5e6443ad0b43951c3c611f9005f, type: 3}
     - {fileID: 2326792908716851030, guid: 4936f5e6443ad0b43951c3c611f9005f, type: 3}
+    - {fileID: 58468017219768028, guid: 4936f5e6443ad0b43951c3c611f9005f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4936f5e6443ad0b43951c3c611f9005f, type: 3}
