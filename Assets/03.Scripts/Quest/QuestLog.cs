@@ -22,36 +22,47 @@ public class QuestLog : MonoBehaviour
         player = GameManager.Instance.data;    
         
     }
-    
+
     public void UpdateQuestLogUI() //questLog에 선택된 퀘스트 정보 표시
     {
-        
-        for (int i = 0; i < questLogName.Length; i++)
+        if (player != null && player.acceptQuest != null)
         {
-            questLogName[i].text = "";
-        }
-        questLogSelected.text = "";
-        questLogDescription.text = "";
-        questLogRewards.text = "";
-
-        foreach (var acceptedQuest in player.acceptQuest)
-        {
-
-            int questIndex = acceptedQuest.questIndex;
-
-
-            if (questIndex >= 0 && questIndex < questLogName.Length)
+            for (int i = 0; i < questLogName.Length; i++)
             {
-
-                questLogName[questIndex].text = acceptedQuest.questName;
+                questLogName[i].text = "";
             }
+            questLogSelected.text = "";
+            questLogDescription.text = "";
+            questLogRewards.text = "";
+
+            foreach (var acceptedQuest in player.acceptQuest)
+            {
+                if (acceptedQuest != null)
+                {
+                    int questIndex = acceptedQuest.questIndex;
+
+                    if (questIndex >= 0 && questIndex < questLogName.Length)
+                    {
+                        questLogName[questIndex].text = acceptedQuest.questName;
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("acceptedQuest가 null입니다.");
+                }
+            }
+            //questLogSelected.text = "";
+            //questLogDescription.text = "";
+            //questLogRewards.text = "";
+
         }
+        else
+        {
+            Debug.LogWarning("player 또는 player.acceptQuest가 null입니다.");
 
-        questLogSelected.text = "";
-        questLogDescription.text = "";
-        questLogRewards.text = "";
-
+        }
     }
+
 
     public void OnQuestObjectClick(QuestSO quest) //questLog에서 퀘스트를 하나하나 선택
     {
