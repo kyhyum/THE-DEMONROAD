@@ -101,18 +101,20 @@ public class ShopManager : MonoBehaviour
 
                 // 골드 차감
                 inventory.Gold -= totalPrice;
+                confirmationPopUp.SetActive(false);
             }
             else
             {
                 Debug.Log("골드가 부족합니다.");
                 outofGoldPop.SetActive(true);
+                confirmationPopUp.SetActive(false);
             }
         }
         else
         {
             Debug.Log("Inventory가 null입니다.");
         }
-        confirmationPopUp.SetActive(false);
+        
     }
     //public void SellItem(ItemSO soldItem)
     //{
