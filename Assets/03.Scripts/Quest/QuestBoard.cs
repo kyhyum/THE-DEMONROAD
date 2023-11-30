@@ -8,7 +8,6 @@ public class QuestBoard : MonoBehaviour
     //gameobject 
     public GameObject acceptPopup;
     public GameObject cancelPopup;
-    //public GameObject questLogPanel;
     public GameObject questacceptCheckPop;
     [SerializeField] Button[] questButton;
 
@@ -18,12 +17,7 @@ public class QuestBoard : MonoBehaviour
     public TMP_Text questConditionText;
     public TMP_Text questRewardText;
     [SerializeField] Button acceptButton;
-
-    //questlog
-    //[SerializeField] TMP_Text[] questLogName;
-    //public TMP_Text questLogSelected;
-    //public TMP_Text questLogDescription;
-    //public TMP_Text questLogRewards;
+  
 
     //quest progress
     [SerializeField] TMP_Text questProgmonsterName;
@@ -52,7 +46,7 @@ public class QuestBoard : MonoBehaviour
     {
         player = GameManager.Instance.data;
         questacceptCheckPop.SetActive(false);
-        //questLog = GetComponent<QuestLog>();
+        
         if(questLog == null )
         {
             Debug.LogError("QuestLog 컴포넌트를 찾을 수 없습니다!");
@@ -147,55 +141,6 @@ public class QuestBoard : MonoBehaviour
     }
 
 
-
-    //private void UpdateQuestLogUI() //questLog에 선택된 퀘스트 정보 표시
-    //{
-    //    //questLogName.text = "";
-    //    for (int i = 0; i < questLogName.Length; i++)
-    //    {
-    //        questLogName[i].text = "";
-    //    }
-    //    questLogSelected.text = "";
-    //    questLogDescription.text = "";
-    //    questLogRewards.text = "";
-
-    //    foreach (var acceptedQuest in player.acceptQuest)
-    //    {
-
-    //        int questIndex = acceptedQuest.questIndex;
-
-
-    //        if (questIndex >= 0 && questIndex < questLogName.Length)
-    //        {
-
-    //            questLogName[questIndex].text = acceptedQuest.questName;
-    //        }
-
-
-
-    //    }
-
-
-    //    questLogSelected.text = "";
-    //    questLogDescription.text = "";
-    //    questLogRewards.text = "";
-
-
-    //}
-
-    //public void OnQuestObjectClick(QuestSO quest) //questLog에서 퀘스트를 하나하나 선택
-    //{
-    //    ShowLogQuestDetails(quest);
-
-    //}
-
-    //private void ShowLogQuestDetails(QuestSO selectedQuest) // questLog에서 선택된 퀘스트 정보 표시
-    //{
-
-    //    questLogSelected.text = selectedQuest.questName;
-    //    questLogDescription.text = selectedQuest.questDescription;
-    //    questLogRewards.text = selectedQuest.questReward;
-    //}
 
     public void ShowQuestProgress(QuestSO selectedQuest) //questProgress 표시창
     {

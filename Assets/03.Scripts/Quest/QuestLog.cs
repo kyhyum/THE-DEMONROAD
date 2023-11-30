@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 
 public class QuestLog : MonoBehaviour
@@ -14,21 +13,13 @@ public class QuestLog : MonoBehaviour
     public TMP_Text questLogSelected;
     public TMP_Text questLogDescription;
     public TMP_Text questLogRewards;
-    
 
-    //public ItemSO golditem;
-    //QuestSO selectQuest;
     PlayerData player;
-    //QuestBoard board;
-    //private QuestController controller;
-
-    //public List<QuestSO> Quests { get { return quests; } }
-    //[SerializeField] List<QuestSO> quests;
+    
 
     public void Start()
     {
-        player = GameManager.Instance.data;
-        //controller = FindAnyObjectByType<QuestController>();
+        player = GameManager.Instance.data;    
         
     }
     
@@ -54,16 +45,11 @@ public class QuestLog : MonoBehaviour
 
                 questLogName[questIndex].text = acceptedQuest.questName;
             }
-
-
-
         }
-
 
         questLogSelected.text = "";
         questLogDescription.text = "";
         questLogRewards.text = "";
-
 
     }
 
