@@ -24,8 +24,10 @@ public class UIManager : MonoBehaviour
     private Inventory inventory;
     private Storage storage;
     private SkillUI skill;
-    private QuestLog questLog;
-    private QuestProgress questProgress;
+
+    //Quest창 합치는 작업 진행중이라 완료시 주석 해제
+    /*private QuestLog questLog;
+    private QuestProgress questProgress;*/
 
     public PlayerUI playerUI { get; private set; }
 
@@ -43,8 +45,9 @@ public class UIManager : MonoBehaviour
         CreateStorage();
         CreateInventory();
         CreateSkill();
-        CreateQuestLog();
-        CreateQuestProgress();
+
+        /*CreateQuestLog();
+        CreateQuestProgress();*/
     }
 
     private void Start()
@@ -89,7 +92,8 @@ public class UIManager : MonoBehaviour
         skillObject.SetActive(false);
     }
 
-    private void CreateQuestLog()
+    //Quest창 합치는 작업중이라 완료시 주석 해제
+    /*private void CreateQuestLog()
     {
         questLogObject = Instantiate(Resources.Load<GameObject>(StringManager.QuestLogPrefabPath), canvas);
         questLog = questLogObject.GetComponentInChildren<QuestLog>();
@@ -101,7 +105,7 @@ public class UIManager : MonoBehaviour
         questProgressObject = Instantiate(Resources.Load<GameObject>(StringManager.QuestProgressPath), canvas);
         questProgress = questProgressObject.GetComponentInChildren<QuestProgress>();
         questProgressObject.SetActive(false);
-    }
+    }*/
 
     public void OnUIInputEnable()
     {
@@ -133,14 +137,16 @@ public class UIManager : MonoBehaviour
     {
         return skill;
     }
-    public QuestLog GetQuestLog()
+
+    //Quest창 합치는 작업중이라 완료시 주석 해제
+    /*public QuestLog GetQuestLog()
     {
         return questLog;
     }
     public QuestProgress GetQuestProgress()
     {
         return questProgress;
-    }
+    }*/
 
     public void ActiveSettingWindow()
     {
