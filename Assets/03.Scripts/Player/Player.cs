@@ -161,4 +161,9 @@ public class Player : MonoBehaviour
 
         return flag;
     }
+
+    public void AnimationEvent()
+    {
+        Debug.Log("Player 클래스의 AnimationEvent 함수 호출했다.");
+    }
 }
