@@ -15,9 +15,11 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
     [field: SerializeField] private Image icon;
     [field: SerializeField] private TMP_Text keyBinding;
     [field: SerializeField] private TMP_Text quantity;
-    [field: SerializeField] private Image cooltime;
+    [field: SerializeField] private Image cooltimeImg;
     [field: SerializeField] private InputActionReference inputActionReference;
     public int slotID;
+    private float coolTime;
+    private float fillAmount;
 
     private void Awake()
     {
@@ -30,6 +32,18 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         keyBinding.text = InputManager.GetBindingName(inputActionReference.action.name);
         inputActionReference.action.Enable();
         inputActionReference.action.started += Use;
+    }
+
+    private void FixedUpdate()
+    {
+        if (fillAmount < 0)
+            fillAmount = 0;
+
+        if (fillAmount > 0)
+        {
+            fillAmount -= Time.deltaTime;
+            cooltimeImg.fillAmount = fillAmount / coolTime;
+        }
     }
 
     public void SetSlot(IUsable usable)
@@ -139,8 +153,8 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         if (usable == null)
             return;
 
-        // if (cooltime.fillAmount != 0)
-        //     return;
+        if (fillAmount != 0)
+            return;
 
         if (usable is IStackable)
         {
@@ -148,13 +162,23 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
             if (stackable.Get() == 0)
                 return;
-
+            SetCoolTime(5f);
         }
+
+        if (usable is Skill)
+        {
+            if (GameManager.Instance.player.IsAttack())
+                return;
+            Skill skill = (Skill)usable;
+            SetCoolTime(skill.coolTime);
+        }
+
         usable.Use();
     }
 
-    private void SetCoolTime(float value)
+    private void SetCoolTime(float f)
     {
-        cooltime.fillAmount = value;
+        coolTime = f;
+        fillAmount = f;
     }
 }
