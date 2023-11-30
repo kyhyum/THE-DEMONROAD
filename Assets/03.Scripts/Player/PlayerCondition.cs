@@ -12,7 +12,7 @@ public class PlayerData
     public Job job;
     public List<Stat> stats;
     public int skillPoint;
-    public int[] skilllevels = new int[3];
+    public int[] skilllevels;
     public string baseObjectPath;
     public int playerIndex;
 

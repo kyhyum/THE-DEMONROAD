@@ -1,18 +1,19 @@
+using UnityEngine;
+
 public class Skill
 {
+    public int index;
     public string skillName;
     public string description;
     public int level;
-    public int damage;
-    public int increasedDamagePerLevel;
     public int manaCost;
     public float coolTime;
 
-    public void Set(SkillSO skillSO)
+    public Skill(SkillSO skillSO)
     {
+        index = skillSO.index;
         skillName = skillSO.skillName;
-        damage = skillSO.damage;
-        increasedDamagePerLevel = skillSO.increasedDamagePerLevel;
+        description = skillSO.description;
         manaCost = skillSO.manaCost;
         coolTime = skillSO.coolTime;
     }

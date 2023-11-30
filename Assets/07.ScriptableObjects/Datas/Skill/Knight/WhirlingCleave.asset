@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3528dcdc81e1f43489ce13a4c92f8ec7, type: 3}
+  m_Script: {fileID: 11500000, guid: 06fc962458934c246bc46d40564cf6b5, type: 3}
   m_Name: WhirlingCleave
   m_EditorClassIdentifier: 
   skillName: WhirlingCleave
   description: "\uD68C\uC804\uD558\uBA74\uC11C \uAC80\uC744 \uD718\uB450\uB978\uB2E4."
-  damage: 100
-  increasedDamagePerLevel: 10
-  stunTime: 0
-  increasedStunTimePerLevel: 0
+  icon: {fileID: 0}
+  type: 0
   manaCost: 15
   coolTime: 3
+  damage: 0
+  increasedDamagePerLevel: 0
