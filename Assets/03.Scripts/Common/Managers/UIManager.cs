@@ -14,12 +14,18 @@ public class UIManager : MonoBehaviour
     private GameObject inventoryObject;
     private GameObject storageObject;
     private GameObject skillObject;
+    private GameObject questLogObject;
+    private GameObject questProgressObject;
+
+
     public GameObject settingObject;
     public GameObject playerUIObject;
 
     private Inventory inventory;
     private Storage storage;
     private SkillUI skill;
+    private QuestLog questLog;
+    private QuestProgress questProgress;
 
     public PlayerUI playerUI { get; private set; }
 
@@ -37,6 +43,8 @@ public class UIManager : MonoBehaviour
         CreateStorage();
         CreateInventory();
         CreateSkill();
+        CreateQuestLog();
+        CreateQuestProgress();
     }
 
     private void Start()
@@ -62,23 +70,37 @@ public class UIManager : MonoBehaviour
 
     private void CreateInventory()
     {
-        inventoryObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UI_Inventory"), canvas);
+        inventoryObject = Instantiate(Resources.Load<GameObject>(StringManager.InventoryPrefabPath), canvas);
         inventory = inventoryObject.GetComponentInChildren<Inventory>();
         inventoryObject.SetActive(false);
     }
 
     private void CreateStorage()
     {
-        storageObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UI_Storage"), canvas);
+        storageObject = Instantiate(Resources.Load<GameObject>(StringManager.StroagePrefabPath), canvas);
         storage = storageObject.GetComponentInChildren<Storage>();
         storageObject.SetActive(false);
     }
 
     private void CreateSkill()
     {
-        skillObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UI_Skill"), transform);
+        skillObject = Instantiate(Resources.Load<GameObject>(StringManager.SKillPrefabPath), transform);
         skill = skillObject.GetComponentInChildren<SkillUI>();
         skillObject.SetActive(false);
+    }
+
+    private void CreateQuestLog()
+    {
+        questLogObject = Instantiate(Resources.Load<GameObject>(StringManager.QuestLogPrefabPath), canvas);
+        questLog = questLogObject.GetComponentInChildren<QuestLog>();
+        questLogObject.SetActive(false);
+    }   
+
+    private void CreateQuestProgress()
+    {
+        questProgressObject = Instantiate(Resources.Load<GameObject>(StringManager.QuestProgressPath), canvas);
+        questProgress = questProgressObject.GetComponentInChildren<QuestProgress>();
+        questProgressObject.SetActive(false);
     }
 
     public void OnUIInputEnable()
@@ -110,6 +132,14 @@ public class UIManager : MonoBehaviour
     public SkillUI GetSkill()
     {
         return skill;
+    }
+    public QuestLog GetQuestLog()
+    {
+        return questLog;
+    }
+    public QuestProgress GetQuestProgress()
+    {
+        return questProgress;
     }
 
     public void ActiveSettingWindow()
