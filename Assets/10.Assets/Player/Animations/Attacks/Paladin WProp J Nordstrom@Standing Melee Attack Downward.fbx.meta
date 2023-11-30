@@ -56,23 +56,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0
-        functionName: TrailRendererEnabled
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 63de8a8f9b71df34492e6c5cee48f5c4,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 1
-        functionName: TrailRendererDisabled
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 63de8a8f9b71df34492e6c5cee48f5c4,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
