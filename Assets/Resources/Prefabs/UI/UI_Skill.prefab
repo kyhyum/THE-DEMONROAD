@@ -830,6 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5705010647b484e49bffe4a41af34d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillPoint: {fileID: 3299342800919598}
   slots:
   - {fileID: 7713446370123140943}
   - {fileID: 783100689504806735}

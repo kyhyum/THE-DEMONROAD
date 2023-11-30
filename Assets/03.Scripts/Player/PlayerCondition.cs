@@ -30,10 +30,13 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
 
     public event Action OnDie;
 
-    public delegate void ValueChangedDelegate(float newValue, float maxValue);
-    public event ValueChangedDelegate OnHpChanged;
-    public event ValueChangedDelegate OnMpChanged;
-    public event ValueChangedDelegate OnExpChanged;
+    public delegate void ValuesChangedDelegate(float newValue, float maxValue);
+    public event ValuesChangedDelegate OnHpChanged;
+    public event ValuesChangedDelegate OnMpChanged;
+    public event ValuesChangedDelegate OnExpChanged;
+
+    public delegate void ValueChangedDelegate(int value);
+    public event ValueChangedDelegate OnSkillPointChanged;
 
     public bool IsDead => currentHp == 0;
     public void Initialize()
@@ -61,14 +64,18 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     {
         playerData.exp -= (playerData.level * 100);
         playerData.level++;
+        playerData.skillPoint++;
         StatUp();
         StatSynchronization();
+        OnSkillPointChanged?.Invoke(playerData.skillPoint);
     }
 
     public void SkillLevelChange(int index, bool flag)
     {
         playerData.skilllevels[index] += (flag) ? 1 : -1;
-        playerData.skillPoint--;
+        playerData.skillPoint += (flag) ? -1 : 1;
+
+        OnSkillPointChanged?.Invoke(playerData.skillPoint);
     }
 
     void StatUp()

@@ -204,9 +204,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b2a119bf1b2540d4896a52bb00776d05, type: 2}
   - {fileID: 11400000, guid: 144504c0b14499941b72d9d9730ffb42, type: 2}
   skillRange:
-  - {fileID: 9162241371379645549}
-  - {fileID: 7732136632135426830}
-  - {fileID: 7010273874005297668}
+  - {fileID: 5059027247282070037}
+  - {fileID: 5469216032710143064}
+  - {fileID: 6650493240538880054}
   <TrailRenderer>k__BackingField: {fileID: 2060720765943931176}
 --- !u!114 &7725758992122052757
 MonoBehaviour:
@@ -388,13 +388,14 @@ GameObject:
   - component: {fileID: 7263491031048304044}
   - component: {fileID: 7204064714509125296}
   - component: {fileID: 7758524645174897154}
+  - component: {fileID: 6650493240538880054}
   m_Layer: 0
   m_Name: Skill3
   m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6173027988286296908
 Transform:
   m_ObjectHideFlags: 0
@@ -435,7 +436,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -466,6 +467,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6650493240538880054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7010273874005297668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c74fa67a4abc340b0c101cf9d1686f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7732136632135426830
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,13 +491,14 @@ GameObject:
   - component: {fileID: 6487469481340430467}
   - component: {fileID: 1280478433804946331}
   - component: {fileID: 8616513963530833997}
+  - component: {fileID: 5469216032710143064}
   m_Layer: 0
   m_Name: Skill2
   m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2757942368229896712
 Transform:
   m_ObjectHideFlags: 0
@@ -525,7 +539,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -556,6 +570,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5469216032710143064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7732136632135426830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c74fa67a4abc340b0c101cf9d1686f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8026398958808994705
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,13 +898,14 @@ GameObject:
   - component: {fileID: 2124327235588095051}
   - component: {fileID: 7934230390281088300}
   - component: {fileID: 2362068732394730226}
+  - component: {fileID: 5059027247282070037}
   m_Layer: 0
   m_Name: Skill1
   m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6849207796724636220
 Transform:
   m_ObjectHideFlags: 0
@@ -919,7 +946,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -950,6 +977,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5059027247282070037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162241371379645549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c74fa67a4abc340b0c101cf9d1686f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8389435689674916573
 PrefabInstance:
   m_ObjectHideFlags: 0
