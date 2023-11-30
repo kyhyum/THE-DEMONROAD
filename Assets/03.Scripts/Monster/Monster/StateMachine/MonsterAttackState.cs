@@ -40,23 +40,30 @@ public class MonsterAttackState : MonsterBaseState
             }else if (alreadyAppliedDealing && normalizedTime >= stateMachine.Monster.Data.Dealing_End_TransitionTime)
             {
                 stateMachine.Monster.Weapon.gameObject.SetActive(false);
-                alreadyAppliedDealing = false; 
-                if (IsInChaseRange())
-                {
-                    stateMachine.ChangeState(stateMachine.ChasingState);
-                    return;
-                }
+                alreadyAppliedDealing = false;
             }
 
         }
         else
         {
-            stateMachine.Monster.Weapon.gameObject.SetActive(false);
-            stateMachine.ChangeState(stateMachine.ChasingState);
-            return;
+            if (IsInAttackRange())
+            {
+                stateMachine.ChangeState(stateMachine.AttackState);
+                return;
+            }
+            else if (IsInChaseRange())
+            {
+                stateMachine.ChangeState(stateMachine.ChasingState);
+                return;
+            }
         }
     }
+    private bool IsInAttackRange()
+    {
+        // if (stateMachine.Target.IsDead) { return false; }
 
-   
+        float playerDistanceSqr = (stateMachine.Target.transform.position - stateMachine.Monster.transform.position).sqrMagnitude;
 
+        return playerDistanceSqr <= stateMachine.Monster.Data.AttackRange * stateMachine.Monster.Data.AttackRange;
+    }
 }

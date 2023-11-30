@@ -20,6 +20,7 @@ public class Portal : MonoBehaviour
 
     public void LeaveDungeon()
     {
+        GameManager.Instance.data.currentPlayerPos = new Vector3(-118.17f,0f,-93.98f);
         SceneLoadManager.LoadScene("NewTownScene");
     }
 }

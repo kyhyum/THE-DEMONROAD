@@ -20,12 +20,14 @@ public class SceneLoadManager : MonoBehaviour
 
     public static void LoadScene(string sceneName)
     {
+        UIManager.Instance.ActivePlayerUI(false);
         nextSceneName = sceneName;
         SceneManager.LoadScene("LoadingScene");
     }
 
     public static void LoadScene(int sceneNumber)
     {
+        UIManager.Instance.ActivePlayerUI(false);
         nextSceneNumber = sceneNumber;
         SceneManager.LoadScene("LoadingScene");
     }
