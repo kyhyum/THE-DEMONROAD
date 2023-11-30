@@ -48,7 +48,13 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
     public void SetSlot(IUsable usable)
     {
-        Debug.Log(usable);
+        if (this.usable is AttackSkill)
+        {
+            AttackSkill skill = (AttackSkill)usable;
+            skill.ApplyCoolTime -= SetCooltime;
+        }
+
+
         this.usable = usable;
 
         if (usable == null)
@@ -74,6 +80,8 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         {
             AttackSkill skill = (AttackSkill)usable;
             icon.sprite = skill.icon;
+
+            skill.ApplyCoolTime += SetCooltime;
         }
 
 
@@ -162,7 +170,7 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
             if (stackable.Get() == 0)
                 return;
-            SetCoolTime(5f);
+            SetCooltime(5f);
         }
 
         if (usable is Skill)
@@ -170,13 +178,12 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
             if (GameManager.Instance.player.IsAttack())
                 return;
             Skill skill = (Skill)usable;
-            SetCoolTime(skill.coolTime);
         }
 
         usable.Use();
     }
 
-    private void SetCoolTime(float f)
+    private void SetCooltime(float f)
     {
         coolTime = f;
         fillAmount = f;

@@ -2539,8 +2539,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1995877994}
-        m_TargetAssemblyTypeName: QuestBoard, Assembly-CSharp
+      - m_Target: {fileID: 1553776593}
+        m_TargetAssemblyTypeName: QuestLog, Assembly-CSharp
         m_MethodName: OnQuestObjectClick
         m_Mode: 2
         m_Arguments:
@@ -11675,8 +11675,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1995877994}
-        m_TargetAssemblyTypeName: QuestBoard, Assembly-CSharp
+      - m_Target: {fileID: 1553776593}
+        m_TargetAssemblyTypeName: QuestLog, Assembly-CSharp
         m_MethodName: OnQuestObjectClick
         m_Mode: 2
         m_Arguments:
@@ -44443,8 +44443,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1995877994}
-        m_TargetAssemblyTypeName: QuestBoard, Assembly-CSharp
+      - m_Target: {fileID: 1553776593}
+        m_TargetAssemblyTypeName: QuestLog, Assembly-CSharp
         m_MethodName: OnQuestObjectClick
         m_Mode: 2
         m_Arguments:
@@ -58476,8 +58476,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1995877994}
-        m_TargetAssemblyTypeName: QuestBoard, Assembly-CSharp
+      - m_Target: {fileID: 1553776593}
+        m_TargetAssemblyTypeName: QuestLog, Assembly-CSharp
         m_MethodName: OnQuestObjectClick
         m_Mode: 2
         m_Arguments:
@@ -66669,8 +66669,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1995877994}
-        m_TargetAssemblyTypeName: QuestBoard, Assembly-CSharp
+      - m_Target: {fileID: 1553776593}
+        m_TargetAssemblyTypeName: QuestLog, Assembly-CSharp
         m_MethodName: OnQuestObjectClick
         m_Mode: 2
         m_Arguments:
@@ -69512,6 +69512,15 @@ MonoBehaviour:
   sellButton: {fileID: 824620454}
   increaseButton: {fileID: 22166285}
   decreaseButton: {fileID: 1997962290}
+  itemList:
+  - {fileID: 11400000, guid: 21631c5a4575c5940a9ced3cbc64bd9d, type: 2}
+  - {fileID: 11400000, guid: e674822d86f953c49b9fd6d1cc290ede, type: 2}
+  - {fileID: 11400000, guid: 021f3c39e254b8347a308b81ffc9eb3e, type: 2}
+  - {fileID: 11400000, guid: 2ef863011a6ee544f91e0b91bb01dae7, type: 2}
+  - {fileID: 11400000, guid: 4d5b05aa79c95e946bc6931ceb651672, type: 2}
+  - {fileID: 11400000, guid: a1b371ee9d122e1429730f8419367036, type: 2}
+  - {fileID: 11400000, guid: 8f3a5c08c7762e244a9351e8a12177d7, type: 2}
+  - {fileID: 11400000, guid: dfce7a7fe6321694e9a3db8a2e408693, type: 2}
 --- !u!4 &1360750912
 Transform:
   m_ObjectHideFlags: 0
@@ -78560,13 +78569,14 @@ GameObject:
   - component: {fileID: 1553776591}
   - component: {fileID: 1553776590}
   - component: {fileID: 1553776589}
+  - component: {fileID: 1553776593}
   m_Layer: 5
   m_Name: QuestLog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1553776589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78651,6 +78661,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1553776593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553776588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f079989646c0c9143bd47ee2247cbd67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questLogPanel: {fileID: 1553776588}
+  questLogName:
+  - {fileID: 1714369780}
+  - {fileID: 1007013000}
+  - {fileID: 1599057850}
+  - {fileID: 1330524039}
+  - {fileID: 958047726}
+  questLogSelected: {fileID: 587364886}
+  questLogDescription: {fileID: 560013017}
+  questLogRewards: {fileID: 112967624}
 --- !u!1 &1565619129
 GameObject:
   m_ObjectHideFlags: 0
@@ -93948,7 +93980,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceptPopup: {fileID: 1085281778}
   cancelPopup: {fileID: 1495364443}
-  questLogPanel: {fileID: 1553776588}
   questacceptCheckPop: {fileID: 1247144617}
   questButton:
   - {fileID: 75335241321947084}
@@ -93966,15 +93997,6 @@ MonoBehaviour:
   questConditionText: {fileID: 1185051826}
   questRewardText: {fileID: 2097166736}
   acceptButton: {fileID: 1120041719}
-  questLogName:
-  - {fileID: 1714369780}
-  - {fileID: 1007013000}
-  - {fileID: 1599057850}
-  - {fileID: 1330524039}
-  - {fileID: 958047726}
-  questLogSelected: {fileID: 587364886}
-  questLogDescription: {fileID: 560013017}
-  questLogRewards: {fileID: 112967624}
   questProgmonsterName: {fileID: 715683515}
   questProgitemName: {fileID: 201066515}
   questProgconverseName: {fileID: 681685322}
@@ -93987,6 +94009,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 269e052d7f4539a4b920b4806a9bf570, type: 2}
   - {fileID: 11400000, guid: f7c5fff364b97c143963901176d62c58, type: 2}
   golditem: {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
+  questLog: {fileID: 1553776593}
 --- !u!1001 &1996853397
 PrefabInstance:
   m_ObjectHideFlags: 0

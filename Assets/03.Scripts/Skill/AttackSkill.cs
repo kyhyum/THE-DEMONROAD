@@ -8,6 +8,9 @@ public class AttackSkill : Skill, IUsable
     public int damage;
     public int increasedDamagePerLevel;
 
+    public delegate void SkillUsedDelegate(float cooltime);
+    public event SkillUsedDelegate ApplyCoolTime;
+
     public AttackSkill(SkillSO skillSO) : base(skillSO)
     {
         if (skillSO is AttackSkillSO)
@@ -26,6 +29,7 @@ public class AttackSkill : Skill, IUsable
         if (GameManager.Instance.condition.ConsumeMp(manaCost))
         {
             GameManager.Instance.player.IsAttackSkill[index] = true;
+            ApplyCoolTime?.Invoke(cooltime);
         }
         else
         {

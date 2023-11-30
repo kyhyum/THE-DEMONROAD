@@ -8,7 +8,7 @@ public class Skill
     public Sprite icon;
     public int level;
     public int manaCost;
-    public float coolTime;
+    public float cooltime;
 
     public Skill(SkillSO skillSO)
     {
@@ -16,7 +16,7 @@ public class Skill
         description = skillSO.description;
         icon = skillSO.icon;
         manaCost = skillSO.manaCost;
-        coolTime = skillSO.coolTime;
+        cooltime = skillSO.cooltime;
     }
 
     public void LevelUp()

@@ -3,34 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[System.Serializable]
-public class PlayerData
-{
-    public string name;
-    public int level;
-    public int exp;
-    public Job job;
-    public List<Stat> stats;
-    public int skillPoint;
-    public int[] skilllevels;
-    public string baseObjectPath;
-    public int playerIndex;
 
-    public SceneType scene;
-    public Vector3 currentPlayerPos;
-    public Quaternion currentPlayerRot;
-
-    public bool isDead;
-
-    public List<QuestSO> acceptQuest;
-}
-
-[System.Serializable]
-public class Stat
-{
-    public StatType type;
-    public int statValue;
-}
 public class PlayerCondition : MonoBehaviour, ITakeDamage
 {
     public PlayerData playerData;

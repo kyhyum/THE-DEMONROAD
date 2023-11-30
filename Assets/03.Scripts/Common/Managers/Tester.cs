@@ -9,14 +9,8 @@ public class Tester : MonoBehaviour
     GameManager gameManager;
     PlayerData tester;
     int scene;
-#if UNITY_EDITOR
-    // 유니티 에디터에서 실행 중인지 확인합니다.
     bool isRunningInUnityEditor = true;
-#else
-    // 빌드된 게임에서 실행 중인지 확인합니다.
-    bool isRunningInUnityEditor = false;
-    Debug.Log("빌드된 게임에서 실행 중입니다.");
-#endif
+
     private void Awake()
     {
         if (isRunningInUnityEditor)

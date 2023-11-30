@@ -117,14 +117,16 @@ public class Player : MonoBehaviour
         {
             //Debug.Log("마우스 포인터가 UI 위에 있다.");
 
-            Input.InputActions.Disable();
+            InputManager.inputActions.Player.Move.Disable();
+            InputManager.inputActions.Player.Attack.Disable();
         }
         //
         else
         {
             //Debug.Log("마우스 포인터가 UI 위에 없다.");
 
-            Input.InputActions.Enable();
+            InputManager.inputActions.Player.Move.Enable();
+            InputManager.inputActions.Player.Attack.Enable();
         }
     }
 
@@ -160,5 +162,10 @@ public class Player : MonoBehaviour
         }
 
         return flag;
+    }
+
+    public void AnimationEvent()
+    {
+        Debug.Log("Player 클래스의 AnimationEvent 함수 호출했다.");
     }
 }
