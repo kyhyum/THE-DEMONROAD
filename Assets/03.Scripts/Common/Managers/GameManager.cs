@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -9,16 +10,22 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public UIManager uiManager;
+
     public Player player;
     public PlayerData data;
     public PlayerCondition condition;
+
     public int goblinkillCount = 0; // 고블린 잡은 횟수
     public GameObject Myplayer;
     public EventSystem eventSystem;
 
+    public Camera playerCamera;
+    public CinemachineVirtualCamera virtualCamera;
+
     SlotItem slot;
 
     GameObject obj;
+
     private void Awake()
     {
         if (Instance == null)
@@ -39,21 +46,9 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (data.name == "Tester")
-        {
-            obj = Resources.Load<GameObject>(data.baseObjectPath);
-            Myplayer = Instantiate<GameObject>(obj, data.currentPlayerPos, data.currentPlayerRot);
-            condition = Myplayer.AddComponent<PlayerCondition>();
-            condition.playerData = data;
-            condition.Initialize();
-            uiManager.gameObject.SetActive(true);
-            uiManager.GetInventory().Set(LoadItemArrayFromJson(StringManager.TestItemJsonPath, player.name));
-            uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.TestItemJsonPath, StringManager.TestStorageName));
-            return;
-        }
-
         if (data.baseObjectPath != null && scene.buildIndex != (int)SceneType.Start && scene.buildIndex != (int)SceneType.Loading)
         {
+            CameraSetActive(true);
             obj = Resources.Load<GameObject>(data.baseObjectPath);
             Myplayer = Instantiate<GameObject>(obj, data.currentPlayerPos, data.currentPlayerRot);
             player = Myplayer.GetComponent<Player>();
@@ -66,18 +61,18 @@ public class GameManager : MonoBehaviour
             uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
             uiManager.GetSkill().Set(player.skills);
         }
+        else
+        {
+            CameraSetActive(false);
+        }
     }
-
-    public void FinishPopUp()
+    private void CameraSetActive(bool active)
     {
-        uiManager.ActivePopUpUI("게임 종료", "정말 게임을 종료 하시겠습니까?", Finish);
+        playerCamera.gameObject.SetActive(active);
+        virtualCamera.gameObject.SetActive(active);
     }
 
-    void Finish()
-    {
-        Application.Quit();
-    }
-
+    #region DataManagement
     public void SavePlayerDataToJson(string jsonPath, string characterName, PlayerData data)
     {
 
@@ -128,7 +123,6 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
-
     public bool DeleteCharacter(string jsonPath, string characterName)
     {
         string path = Path.Combine(jsonPath, $"{characterName}.json");
@@ -139,7 +133,21 @@ public class GameManager : MonoBehaviour
         }
         return result;
     }
+    public void Save()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)SceneType.Loading)
+        {
+            data.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
+            data.currentPlayerPos = Myplayer.transform.position;
+            data.currentPlayerRot = Myplayer.transform.rotation;
+            SaveItemArrayToJson(StringManager.ItemJsonPath, data.name, uiManager.GetInventory().Get());
+            SaveItemArrayToJson(StringManager.ItemJsonPath, StringManager.StorageName, uiManager.GetStorage().Get());
+        }
+        SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
+    }
+    #endregion DataManagement
 
+    #region GamePlay
     public void GameStart()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -157,34 +165,20 @@ public class GameManager : MonoBehaviour
             Myplayer = null;
         }
     }
-
-    public void Save()
+    public void FinishPopUp()
     {
-        if (data.name == "Tester")
-        {
-            data.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
-            data.currentPlayerPos = Myplayer.transform.position;
-            data.currentPlayerRot = Myplayer.transform.rotation;
-            SaveItemArrayToJson(StringManager.TestItemJsonPath, data.name, uiManager.GetInventory().Get());
-            SaveItemArrayToJson(StringManager.TestItemJsonPath, StringManager.TestStorageName, uiManager.GetStorage().Get());
-            SavePlayerDataToJson(StringManager.TestJsonPath, data.name, data);
-            return;
-        }
-
-        if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)SceneType.Loading)
-        {
-            data.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
-            data.currentPlayerPos = Myplayer.transform.position;
-            data.currentPlayerRot = Myplayer.transform.rotation;
-            SaveItemArrayToJson(StringManager.ItemJsonPath, player.name, uiManager.GetInventory().Get());
-            SaveItemArrayToJson(StringManager.ItemJsonPath, StringManager.StorageName, uiManager.GetStorage().Get());
-        }
-        SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
+        uiManager.ActivePopUpUI("게임 종료", "정말 게임을 종료 하시겠습니까?", Finish);
     }
+
+    void Finish()
+    {
+        Application.Quit();
+    }
+
     private void OnApplicationQuit()
     {
         StopAllCoroutines();
         Save();
     }
-
+    #endregion GamePlay
 }

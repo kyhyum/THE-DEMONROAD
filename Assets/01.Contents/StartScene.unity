@@ -31826,36 +31826,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 58468017219768028, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 774749112809845427, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1131402574899710677, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: playerUIObject
-      value: 
-      objectReference: {fileID: 997064872083453179}
-    - target: {fileID: 1181809638457511114, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: icon
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466041993175949320, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1582499882760745777, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: m_Texture
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1736569979814519159, guid: 4936f5e6443ad0b43951c3c611f9005f,
         type: 3}
       propertyPath: m_RootOrder
@@ -31911,66 +31881,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1899989747299611500, guid: 4936f5e6443ad0b43951c3c611f9005f,
+    - target: {fileID: 2683909871733751160, guid: 4936f5e6443ad0b43951c3c611f9005f,
         type: 3}
-      propertyPath: m_Color.a
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2916646002336221873, guid: 4936f5e6443ad0b43951c3c611f9005f,
+    - target: {fileID: 4155672554255549546, guid: 4936f5e6443ad0b43951c3c611f9005f,
         type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3817004573174333103, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: m_RootOrder
+      propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4623413459788018428, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4839323509175744345, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5465427506100531734, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: icon
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7710585743388986312, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: icon
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8736770122580632273, guid: 4936f5e6443ad0b43951c3c611f9005f,
         type: 3}
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8810935002185344109, guid: 4936f5e6443ad0b43951c3c611f9005f,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5894192386290664288, guid: 4936f5e6443ad0b43951c3c611f9005f, type: 3}
-    - {fileID: 4471592499451628101, guid: 4936f5e6443ad0b43951c3c611f9005f, type: 3}
-    - {fileID: 2326792908716851030, guid: 4936f5e6443ad0b43951c3c611f9005f, type: 3}
-    - {fileID: 58468017219768028, guid: 4936f5e6443ad0b43951c3c611f9005f, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4936f5e6443ad0b43951c3c611f9005f, type: 3}
---- !u!1 &997064872083453179 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7666749680497955468, guid: 4936f5e6443ad0b43951c3c611f9005f,
-    type: 3}
-  m_PrefabInstance: {fileID: 997064872083453178}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1016876922204693156
 GameObject:
   m_ObjectHideFlags: 0
