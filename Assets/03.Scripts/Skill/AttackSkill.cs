@@ -10,7 +10,6 @@ public class AttackSkill : Skill, IUsable
     public int increasedDamagePerLevel;
     public delegate void SkillUsedDelegate(float cooltime);
     public event SkillUsedDelegate ApplyCoolTime;
-    private AttackRange attackRange;
 
     public AttackSkill(SkillSO skillSO) : base(skillSO)
     {
@@ -23,16 +22,6 @@ public class AttackSkill : Skill, IUsable
         }
     }
 
-    public void SetRange(Collider collider)
-    {
-        attackRange = collider.AddComponent<AttackRange>();
-    }
-
-    public AttackRange GetRange()
-    {
-        return attackRange;
-    }
-
 
     // TODO: 이펙트, 범위, 대미지
     public void Use()
@@ -41,7 +30,7 @@ public class AttackSkill : Skill, IUsable
         if (GameManager.Instance.condition.ConsumeMp(manaCost))
         {
             float totalDamage = damage + level * increasedDamagePerLevel;
-            attackRange.Set(totalDamage);
+            GameManager.Instance.player.skillRange[index].Set(totalDamage);
             GameManager.Instance.player.IsAttackSkill[index] = true;
             ApplyCoolTime?.Invoke(cooltime);
         }

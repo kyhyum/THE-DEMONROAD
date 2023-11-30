@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
             uiManager.ActivePlayerUI(true);
             uiManager.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, data.name));
             uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
-            uiManager.GetSkill().Set(player.skills);
         }
     }
 

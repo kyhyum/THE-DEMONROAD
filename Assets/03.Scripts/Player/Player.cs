@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     [field: Header("Skill")]
     public SkillSO[] skillSOs;
     public Skill[] skills { get; private set; }
-    public Collider[] skillRange;
+    public AttackRange[] skillRange;
 
 
     [field: Header(" ")]
@@ -59,13 +59,6 @@ public class Player : MonoBehaviour
         IsAttackSkill = new bool[skillSOs.Length];
         skills = new Skill[skillSOs.Length];
 
-        for (int i = 0; i < skills.Length; i++)
-        {
-            skills[i] = new AttackSkill(skillSOs[i]);
-            skills[i].level = GameManager.Instance.data.skilllevels[i];
-            skills[i].index = i;
-            ((AttackSkill)skills[i]).SetRange(skillRange[i]);
-        }
     }
 
     private void Start()
@@ -100,6 +93,16 @@ public class Player : MonoBehaviour
         {
             ComponentBase = VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
         }
+
+        for (int i = 0; i < skills.Length; i++)
+        {
+            skills[i] = new AttackSkill(skillSOs[i]);
+            skills[i].level = GameManager.Instance.data.skilllevels[i];
+            skills[i].index = i;
+        }
+
+        UIManager.Instance.GetSkill().Init();
+        UIManager.Instance.GetSkill().Set(skills);
     }
 
     private void Update()

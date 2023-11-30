@@ -27,6 +27,11 @@ public class SkillSlot : MonoBehaviour
 
         slotID = skill.index;
 
+        if (GameManager.Instance.data.skillPoint == 0)
+        {
+            addBtn.interactable = false;
+        }
+
         if (skill.level == 0)
         {
             subBtn.interactable = false;
@@ -48,6 +53,11 @@ public class SkillSlot : MonoBehaviour
         subBtn.interactable = true;
 
         skill.LevelUp();
+
+        if (GameManager.Instance.data.skillPoint == 0)
+        {
+            addBtn.interactable = false;
+        }
 
         if (skill.level == 5)
         {
