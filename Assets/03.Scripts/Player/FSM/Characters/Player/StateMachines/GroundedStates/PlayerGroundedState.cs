@@ -30,17 +30,17 @@ public class PlayerGroundedState : PlayerBaseState
             OnAttack();
             return;
         }
-        else if(stateMachine.Player.IsAttackSkill1) 
+        else if (stateMachine.Player.IsAttackSkill[0]) 
         { 
             OnAttackSkill1(); 
             return;
         }
-        else if (stateMachine.Player.IsAttackSkill2)
+        else if (stateMachine.Player.IsAttackSkill[1])
         {
             OnAttackSkill2();
             return;
         }
-        else if (stateMachine.Player.IsAttackSkill3)
+        else if (stateMachine.Player.IsAttackSkill[2])
         {
             OnAttackSkill3();
             return;
