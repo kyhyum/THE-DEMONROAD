@@ -42,6 +42,7 @@ public class PlayerAttackSkill1State : PlayerBaseState
         }
         else
         {
+            stateMachine.Player.IsAttackSkill[0] = false;
             stateMachine.ChangeState(stateMachine.IdleState);
         }
     }

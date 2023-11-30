@@ -23,10 +23,14 @@ public class AttackSkill : Skill, IUsable
     // TODO: 이펙트, 범위, 대미지
     public void Use()
     {
-        Player player = GameManager.Instance.player;
-        if (player.IsAttack())
-            return;
+        if (GameManager.Instance.condition.ConsumeMp(manaCost))
+        {
+            GameManager.Instance.player.IsAttackSkill[index] = true;
+        }
+        else
+        {
+            // TODO: mp가 부족할 때 팝업창 띄우기
+        }
 
-        player.IsAttackSkill[index] = true;
     }
 }

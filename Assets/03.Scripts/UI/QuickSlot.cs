@@ -12,12 +12,14 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
     private Canvas canvas;
     private RectTransform rect;
     private IUsable usable;
-    [field: SerializeField] private RawImage icon;
+    [field: SerializeField] private Image icon;
     [field: SerializeField] private TMP_Text keyBinding;
     [field: SerializeField] private TMP_Text quantity;
-    [field: SerializeField] private Image cooltime;
+    [field: SerializeField] private Image cooltimeImg;
     [field: SerializeField] private InputActionReference inputActionReference;
     public int slotID;
+    private float coolTime;
+    private float fillAmount;
 
     private void Awake()
     {
@@ -32,8 +34,21 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         inputActionReference.action.started += Use;
     }
 
+    private void FixedUpdate()
+    {
+        if (fillAmount < 0)
+            fillAmount = 0;
+
+        if (fillAmount > 0)
+        {
+            fillAmount -= Time.deltaTime;
+            cooltimeImg.fillAmount = fillAmount / coolTime;
+        }
+    }
+
     public void SetSlot(IUsable usable)
     {
+        Debug.Log(usable);
         this.usable = usable;
 
         if (usable == null)
@@ -52,7 +67,13 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         {
             UseItem useItem = (UseItem)usable;
             useItem.OnCountChanged += SetQuantity;
-            icon.texture = useItem.texture;
+            icon.sprite = Sprite.Create(useItem.texture, new Rect(0, 0, useItem.texture.width, useItem.texture.height), Vector2.one * 0.5f);
+        }
+
+        if (usable is AttackSkill)
+        {
+            AttackSkill skill = (AttackSkill)usable;
+            icon.sprite = skill.icon;
         }
 
 
@@ -132,8 +153,8 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         if (usable == null)
             return;
 
-        // if (cooltime.fillAmount != 0)
-        //     return;
+        if (fillAmount != 0)
+            return;
 
         if (usable is IStackable)
         {
@@ -141,17 +162,23 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
             if (stackable.Get() == 0)
                 return;
-
-            usable.Use();
+            SetCoolTime(5f);
         }
-        else
+
+        if (usable is Skill)
         {
-
+            if (GameManager.Instance.player.IsAttack())
+                return;
+            Skill skill = (Skill)usable;
+            SetCoolTime(skill.coolTime);
         }
+
+        usable.Use();
     }
 
-    private void SetCoolTime(float value)
+    private void SetCoolTime(float f)
     {
-        cooltime.fillAmount = value;
+        coolTime = f;
+        fillAmount = f;
     }
 }

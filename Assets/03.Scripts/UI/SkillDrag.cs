@@ -12,7 +12,6 @@ public class SkillDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private Canvas canvas;
     private RectTransform rect;
     private Skill skill;
-    private bool isClone;
 
     private void Awake()
     {
@@ -29,7 +28,7 @@ public class SkillDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         clone = Instantiate(gameObject, canvas.GetComponent<Transform>());
         rect = clone.GetComponent<RectTransform>();
         SkillDrag sd = clone.GetComponent<SkillDrag>();
-        // sd.SetSkill(GetComponentInParent<SkillSlot>().GetSkill());
+        sd.SetSkill(GetComponentInParent<SkillSlot>().GetSkill());
 
         rect.sizeDelta = new Vector2(100, 100);
 
@@ -68,9 +67,10 @@ public class SkillDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             if (result.gameObject.TryGetComponent<QuickSlot>(out QuickSlot quickSlot))
             {
-                Debug.Log("OnDrop QuickSlot");
+                Debug.Log(skill);
                 if (skill is IUsable)
                 {
+                    Debug.Log("Skill is IUsable");
                     quickSlot.SetSlot((IUsable)skill);
                 }
             }

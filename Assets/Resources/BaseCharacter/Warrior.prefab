@@ -198,7 +198,7 @@ MonoBehaviour:
   <VirtualCamera>k__BackingField: {fileID: 0}
   <ComponentBase>k__BackingField: {fileID: 0}
   cameraLookPoint: {fileID: 8219408792071906567}
-  skills:
+  skillSOs:
   - {fileID: 11400000, guid: b176c1d80d161714e9fdd98af362c48a, type: 2}
   - {fileID: 11400000, guid: b2a119bf1b2540d4896a52bb00776d05, type: 2}
   - {fileID: 11400000, guid: 144504c0b14499941b72d9d9730ffb42, type: 2}

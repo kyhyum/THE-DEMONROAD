@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Dungeon
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: c6e99a124ebfb6846a39c6ca335d7df1, type: 3}
-  color: {r: 0.04538981, g: 0.08653227, b: 0.18867922, a: 1}
   dungeonName: "\uC624\uD06C\uBC84\uC11C\uCEE4 \uB358\uC804"
   explan: "\uACE0\uBE14\uB9B0\uB4E4\uACFC \uC624\uD06C\uAC00 \uB098\uC624\uB294 \uB358\uC804\uC785\uB2C8\uB2E4."
   appropriateLevel: "\uC801\uC815 \uB808\uBCA8 : 1 ~ 5"
-  dungeon: 3
+  dungeon: 4

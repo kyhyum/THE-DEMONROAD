@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
 
     [field: Header("Skill")]
     public SkillSO[] skillSOs;
-    private Skill[] skills;
+    public Skill[] skills { get; private set; }
 
 
     [field: Header(" ")]
@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
         {
             skills[i] = new AttackSkill(skillSOs[i]);
             skills[i].level = GameManager.Instance.data.skilllevels[i];
+            skills[i].index = i;
         }
     }
 
@@ -97,7 +98,6 @@ public class Player : MonoBehaviour
         {
             ComponentBase = VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
         }
-
     }
 
     private void Update()
