@@ -31840,7 +31840,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerUIObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 997064872083453179}
     - target: {fileID: 1181809638457511114, guid: 4936f5e6443ad0b43951c3c611f9005f,
         type: 3}
       propertyPath: icon
@@ -31965,6 +31965,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4936f5e6443ad0b43951c3c611f9005f, type: 3}
+--- !u!1 &997064872083453179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7666749680497955468, guid: 4936f5e6443ad0b43951c3c611f9005f,
+    type: 3}
+  m_PrefabInstance: {fileID: 997064872083453178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1016876922204693156
 GameObject:
   m_ObjectHideFlags: 0
