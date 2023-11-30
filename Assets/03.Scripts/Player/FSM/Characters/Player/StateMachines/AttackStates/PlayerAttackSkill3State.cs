@@ -33,7 +33,7 @@ public class PlayerAttackSkill3State : PlayerBaseState
         float normalizedTime = GetNormalizedTime(stateMachine.Player.Animator, "AttackSkill3");
         if (normalizedTime < 0.8f)
         {
-            if (stateMachine.Player.IsAttackSkill3)
+            if (stateMachine.Player.IsAttackSkill[2])
             {
 
             }

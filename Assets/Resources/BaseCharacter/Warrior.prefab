@@ -144,7 +144,6 @@ GameObject:
   - component: {fileID: 393066641193517922}
   - component: {fileID: -432404944769503272}
   - component: {fileID: 3964102378773806288}
-  - component: {fileID: 1739064005844166843}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Player
@@ -199,7 +198,10 @@ MonoBehaviour:
   <VirtualCamera>k__BackingField: {fileID: 0}
   <ComponentBase>k__BackingField: {fileID: 0}
   cameraLookPoint: {fileID: 8219408792071906567}
-  <Strike>k__BackingField: {fileID: 4215151398305761063}
+  skills:
+  - {fileID: 11400000, guid: b176c1d80d161714e9fdd98af362c48a, type: 2}
+  - {fileID: 11400000, guid: b2a119bf1b2540d4896a52bb00776d05, type: 2}
+  - {fileID: 11400000, guid: 144504c0b14499941b72d9d9730ffb42, type: 2}
   <TrailRenderer>k__BackingField: {fileID: 2060720765943931176}
 --- !u!114 &7725758992122052757
 MonoBehaviour:
@@ -285,22 +287,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1739064005844166843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5181127313120891243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e25912602c3acb4fb9224f45b8d08e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  strikeSkillSO: {fileID: 11400000, guid: bb9d81f73485a484d8d137f2f8921a51, type: 2}
-  shieldStrikeSO: {fileID: 11400000, guid: de2e5bc02f41d2146aaaeab49d682206, type: 2}
-  whirlingCleaveSO: {fileID: 11400000, guid: 4d28caaae11e7f3498c3141f400aa062, type: 2}
-  totalDamage: 0
 --- !u!1 &5341204779959012001
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +777,6 @@ GameObject:
   - component: {fileID: 2124327235588095051}
   - component: {fileID: 7934230390281088300}
   - component: {fileID: 2362068732394730226}
-  - component: {fileID: 4215151398305761063}
   m_Layer: 0
   m_Name: Range1
   m_TagString: PlayerAttack
@@ -870,27 +855,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4215151398305761063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9162241371379645549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb2fdbc647e6b564b8b9ad6fe98a30c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: 
-  level: 0
-  damage: 0
-  increasedDamagePerLevel: 0
-  stunTime: 0
-  increasedStunTimePerLevel: 0
-  manaCost: 0
-  coolTime: 0
-  player: {fileID: 253929875917010689}
 --- !u!1001 &8389435689674916573
 PrefabInstance:
   m_ObjectHideFlags: 0
