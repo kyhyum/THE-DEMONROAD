@@ -32,7 +32,7 @@ public class QuestProgress : MonoBehaviour
 
             }
         }
-        else if (selectedQuest.questType == Define.QuestType.ItemQuest) //아이템퀘스트 = TODO:드롭되는 아이템 갯수 카운트 해서 '0'에 반영
+        else if (selectedQuest.questType == Define.QuestType.ItemQuest) 
         {
             questProgitemName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
         }
