@@ -66,12 +66,8 @@ public class QuestProgress : MonoBehaviour
         }
         else if (selectedQuest.questType == Define.QuestType.MainQuest)  
         {
-            StringBuilder questProgmainName = new StringBuilder();
-            questProgmainName.Append(selectedQuest.questName)
-                .Append("\n - 0 /")
-                .Append(selectedQuest.questComplete);
 
-            //questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
+            questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
             UpdateMainQuestProgress(selectedQuest);
 
 

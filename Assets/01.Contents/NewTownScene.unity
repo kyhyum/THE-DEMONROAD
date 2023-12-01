@@ -12443,7 +12443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &388884066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14190,6 +14190,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DungeonChoiceCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3850792569165774027, guid: 40ba875b7444d924299aa66da92aed06,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5016137046212486453, guid: 40ba875b7444d924299aa66da92aed06,
         type: 3}
       propertyPath: m_Pivot.x
@@ -14248,7 +14253,7 @@ PrefabInstance:
     - target: {fileID: 5016137046212486453, guid: 40ba875b7444d924299aa66da92aed06,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.000020027494
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5016137046212486453, guid: 40ba875b7444d924299aa66da92aed06,
         type: 3}
@@ -14258,17 +14263,17 @@ PrefabInstance:
     - target: {fileID: 5016137046212486453, guid: 40ba875b7444d924299aa66da92aed06,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5016137046212486453, guid: 40ba875b7444d924299aa66da92aed06,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000029802319
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5016137046212486453, guid: 40ba875b7444d924299aa66da92aed06,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5016137046212486453, guid: 40ba875b7444d924299aa66da92aed06,
         type: 3}
