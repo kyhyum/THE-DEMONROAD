@@ -22,7 +22,7 @@ public class QuestBoard : MonoBehaviour
     [SerializeField] List<QuestSO> quests;
     public static UIManager Instance;
 
-    //메인퀘스트 관련
+    
     private ChoiceDungeon choiceDungeon;
     public QuestController qcontroller;
 
