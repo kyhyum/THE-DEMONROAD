@@ -47,6 +47,6 @@ public class TutorialManager : MonoBehaviour
     private void EndTutorial()
     {
         GameManager.Instance.data.currentPlayerPos = Vector3.zero;
-        SceneLoadManager.LoadScene((int)SceneType.Town);
+        SceneLoadManager.LoadScene((int)Define.SceneType.Town);
     }
 }

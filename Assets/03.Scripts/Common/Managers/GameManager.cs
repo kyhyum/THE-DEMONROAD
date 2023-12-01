@@ -6,10 +6,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager Instance;
-
     public Player player;
     public PlayerData data;
     public PlayerCondition condition;
@@ -27,15 +25,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-
         slot = new SlotItem();
     }
     private void Start()
@@ -45,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (data.baseObjectPath != null && scene.buildIndex != (int)SceneType.Start && scene.buildIndex != (int)SceneType.Loading)
+        if (data.baseObjectPath != null && scene.buildIndex != (int)Define.SceneType.Start && scene.buildIndex != (int)Define.SceneType.Loading)
         {
             CameraSetActive(true);
             obj = Resources.Load<GameObject>(data.baseObjectPath);
@@ -142,9 +131,9 @@ public class GameManager : MonoBehaviour
     }
     public void Save()
     {
-        if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)SceneType.Loading)
+        if (SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Loading)
         {
-            data.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
+            data.scene = (Define.SceneType)SceneManager.GetActiveScene().buildIndex;
             PlayerPosSave();
             data.currentPlayerRot = Myplayer.transform.rotation;
             SaveItemArrayToJson(StringManager.ItemJsonPath, data.name, UIManager.Instance.GetInventory().Get());
@@ -163,9 +152,9 @@ public class GameManager : MonoBehaviour
 
     public void HomeButton()
     {
-        if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start)
+        if (SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Start)
         {
-            SceneLoadManager.LoadScene((int)SceneType.Start);
+            SceneLoadManager.LoadScene((int)Define.SceneType.Start);
             Save();
             player = null;
             data = null;

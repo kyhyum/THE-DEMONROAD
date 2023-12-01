@@ -7,7 +7,7 @@ using System;
 public class PlayerCondition : MonoBehaviour, ITakeDamage
 {
     public PlayerData playerData;
-    StatType mainStat;
+    Define.StatType mainStat;
 
     public float atk;
     public float def;
@@ -26,7 +26,7 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     const int mainStatRatio = 3;
     const int statRatio = 1;
 
-    Dictionary<StatType, int> myStats = new Dictionary<StatType, int>();
+    Dictionary<Define.StatType, int> myStats = new Dictionary<Define.StatType, int>();
 
     public event Action OnDie;
 
@@ -43,14 +43,14 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     {
         switch (playerData.job)
         {
-            case Job.WARRIOR:
-                mainStat = StatType.STR;
+            case Define.Job.WARRIOR:
+                mainStat = Define.StatType.STR;
                 break;
-            case Job.ARCHOR:
-                mainStat = StatType.DEX;
+            case Define.Job.ARCHOR:
+                mainStat = Define.StatType.DEX;
                 break;
-            case Job.WIZZARD:
-                mainStat = StatType.INT;
+            case Define.Job.WIZZARD:
+                mainStat = Define.StatType.INT;
                 break;
         }
         for (int i = 0; i < playerData.stats.Count; i++)
@@ -92,25 +92,25 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
             }
         }
     }
-    void RaitoSet(Job job)
+    void RaitoSet(Define.Job job)
     {
         switch (job)
         {
-            case Job.WARRIOR:
+            case Define.Job.WARRIOR:
                 atkRatio = 4f;
                 defRatio = 0.7f;
                 speedRatio = 1.8f;
                 hpRatio = 12f;
                 mpRatio = 8f;
                 break;
-            case Job.ARCHOR:
+            case Define.Job.ARCHOR:
                 atkRatio = 3.5f;
                 defRatio = 0.4f;
                 speedRatio = 2.5f;
                 hpRatio = 8f;
                 mpRatio = 9f;
                 break;
-            case Job.WIZZARD:
+            case Define.Job.WIZZARD:
                 atkRatio = 4f;
                 defRatio = 0.3f;
                 speedRatio = 2f;
@@ -122,11 +122,11 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     void StatSynchronization()
     {
         atk = myStats[mainStat] * atkRatio;
-        def = myStats[StatType.DEX] * defRatio;
-        speed = myStats[StatType.DEX] * speedRatio;
-        maxHp = myStats[StatType.CON] + myStats[StatType.STR] * hpRatio;
+        def = myStats[Define.StatType.DEX] * defRatio;
+        speed = myStats[Define.StatType.DEX] * speedRatio;
+        maxHp = myStats[Define.StatType.CON] + myStats[Define.StatType.STR] * hpRatio;
         currentHp = maxHp;
-        maxMp = myStats[StatType.INT] * mpRatio;
+        maxMp = myStats[Define.StatType.INT] * mpRatio;
         currentMp = maxMp;
         levelExp = playerData.level * 100;
         for (int i = 0; i < playerData.stats.Count; i++)
@@ -185,16 +185,16 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
                 def += value;
                 break;
             case Define.BuffType.Str:
-                myStats[StatType.STR] += value;
+                myStats[Define.StatType.STR] += value;
                 break;
             case Define.BuffType.Dex:
-                myStats[StatType.DEX] += value;
+                myStats[Define.StatType.DEX] += value;
                 break;
             case Define.BuffType.Int:
-                myStats[StatType.INT] += value;
+                myStats[Define.StatType.INT] += value;
                 break;
             case Define.BuffType.Con:
-                myStats[StatType.CON] += value;
+                myStats[Define.StatType.CON] += value;
                 break;
         }
 
@@ -209,16 +209,16 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
                 def -= value;
                 break;
             case Define.BuffType.Str:
-                myStats[StatType.STR] -= value;
+                myStats[Define.StatType.STR] -= value;
                 break;
             case Define.BuffType.Dex:
-                myStats[StatType.DEX] -= value;
+                myStats[Define.StatType.DEX] -= value;
                 break;
             case Define.BuffType.Int:
-                myStats[StatType.INT] -= value;
+                myStats[Define.StatType.INT] -= value;
                 break;
             case Define.BuffType.Con:
-                myStats[StatType.CON] -= value;
+                myStats[Define.StatType.CON] -= value;
                 break;
         }
     }

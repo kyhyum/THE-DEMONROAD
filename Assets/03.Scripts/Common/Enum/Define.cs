@@ -53,4 +53,28 @@ public class Define
     {
         Attack, Buff
     }
+
+    public enum Job
+    {
+        WARRIOR,
+        ARCHOR,
+        WIZZARD
+    }
+
+    public enum SceneType
+    {
+        Start,
+        Loading,
+        Tutorial,
+        Town,
+        Dungeon
+    }
+
+    public enum StatType
+    {
+        STR,
+        DEX,
+        INT,
+        CON
+    }
 }

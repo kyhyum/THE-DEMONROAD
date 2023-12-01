@@ -6,7 +6,7 @@ using TMPro;
 
 public class DungeonExplanUI : MonoBehaviour
 {
-    SceneType dungeon;
+    Define.SceneType dungeon;
     [SerializeField] Image image;
     [SerializeField] TMP_Text dungeonName;
     [SerializeField] TMP_Text dungeonExplan;

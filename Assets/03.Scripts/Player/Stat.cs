@@ -5,6 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Stat
 {
-    public StatType type;
+    public Define.StatType type;
     public int statValue;
 }
