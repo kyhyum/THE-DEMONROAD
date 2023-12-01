@@ -23,6 +23,7 @@ public class UIManager : Singleton<UIManager>
     private Inventory inventory;
     private Storage storage;
     private SkillUI skill;
+    public QuickSlot[] quickSlots;
 
     private QuestLog questLog;
     private QuestProgress questProgress;
@@ -37,6 +38,7 @@ public class UIManager : Singleton<UIManager>
 
     private void Awake()
     {
+        quickSlots = new QuickSlot[5];
         EnableUI = new List<GameObject>();
         audioSource = GetComponent<AudioSource>();
 
@@ -81,7 +83,7 @@ public class UIManager : Singleton<UIManager>
 
     public void CreateQuestLog()
     {
-        if(questLogObject != null)
+        if (questLogObject != null)
         {
             return;
         }
@@ -112,6 +114,25 @@ public class UIManager : Singleton<UIManager>
         questProgressObject = null;
         questLog = null;
         questProgress = null;
+    }
+
+    public void SetQuickSlot(QuickSlotData data)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            quickSlots[i].SetSlot(data.usables[i]);
+        }
+    }
+
+    public QuickSlotData GetQuickSlot()
+    {
+        QuickSlotData data = new QuickSlotData();
+        for (int i = 0; i < 5; i++)
+        {
+            data.usables[i] = quickSlots[i].Get();
+        }
+
+        return data;
     }
 
     public void OnUIInputEnable()

@@ -24,6 +24,7 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
+        UIManager.Instance.quickSlots[slotID] = this;
         SetSlot(null);
     }
 
@@ -93,6 +94,11 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         Color color = icon.color;
         color.a = f;
         icon.color = color;
+    }
+
+    public IUsable Get()
+    {
+        return usable;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
