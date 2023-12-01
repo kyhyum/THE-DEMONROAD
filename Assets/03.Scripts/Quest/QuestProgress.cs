@@ -22,7 +22,7 @@ public class QuestProgress : MonoBehaviour
 
     public void ShowQuestProgress(QuestSO selectedQuest) 
     {
-        if (selectedQuest.questType == QuestType.ConversationQuest) 
+        if (selectedQuest.questType == Define.QuestType.ConversationQuest) 
         {
             foreach (var npc in selectedQuest.relatedNPCs)
             {
@@ -31,11 +31,11 @@ public class QuestProgress : MonoBehaviour
 
             }
         }
-        else if (selectedQuest.questType == QuestType.ItemQuest) //아이템퀘스트 = TODO:드롭되는 아이템 갯수 카운트 해서 '0'에 반영
+        else if (selectedQuest.questType == Define.QuestType.ItemQuest) //아이템퀘스트 = TODO:드롭되는 아이템 갯수 카운트 해서 '0'에 반영
         {
             questProgitemName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
         }
-        else if (selectedQuest.questType == QuestType.MonsterQuest)  
+        else if (selectedQuest.questType == Define.QuestType.MonsterQuest)  
         {
             int goblinKills = GameManager.Instance.goblinkillCount;
 
@@ -49,7 +49,7 @@ public class QuestProgress : MonoBehaviour
                 MonsterQuestReward(selectedQuest);
             }
         }
-        else if (selectedQuest.questType == QuestType.InfiniteMonsterQuest) 
+        else if (selectedQuest.questType == Define.QuestType.InfiniteMonsterQuest) 
         {
 
             int goblinKills = GameManager.Instance.goblinkillCount;
@@ -64,7 +64,7 @@ public class QuestProgress : MonoBehaviour
 
             }
         }
-        else if (selectedQuest.questType == QuestType.MainQuest)  
+        else if (selectedQuest.questType == Define.QuestType.MainQuest)  
         {
             StringBuilder questProgmainName = new StringBuilder();
             questProgmainName.Append(selectedQuest.questName)
@@ -117,7 +117,7 @@ public class QuestProgress : MonoBehaviour
         }
         if (selectedQuest != null)
         {
-            if (selectedQuest.questType == QuestType.MainQuest)
+            if (selectedQuest.questType == Define.QuestType.MainQuest)
             {
                 Inventory inventory = UIManager.Instance.GetInventory();
 
@@ -158,7 +158,7 @@ public class QuestProgress : MonoBehaviour
 
         if (selectedQuest != null)
         {
-            if (selectedQuest.questType == QuestType.MonsterQuest)
+            if (selectedQuest.questType == Define.QuestType.MonsterQuest)
             {
                 Inventory inventory = UIManager.Instance.GetInventory();
 
@@ -197,7 +197,7 @@ public class QuestProgress : MonoBehaviour
 
         if (selectedQuest != null)
         {
-            if (selectedQuest.questType == QuestType.InfiniteMonsterQuest)
+            if (selectedQuest.questType == Define.QuestType.InfiniteMonsterQuest)
             {
                 Inventory inventory = UIManager.Instance.GetInventory();
 

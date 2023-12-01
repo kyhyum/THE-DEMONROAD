@@ -77,4 +77,13 @@ public class Define
         INT,
         CON
     }
+
+    public enum QuestType
+    {
+        MonsterQuest,
+        ItemQuest,
+        ConversationQuest,
+        InfiniteMonsterQuest,
+        MainQuest,
+    }
 }
