@@ -4,14 +4,10 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class DungeonManager : MonoBehaviour
-{
-    public static DungeonManager Instance;
-
-    
+public class DungeonManager : Singleton<DungeonManager>
+{   
     public int spawnIdx;
     
-
     [field: Header("Audio")]
     [SerializeField] private AudioClip DungeonSound;
 
@@ -34,17 +30,6 @@ public class DungeonManager : MonoBehaviour
     [field: Header("Spawn")]
     public List<MonsterSpawn> spawnList = new List<MonsterSpawn>();
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
 
     private void Start()
     {
@@ -69,11 +54,11 @@ public class DungeonManager : MonoBehaviour
                && necrmanserObjectPool.CheckListSize();
     }
 
-    public GameObject SpawnMonster(MonsterType monsterType, int spawnListIdx)
+    public GameObject SpawnMonster(Define.MonsterType monsterType, int spawnListIdx)
     {
         Vector3 spawnPos = spawnList[spawnListIdx].ReturnRandomPosition();
 
-        if(MonsterType.Necromanser == monsterType)
+        if(Define.MonsterType.Necromanser == monsterType)
         {
             Boss boss = null;
             boss = necrmanserObjectPool.GetObject();
@@ -87,7 +72,7 @@ public class DungeonManager : MonoBehaviour
         Monster monster = null;
         switch (monsterType)
         {
-            case MonsterType.Goblin:
+            case Define.MonsterType.Goblin:
 
                 monster = goblinObjectPool.GetObject();
                 monster.objectPoolReturn += goblinObjectPool.ReturnObject;
@@ -95,15 +80,15 @@ public class DungeonManager : MonoBehaviour
                 //고블린 몬스터타입이 죽을때마다 goblinKillCount가 늘어나게끔
                 monster.objectPoolReturn += DungeonGoblinKilled;
                 break;
-            case MonsterType.SwordGoblin:
+            case Define.MonsterType.SwordGoblin:
                 monster = swordGoblinObjectPool.GetObject();
                 monster.objectPoolReturn += swordGoblinObjectPool.ReturnObject;
                 break;
-            case MonsterType.Monster:
+            case Define.MonsterType.Monster:
                 monster = monsterObjectPool.GetObject();
                 monster.objectPoolReturn += monsterObjectPool.ReturnObject;
                 break;
-            case MonsterType.OrkBerserk:
+            case Define.MonsterType.OrkBerserk:
                 monster = orkberserkerObjectPool.GetObject();
                 monster.objectPoolReturn += orkberserkerObjectPool.ReturnObject;
                 break;

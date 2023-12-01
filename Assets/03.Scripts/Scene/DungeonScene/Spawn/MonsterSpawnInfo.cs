@@ -1,6 +1,6 @@
 [System.Serializable]
 public class MonsterSpawnInfo
 {
-    public MonsterType monsterType;
+    public Define.MonsterType monsterType;
     public int spawnCount;
 }

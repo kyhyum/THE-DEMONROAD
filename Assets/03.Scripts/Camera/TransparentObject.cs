@@ -60,24 +60,6 @@ public class TransparentObject : MonoBehaviour
             StopCoroutine(setTransparentCoroutine); // Stop the previous coroutine
             return;
         }
-
-        //while (elapsedTime <= 1.0f)
-        //{
-        //    lerpValue = Mathf.Lerp(1f, 0f, elapsedTime / 1.0f);
-
-        //    for (int i = 0; i < originalMaterials.Length; i++)
-        //    {
-        //        meshRenderer.sharedMaterials[i = new Color(1, 1, 1, lerpValue);
-        //    }
-        //    // 경과 시간 업데이트
-        //    elapsedTime += Time.deltaTime;
-        //}
-
-        //for (int i = 0; i < originalMaterials.Length; i++)
-        //{
-        //    meshRenderer.materials[i] = TransparentMaterials[i];
-        //}
-
         meshRenderer.sharedMaterials = TransparentMaterials.ToArray();
         isTransparent = true;
     }
@@ -85,22 +67,6 @@ public class TransparentObject : MonoBehaviour
     IEnumerator SetUnTransparent()
     {
         yield return new WaitForSeconds(1f);
-        //float lerpValue;
-        //while (elapsedTime <= 1.0f)
-        //{
-        //    lerpValue = Mathf.Lerp(0f, 1f, elapsedTime / 1.0f);
-        //    for (int i = 0; i < originalMaterials.Length; i++)
-        //    {
-        //        meshRenderer.materials[i].Lerp(TransparentMaterials[i], originalMaterials[i], lerpValue);
-        //    }
-        //    // 경과 시간 업데이트
-        //    elapsedTime += Time.deltaTime;
-        //}
-        //for (int i = 0; i < originalMaterials.Length; i++)
-        //{
-        //    meshRenderer.materials[i] = originalMaterials[i];
-        //}
-
         meshRenderer.sharedMaterials = originalMaterials;
 
         isTransparent = false;
@@ -118,14 +84,6 @@ public class TransparentObject : MonoBehaviour
             StopCoroutine(setTransparentCoroutine); // Stop the previous coroutine
             return;
         }
-        float lerpValue;
-        while (elapsedTime <= 1.0f)
-        {
-            lerpValue = Mathf.Lerp(0f, 1f, elapsedTime / 1.0f);
-            meshRenderer.material.Lerp(originalMaterial, TransparentMaterial, lerpValue);
-            // 경과 시간 업데이트
-            elapsedTime += Time.deltaTime;
-        }
         meshRenderer.material = TransparentMaterial;
         isTransparent = true;
     }
@@ -133,14 +91,6 @@ public class TransparentObject : MonoBehaviour
     IEnumerator SetUnTransparentMaterial()
     {
         yield return new WaitForSeconds(1f);
-        float lerpValue;
-        while (elapsedTime <= 1.0f)
-        {
-            lerpValue = Mathf.Lerp(0f, 1f, elapsedTime / 1.0f);
-            meshRenderer.material.Lerp(TransparentMaterial, originalMaterial, lerpValue);
-            // 경과 시간 업데이트
-            elapsedTime += Time.deltaTime;
-        }
         meshRenderer.material = originalMaterial;
         isTransparent = false;
     }

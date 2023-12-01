@@ -86,4 +86,13 @@ public class Define
         InfiniteMonsterQuest,
         MainQuest,
     }
+
+    public enum MonsterType
+    {
+        Goblin,
+        SwordGoblin,
+        Monster,
+        OrkBerserk,
+        Necromanser
+    }
 }

@@ -9,25 +9,11 @@ public class ItemPoolSize
     public int poolSize;
 }
 
-public class ItemDropManager : MonoBehaviour
+public class ItemDropManager : Singleton<ItemDropManager>
 {
-
-    public static ItemDropManager Instance;
-
     public List<ItemPoolSize> itemPoolSizes; // 각 아이템과 그에 대응하는 풀 크기
     private Dictionary<ItemSO, List<GameObject>> itemPools; // 각 아이템에 대응하는 풀
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
 
     // Start is called before the first frame update
     void Start()
