@@ -13,7 +13,6 @@ public class TutorialNPC : MonoBehaviour
 
     public GameObject dialogueUI;
     [SerializeField] GameObject npcCanvas;
-    GameObject playerUI;
 
     [SerializeField] Button acceptButton;
     [SerializeField] Button cancelButton;
@@ -49,8 +48,6 @@ public class TutorialNPC : MonoBehaviour
         player = GameManager.Instance.Myplayer.transform;
 
         data = GameManager.Instance.data;
-
-        playerUI = UIManager.Instance.playerUIObject;
 
         acceptButton.onClick.AddListener(Accept);
         cancelButton.onClick.AddListener(Cancel);
@@ -156,7 +153,7 @@ public class TutorialNPC : MonoBehaviour
         talkCoroutine = null;
         dialogueText.text = npc.npcDialogue[talkIndex];
 
-        Invoke("UISetActive", 0.5f);
+        Invoke("UISetActive", 1f);
     }
     void UISetActive()
     {
@@ -174,6 +171,10 @@ public class TutorialNPC : MonoBehaviour
         {
             ButtonSetActive(true);
         }
+        else if(talkIndex == 12)
+        {
+            TutorialManager.Instance.EndTutorial();
+        }
         else
         {
             return;
@@ -187,7 +188,7 @@ public class TutorialNPC : MonoBehaviour
     private void DialogueUISetActive(bool active)
     {
         dialogueUI.SetActive(active);
-        playerUI.SetActive(!active);
+        UIManager.Instance.ActivePlayerUI(!active);
     }
     private void ButtonSetActive(bool active)
     {

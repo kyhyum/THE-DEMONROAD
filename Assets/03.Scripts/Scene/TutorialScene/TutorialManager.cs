@@ -5,8 +5,13 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] TutorialNPC npc;
+    public static TutorialManager Instance;
     Player player;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         player = GameManager.Instance.Myplayer.GetComponent<Player>();
@@ -44,7 +49,7 @@ public class TutorialManager : MonoBehaviour
     {
         UIManager.Instance.ActivePopUpUI("튜토리얼", "튜토리얼을 종료 하시겠습니까?", EndTutorial);
     }
-    private void EndTutorial()
+    public void EndTutorial()
     {
         GameManager.Instance.data.currentPlayerPos = Vector3.zero;
         SceneLoadManager.LoadScene((int)Define.SceneType.Town);

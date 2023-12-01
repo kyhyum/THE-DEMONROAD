@@ -53,7 +53,7 @@ public class DisplayManager : MonoBehaviour
     }
     public void OpenPopUp()
     {
-        UIManager.Instance.popUpUI.OpenPopUpUI("디스플레이", "환경 설정을 변경 하시겠습니까?", ChangeDisplay);
+        UIManager.Instance.ActivePopUpUI("디스플레이", "환경 설정을 변경 하시겠습니까?", ChangeDisplay);
     }
     void ChangeDisplay()
     {
