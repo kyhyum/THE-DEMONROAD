@@ -24,9 +24,8 @@ public class UIManager : Singleton<UIManager>
     private Storage storage;
     private SkillUI skill;
 
-    //Quest창 합치는 작업 진행중이라 완료시 주석 해제
-    /*private QuestLog questLog;
-    private QuestProgress questProgress;*/
+    private QuestLog questLog;
+    private QuestProgress questProgress;
 
     public PlayerUI playerUI { get; private set; }
 
@@ -45,8 +44,8 @@ public class UIManager : Singleton<UIManager>
         CreateInventory();
         CreateSkill();
 
-        /*CreateQuestLog();
-        CreateQuestProgress();*/
+        CreateQuestLog();
+        CreateQuestProgress();
     }
 
     private void Start()
@@ -81,35 +80,39 @@ public class UIManager : Singleton<UIManager>
         skillObject.SetActive(false);
     }
 
-    //Quest창 합치는 작업중이라 완료시 주석 해제
-    /*private void CreateQuestLog()
+    private void CreateQuestLog()
     {
         questLogObject = Instantiate(Resources.Load<GameObject>(StringManager.QuestLogPrefabPath), canvas);
         questLog = questLogObject.GetComponentInChildren<QuestLog>();
         questLogObject.SetActive(false);
-    }   
+    }
 
     private void CreateQuestProgress()
     {
         questProgressObject = Instantiate(Resources.Load<GameObject>(StringManager.QuestProgressPath), canvas);
         questProgress = questProgressObject.GetComponentInChildren<QuestProgress>();
         questProgressObject.SetActive(false);
-    }*/
+    }
 
     public void OnUIInputEnable()
     {
         inputAction.Player.Inventory.Enable();
         inputAction.Player.SkillUI.Enable();
+        inputAction.Player.Quest.Enable();
         inputAction.Player.Inventory.started += ActiveInventory;
         inputAction.Player.SkillUI.started += ActiveSkill;
+        inputAction.Player.Quest.started += ActiveQuestLog;
     }
 
     public void OnUIInputDisable()
     {
         inputAction.Player.Inventory.Disable();
         inputAction.Player.SkillUI.Disable();
+        inputAction.Player.Quest.Disable();
         inputAction.Player.Inventory.started -= ActiveInventory;
         inputAction.Player.SkillUI.started -= ActiveSkill;
+        inputAction.Player.Quest.started -= ActiveQuestLog;
+
     }
 
     public Inventory GetInventory()
@@ -127,15 +130,14 @@ public class UIManager : Singleton<UIManager>
         return skill;
     }
 
-    //Quest창 합치는 작업중이라 완료시 주석 해제
-    /*public QuestLog GetQuestLog()
+    public QuestLog GetQuestLog()
     {
         return questLog;
     }
     public QuestProgress GetQuestProgress()
     {
         return questProgress;
-    }*/
+    }
 
     public void ActiveSettingWindow()
     {
@@ -160,6 +162,20 @@ public class UIManager : Singleton<UIManager>
     private void ActiveSkill(InputAction.CallbackContext context)
     {
         ActiveSkill();
+    }
+
+    public void ActiveQuestLog()
+    {
+        ActiveUIGameObject(questLogObject);
+    }
+    public void ActiveQuesProgress()
+    {
+        ActiveUIGameObject(questProgressObject);
+    }
+
+    private void ActiveQuestLog(InputAction.CallbackContext context)
+    {
+        ActiveQuestLog();
     }
 
     public void ActivePopUpUI(string title, string explan, UnityAction action)
