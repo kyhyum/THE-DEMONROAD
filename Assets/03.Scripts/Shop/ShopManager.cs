@@ -144,13 +144,9 @@ public class ShopManager : Singleton<ShopManager>
 
         if (inventory != null && item != null)
         {
-            int sellPrice = item.itemPrice; // 판매 아이템의 가격
+            int sellPrice = item.itemPrice; 
 
-            // 판매 아이템 추가 로직 - 아이템을 생성해서 인벤토리에 추가하는 것으로 가정합니다.
-            Item itemToSell = new Item(item);
-            inventory.AddItem(itemToSell);
-
-            // 골드 증가 로직
+            
             inventory.Gold += sellPrice;
 
             sellconfirmationPopup.SetActive(false);
