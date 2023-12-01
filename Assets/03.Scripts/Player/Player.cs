@@ -42,7 +42,8 @@ public class Player : MonoBehaviour
 
     [field: Header(" ")]
     [field: SerializeField] public TrailRenderer TrailRenderer { get; set; }
-    [field: SerializeField] public GameObject ParticleSystem_Parent { get; set; }
+    [field: SerializeField] public GameObject ParticleSystem_Trails1 { get; set; }
+    [field: SerializeField] public GameObject ParticleSystem_Trails2 { get; set; }
 
     private PlayerStateMachine stateMachine;
 
@@ -95,8 +96,6 @@ public class Player : MonoBehaviour
         {
             ComponentBase = VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
         }
-
-        ParticleSystem_Parent = gameObject.transform.Find("Eff11_Energy").gameObject;
 
         for (int i = 0; i < skills.Length; i++)
         {

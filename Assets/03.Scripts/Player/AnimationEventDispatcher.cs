@@ -17,7 +17,8 @@ public class AnimationEventDispatcher : MonoBehaviour
 
     Animator animator;
 
-    ParticleSystem[] trailsS;
+    GameObject trails1;
+    GameObject trails2;
 
     public AnimationEventDispatcher(Player player)
     {
@@ -45,11 +46,12 @@ public class AnimationEventDispatcher : MonoBehaviour
             clip.AddEvent(animationStartEvent);
             clip.AddEvent(animationEndEvent);
         }
+    }
 
-        var particleSystem = player.ParticleSystem_Parent;
-        //trailsS = GetComponentsInChildren<ParticleSystem>();
-        trailsS = particleSystem.gameObject.GetComponentsInChildren<ParticleSystem>();
-
+    private void Start()
+    {
+        trails1 = GameManager.Instance.player.ParticleSystem_Trails1;
+        trails2 = GameManager.Instance.player.ParticleSystem_Trails2;
     }
 
     public void AnimationStartHandler(string name)
@@ -65,11 +67,8 @@ public class AnimationEventDispatcher : MonoBehaviour
                 //var particleSystem = player.ParticleSystem_Trails;
                 //var trails = GetComponentInChildren<ParticleSystem>().trails;
 
-                for (int i = 0; i < trailsS.Length; i++)
-                {
-                    var trails = trailsS[i].trails;
-                    trails.enabled = true;
-                }
+                trails1.SetActive(true);
+                trails2.SetActive(true);
             }
         }
 
@@ -89,11 +88,8 @@ public class AnimationEventDispatcher : MonoBehaviour
                 //var trails = player.ParticleSystem_Trails.trails;
                 //trails.enabled = false;
 
-                for (int i = 0; i < trailsS.Length; i++)
-                {
-                    var trails = trailsS[i].trails;
-                    trails.enabled = false;
-                }
+                trails1.SetActive(false);
+                trails2.SetActive(false);
             }
         }
         
