@@ -17,6 +17,8 @@ public class AnimationEventDispatcher : MonoBehaviour
 
     Animator animator;
 
+    ParticleSystem[] trailsS;
+
     public AnimationEventDispatcher(Player player)
     {
         this.player = player;
@@ -43,6 +45,11 @@ public class AnimationEventDispatcher : MonoBehaviour
             clip.AddEvent(animationStartEvent);
             clip.AddEvent(animationEndEvent);
         }
+
+        var particleSystem = player.ParticleSystem_Parent;
+        //trailsS = GetComponentsInChildren<ParticleSystem>();
+        trailsS = particleSystem.gameObject.GetComponentsInChildren<ParticleSystem>();
+
     }
 
     public void AnimationStartHandler(string name)
@@ -53,7 +60,16 @@ public class AnimationEventDispatcher : MonoBehaviour
         {
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.5f)
             {
-                player.TrailRenderer.enabled = true;
+                //player.TrailRenderer.enabled = true;
+
+                //var particleSystem = player.ParticleSystem_Trails;
+                //var trails = GetComponentInChildren<ParticleSystem>().trails;
+
+                for (int i = 0; i < trailsS.Length; i++)
+                {
+                    var trails = trailsS[i].trails;
+                    trails.enabled = true;
+                }
             }
         }
 
@@ -68,7 +84,16 @@ public class AnimationEventDispatcher : MonoBehaviour
         {
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
-                player.TrailRenderer.enabled = false;
+                //player.TrailRenderer.enabled = false;
+
+                //var trails = player.ParticleSystem_Trails.trails;
+                //trails.enabled = false;
+
+                for (int i = 0; i < trailsS.Length; i++)
+                {
+                    var trails = trailsS[i].trails;
+                    trails.enabled = false;
+                }
             }
         }
         

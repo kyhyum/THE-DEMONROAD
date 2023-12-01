@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
 
     [field: Header(" ")]
     [field: SerializeField] public TrailRenderer TrailRenderer { get; set; }
+    [field: SerializeField] public GameObject ParticleSystem_Parent { get; set; }
 
     private PlayerStateMachine stateMachine;
 
@@ -56,6 +57,7 @@ public class Player : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
 
         stateMachine = new PlayerStateMachine(this);
+
         IsAttackSkill = new bool[skillSOs.Length];
         skills = new Skill[skillSOs.Length];
 
@@ -83,7 +85,7 @@ public class Player : MonoBehaviour
 
         UIManager.Instance.OnUIInputEnable();
 
-        VirtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+        VirtualCamera = GameManager.Instance.virtualCamera;
         if (VirtualCamera != null)
         {
             VirtualCamera.Follow = cameraLookPoint;
@@ -93,6 +95,8 @@ public class Player : MonoBehaviour
         {
             ComponentBase = VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
         }
+
+        ParticleSystem_Parent = gameObject.transform.Find("Eff11_Energy").gameObject;
 
         for (int i = 0; i < skills.Length; i++)
         {
