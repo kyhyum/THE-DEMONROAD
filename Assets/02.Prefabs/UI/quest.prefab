@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 6542158399216599491}
   - component: {fileID: 3857894147252223195}
   m_Layer: 5
-  m_Name: quest
+  m_Name: Quest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
