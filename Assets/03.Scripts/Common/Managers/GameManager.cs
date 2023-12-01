@@ -48,6 +48,8 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, data.name));
             UIManager.Instance.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
             UIManager.Instance.GetSkill().Set(player.skills);
+            UIManager.Instance.CreateQuestLog();
+            UIManager.Instance.CreateQuestProgress();
         }
         else
         {
@@ -156,6 +158,8 @@ public class GameManager : Singleton<GameManager>
         {
             SceneLoadManager.LoadScene((int)Define.SceneType.Start);
             Save();
+            UIManager.Instance.ActivePlayerUI(false);
+            UIManager.Instance.DestroyQuestUI();
             player = null;
             data = null;
             Myplayer = null;

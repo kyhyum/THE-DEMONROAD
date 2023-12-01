@@ -17,6 +17,9 @@ public class AnimationEventDispatcher : MonoBehaviour
 
     Animator animator;
 
+    GameObject trails1;
+    GameObject trails2;
+
     public AnimationEventDispatcher(Player player)
     {
         this.player = player;
@@ -45,6 +48,12 @@ public class AnimationEventDispatcher : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        trails1 = GameManager.Instance.player.ParticleSystem_Trails1;
+        trails2 = GameManager.Instance.player.ParticleSystem_Trails2;
+    }
+
     public void AnimationStartHandler(string name)
     {
         Debug.Log($"{name} 애니메이션 시작한다.");
@@ -53,7 +62,13 @@ public class AnimationEventDispatcher : MonoBehaviour
         {
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.5f)
             {
-                player.TrailRenderer.enabled = true;
+                //player.TrailRenderer.enabled = true;
+
+                //var particleSystem = player.ParticleSystem_Trails;
+                //var trails = GetComponentInChildren<ParticleSystem>().trails;
+
+                trails1.SetActive(true);
+                trails2.SetActive(true);
             }
         }
 
@@ -68,7 +83,13 @@ public class AnimationEventDispatcher : MonoBehaviour
         {
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
-                player.TrailRenderer.enabled = false;
+                //player.TrailRenderer.enabled = false;
+
+                //var trails = player.ParticleSystem_Trails.trails;
+                //trails.enabled = false;
+
+                trails1.SetActive(false);
+                trails2.SetActive(false);
             }
         }
         

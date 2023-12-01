@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -9,66 +10,61 @@ public class QuestLog : MonoBehaviour
     public GameObject questLogPanel;
 
     //questlog
-    [SerializeField] TMP_Text[] questLogName;
+    [SerializeField] GameObject questLogBackGround;
+    [SerializeField] GameObject questLog;
+
     public TMP_Text questLogSelected;
     public TMP_Text questLogDescription;
     public TMP_Text questLogRewards;
 
-    PlayerData player;
-    
+    AcceptQuest acceptQuest;
 
-    public void Start()
+    GameObject obj;
+    private void Start()
     {
-        player = GameManager.Instance.data;    
-        
+        UpdateQuestLogUI();
     }
-
-    public void UpdateQuestLogUI() 
+    private void UpdateQuestLogUI()
     {
-        if (player != null && player.acceptQuest != null)
+        if (GameManager.Instance.data != null && GameManager.Instance.data.acceptQuest != null)
         {
-            for (int i = 0; i < questLogName.Length; i++)
-            {
-                questLogName[i].text = "";
-            }
-            questLogSelected.text = "";
-            questLogDescription.text = "";
-            questLogRewards.text = "";
-
-            foreach (var acceptedQuest in player.acceptQuest)
+            foreach (var acceptedQuest in GameManager.Instance.data.acceptQuest)
             {
                 if (acceptedQuest != null)
                 {
-                    int questIndex = acceptedQuest.questIndex;
-
-                    if (questIndex >= 0 && questIndex < questLogName.Length)
-                    {
-                        questLogName[questIndex].text = acceptedQuest.questName;
-                    }
+                    obj = Instantiate(questLog, questLogBackGround.transform);
+                    acceptQuest = obj.GetComponent<AcceptQuest>();
+                    acceptQuest.questName.text = acceptedQuest.questName;
+                    acceptQuest.questSO = acceptedQuest;
+                    UIManager.Instance.GetQuestProgress().ShowQuestProgress(acceptedQuest);
                 }
                 else
                 {
                     Debug.LogWarning("acceptedQuest가 null입니다.");
                 }
             }
-            
 
         }
         else
         {
             Debug.LogWarning("player 또는 player.acceptQuest가 null입니다.");
-
         }
     }
-
-
-    public void OnQuestObjectClick(QuestSO quest) 
+    public void AddQuestLog(QuestSO questSO)
     {
-        ShowLogQuestDetails(quest);
-
+        if (GameManager.Instance.data != null && GameManager.Instance.data.acceptQuest != null)
+        {
+            if (GameManager.Instance.data.acceptQuest.Contains(questSO))
+            {
+                obj = Instantiate(questLog, questLogBackGround.transform);
+                acceptQuest = obj.GetComponent<AcceptQuest>();
+                acceptQuest.questName.text = questSO.questName;
+                acceptQuest.questSO = questSO;
+            }
+        }
+                
     }
-
-    private void ShowLogQuestDetails(QuestSO selectedQuest) 
+    public void ShowLogQuestDetails(QuestSO selectedQuest) 
     {
 
         questLogSelected.text = selectedQuest.questName;
@@ -76,7 +72,10 @@ public class QuestLog : MonoBehaviour
         questLogRewards.text = selectedQuest.questReward;
     }
 
-    
+    public void ShowQuestProgress()
+    {
+        UIManager.Instance.ActiveQuesProgress();
+    }
 }
     
 
