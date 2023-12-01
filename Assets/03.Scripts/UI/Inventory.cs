@@ -101,7 +101,7 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
-    private int FindItemIndex(Item item)
+    public int FindItemIndex(Item item)
     {
         for (int i = 0; i < 30; i++)
         {

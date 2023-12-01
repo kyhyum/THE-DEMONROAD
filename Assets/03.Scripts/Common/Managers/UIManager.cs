@@ -116,20 +116,45 @@ public class UIManager : Singleton<UIManager>
         questProgress = null;
     }
 
-    public void SetQuickSlot(IUsable[] data)
+    public void SetQuickSlot(QuickSlotData[] data)
     {
         for (int i = 0; i < 5; i++)
         {
-            quickSlots[i].SetSlot(data[i]);
+            switch (data[i].type)
+            {
+                case Define.QuickSlotType.Skill:
+                    quickSlots[i].SetSlot((IUsable)skill.slots[data[i].index].GetSkill());
+                    break;
+                case Define.QuickSlotType.Item:
+                    quickSlots[i].SetSlot((IUsable)inventory.inventorySlots[data[i].index].GetItem());
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-    public IUsable[] GetQuickSlot()
+    public QuickSlotData[] GetQuickSlot()
     {
-        IUsable[] data = new IUsable[5];
+        QuickSlotData[] data = new QuickSlotData[5];
         for (int i = 0; i < 5; i++)
         {
-            data[i] = quickSlots[i].Get();
+            IUsable usable = quickSlots[i].Get();
+
+            if (usable is Skill)
+            {
+                Skill skill = (Skill)usable;
+                data[i] = new QuickSlotData(Define.QuickSlotType.Skill, skill.index);
+            }
+            else if (usable is UseItem)
+            {
+                UseItem item = (UseItem)usable;
+                data[i] = new QuickSlotData(Define.QuickSlotType.Item, inventory.FindItemIndex(item));
+            }
+            else
+            {
+                data[i] = new QuickSlotData(Define.QuickSlotType.None, 0); ;
+            }
         }
 
         return data;
@@ -227,7 +252,6 @@ public class UIManager : Singleton<UIManager>
 
     public void ActivePlayerUI(bool flag)
     {
-        Debug.Log(flag);
         playerUIObject.SetActive(flag);
     }
 

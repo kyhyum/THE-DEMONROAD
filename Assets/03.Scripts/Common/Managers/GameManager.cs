@@ -47,8 +47,6 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.ActivePlayerUI(true);
             UIManager.Instance.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, data.name));
             UIManager.Instance.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
-            UIManager.Instance.SetQuickSlot(data.QuickSlots);
-            UIManager.Instance.GetSkill().Set(player.skills);
             UIManager.Instance.CreateQuestLog();
             UIManager.Instance.CreateQuestProgress();
         }
