@@ -116,20 +116,20 @@ public class UIManager : Singleton<UIManager>
         questProgress = null;
     }
 
-    public void SetQuickSlot(QuickSlotData data)
+    public void SetQuickSlot(IUsable[] data)
     {
         for (int i = 0; i < 5; i++)
         {
-            quickSlots[i].SetSlot(data.usables[i]);
+            quickSlots[i].SetSlot(data[i]);
         }
     }
 
-    public QuickSlotData GetQuickSlot()
+    public IUsable[] GetQuickSlot()
     {
-        QuickSlotData data = new QuickSlotData();
+        IUsable[] data = new IUsable[5];
         for (int i = 0; i < 5; i++)
         {
-            data.usables[i] = quickSlots[i].Get();
+            data[i] = quickSlots[i].Get();
         }
 
         return data;
@@ -227,6 +227,7 @@ public class UIManager : Singleton<UIManager>
 
     public void ActivePlayerUI(bool flag)
     {
+        Debug.Log(flag);
         playerUIObject.SetActive(flag);
     }
 

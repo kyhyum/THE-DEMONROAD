@@ -47,6 +47,7 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.ActivePlayerUI(true);
             UIManager.Instance.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, data.name));
             UIManager.Instance.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
+            UIManager.Instance.SetQuickSlot(data.QuickSlots);
             UIManager.Instance.GetSkill().Set(player.skills);
             UIManager.Instance.CreateQuestLog();
             UIManager.Instance.CreateQuestProgress();
@@ -125,7 +126,7 @@ public class GameManager : Singleton<GameManager>
     }
     void PlayerPosSave()
     {
-        if(SceneManager.GetActiveScene().buildIndex >= 4)
+        if (SceneManager.GetActiveScene().buildIndex >= 4)
         {
             return;
         }
@@ -138,6 +139,7 @@ public class GameManager : Singleton<GameManager>
             data.scene = (Define.SceneType)SceneManager.GetActiveScene().buildIndex;
             PlayerPosSave();
             data.currentPlayerRot = Myplayer.transform.rotation;
+            data.QuickSlots = UIManager.Instance.GetQuickSlot();
             SaveItemArrayToJson(StringManager.ItemJsonPath, data.name, UIManager.Instance.GetInventory().Get());
             SaveItemArrayToJson(StringManager.ItemJsonPath, StringManager.StorageName, UIManager.Instance.GetStorage().Get());
         }
@@ -156,6 +158,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Start)
         {
+            Debug.Log("HomeButton Active");
             SceneLoadManager.LoadScene((int)Define.SceneType.Start);
             Save();
             UIManager.Instance.ActivePlayerUI(false);
