@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject sellConfirmationPopup;
+    public TMP_Text sellConfirmationText;
+    public Button sellConfirmButton;
+
+    private ItemSO currentItem;
+
+    
+    public void SellItem()
     {
+        ShopManager.Instance.SellItem();
         
     }
+   
 
-    // Update is called once per frame
-    void Update()
+    
+    public void ShowSellConfirmationPopup(ItemSO item)
     {
+        currentItem = item; 
+
         
+        sellConfirmationPopup.SetActive(true);
+        sellConfirmationText.text = item.itemName + "아이템을 판매하시겠습니까?"; 
     }
 }
