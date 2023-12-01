@@ -3,6 +3,6 @@ using System;
 [Serializable]
 public class Option
 {
-    public StatType type;
+    public Define.StatType type;
     public int value;
 }

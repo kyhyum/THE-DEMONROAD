@@ -10,5 +10,5 @@ public class DungeonSO : ScriptableObject
     public string dungeonName;
     public string explan;
     public string appropriateLevel;
-    public SceneType dungeon;
+    public Define.SceneType dungeon;
 }
