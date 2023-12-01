@@ -93,7 +93,7 @@ public class npcInteraction : MonoBehaviour
 
        
 
-        if (npc.questType == QuestType.ConversationQuest)
+        if (npc.questType == Define.QuestType.ConversationQuest)
         {
             if (npc.hasQuest)
             {
@@ -133,7 +133,7 @@ public class npcInteraction : MonoBehaviour
     }
     public void ConversationQuestProgress(QuestSO selectedQuest) 
     {
-        if (selectedQuest.questType == QuestType.ConversationQuest) 
+        if (selectedQuest.questType == Define.QuestType.ConversationQuest) 
         {
             StringBuilder questProgress = new StringBuilder();
             foreach (var npc in selectedQuest.relatedNPCs)
@@ -182,7 +182,7 @@ public class npcInteraction : MonoBehaviour
         
 
         
-        if (quest != null && quest.questType == QuestType.ConversationQuest)
+        if (quest != null && quest.questType == Define.QuestType.ConversationQuest)
         {
             Inventory inventory = UIManager.Instance.GetInventory();
 
