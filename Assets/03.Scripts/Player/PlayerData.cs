@@ -14,6 +14,7 @@ public class PlayerData
     public int[] skilllevels;
     public string baseObjectPath;
     public int playerIndex;
+    public QuickSlotData[] QuickSlots;
 
     public Define.SceneType scene;
     public Vector3 currentPlayerPos;

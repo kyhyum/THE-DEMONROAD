@@ -106,6 +106,7 @@ public class Player : MonoBehaviour
 
         UIManager.Instance.GetSkill().Init();
         UIManager.Instance.GetSkill().Set(skills);
+        UIManager.Instance.SetQuickSlot(GameManager.Instance.data.QuickSlots);
     }
 
     private void Update()

@@ -23,6 +23,7 @@ public class UIManager : Singleton<UIManager>
     private Inventory inventory;
     private Storage storage;
     private SkillUI skill;
+    public QuickSlot[] quickSlots;
 
     private QuestLog questLog;
     private QuestProgress questProgress;
@@ -37,6 +38,7 @@ public class UIManager : Singleton<UIManager>
 
     private void Awake()
     {
+        quickSlots = new QuickSlot[5];
         EnableUI = new List<GameObject>();
         audioSource = GetComponent<AudioSource>();
 
@@ -81,7 +83,7 @@ public class UIManager : Singleton<UIManager>
 
     public void CreateQuestLog()
     {
-        if(questLogObject != null)
+        if (questLogObject != null)
         {
             return;
         }
@@ -112,6 +114,50 @@ public class UIManager : Singleton<UIManager>
         questProgressObject = null;
         questLog = null;
         questProgress = null;
+    }
+
+    public void SetQuickSlot(QuickSlotData[] data)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            switch (data[i].type)
+            {
+                case Define.QuickSlotType.Skill:
+                    quickSlots[i].SetSlot((IUsable)skill.slots[data[i].index].GetSkill());
+                    break;
+                case Define.QuickSlotType.Item:
+                    quickSlots[i].SetSlot((IUsable)inventory.inventorySlots[data[i].index].GetItem());
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public QuickSlotData[] GetQuickSlot()
+    {
+        QuickSlotData[] data = new QuickSlotData[5];
+        for (int i = 0; i < 5; i++)
+        {
+            IUsable usable = quickSlots[i].Get();
+
+            if (usable is Skill)
+            {
+                Skill skill = (Skill)usable;
+                data[i] = new QuickSlotData(Define.QuickSlotType.Skill, skill.index);
+            }
+            else if (usable is UseItem)
+            {
+                UseItem item = (UseItem)usable;
+                data[i] = new QuickSlotData(Define.QuickSlotType.Item, inventory.FindItemIndex(item));
+            }
+            else
+            {
+                data[i] = new QuickSlotData(Define.QuickSlotType.None, 0); ;
+            }
+        }
+
+        return data;
     }
 
     public void OnUIInputEnable()

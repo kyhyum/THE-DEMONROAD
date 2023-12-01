@@ -95,4 +95,11 @@ public class Define
         OrkBerserk,
         Necromanser
     }
+
+    public enum QuickSlotType
+    {
+        None,
+        Skill,
+        Item
+    }
 }

@@ -9,7 +9,7 @@ public class SlotItem
     public int gold;
     public SlotItem()
     {
-        
+
     }
     public SlotItem(int index)
     {
