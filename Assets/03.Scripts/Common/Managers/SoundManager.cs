@@ -2,9 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : Singleton<SoundManager>
 {
-    public static SoundManager Instance;
     [SerializeField] AudioSource bgmAudioSource;
     [SerializeField] AudioSource buttonClickSource;
     [SerializeField] AudioMixer masterMixer;
@@ -18,14 +17,6 @@ public class SoundManager : MonoBehaviour
     float sfx;
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
         bgmAudioSource.Play();
     }
     private void Start()
