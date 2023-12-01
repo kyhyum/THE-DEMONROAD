@@ -79,18 +79,39 @@ public class UIManager : Singleton<UIManager>
         skillObject.SetActive(false);
     }
 
-    private void CreateQuestLog()
+    public void CreateQuestLog()
     {
+        if(questLogObject != null)
+        {
+            return;
+        }
         questLogObject = Instantiate(Resources.Load<GameObject>(StringManager.QuestLogPrefabPath), canvas);
         questLog = questLogObject.GetComponentInChildren<QuestLog>();
         questLogObject.SetActive(false);
     }
 
-    private void CreateQuestProgress()
+    public void CreateQuestProgress()
     {
+        if (questProgressObject != null)
+        {
+            return;
+        }
         questProgressObject = Instantiate(Resources.Load<GameObject>(StringManager.QuestProgressPath), canvas);
         questProgress = questProgressObject.GetComponentInChildren<QuestProgress>();
         questProgressObject.SetActive(false);
+    }
+    public void DestroyQuestUI()
+    {
+        if (questLogObject == null)
+        {
+            return;
+        }
+        Destroy(questLogObject);
+        Destroy(questProgressObject);
+        questLogObject = null;
+        questProgressObject = null;
+        questLog = null;
+        questProgress = null;
     }
 
     public void OnUIInputEnable()

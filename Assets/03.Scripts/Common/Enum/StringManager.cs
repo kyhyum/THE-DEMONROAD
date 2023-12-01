@@ -15,7 +15,7 @@ public static class StringManager
     private static string stroagePrefabPath = "Prefabs/UI/UI_Storage";
     private static string skillPrefabPath = "Prefabs/UI/UI_SKill";
     private static string questLogPrefabPath = "Prefabs/UI/UI_QuestLog";
-    private static string questProgressPath = "Prefabs/UI/UI_QuestProcess";
+    private static string questProgressPath = "Prefabs/UI/UI_QuestProgress";
     public static string JsonPath { get { return jsonPath; } }
     public static string ItemJsonPath { get { return itemJsonPath; } }
     public static string StorageName { get { return storageName; } }
