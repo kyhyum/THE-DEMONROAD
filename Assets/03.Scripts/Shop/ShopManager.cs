@@ -26,12 +26,12 @@ public class ShopManager : MonoBehaviour
 
     //Text
     public TMP_Text confirmationText;
-    public TMP_Text sellconfirmationText;
+    //public TMP_Text sellconfirmationText;
     public TMP_Text itemCountText;
 
     //Button
     public Button confirmationButton;
-    public Button sellButton;
+    //public Button sellButton;
     public Button increaseButton; 
     public Button decreaseButton;
 
@@ -56,6 +56,10 @@ public class ShopManager : MonoBehaviour
 
         
         confirmationButton.onClick.AddListener(BuyItem);
+
+        //아이템 판매버튼 이벤트
+        //sellButton.onClick.RemoveAllListeners();
+        //sellButton.onClick.AddListener(() => SellItem(item));
     }
 
     private void Update()
@@ -74,21 +78,24 @@ public class ShopManager : MonoBehaviour
         {
             confirmationPopUp.SetActive(true);
             confirmationText.text = "구매하시겠습니까? " + "\n" + item.itemName;                                       
-
-
-            sellconfirmationText.text = "판매하시겠습니까? " + "\n" + item.itemName;
-
-            //아이템 판매버튼 이벤트
-            sellButton.onClick.RemoveAllListeners();
-            sellButton.onClick.AddListener(() => SellItem(item));
-
         }
         else
         {
             Debug.Log("Item이 null입니다.");
         }
         
-    }   
+    }  
+    
+    //public void OnItemSell(ItemSO clickedItem)
+    //{
+    //    item = clickedItem;
+    //    if(item != null)
+    //    {
+    //        sellconfirmationPopup.SetActive(true);
+    //        sellconfirmationText.text = "판매하시겠습니까? " + "\n" + item.itemName;
+    //    }
+    //}
+
     public void BuyItem()
     {
         Inventory inventory = UIManager.Instance.GetInventory();
