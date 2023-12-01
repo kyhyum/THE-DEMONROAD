@@ -22,15 +22,15 @@ public class QuestBoard : MonoBehaviour
     [SerializeField] List<QuestSO> quests;
     public static UIManager Instance;
 
-    
+    //메인퀘스트 관련
     private ChoiceDungeon choiceDungeon;
     public QuestController qcontroller;
 
 
     public List<QuestSO> Quests { get { return quests; } }
     public ItemSO golditem;
-    public QuestProgress questProgress;
-    public QuestLog questLog;
+    QuestProgress questProgress;
+    QuestLog questLog;
     QuestSO selectQuest;
     PlayerData player;
 
@@ -38,8 +38,11 @@ public class QuestBoard : MonoBehaviour
     {
         player = GameManager.Instance.data;
         questacceptCheckPop.SetActive(false);
-        
-        if(questLog == null )
+
+        questLog = UIManager.Instance.GetQuestLog();
+        questProgress = UIManager.Instance.GetQuestProgress();
+
+        if (questLog == null )
         {
             Debug.LogError("QuestLog 컴포넌트를 찾을 수 없습니다.");
             return;
@@ -135,12 +138,10 @@ public class QuestBoard : MonoBehaviour
     {
         if (!IsQuestAlreadyAccepted(quest))
         {
-            qcontroller.questLogPanel.SetActive(true);
             player.acceptQuest.Add(quest);
-            acceptPopup.SetActive(true);
-
-            questLog.UpdateQuestLogUI(); 
+            acceptPopup.SetActive(true);        
             
+            questLog.AddQuestLog(quest);
             questProgress.ShowQuestProgress(quest);
 
             foreach (var npc in quest.relatedNPCs)
