@@ -153,12 +153,16 @@ public class PlayerBaseState : IState, IUsable
     /// </summary>
     protected void Move()
     {
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition), out hit, 100))
+        RaycastHit[] hits = Physics.RaycastAll(Camera.main.transform.position, Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition).direction.normalized, 100, 1 << LayerMask.NameToLayer("Ground"));
+        if (hits.Length > 0)
         {
             //Debug.Log($"hit.collider.name: {hit.collider.name}");
             //Debug.Log($"hit.point: {hit.point}");
-
-            stateMachine.Player.Agent.SetDestination(hit.point);
+            destPosition = new Vector3(hits[0].point.x, stateMachine.Player.transform.position.y, hits[0].point.z);
+            direction = destPosition - stateMachine.Player.transform.position;
+            lookTarget = Quaternion.LookRotation(direction);
+            stateMachine.Player.transform.rotation = lookTarget;
+            stateMachine.Player.Agent.SetDestination(hits[0].point);
         }
     }
 
@@ -167,12 +171,16 @@ public class PlayerBaseState : IState, IUsable
         if (!stateMachine.Player.IsMovePerformed)
             return;
 
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+        RaycastHit[] hits = Physics.RaycastAll(Camera.main.transform.position, Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition).direction.normalized, 100, 1 << LayerMask.NameToLayer("Ground"));
+        if (hits.Length > 0)
         {
             //Debug.Log($"hit.collider.name: {hit.collider.name}");
             //Debug.Log($"hit.point: {hit.point}");
-
-            stateMachine.Player.Agent.SetDestination(hit.point);
+            destPosition = new Vector3(hits[0].point.x, stateMachine.Player.transform.position.y, hits[0].point.z);
+            direction = destPosition - stateMachine.Player.transform.position;
+            lookTarget = Quaternion.LookRotation(direction);
+            stateMachine.Player.transform.rotation = lookTarget;
+            stateMachine.Player.Agent.SetDestination(hits[0].point);
         }
     }
 
