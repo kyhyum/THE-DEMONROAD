@@ -5,18 +5,24 @@ using UnityEngine;
 public class MonsterAttackState : MonsterBaseState
 {
     private bool alreadyAppliedDealing;
-    private bool alreadyAppliedForce;
     public MonsterAttackState(MonsterStateMachine monsterStateMachine) : base(monsterStateMachine)
     {
         stateMachine = monsterStateMachine;
     }
     public override void Enter()
     {
-        alreadyAppliedForce = false;
         alreadyAppliedDealing = false;
         stateMachine.MovementSpeedModifier = 0;
+        stateMachine.Monster.monsterSound.PlayAttackSound();
         base.Enter();
-        StartAnimation(stateMachine.Monster.monsterAnimationData.AttackParameterHash);
+        if(GetNormalizedTime(stateMachine.Monster.Animator, "Attack") > 1)
+        {
+            stateMachine.Monster.Animator.Play("Attack", -1, 0f);
+        }
+        else
+        {
+            StartAnimation(stateMachine.Monster.monsterAnimationData.AttackParameterHash);
+        }
     }
 
     public override void Exit()

@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 
 public class BossChaseState : BossBaseState
 {
-    protected BossAttackPattern previousAttackPattern = BossAttackPattern.Pattern3;
+    protected BossAttackPattern previousAttackPattern;
+
+    bool isAttackPattern2 = false;
+    bool isAttackPattern4 = false;
     public BossChaseState(BossStateMachine bossStateMachine) : base(bossStateMachine)
     {
         stateMachine = bossStateMachine;
@@ -15,7 +18,7 @@ public class BossChaseState : BossBaseState
     public override void Enter()
     {
         base.Enter();
-        GetRandomAttackPattern();
+        previousAttackPattern = GetRandomAttackPattern();
         StartAnimation(stateMachine.Boss.bossAnimationData.ChaseParameterHash);
     }
 
@@ -27,15 +30,9 @@ public class BossChaseState : BossBaseState
 
     public override void Update()
     {
-        Debug.Log(IsInAttackRange());
         base.Update();
         stateMachine.Boss.BossNavMeshAgent.SetDestination(stateMachine.Target.transform.position);
-        if (!IsInChaseRange())
-        {
-            stateMachine.ChangeState(stateMachine.IdleState);
-            return;
-        }
-        else if (IsInAttackRange())
+        if (IsInAttackRange())
         {
             stateMachine.Boss.BossNavMeshAgent.ResetPath();
             switch (previousAttackPattern)
@@ -82,6 +79,11 @@ public class BossChaseState : BossBaseState
         // 체력이 50% 이하이면 Pattern3을 추가하고 고정으로 실행
         if (currentHealthPercentage <= 0.5f)
         {
+            if (!isAttackPattern2)
+            {
+                isAttackPattern2 = true; 
+                return BossAttackPattern.Pattern2;
+            }
             availablePatterns.Add(BossAttackPattern.Pattern2);
         }
 
@@ -89,6 +91,11 @@ public class BossChaseState : BossBaseState
         // 체력이 30% 이하이면 Pattern4를 추가하고 고정으로 한 번 실행
         if (currentHealthPercentage <= 0.3f)
         {
+            if (!isAttackPattern4)
+            {
+                isAttackPattern4 = true;
+                return BossAttackPattern.Pattern4;
+            }
             availablePatterns.Add(BossAttackPattern.Pattern4);
         }
 

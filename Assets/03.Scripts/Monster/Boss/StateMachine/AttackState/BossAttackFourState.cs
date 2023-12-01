@@ -14,6 +14,7 @@ public class BossAttackFourState : BossBaseState
     public override void Enter()
     {
         base.Enter();
+        timer = 0f;
         StartAnimation(stateMachine.Boss.bossAnimationData.Attack4ParameterHash);
     }
 
@@ -34,7 +35,8 @@ public class BossAttackFourState : BossBaseState
                 if (timer >= interval)
                 {
                     BossBullet bossBullet = stateMachine.Boss.pattern2Bullet.GetObject();
-                    bossBullet.gameObject.transform.position = stateMachine.Target.position;
+                    bossBullet.BulletSetEventNull();
+                    bossBullet.gameObject.transform.position = stateMachine.Boss.transform.position;
                     bossBullet.BulletReturned += stateMachine.Boss.pattern2Bullet.ReturnObject;
                     timer = 0f; // 타이머 초기화
                 }

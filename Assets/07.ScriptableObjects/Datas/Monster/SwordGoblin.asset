@@ -17,7 +17,7 @@ MonoBehaviour:
   <Health>k__BackingField: 100
   <IsLongRanged>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 12
-  <AttackRange>k__BackingField: 6
+  <AttackRange>k__BackingField: 2
   <ForceTransitionTime>k__BackingField: 0
   <Force>k__BackingField: 0
   <Damage>k__BackingField: 3
