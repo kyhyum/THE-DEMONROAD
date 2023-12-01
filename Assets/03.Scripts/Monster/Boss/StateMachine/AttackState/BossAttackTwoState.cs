@@ -27,7 +27,6 @@ public class BossAttackTwoState : BossBaseState
 
     public override void Update()
     {
-        //강공은 회전있으면 너무 빡셀거 같아 base.update는 없엠
         float normalizedTime = GetNormalizedTime(stateMachine.Boss.Animator);
         if (normalizedTime < 1f)
         {
@@ -40,10 +39,13 @@ public class BossAttackTwoState : BossBaseState
             {
                 stateMachine.Boss.Weapon.gameObject.SetActive(false);
                 alreadyAppliedDealing = false; 
-                stateMachine.ChangeState(stateMachine.ChasingState);
                 return;
             }
 
+        }
+        else
+        {
+            stateMachine.ChangeState(stateMachine.ChasingState);
         }
     }
 }

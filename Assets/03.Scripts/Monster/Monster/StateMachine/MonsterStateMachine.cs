@@ -22,10 +22,8 @@ public class MonsterStateMachine : MonsterBaseStateMachine
 
     public MonsterStateMachine(Monster monster)
     {
-        Monster = monster;
-        Target = GameObject.FindGameObjectWithTag("Player").transform;
-
-        //TODO : Target = GameManager.Instance.Myplayer.transform;
+        Monster = monster; 
+        Target = GameManager.Instance.Myplayer.transform;
 
         IdleState = new MonsterIdleState(this);
         ChasingState = new MonsterChaseState(this);

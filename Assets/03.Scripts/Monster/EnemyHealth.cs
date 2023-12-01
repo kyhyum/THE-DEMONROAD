@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public string enemyName;
-    public int maxHealth = 100;
+    public int maxHealth;
     public int health;
     public event Action OnDie;
     public bool IsDead => health == 0;

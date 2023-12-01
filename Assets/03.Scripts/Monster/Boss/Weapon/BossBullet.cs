@@ -12,13 +12,14 @@ public class BossBullet : BossWeapon
     private Transform Target;
     void Awake()
     {
-        Target = GameObject.FindGameObjectWithTag("Player").transform;
+        Target = GameManager.Instance.Myplayer.transform;
     }
 
     public void Shooting()
     {
         StartCoroutine(FlyTowardsTarget());
     }
+
     IEnumerator FlyTowardsTarget()
     {
         float elapsedTime = 0f;
@@ -37,5 +38,10 @@ public class BossBullet : BossWeapon
 
         // 일정 시간이 지나면 총알 오브젝트 풀에 넣기
         BulletReturned?.Invoke(this);
+    }
+
+    public void BulletSetEventNull()
+    {
+        BulletReturned = null;
     }
 }

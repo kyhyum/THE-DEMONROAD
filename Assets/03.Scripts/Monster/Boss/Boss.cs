@@ -16,8 +16,13 @@ public class Boss : MonoBehaviour
     [field: Header("Bullet")]
     [field: SerializeField] private GameObject bossBullet1Obj;
     [field: SerializeField] private GameObject bossBullet2Obj;
+    public ObjectPool<BossBullet> pattern1Bullet { get; private set; }
+    public ObjectPool<BossBullet> pattern2Bullet { get; private set; }
+
+    public event Action<Boss> objectPoolReturn;
     [field: SerializeField] public Transform bulletSpawnPoint {get; private set;}
-    public EnemyForceReceiver EnemyForceReceiver { get; private set; }
+
+
     public NavMeshAgent BossNavMeshAgent { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
@@ -26,9 +31,6 @@ public class Boss : MonoBehaviour
     [field: SerializeField] public BossWeapon Weapon { get; private set; }
     public BossHealth BossHealth { get; private set; }
 
-    public ObjectPool<BossBullet> pattern1Bullet { get; private set; }
-    public ObjectPool<BossBullet> pattern2Bullet { get; private set; }
-    public event Action<Boss> objectPoolReturn;
 
     private void Awake()
     {
@@ -41,7 +43,7 @@ public class Boss : MonoBehaviour
         BossHealth = GetComponent<BossHealth>();
         BossHealth.InitEnemyHealth(Data.Health, Data.Name);
 
-        pattern1Bullet = new ObjectPool<BossBullet>(bossBullet1Obj.GetComponent<BossBullet>(), 3);
+        pattern1Bullet = new ObjectPool<BossBullet>(bossBullet1Obj.GetComponent<BossBullet>(), 6);
         pattern2Bullet = new ObjectPool<BossBullet>(bossBullet2Obj.GetComponent<BossBullet>(), 1);
     }
 

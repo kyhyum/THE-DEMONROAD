@@ -27,8 +27,6 @@ public class BossAttackOneState : BossBaseState
 
     public override void Update()
     {
-        base.Update();
-
         float normalizedTime = GetNormalizedTime(stateMachine.Boss.Animator);
         Debug.Log(normalizedTime);
         if (normalizedTime < 1f)
@@ -42,10 +40,14 @@ public class BossAttackOneState : BossBaseState
             {
                 stateMachine.Boss.Weapon.gameObject.SetActive(false);
                 alreadyAppliedDealing = false; 
-                stateMachine.ChangeState(stateMachine.ChasingState);
                 return;
             }
 
+        }
+        else
+        {
+            stateMachine.ChangeState(stateMachine.ChasingState);
+            return;
         }
     }
 
