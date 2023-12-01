@@ -142,7 +142,6 @@ public class QuestBoard : MonoBehaviour
             acceptPopup.SetActive(true);        
             
             questLog.AddQuestLog(quest);
-
             questProgress.ShowQuestProgress(quest);
 
             foreach (var npc in quest.relatedNPCs)
