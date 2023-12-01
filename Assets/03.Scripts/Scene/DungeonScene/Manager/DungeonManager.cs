@@ -9,7 +9,7 @@ public class DungeonManager : MonoBehaviour
     public static DungeonManager Instance;
 
     
-    public int spawnIdx = 0;
+    public int spawnIdx;
     
 
     [field: Header("Audio")]
@@ -50,6 +50,8 @@ public class DungeonManager : MonoBehaviour
     {
         //사운드 플레이
         SoundManager.Instance.BGMPlay(DungeonSound);
+
+        SetSpawnNum();
 
         monsterObjectPool = new ObjectPool<Monster>(monsterPrefab.GetComponent<Monster>(), 20);
         goblinObjectPool = new ObjectPool<Monster>(goblinPrefab.GetComponent<Monster>(), 10);
@@ -132,6 +134,61 @@ public class DungeonManager : MonoBehaviour
                     Debug.LogError("Failed to spawn monster of type: " + spawnList[spawnIdx].spawnEnemyList[i].monsterType);
                 }
             }
+        }
+    }
+
+    public void SetSpawnNum()
+    {
+        if(GameManager.Instance.data.currentPlayerPos == new Vector3(0f, 0f, 0f))
+        {
+            spawnIdx = 0;
+        }
+        else if (GameManager.Instance.data.currentPlayerPos == new Vector3(247.13f, 0f, 193.55f))
+        {
+            spawnIdx = 1;
+        }
+        else if (GameManager.Instance.data.currentPlayerPos == new Vector3(-10f, 4f, 232.68f))
+        {
+            spawnIdx = 2;
+        }
+        else if (GameManager.Instance.data.currentPlayerPos == new Vector3(-127.9f, 8f, 340f))
+        {
+            spawnIdx = 3;
+        }
+        else if (GameManager.Instance.data.currentPlayerPos == new Vector3(-128.9f, 8f, 377.6f))
+        {
+            spawnIdx = 4;
+        }
+        else
+        {
+            spawnIdx = 0;
+        }
+    }
+
+
+
+    public void SetPlayerPosition(int passageNum)
+    {
+        switch (passageNum)
+        {
+            case 0:
+                GameManager.Instance.data.currentPlayerPos = new Vector3(0f, 0f, 0f);
+                break;
+            case 1:
+                GameManager.Instance.data.currentPlayerPos = new Vector3(247.13f, 0f, 193.55f);
+                break;
+            case 2:
+                GameManager.Instance.data.currentPlayerPos = new Vector3(-10f, 4f, 232.68f);
+                break;
+            case 3:
+                GameManager.Instance.data.currentPlayerPos = new Vector3(-127.9f, 8f, 340f);
+                break;
+            case 4:
+                GameManager.Instance.data.currentPlayerPos = new Vector3(-128.9f, 8f, 377.6f);
+                break;
+            case 5:
+                GameManager.Instance.data.currentPlayerPos = new Vector3(-129.1f, 12f, 430.5f);
+                break;
         }
     }
 }
