@@ -9,6 +9,7 @@ public class QuestBoard : MonoBehaviour
     public GameObject acceptPopup;
     public GameObject cancelPopup;
     public GameObject questacceptCheckPop;
+    
     [SerializeField] Button[] questButton;
 
     //quest board
@@ -23,7 +24,7 @@ public class QuestBoard : MonoBehaviour
 
     //메인퀘스트 관련
     private ChoiceDungeon choiceDungeon;
-    
+    public QuestController qcontroller;
 
 
     public List<QuestSO> Quests { get { return quests; } }
@@ -137,9 +138,12 @@ public class QuestBoard : MonoBehaviour
     {
         if (!IsQuestAlreadyAccepted(quest))
         {
+            qcontroller.questLogPanel.SetActive(true);
             player.acceptQuest.Add(quest);
             acceptPopup.SetActive(true);
-            questLog.UpdateQuestLogUI();
+
+            questLog.UpdateQuestLogUI(); 
+            
             questProgress.ShowQuestProgress(quest);
 
             foreach (var npc in quest.relatedNPCs)

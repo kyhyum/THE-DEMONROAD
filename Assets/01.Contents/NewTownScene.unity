@@ -32182,54 +32182,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &592654584
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 592654586}
-  - component: {fileID: 592654585}
-  m_Layer: 0
-  m_Name: QuestController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &592654585
+--- !u!114 &592654585 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8243316258452708899, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+    type: 3}
+  m_PrefabInstance: {fileID: 8683673728676346441}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 592654584}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1837dd30fb6774799f4d1e0feda82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questLogPanel: {fileID: 1553776588}
-  questProgressPanel: {fileID: 1110821356}
-  completeUI: {fileID: 1810874149}
-  fadeDuration: 1
---- !u!4 &592654586
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 592654584}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 929.9225, y: 440.53156, z: -3.154959}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &593878369
 Animator:
   serializedVersion: 5
@@ -89751,6 +89715,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5bffe58e074b9d446bec87198042fa64, type: 2}
   - {fileID: 11400000, guid: 269e052d7f4539a4b920b4806a9bf570, type: 2}
   - {fileID: 11400000, guid: f7c5fff364b97c143963901176d62c58, type: 2}
+  qcontroller: {fileID: 592654585}
   golditem: {fileID: 11400000, guid: 55c6319f5c3d1d34f8473393f1382fbf, type: 2}
   questProgress: {fileID: 1110821361}
   questLog: {fileID: 1553776593}
@@ -100332,7 +100297,7 @@ PrefabInstance:
     - target: {fileID: 649965073091601695, guid: 0366929a60e737f44a4dd8f6880fceeb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2221209135703620235, guid: 0366929a60e737f44a4dd8f6880fceeb,
         type: 3}
@@ -100449,3 +100414,91 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0366929a60e737f44a4dd8f6880fceeb, type: 3}
+--- !u!1001 &8683673728676346441
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1012409553713173743, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012409553713173743, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 929.9225
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012409553713173743, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 440.53156
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012409553713173743, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.154959
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012409553713173743, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012409553713173743, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012409553713173743, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012409553713173743, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012409553713173743, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012409553713173743, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012409553713173743, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923391570336430412, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: m_Name
+      value: QuestController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243316258452708899, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: completeUI
+      value: 
+      objectReference: {fileID: 1810874149}
+    - target: {fileID: 8243316258452708899, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: questLogPanel
+      value: 
+      objectReference: {fileID: 1553776588}
+    - target: {fileID: 8243316258452708899, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+        type: 3}
+      propertyPath: questProgressPanel
+      value: 
+      objectReference: {fileID: 1110821356}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6ee9113740e1c6546aa32e33a0c72e35, type: 3}
