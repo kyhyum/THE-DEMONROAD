@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class TutorialNPC : MonoBehaviour
 {
-    GameManager gameManager;
     Transform player;
 
     [SerializeField] NPCSO npc;
@@ -47,12 +46,11 @@ public class TutorialNPC : MonoBehaviour
     }
     private void Start()
     {
-        gameManager = GameManager.Instance;
-        player = gameManager.Myplayer.transform;
+        player = GameManager.Instance.Myplayer.transform;
 
-        data = gameManager.data;
+        data = GameManager.Instance.data;
 
-        playerUI = gameManager.uiManager.playerUIObject;
+        playerUI = UIManager.Instance.playerUIObject;
 
         acceptButton.onClick.AddListener(Accept);
         cancelButton.onClick.AddListener(Cancel);

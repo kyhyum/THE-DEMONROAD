@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public UIManager uiManager;
 
     public Player player;
     public PlayerData data;
@@ -55,11 +54,11 @@ public class GameManager : MonoBehaviour
             condition = Myplayer.AddComponent<PlayerCondition>();
             condition.playerData = data;
             condition.Initialize();
-            uiManager.gameObject.SetActive(true);
-            uiManager.ActivePlayerUI(true);
-            uiManager.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, data.name));
-            uiManager.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
-            uiManager.GetSkill().Set(player.skills);
+            UIManager.Instance.gameObject.SetActive(true);
+            UIManager.Instance.ActivePlayerUI(true);
+            UIManager.Instance.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, data.name));
+            UIManager.Instance.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
+            UIManager.Instance.GetSkill().Set(player.skills);
         }
         else
         {
@@ -133,15 +132,23 @@ public class GameManager : MonoBehaviour
         }
         return result;
     }
+    void PlayerPosSave()
+    {
+        if(SceneManager.GetActiveScene().buildIndex >= 4)
+        {
+            return;
+        }
+        data.currentPlayerPos = Myplayer.transform.position;
+    }
     public void Save()
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)SceneType.Loading)
         {
             data.scene = (SceneType)SceneManager.GetActiveScene().buildIndex;
-            data.currentPlayerPos = Myplayer.transform.position;
+            PlayerPosSave();
             data.currentPlayerRot = Myplayer.transform.rotation;
-            SaveItemArrayToJson(StringManager.ItemJsonPath, data.name, uiManager.GetInventory().Get());
-            SaveItemArrayToJson(StringManager.ItemJsonPath, StringManager.StorageName, uiManager.GetStorage().Get());
+            SaveItemArrayToJson(StringManager.ItemJsonPath, data.name, UIManager.Instance.GetInventory().Get());
+            SaveItemArrayToJson(StringManager.ItemJsonPath, StringManager.StorageName, UIManager.Instance.GetStorage().Get());
         }
         SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
     }
@@ -167,7 +174,7 @@ public class GameManager : MonoBehaviour
     }
     public void FinishPopUp()
     {
-        uiManager.ActivePopUpUI("게임 종료", "정말 게임을 종료 하시겠습니까?", Finish);
+        UIManager.Instance.ActivePopUpUI("게임 종료", "정말 게임을 종료 하시겠습니까?", Finish);
     }
 
     void Finish()

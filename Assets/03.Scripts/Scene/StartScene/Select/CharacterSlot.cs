@@ -17,16 +17,9 @@ public class CharacterSlot : MonoBehaviour
 
     PlayerCondition conditon;
     PlayerData data;
-    GameManager gameManager;
     VoiceClip clip;
     AudioSource source;
     Animator animator;
-    SoundManager soundManager;
-    private void Awake()
-    {
-        gameManager = GameManager.Instance;
-        soundManager = SoundManager.Instance;
-    }
     private void OnEnable()
     {
         SlotSetting();
@@ -76,7 +69,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            if (gameManager.DeleteCharacter(StringManager.JsonPath, data.name))
+            if (GameManager.Instance.DeleteCharacter(StringManager.JsonPath, data.name))
             {
                 ClearSlot();
             }
@@ -104,7 +97,7 @@ public class CharacterSlot : MonoBehaviour
             return;
         }
         animator.SetTrigger("Choice");
-        soundManager.SFXPlay(source, clip.clips[1]);
+        SoundManager.Instance.SFXPlay(source, clip.clips[1]);
     }
     void TextOpen(bool isChar)
     {
@@ -137,7 +130,7 @@ public class CharacterSlot : MonoBehaviour
     {
         if (character != null)
         {
-            gameManager.data = data;
+            GameManager.Instance.data = data;
         }
         else
         {

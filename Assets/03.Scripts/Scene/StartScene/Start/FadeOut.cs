@@ -7,11 +7,11 @@ using DG.Tweening;
 public class FadeOut : MonoBehaviour
 {
     [SerializeField] Image blackImage;
-    Color a;
+    Color originColor;
     Tween fadeTween;
     private void Awake()
     {
-        a = blackImage.color;
+        originColor = blackImage.color;
         
     }
     private void OnEnable()
@@ -22,7 +22,7 @@ public class FadeOut : MonoBehaviour
     }
     void SetActice()
     {
-        blackImage.color = a;
+        blackImage.color = originColor;
         this.gameObject.SetActive(false);
     }
 }

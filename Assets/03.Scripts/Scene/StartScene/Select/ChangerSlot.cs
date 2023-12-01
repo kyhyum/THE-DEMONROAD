@@ -8,18 +8,13 @@ public class ChangerSlot : MonoBehaviour
     [SerializeField] TextMeshProUGUI index, charLevel, charName, charJob;
     [SerializeField] GameObject UpButton, DownButton;
     [SerializeField] private int slotIndex;
-    SelectCanvasManager selectCanvasManager;
     private PlayerData playerData;
     public PlayerData PlayerData { get { return playerData; } }
     private void OnEnable()
     {
-        if(selectCanvasManager == null)
+        if(SelectCanvasManager.Instance.PlayerDatas[slotIndex] != null)
         {
-            selectCanvasManager = SelectCanvasManager.Instance;
-        }
-        if(selectCanvasManager.PlayerDatas[slotIndex] != null)
-        {
-            playerData = selectCanvasManager.PlayerDatas[slotIndex];
+            playerData = SelectCanvasManager.Instance.PlayerDatas[slotIndex];
         }
         UpdateUI();
     }
