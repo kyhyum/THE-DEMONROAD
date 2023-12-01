@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EquipItem", menuName = "Item/EquipItem")]
 public class EquipItemSO : ItemSO
 {
-    public EquipItemType equipType;
+    public Define.EquipItemType equipType;
     public List<Option> options;
     public float Attack;
     public float Deffence;

@@ -45,7 +45,7 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        if (item.type == ItemType.Gold)
+        if (item.type == Define.ItemType.Gold)
         {
             IStackable stackableItem = (IStackable)item;
             gold += stackableItem.Get();
@@ -134,7 +134,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void UnEquip(int slotA, EquipItemType type)
+    public void UnEquip(int slotA, Define.EquipItemType type)
     {
         EquipSlot equipSlot = equipSlots[(int)type];
         Item item = inventorySlots[slotA].GetItem();
