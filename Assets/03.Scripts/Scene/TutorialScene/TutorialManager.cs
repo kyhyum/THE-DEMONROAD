@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
-    GameManager gameManager;
-    UIManager uiManager;
     [SerializeField] TutorialNPC npc;
     Player player;
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameManager.Instance;
-        uiManager = gameManager.uiManager;
-        player = gameManager.Myplayer.GetComponent<Player>();
+        player = GameManager.Instance.Myplayer.GetComponent<Player>();
     }
 
     void Update()
@@ -46,11 +42,11 @@ public class TutorialManager : MonoBehaviour
 
     public void EndTutorialPopUpUI()
     {
-        uiManager.ActivePopUpUI("튜토리얼", "튜토리얼을 종료 하시겠습니까?", EndTutorial);
+        UIManager.Instance.ActivePopUpUI("튜토리얼", "튜토리얼을 종료 하시겠습니까?", EndTutorial);
     }
     private void EndTutorial()
     {
-        gameManager.data.currentPlayerPos = Vector3.zero;
+        GameManager.Instance.data.currentPlayerPos = Vector3.zero;
         SceneLoadManager.LoadScene((int)SceneType.Town);
     }
 }
