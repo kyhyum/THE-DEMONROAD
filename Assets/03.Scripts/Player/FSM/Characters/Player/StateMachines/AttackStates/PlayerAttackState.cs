@@ -15,7 +15,6 @@ public class PlayerAttackState : PlayerBaseState
         stateMachine.Player.Agent.ResetPath();
         base.Enter();
 
-        stateMachine.Player.TrailRenderer.enabled = true;
         StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
     }
 
@@ -24,8 +23,6 @@ public class PlayerAttackState : PlayerBaseState
         base.Exit();
 
         StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
-
-        stateMachine.Player.TrailRenderer.enabled = false;
     }
 
     public override void Update()

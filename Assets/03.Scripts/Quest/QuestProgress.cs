@@ -14,9 +14,10 @@ public class QuestProgress : MonoBehaviour
 
     public TMP_Text questProgmainName;
 
+    public QuestBoard board;
     private QuestController controller;
-    private ChoiceDungeon choiceDungeon;
-    private bool isMainQuestProgressUpdated = false;
+    
+    
 
     
 
@@ -31,7 +32,7 @@ public class QuestProgress : MonoBehaviour
 
             }
         }
-        else if (selectedQuest.questType == Define.QuestType.ItemQuest) //아이템퀘스트 = TODO:드롭되는 아이템 갯수 카운트 해서 '0'에 반영
+        else if (selectedQuest.questType == Define.QuestType.ItemQuest) 
         {
             questProgitemName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
         }
@@ -66,43 +67,14 @@ public class QuestProgress : MonoBehaviour
         }
         else if (selectedQuest.questType == Define.QuestType.MainQuest)  
         {
-            StringBuilder questProgmainName = new StringBuilder();
-            questProgmainName.Append(selectedQuest.questName)
-                .Append("\n - 0 /")
-                .Append(selectedQuest.questComplete);
 
-            //questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
-            UpdateMainQuestProgress(selectedQuest);
+            questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
+            board.UpdateMainQuestProgress(selectedQuest);
 
 
         }
     }
-    public void UpdateMainQuestProgress(QuestSO selectedQuest)
-    {
-        if (!isMainQuestProgressUpdated)
-        {
-            if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
-            {
-                Debug.Log("UpdateMainQuest이 null이 아니다");
-
-
-                questProgmainName.color = Color.red;
-                questProgmainName.fontStyle |= FontStyles.Italic;
-                questProgmainName.fontStyle |= FontStyles.Strikethrough;
-
-                questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;
-
-                
-                MainQuestReward(selectedQuest);
-                isMainQuestProgressUpdated = true;
-
-
-            }
-
-
-        }
-
-    }
+    
     public void MainQuestReward(QuestSO selectedQuest)
     {
         if (controller != null)

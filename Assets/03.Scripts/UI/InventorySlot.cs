@@ -46,6 +46,11 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
                 UIManager.Instance.SwapItems(slotID, storageSlot.slotID);
                 return;
             }
+
+            if (result.gameObject.TryGetComponent<Shop>(out Shop shop))
+            {
+                return;
+            }
         }
     }
 

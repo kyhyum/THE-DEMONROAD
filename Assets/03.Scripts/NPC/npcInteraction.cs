@@ -135,14 +135,11 @@ public class npcInteraction : MonoBehaviour
     {
         if (selectedQuest.questType == Define.QuestType.ConversationQuest) 
         {
-            StringBuilder questProgress = new StringBuilder();
+            
             foreach (var npc in selectedQuest.relatedNPCs)
             {
-                questProgress.Append(selectedQuest.questName)
-                    .Append("\n - 1 /")
-                    .Append(selectedQuest.questComplete);
-                
-                //questProgName.text = selectedQuest.questName + "\n - " +  " 1 / " + selectedQuest.questComplete;
+        
+                questProgName.text = selectedQuest.questName + "\n - " +  " 1 / " + selectedQuest.questComplete;
             }
         }
         
