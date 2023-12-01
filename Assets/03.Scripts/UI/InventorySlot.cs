@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using static UnityEditor.Progress;
 
 public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
 {
+    
     public void OnDrop(PointerEventData eventData)
     {
         // 이벤트 데이터를 이용해 드롭 지점에서의 Raycast를 수행
@@ -49,6 +51,8 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
 
             if (result.gameObject.TryGetComponent<Shop>(out Shop shop))
             {
+                ItemSO clickedItem = GetItem().itemSO;
+                shop.ShowSellConfirmationPopup(clickedItem);
                 return;
             }
         }

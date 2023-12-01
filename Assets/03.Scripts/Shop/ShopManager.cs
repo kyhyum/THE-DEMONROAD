@@ -22,16 +22,17 @@ public class ShopManager : Singleton<ShopManager>
     //Pop
     public GameObject confirmationPopUp;
     public GameObject sellconfirmationPopup;
+    public GameObject equipsellconfirmationPopUp;
     public GameObject outofGoldPop;
 
     //Text
     public TMP_Text confirmationText;
-    //public TMP_Text sellconfirmationText;
+    
     public TMP_Text itemCountText;
 
     //Button
     public Button confirmationButton;
-    //public Button sellButton;
+    
     public Button increaseButton; 
     public Button decreaseButton;
 
@@ -49,6 +50,7 @@ public class ShopManager : Singleton<ShopManager>
 
         confirmationPopUp.SetActive(false);
         sellconfirmationPopup.SetActive(false);
+        equipsellconfirmationPopUp.SetActive(false);
         outofGoldPop.SetActive(false);
 
         increaseButton.onClick.AddListener(IncreaseItemCount);
@@ -57,9 +59,7 @@ public class ShopManager : Singleton<ShopManager>
         
         confirmationButton.onClick.AddListener(BuyItem);
 
-        //아이템 판매버튼 이벤트
-        //sellButton.onClick.RemoveAllListeners();
-        //sellButton.onClick.AddListener(() => SellItem(item));
+        
     }
 
     private void Update()
@@ -86,15 +86,7 @@ public class ShopManager : Singleton<ShopManager>
         
     }  
     
-    //public void OnItemSell(ItemSO clickedItem)
-    //{
-    //    item = clickedItem;
-    //    if(item != null)
-    //    {
-    //        sellconfirmationPopup.SetActive(true);
-    //        sellconfirmationText.text = "판매하시겠습니까? " + "\n" + item.itemName;
-    //    }
-    //}
+    
 
     public void BuyItem()
     {
@@ -146,36 +138,29 @@ public class ShopManager : Singleton<ShopManager>
             Debug.Log("Inventory가 null입니다.");
         }
     }
-    public void SellItem(ItemSO soldItem)
+    public void SellItem()
     {
         Inventory inventory = UIManager.Instance.GetInventory();
 
-        if (inventory != null && soldItem != null)
+        if (inventory != null && item != null)
         {
-            
-            for (int i = 0; i < inventory.inventorySlots.Length; i++)
-            {
-                Item currentItem = inventory.GetItem(i);
+            int sellPrice = item.itemPrice; // 판매 아이템의 가격
 
+            // 판매 아이템 추가 로직 - 아이템을 생성해서 인벤토리에 추가하는 것으로 가정합니다.
+            Item itemToSell = new Item(item);
+            inventory.AddItem(itemToSell);
 
-                if (currentItem != null && currentItem.itemName == soldItem.itemName)
-                {
+            // 골드 증가 로직
+            inventory.Gold += sellPrice;
 
-                    inventory.inventorySlots[i].Clear();
-                    inventory.Gold += soldItem.itemPrice;
-
-                    Debug.Log(soldItem.itemName + "을(를) 판매하였습니다. 금화 +" + soldItem.itemPrice);
-                    return;
-                }
-            }
-
-            Debug.Log(soldItem.itemName + "을(를) 인벤토리에서 찾을 수 없습니다.");
+            sellconfirmationPopup.SetActive(false);
         }
         else
         {
-            Debug.Log("Inventory가 null이거나 판매할 아이템이 null입니다.");
+            Debug.LogWarning("인벤토리가 없거나 판매할 아이템이 선택되지 않았습니다.");
         }
     }
+
     public void IncreaseItemCount()
     {
         
