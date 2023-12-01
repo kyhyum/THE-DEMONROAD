@@ -4,18 +4,34 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    public static T Instance;
+    private static T _instance;
 
-    private void Awake()
+    public static T Instance
     {
-        if (Instance == null)
+        get
         {
-            Instance = this as T;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<T>();
+
+                if (_instance == null)
+                {
+                    string componentName = typeof(T).ToString();
+
+                    GameObject findObject = GameObject.Find(componentName);
+
+                    if (findObject == null)
+                    {
+                        findObject = new GameObject(componentName);
+                    }
+
+                    _instance = findObject.AddComponent<T>();
+                }
+
+                DontDestroyOnLoad(_instance);
+            }
+
+            return _instance;
         }
     }
 }
