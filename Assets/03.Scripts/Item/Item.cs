@@ -8,8 +8,8 @@ public class Item
     public string itemName;
     public string description;
     public Texture2D texture;
-    public Rank rank;
-    public ItemType type;
+    public Define.Rank rank;
+    public Define.ItemType type;
     public GameObject prefab;
 
     public Item(ItemSO itemSO)
@@ -25,7 +25,7 @@ public class Item
         }
         else
         {
-            
+
             Debug.LogError("ItemSO가 null입니다.");
         }
     }

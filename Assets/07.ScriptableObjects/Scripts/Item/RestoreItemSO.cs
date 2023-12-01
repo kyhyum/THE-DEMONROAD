@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RestoreItem", menuName = "Item/RestoreItem")]
 public class RestoreItemSO : UseItemSO
 {
-    public RestoreType restoreType;
+    public Define.RestoreType restoreType;
     public float value;
 
     public override GameObject CreateItem()

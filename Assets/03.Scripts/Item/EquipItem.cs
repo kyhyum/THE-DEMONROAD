@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EquipItem : Item
 {
-    public EquipItemType equipType;
+    public Define.EquipItemType equipType;
     public List<Option> options;
     public float Attack;
     public float Deffence;

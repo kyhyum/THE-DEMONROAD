@@ -43,7 +43,7 @@ public class Storage : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        if (item.type == ItemType.Gold)
+        if (item.type == Define.ItemType.Gold)
         {
             IStackable stackableItem = (IStackable)item;
             gold += stackableItem.Get();

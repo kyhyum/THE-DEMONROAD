@@ -1,6 +1,6 @@
 public class BuffItem : UseItem
 {
-    public BuffType buffType;
+    public Define.BuffType buffType;
     public float duration;
     public int value;
 

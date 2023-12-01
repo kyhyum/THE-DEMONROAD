@@ -13,10 +13,10 @@ public class ItemTestScript : MonoBehaviour
 
         switch (itemSO.type)
         {
-            case ItemType.Equip:
+            case Define.ItemType.Equip:
                 item = new EquipItem(itemSO);
                 break;
-            case ItemType.Consumes:
+            case Define.ItemType.Consumes:
                 item = new UseItem(itemSO);
                 break;
             default:

@@ -24,7 +24,7 @@ public static class StringManager
     public static string TestStorageName { get { return testStorageName; } }
     public static string BaseObjectPath { get { return baseObjcetPath; } }
     public static string InventoryPrefabPath { get { return inventoryPrefabPath; } }
-    public static string StroagePrefabPath { get { return stroagePrefabPath;} }
+    public static string StroagePrefabPath { get { return stroagePrefabPath; } }
     public static string SKillPrefabPath { get { return skillPrefabPath; } }
     public static string QuestLogPrefabPath { get { return questLogPrefabPath; } }
     public static string QuestProgressPath { get { return questProgressPath; } }

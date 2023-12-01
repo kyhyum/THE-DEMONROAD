@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EquipSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler, IPointerDownHandler
 {
-    public EquipItemType type;
+    public Define.EquipItemType type;
     private GameObject itemClone;
     private Canvas canvas;
     private RectTransform rect;

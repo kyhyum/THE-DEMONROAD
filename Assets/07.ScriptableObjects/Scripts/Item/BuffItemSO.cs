@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BuffItem", menuName = "Item/BuffItem")]
 public class BuffItemSO : UseItemSO
 {
-    public BuffType buffType;
+    public Define.BuffType buffType;
     public float duration;
     public int value;
 
