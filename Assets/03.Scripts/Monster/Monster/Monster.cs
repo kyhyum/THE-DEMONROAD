@@ -11,17 +11,20 @@ public class Monster : MonoBehaviour
 
     [field: Header("Animations")]
     [field: SerializeField] public MonsterAnimationData monsterAnimationData { get; private set; }
+    public Animator Animator { get; private set; }
 
-    public EnemyForceReceiver EnemyForceReceiver { get; private set; }
+    [field: Header("NavMesh")]
     public NavMeshAgent EnemyNavMeshAgent { get; private set; }
 
-    public Rigidbody Rigidbody { get; private set; }
-    public Animator Animator { get; private set; }
-    public CharacterController Controller { get; private set; }
+    [field: Header("FSM")]
 
     public MonsterStateMachine stateMachine { get; private set; }
-    [field: SerializeField] public MonsterWeapon Weapon { get; private set; }
+
+    [field: Header("Monster")]
     public MonsterHealth MonsterHealth { get; private set; }
+    [field: SerializeField] public MonsterWeapon Weapon { get; private set; }
+    public MonsterSound monsterSound { get; private set; }
+
     public ItemDropController itemDropController { get; private set; }
     public event Action<Monster> objectPoolReturn;
 
@@ -29,14 +32,12 @@ public class Monster : MonoBehaviour
     {
         monsterAnimationData.Initialize();
 
-        Rigidbody = GetComponent<Rigidbody>();
         Animator = GetComponent<Animator>();
-        Controller = GetComponent<CharacterController>();
-        EnemyForceReceiver = GetComponent<EnemyForceReceiver>();
         EnemyNavMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new MonsterStateMachine(this);
         MonsterHealth = GetComponent<MonsterHealth>();
         itemDropController = GetComponent<ItemDropController>();
+        monsterSound = GetComponent<MonsterSound>();
 
     }
 
@@ -59,6 +60,7 @@ public class Monster : MonoBehaviour
         InitMonster();
         MonsterHealth.OnDie += OnDie;
         MonsterHealth.OnDie += itemDropController.DropItem;
+        MonsterHealth.OnDie += monsterSound.PlayDeadSound;
     }
 
     public void InitMonster()
