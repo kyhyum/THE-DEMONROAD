@@ -12,10 +12,12 @@ public class QuestLog : MonoBehaviour
     //questlog
     [SerializeField] GameObject questLogBackGround;
     [SerializeField] GameObject questLog;
-    AcceptQuest acceptQuest;
+
     public TMP_Text questLogSelected;
     public TMP_Text questLogDescription;
     public TMP_Text questLogRewards;
+
+    AcceptQuest acceptQuest;
 
     GameObject obj;
     private void Start()

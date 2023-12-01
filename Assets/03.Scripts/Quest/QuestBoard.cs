@@ -106,9 +106,6 @@ public class QuestBoard : MonoBehaviour
         {
             Debug.LogWarning("MainQuest가 아닙니다. UpdateMainQuestProgress 메서드는 MainQuest에 대해서만 실행됩니다.");
         }
-
-        
-
     }
 
     private void InitializeQuestList()

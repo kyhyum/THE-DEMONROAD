@@ -43,7 +43,6 @@ public class UIManager : Singleton<UIManager>
         CreateStorage();
         CreateInventory();
         CreateSkill();
-
         CreateQuestLog();
         CreateQuestProgress();
     }
