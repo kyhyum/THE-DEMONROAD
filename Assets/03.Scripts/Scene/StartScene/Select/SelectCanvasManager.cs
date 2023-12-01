@@ -19,9 +19,6 @@ public class SelectCanvasManager : MonoBehaviour
     private PlayerData[] playerDatas = new PlayerData[4];
     public PlayerData[] PlayerDatas { get { return playerDatas; } }
 
-    GameManager gameManager;
-
-    StartSceneManager startSceneManager;
     private void Awake()
     {
         if (Instance == null)
@@ -32,9 +29,6 @@ public class SelectCanvasManager : MonoBehaviour
         {
             Destroy(this);
         }
-        gameManager = GameManager.Instance;
-        startSceneManager = StartSceneManager.Instance;
-       
     }
 
     private void OnEnable()
@@ -56,7 +50,7 @@ public class SelectCanvasManager : MonoBehaviour
             {
                 foreach (string one in playerName)
                 {
-                    PlayerData data = gameManager.LoadPlayerDataFromJson(StringManager.JsonPath, one);
+                    PlayerData data = GameManager.Instance.LoadPlayerDataFromJson(StringManager.JsonPath, one);
                     playerDatas[data.playerIndex] = data;
                     characterSlots[data.playerIndex].CreateCharacter(baseCharacters[(int)data.job], data);
                 }
@@ -74,11 +68,11 @@ public class SelectCanvasManager : MonoBehaviour
     {
         if (selectedSlot == -1)
         {
-            gameManager.uiManager.ActivePopUpUI("게임 시작", "캐릭터를 선택해 주세요.", null);
+            UIManager.Instance.ActivePopUpUI("게임 시작", "캐릭터를 선택해 주세요.", null);
             return;
         }
         characterSlots[selectedSlot].StartCharacter();
-        gameManager.GameStart();
+        GameManager.Instance.GameStart();
     }
     public void DeleteButton()
     {
@@ -137,13 +131,13 @@ public class SelectCanvasManager : MonoBehaviour
         {
             characterSlots[i].SetActiceCharacter();
         }
-        startSceneManager.OpenCreateCanvas();
+        StartSceneManager.Instance.OpenCreateCanvas();
     }
     public void CreateCharacter(string name, PlayerData data)
     {
         if(name.Length > 6)
         {
-            gameManager.uiManager.ActivePopUpUI("캐릭터 생성", "이름은 최대 6자 까지입니다.", null);
+            UIManager.Instance.ActivePopUpUI("캐릭터 생성", "이름은 최대 6자 까지입니다.", null);
             return;
         }
         if (!playerName.Contains(name))
@@ -151,21 +145,21 @@ public class SelectCanvasManager : MonoBehaviour
             data.name = name;
             data.playerIndex = selectedSlot;
             data.level = 1;
-            gameManager.SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
-            PlayerData thisdata = gameManager.LoadPlayerDataFromJson(StringManager.JsonPath, data.name);
+            GameManager.Instance.SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
+            PlayerData thisdata = GameManager.Instance.LoadPlayerDataFromJson(StringManager.JsonPath, data.name);
             characterSlots[selectedSlot].CreateCharacter(baseCharacters[(int)data.job], thisdata);
             playerDatas[thisdata.playerIndex] = thisdata;
             playerName.Add(name);
-            startSceneManager.OpenSelectCanvas();
+            StartSceneManager.Instance.OpenSelectCanvas();
         }
         else
         {
-            gameManager.uiManager.ActivePopUpUI("캐릭터 생성", "이미 있는 이름입니다.", null);
+            UIManager.Instance.ActivePopUpUI("캐릭터 생성", "이미 있는 이름입니다.", null);
         }
     }
     public void PopUpOpen()
     {
-       gameManager.uiManager.ActivePopUpUI("캐릭터 슬롯 변경", "정말 변경 하시겠습니까?", SlotChangeButton);
+       UIManager.Instance.ActivePopUpUI("캐릭터 슬롯 변경", "정말 변경 하시겠습니까?", SlotChangeButton);
     }
     void SlotChangeButton()
     {
@@ -173,7 +167,7 @@ public class SelectCanvasManager : MonoBehaviour
         {
             if (playerDatas[i] != null)
             {
-                gameManager.SavePlayerDataToJson(StringManager.JsonPath, playerDatas[i].name, playerDatas[i]);
+                GameManager.Instance.SavePlayerDataToJson(StringManager.JsonPath, playerDatas[i].name, playerDatas[i]);
             }
         }
         for(int i = 0; i < characterSlots.Length; i++)

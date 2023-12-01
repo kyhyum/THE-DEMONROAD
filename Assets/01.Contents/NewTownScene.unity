@@ -14175,6 +14175,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1615886214}
     m_Modifications:
+    - target: {fileID: 434502823640489614, guid: 40ba875b7444d924299aa66da92aed06,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1694299908}
+    - target: {fileID: 434502823640489614, guid: 40ba875b7444d924299aa66da92aed06,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenDungeon
+      objectReference: {fileID: 0}
     - target: {fileID: 3850792569165774027, guid: 40ba875b7444d924299aa66da92aed06,
         type: 3}
       propertyPath: m_Name
@@ -32690,7 +32700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1372309525486772, guid: 15bb5a066e6966e4abb2d26f51f8b516, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1372309525486772, guid: 15bb5a066e6966e4abb2d26f51f8b516, type: 3}
       propertyPath: m_NavMeshLayer
@@ -33779,7 +33789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransparentMaterials: []
-  TransparentMaterial: {fileID: 0}
+  TransparentMaterial: {fileID: 2100000, guid: 8d7163061c55b7241bc9cae9fabb2105, type: 2}
 --- !u!1 &679774057
 GameObject:
   m_ObjectHideFlags: 0
@@ -42720,37 +42730,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 924574104}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &933524175
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 933524176}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &933524176
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 933524175}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -60.210308, y: -5.5157695, z: -30.781628}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 26
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &935553018
 PrefabInstance:
   m_ObjectHideFlags: 0

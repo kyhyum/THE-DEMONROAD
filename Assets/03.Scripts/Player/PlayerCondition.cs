@@ -169,31 +169,31 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
         return true;
     }
 
-    public void Buff(BuffType buffType, float duration, int value)
+    public void Buff(Define.BuffType buffType, float duration, int value)
     {
         StartCoroutine(CBuff(buffType, duration, value));
     }
 
-    IEnumerator CBuff(BuffType buffType, float duration, int value)
+    IEnumerator CBuff(Define.BuffType buffType, float duration, int value)
     {
         switch (buffType)
         {
-            case BuffType.Atk:
+            case Define.BuffType.Atk:
                 atk += value;
                 break;
-            case BuffType.Def:
+            case Define.BuffType.Def:
                 def += value;
                 break;
-            case BuffType.Str:
+            case Define.BuffType.Str:
                 myStats[StatType.STR] += value;
                 break;
-            case BuffType.Dex:
+            case Define.BuffType.Dex:
                 myStats[StatType.DEX] += value;
                 break;
-            case BuffType.Int:
+            case Define.BuffType.Int:
                 myStats[StatType.INT] += value;
                 break;
-            case BuffType.Con:
+            case Define.BuffType.Con:
                 myStats[StatType.CON] += value;
                 break;
         }
@@ -202,22 +202,22 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
 
         switch (buffType)
         {
-            case BuffType.Atk:
+            case Define.BuffType.Atk:
                 atk -= value;
                 break;
-            case BuffType.Def:
+            case Define.BuffType.Def:
                 def -= value;
                 break;
-            case BuffType.Str:
+            case Define.BuffType.Str:
                 myStats[StatType.STR] -= value;
                 break;
-            case BuffType.Dex:
+            case Define.BuffType.Dex:
                 myStats[StatType.DEX] -= value;
                 break;
-            case BuffType.Int:
+            case Define.BuffType.Int:
                 myStats[StatType.INT] -= value;
                 break;
-            case BuffType.Con:
+            case Define.BuffType.Con:
                 myStats[StatType.CON] -= value;
                 break;
         }

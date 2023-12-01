@@ -1,6 +1,6 @@
 public class RestoreItem : UseItem
 {
-    RestoreType restoreType;
+    Define.RestoreType restoreType;
     float value;
 
     public RestoreItem(ItemSO itemSO) : base(itemSO)
@@ -18,10 +18,10 @@ public class RestoreItem : UseItem
 
         switch (restoreType)
         {
-            case RestoreType.HP:
+            case Define.RestoreType.HP:
                 condition.currentHp = condition.currentHp + value > condition.maxHp ? condition.maxHp : condition.currentHp + value;
                 break;
-            case RestoreType.MP:
+            case Define.RestoreType.MP:
                 condition.currentHp = condition.currentMp + value > condition.maxMp ? condition.maxMp : condition.currentMp + value;
                 break;
         }

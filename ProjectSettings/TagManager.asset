@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - VirtualCamera
   - PlayerAttack
+  - Monster
   layers:
   - Default
   - TransparentFX

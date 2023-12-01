@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    public static UIManager Instance;
     private PlayerInputAction inputAction;
     [field: SerializeField] private Transform canvas;
     private List<GameObject> EnableUI;
@@ -52,16 +51,6 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-
-        if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
-
         inputAction = InputManager.inputActions;
 
         inputAction.Player.Escape.Enable();

@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class PlayerPassageChecker : MonoBehaviour
 {
     [SerializeField] private List<FadeOutObject> fadeOutObjects;
+    [SerializeField] private int passageNum;
     private DungeonManager dungeonManager;
     private BoxCollider boxCollider;
     private void Start()
@@ -34,6 +35,7 @@ public class PlayerPassageChecker : MonoBehaviour
                 else
                 {
                     dungeonManager.Spawn();
+                    dungeonManager.SetPlayerPosition(passageNum);
                 }
                 
             }
