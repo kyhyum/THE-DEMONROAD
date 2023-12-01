@@ -25,8 +25,7 @@ public class BossStateMachine : BossBaseStateMachine
     public BossStateMachine(Boss boss)
     {
         Boss = boss;
-        Target = GameObject.FindGameObjectWithTag("Player").transform;
-        //TODO : Target = GameManager.Instance.Myplayer.transform;
+        Target = GameManager.Instance.Myplayer.transform;
 
         IdleState = new BossIdleState(this);
         ChasingState = new BossChaseState(this);

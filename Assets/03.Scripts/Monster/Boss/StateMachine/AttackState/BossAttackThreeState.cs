@@ -16,6 +16,7 @@ public class BossAttackThreeState : BossBaseState
     public override void Enter()
     {
         base.Enter();
+        timer = 0f;
         StartAnimation(stateMachine.Boss.bossAnimationData.Attack3ParameterHash);
     }
 
@@ -38,6 +39,7 @@ public class BossAttackThreeState : BossBaseState
                 if (timer >= interval)
                 {
                     BossBullet bossBullet = stateMachine.Boss.pattern1Bullet.GetObject();
+                    bossBullet.BulletSetEventNull();
                     bossBullet.gameObject.transform.position = stateMachine.Boss.bulletSpawnPoint.position;
                     bossBullet.BulletReturned += stateMachine.Boss.pattern1Bullet.ReturnObject;
                     bossBullet.Shooting();

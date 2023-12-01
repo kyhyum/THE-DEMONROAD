@@ -60,7 +60,6 @@ public class Monster : MonoBehaviour
         InitMonster();
         MonsterHealth.OnDie += OnDie;
         MonsterHealth.OnDie += itemDropController.DropItem;
-        MonsterHealth.OnDie += monsterSound.PlayDeadSound;
     }
 
     public void InitMonster()
@@ -84,6 +83,7 @@ public class Monster : MonoBehaviour
     void OnDie()
     {
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        MonsterHealth.OnDie += monsterSound.PlayDeadSound;
         Animator.SetTrigger("Die");
         Invoke("AfterAnimationComplete", Animator.GetCurrentAnimatorStateInfo(0).length);
     }
