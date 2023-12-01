@@ -25,6 +25,7 @@ public class QuestBoard : MonoBehaviour
     private ChoiceDungeon choiceDungeon;
     
 
+
     public List<QuestSO> Quests { get { return quests; } }
     public ItemSO golditem;
     public QuestProgress questProgress;
@@ -72,13 +73,38 @@ public class QuestBoard : MonoBehaviour
     private void OnDungeonInteractionPopupActivated()
     {
         QuestSO selectedQuest = GetMainQuest();
-        questProgress.UpdateMainQuestProgress(selectedQuest);
+        UpdateMainQuestProgress(selectedQuest);
     }
 
     private QuestSO GetMainQuest()
     {
         QuestSO mainQuest = quests[4];
         return mainQuest;
+    }
+    public void UpdateMainQuestProgress(QuestSO selectedQuest)
+    {
+        if (selectedQuest.questType == Define.QuestType.MainQuest)
+        {
+            if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
+            {
+                Debug.Log("UpdateMainQuest이 null이 아니다");
+
+                questProgress.questProgmainName.color = Color.red;
+                questProgress.questProgmainName.fontStyle |= FontStyles.Italic;
+                questProgress.questProgmainName.fontStyle |= FontStyles.Strikethrough;
+
+                questProgress.questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;
+
+                questProgress.MainQuestReward(selectedQuest);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("MainQuest가 아닙니다. UpdateMainQuestProgress 메서드는 MainQuest에 대해서만 실행됩니다.");
+        }
+
+        
+
     }
 
     private void InitializeQuestList()

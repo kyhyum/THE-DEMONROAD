@@ -14,9 +14,10 @@ public class QuestProgress : MonoBehaviour
 
     public TMP_Text questProgmainName;
 
+    public QuestBoard board;
     private QuestController controller;
-    private ChoiceDungeon choiceDungeon;
-    private bool isMainQuestProgressUpdated = false;
+    
+    
 
     
 
@@ -68,37 +69,12 @@ public class QuestProgress : MonoBehaviour
         {
 
             questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
-            UpdateMainQuestProgress(selectedQuest);
+            board.UpdateMainQuestProgress(selectedQuest);
 
 
         }
     }
-    public void UpdateMainQuestProgress(QuestSO selectedQuest)
-    {
-        if (!isMainQuestProgressUpdated)
-        {
-            if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
-            {
-                Debug.Log("UpdateMainQuest이 null이 아니다");
-
-
-                questProgmainName.color = Color.red;
-                questProgmainName.fontStyle |= FontStyles.Italic;
-                questProgmainName.fontStyle |= FontStyles.Strikethrough;
-
-                questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;
-
-                
-                MainQuestReward(selectedQuest);
-                isMainQuestProgressUpdated = true;
-
-
-            }
-
-
-        }
-
-    }
+    
     public void MainQuestReward(QuestSO selectedQuest)
     {
         if (controller != null)
