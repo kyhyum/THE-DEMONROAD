@@ -4,7 +4,7 @@ using TMPro;
 using System.Collections.Generic;
 
 
-public class ShopManager : MonoBehaviour
+public class ShopManager : Singleton<ShopManager>
 {
     //potionShop
     public GameObject potionShop;
