@@ -17,10 +17,6 @@ public class QuestProgress : MonoBehaviour
     public QuestBoard board;
     private QuestController controller;
     
-    
-
-    
-
     public void ShowQuestProgress(QuestSO selectedQuest) 
     {
         if (selectedQuest.questType == Define.QuestType.ConversationQuest) 
@@ -52,7 +48,6 @@ public class QuestProgress : MonoBehaviour
         }
         else if (selectedQuest.questType == Define.QuestType.InfiniteMonsterQuest) 
         {
-
             int goblinKills = GameManager.Instance.goblinkillCount;
             questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " + goblinKills + " / " + selectedQuest.questComplete;
             if (goblinKills >= selectedQuest.questComplete)
@@ -74,7 +69,7 @@ public class QuestProgress : MonoBehaviour
 
         }
     }
-    
+
     public void MainQuestReward(QuestSO selectedQuest)
     {
         if (controller != null)
