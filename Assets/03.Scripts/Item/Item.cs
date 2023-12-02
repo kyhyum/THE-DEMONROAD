@@ -11,6 +11,8 @@ public class Item
     public Define.Rank rank;
     public Define.ItemType type;
     public GameObject prefab;
+    internal ItemSO itemSO;
+    internal int itemPrice;
 
     public Item(ItemSO itemSO)
     {
