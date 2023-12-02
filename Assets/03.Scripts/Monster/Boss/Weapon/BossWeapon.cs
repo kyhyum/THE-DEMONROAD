@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class BossWeapon : MonoBehaviour
 {
     public Collider myCollider { set; get; }
 
-    private int damage;
+    public int damage;
 
     private List<Collider> alreadyColliderWith = new List<Collider>();
 
@@ -21,7 +22,6 @@ public class BossWeapon : MonoBehaviour
         if (alreadyColliderWith.Contains(other)) return;
 
         alreadyColliderWith.Add(other);
-
         if (other.TryGetComponent(out BossHealth health))
         {
             health.TakeDamage(damage);

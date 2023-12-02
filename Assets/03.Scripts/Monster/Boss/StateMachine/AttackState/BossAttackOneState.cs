@@ -28,23 +28,22 @@ public class BossAttackOneState : BossBaseState
     public override void Update()
     {
         float normalizedTime = GetNormalizedTime(stateMachine.Boss.Animator);
-        Debug.Log(normalizedTime);
         if (normalizedTime < 1f)
         {
             if (!alreadyAppliedDealing && normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[0].Dealing_Start_TransitionTime)
             {
-                stateMachine.Boss.Weapon.SetAttack(stateMachine.Boss.Data.AttackPatternInfoDatas[0].Damage);
-                stateMachine.Boss.Weapon.gameObject.SetActive(true);
+                stateMachine.Boss.Weapon1.SetAttack(stateMachine.Boss.Data.AttackPatternInfoDatas[0].Damage);
+                stateMachine.Boss.Weapon1.gameObject.SetActive(true);
                 alreadyAppliedDealing = true;
             }else if (alreadyAppliedDealing && normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[0].Dealing_End_TransitionTime)
             {
-                stateMachine.Boss.Weapon.gameObject.SetActive(false);
+                stateMachine.Boss.Weapon1.gameObject.SetActive(false);
                 alreadyAppliedDealing = false; 
                 return;
             }
 
         }
-        else
+        else if(normalizedTime > 1f)
         {
             stateMachine.ChangeState(stateMachine.ChasingState);
             return;

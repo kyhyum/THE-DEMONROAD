@@ -6,14 +6,12 @@ using UnityEngine;
 public class BossAttackTwoState : BossBaseState
 {
     private bool alreadyAppliedDealing;
-    private bool alreadyAppliedForce;
     public BossAttackTwoState(BossStateMachine bossStateMachine) : base(bossStateMachine)
     {
         stateMachine = bossStateMachine;
     }
     public override void Enter()
     {
-        alreadyAppliedForce = false;
         alreadyAppliedDealing = false;
         base.Enter();
         StartAnimation(stateMachine.Boss.bossAnimationData.Attack2ParameterHash);
@@ -32,18 +30,18 @@ public class BossAttackTwoState : BossBaseState
         {
             if (!alreadyAppliedDealing && normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[1].Dealing_Start_TransitionTime)
             {
-                stateMachine.Boss.Weapon.SetAttack(stateMachine.Boss.Data.AttackPatternInfoDatas[1].Damage);
-                stateMachine.Boss.Weapon.gameObject.SetActive(true);
+                stateMachine.Boss.Weapon2.SetAttack(stateMachine.Boss.Data.AttackPatternInfoDatas[1].Damage);
+                stateMachine.Boss.Weapon2.gameObject.SetActive(true);
                 alreadyAppliedDealing = true;
             }else if (alreadyAppliedDealing && normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[1].Dealing_End_TransitionTime)
             {
-                stateMachine.Boss.Weapon.gameObject.SetActive(false);
+                stateMachine.Boss.Weapon2.gameObject.SetActive(false);
                 alreadyAppliedDealing = false; 
                 return;
             }
 
         }
-        else
+        else if(normalizedTime > 1f)
         {
             stateMachine.ChangeState(stateMachine.ChasingState);
         }

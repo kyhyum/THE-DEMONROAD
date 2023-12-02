@@ -9,10 +9,24 @@ public class BossBullet : BossWeapon
     public float bulletSpeed = 10f;
     public float bulletDuration = 11f;
 
+    public Coroutine DestroyCoroutine = null;
+
     private Transform Target;
     void Awake()
     {
         Target = GameManager.Instance.Myplayer.transform;
+    }
+
+    public void BulletSpawn()
+    {
+        StartCoroutine(BulletUnactive());
+    }
+
+    IEnumerator BulletUnactive()
+    {
+        yield return new WaitForSeconds(bulletDuration);
+
+        BulletReturned?.Invoke(this);
     }
 
     public void Shooting()
@@ -28,7 +42,6 @@ public class BossBullet : BossWeapon
 
         while (elapsedTime < bulletDuration)
         {
-
             // 총알을 플레이어 방향으로 날아가게 함
             transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
 
@@ -36,7 +49,6 @@ public class BossBullet : BossWeapon
             yield return null;
         }
 
-        // 일정 시간이 지나면 총알 오브젝트 풀에 넣기
         BulletReturned?.Invoke(this);
     }
 
@@ -44,4 +56,5 @@ public class BossBullet : BossWeapon
     {
         BulletReturned = null;
     }
+
 }
