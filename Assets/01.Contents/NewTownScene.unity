@@ -35009,7 +35009,8 @@ MonoBehaviour:
   interactionPopup: {fileID: 183830749}
   nameText: {fileID: 1608689205}
   dialogueText: {fileID: 1010167134}
-  questProgName: {fileID: 0}
+  uiProgressPrefab: {fileID: 5962014774717511912, guid: 3262b73b341cb5445b06164b6467028b,
+    type: 3}
   activationDistance: 5
 --- !u!1 &709558938
 GameObject:
@@ -47539,7 +47540,8 @@ MonoBehaviour:
   interactionPopup: {fileID: 162535865}
   nameText: {fileID: 1324289736}
   dialogueText: {fileID: 1689673536}
-  questProgName: {fileID: 0}
+  uiProgressPrefab: {fileID: 5962014774717511912, guid: 3262b73b341cb5445b06164b6467028b,
+    type: 3}
   activationDistance: 5
 --- !u!1 &962153053
 GameObject:
@@ -66833,7 +66835,8 @@ MonoBehaviour:
   interactionPopup: {fileID: 366699507}
   nameText: {fileID: 1580947111}
   dialogueText: {fileID: 1904894478}
-  questProgName: {fileID: 0}
+  uiProgressPrefab: {fileID: 5962014774717511912, guid: 3262b73b341cb5445b06164b6467028b,
+    type: 3}
   activationDistance: 5
 --- !u!33 &1356693023
 MeshFilter:

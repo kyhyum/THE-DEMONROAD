@@ -23,7 +23,9 @@ public class npcInteraction : MonoBehaviour
     public TMP_Text dialogueText;
 
     //progressui
-    public TMP_Text questProgName;
+    //private TMP_Text questProgName;
+    QuestProgress questProgress;
+
 
 
     private bool isUIVisible = false;
@@ -36,6 +38,11 @@ public class npcInteraction : MonoBehaviour
     void Start()
     {
         controller = FindObjectOfType<QuestController>();
+        questProgress = UIManager.Instance.GetQuestProgress();
+        if (questProgress == null)
+        {
+            Debug.LogError("QuestProgress 컴포넌트를 찾을 수 없습니다.");
+        }
 
 
         dialogueUI.SetActive(false);
@@ -104,7 +111,8 @@ public class npcInteraction : MonoBehaviour
                 Debug.Log("대화횟수 1증가");
                 Debug.Log("현재 총 대화수: " + npc.conversationCount);
 
-                ConversationQuestProgress(quest);
+                Debug.Log("UpdateConversationQuestProgress 메서드 호출");
+                UpdateConversationQuestProgress(quest);
 
                 if (npc.conversationCount == quest.questComplete)
                 {
@@ -130,16 +138,22 @@ public class npcInteraction : MonoBehaviour
 
 
     }
-    public void ConversationQuestProgress(QuestSO selectedQuest)
+    public void UpdateConversationQuestProgress(QuestSO selectedQuest)
     {
+        Debug.Log("update됨");
         if (selectedQuest.questType == Define.QuestType.ConversationQuest)
         {
+            questProgress.questProgconverseName.color = Color.red;
+            questProgress.questProgconverseName.fontStyle = FontStyles.Italic | FontStyles.Strikethrough;
+            questProgress.questProgconverseName.text = selectedQuest.questName + "\n - " + " 1 / " + selectedQuest.questComplete;
 
-            foreach (var npc in selectedQuest.relatedNPCs)
-            {
+            //foreach (var npc in selectedQuest.relatedNPCs)
+            //{
+            //    questProgName.color = Color.red;
+            //    questProgName.fontStyle = FontStyles.Italic | FontStyles.Strikethrough;
+            //    questProgName.text = selectedQuest.questName + "\n - " + " 1 / " + selectedQuest.questComplete;
 
-                questProgName.text = selectedQuest.questName + "\n - " + " 1 / " + selectedQuest.questComplete;
-            }
+            //}
         }
 
     }
@@ -169,11 +183,7 @@ public class npcInteraction : MonoBehaviour
 
 
 
-        Debug.Log("Quest completed!");
-
-        questProgName.color = Color.red;
-        questProgName.fontStyle |= FontStyles.Italic;
-        questProgName.fontStyle |= FontStyles.Strikethrough;
+        Debug.Log("Quest completed!");  
 
 
 

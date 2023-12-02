@@ -9,7 +9,7 @@ public class QuestProgress : MonoBehaviour
 {
     [SerializeField] TMP_Text questProgmonsterName;
     [SerializeField] TMP_Text questProgitemName;
-    [SerializeField] TMP_Text questProgconverseName;
+    public TMP_Text questProgconverseName;
     [SerializeField] TMP_Text questProgInfinitemonsterName;
 
     public TMP_Text questProgmainName;
