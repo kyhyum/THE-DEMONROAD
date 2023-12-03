@@ -13,7 +13,7 @@ public class PlayerAttackState : PlayerBaseState
         //Debug.Log("PlayerAttackState 클래스 Enter 함수 호출한다.");
         
         stateMachine.Player.Agent.ResetPath();
-        stateMachine.Player.animationEventEffects.SetEffects(stateMachine.Player.playerSO.AttakData[0].Effects);
+        stateMachine.Player.animationEventEffects.SetEffects(stateMachine.Player.playerBaseAttackData.Effects);
         base.Enter();
         StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
     }
@@ -25,23 +25,24 @@ public class PlayerAttackState : PlayerBaseState
         StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
     }
 
-    public override void Update()
-    {
-        base.Update();
+    //Attack Test
+    //public override void Update()
+    //{
+    //    base.Update();
 
-        float normalizedTime = GetNormalizedTime(stateMachine.Player.Animator, "Attack");
-        if (normalizedTime < 0.8f)
-        {
-            if (stateMachine.Player.IsAttacking)
-            {
-                //Debug.Log("PlayerAttackState 클래스 Update 함수 호출한다.");
-            }
+    //    float normalizedTime = GetNormalizedTime(stateMachine.Player.Animator, "Attack");
+    //    if (normalizedTime < 0.8f)
+    //    {
+    //        if (stateMachine.Player.IsAttacking)
+    //        {
+    //            //Debug.Log("PlayerAttackState 클래스 Update 함수 호출한다.");
+    //        }
 
-            //Debug.Log("PlayerAttackState 클래스 Update2 함수 호출한다. 2");
-        }
-        else
-        {
-            stateMachine.ChangeState(stateMachine.IdleState);
-        }
-    }
+    //        //Debug.Log("PlayerAttackState 클래스 Update2 함수 호출한다. 2");
+    //    }
+    //    else
+    //    {
+    //        stateMachine.ChangeState(stateMachine.IdleState);
+    //    }
+    //}
 }

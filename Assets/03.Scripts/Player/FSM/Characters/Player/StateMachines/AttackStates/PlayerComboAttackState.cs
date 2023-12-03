@@ -23,7 +23,7 @@ public class PlayerComboAttackState : PlayerAttackState
 
         int comboIndex = stateMachine.ComboIndex;
         attackInfoData = stateMachine.Player.playerSO.AttakData[0].GetAttackInfo(comboIndex);
-        stateMachine.Player.Animator.SetInteger("Combo", comboIndex);
+        stateMachine.Player.Animator.SetInteger("BasicAttackCombo", comboIndex);
     }
 
     public override void Exit()

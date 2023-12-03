@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     [field: Header("Attack")]
     public PlayerSO playerSO;
     [field: SerializeField] private List<Transform> basicAttackTransforms;
+    public PlayerAttackData playerBaseAttackData { get; set; }
     [field: SerializeField] public AnimationEventEffects animationEventEffects { get; private set; }
 
     [field: Header("Skill")]
@@ -45,10 +46,11 @@ public class Player : MonoBehaviour
     public AttackRange[] skillRange;
 
 
-    [field: Header(" ")]
-    [field: SerializeField] public TrailRenderer TrailRenderer { get; set; }
-    [field: SerializeField] public GameObject ParticleSystem_Trails1 { get; set; }
-    [field: SerializeField] public GameObject ParticleSystem_Trails2 { get; set; }
+    //Attack Test
+    //[field: Header(" ")]
+    //[field: SerializeField] public TrailRenderer TrailRenderer { get; set; }
+    //[field: SerializeField] public GameObject ParticleSystem_Trails1 { get; set; }
+    //[field: SerializeField] public GameObject ParticleSystem_Trails2 { get; set; }
 
     private PlayerStateMachine stateMachine;
 
@@ -61,15 +63,16 @@ public class Player : MonoBehaviour
         Input = GetComponent<PlayerInput>();
         Controller = GetComponent<CharacterController>();
         Agent = GetComponent<NavMeshAgent>();
-        animationEventEffects = GetComponent<AnimationEventEffects>();
 
         stateMachine = new PlayerStateMachine(this);
 
         IsAttackSkill = new bool[skillSOs.Length];
         skills = new Skill[skillSOs.Length];
 
+        //기본 공격
+        playerBaseAttackData = playerSO.AttakData[0];
         //Attack 위치 설정
-        playerSO.AttakData[0].SetAttackEffectTransform(basicAttackTransforms);
+        playerBaseAttackData.SetAttackEffectTransform(basicAttackTransforms);
     }
 
     private void Start()
@@ -169,15 +172,16 @@ public class Player : MonoBehaviour
         enabled = false;
     }
 
-    public bool IsAttack()
-    {
-        bool flag = IsAttacking;
+    //Attack Test 
+    //public bool IsAttack()
+    //{
+    //    bool flag = IsAttacking;
 
-        foreach (bool b in IsAttackSkill)
-        {
-            flag = flag || b;
-        }
+    //    foreach (bool b in IsAttackSkill)
+    //    {
+    //        flag = flag || b;
+    //    }
 
-        return flag;
-    }
+    //    return flag;
+    //}
 }

@@ -11,7 +11,8 @@ public class Weapon : MonoBehaviour
     // 이미 충돌한 상태
     private List<Collider> alreadyColliderWith = new List<Collider>();
 
-    [field: SerializeField] public ParticleSystem AttackSlash { get; private set; }
+    //Attack Test
+    //[field: SerializeField] public ParticleSystem AttackSlash { get; private set; }
 
     private void OnEnable()
     {
