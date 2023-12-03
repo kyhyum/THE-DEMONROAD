@@ -34,6 +34,11 @@ public class Player : MonoBehaviour
     public bool IsAttacking { get; set; }
     public bool[] IsAttackSkill { get; set; }
 
+    [field: Header("Attack")]
+    public PlayerSO playerSO;
+    [field: SerializeField] private List<Transform> basicAttackTransforms;
+    [field: SerializeField] public AnimationEventEffects animationEventEffects { get; private set; }
+
     [field: Header("Skill")]
     public SkillSO[] skillSOs;
     public Skill[] skills { get; private set; }
@@ -56,12 +61,15 @@ public class Player : MonoBehaviour
         Input = GetComponent<PlayerInput>();
         Controller = GetComponent<CharacterController>();
         Agent = GetComponent<NavMeshAgent>();
+        animationEventEffects = GetComponent<AnimationEventEffects>();
 
         stateMachine = new PlayerStateMachine(this);
 
         IsAttackSkill = new bool[skillSOs.Length];
         skills = new Skill[skillSOs.Length];
 
+        //Attack 위치 설정
+        playerSO.AttakData[0].SetAttackEffectTransform(basicAttackTransforms);
     }
 
     private void Start()

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,17 +11,7 @@ public class AnimationEventEffects : MonoBehaviour {
     //public Transform EffectStartPositionWorld;
     //public float DestroyAfterWorld = 10;
 
-    public EffectInfo[] Effects;
-
-    [System.Serializable]
-
-    public class EffectInfo
-    {
-        public GameObject Effect;
-        public Transform StartPositionRotation;
-        public float DestroyAfter = 10;
-        public bool UseLocalPosition = true;
-    }
+    public AttackEffectInfoData[] Effects;
 
     //   // Update is called once per frame
     //   void CreateEffect () {
@@ -39,6 +29,10 @@ public class AnimationEventEffects : MonoBehaviour {
     void Start() {
     }
             
+    public void SetEffects(AttackEffectInfoData[] effects)
+    {
+        this.Effects = effects;
+    }
     void InstantiateEffect(int EffectNumber)
     {
         if(Effects == null || Effects.Length <= EffectNumber)

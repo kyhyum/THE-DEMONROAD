@@ -13,8 +13,8 @@ public class PlayerAttackState : PlayerBaseState
         //Debug.Log("PlayerAttackState 클래스 Enter 함수 호출한다.");
         
         stateMachine.Player.Agent.ResetPath();
+        stateMachine.Player.animationEventEffects.SetEffects(stateMachine.Player.playerSO.AttakData[0].Effects);
         base.Enter();
-
         StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
     }
 

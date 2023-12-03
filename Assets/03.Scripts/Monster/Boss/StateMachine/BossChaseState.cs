@@ -39,6 +39,7 @@ public class BossChaseState : BossBaseState
         {
             if (IsInAttackRange())
             {
+                setPattern = false;
                 stateMachine.Boss.BossNavMeshAgent.ResetPath();
                 switch (previousAttackPattern)
                 {
@@ -56,7 +57,6 @@ public class BossChaseState : BossBaseState
                         break;
 
                 }
-                setPattern = false;
                 return;
             }
         }

@@ -21,7 +21,7 @@ MonoBehaviour:
     <Damage>k__BackingField: 0
     <ForceTransitionTime>k__BackingField: 0
     <Force>k__BackingField: 0
-    <Dealing_Start_TransitionTime>k__BackingField: 0
+    <Dealing_Start_TransitionTime>k__BackingField: 0.148
     <Dealing_End_TransitionTime>k__BackingField: 0.606
     <AttackRange>k__BackingField: 5
   - <IsLongRanged>k__BackingField: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
     <ForceTransitionTime>k__BackingField: 0
     <Force>k__BackingField: 0
     <Dealing_Start_TransitionTime>k__BackingField: 0.157
-    <Dealing_End_TransitionTime>k__BackingField: 0.921
+    <Dealing_End_TransitionTime>k__BackingField: 0.75
     <AttackRange>k__BackingField: 10
   - <IsLongRanged>k__BackingField: 1
     <AttackName>k__BackingField: Attack3

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9766a236593e65c498e3004032e24e88, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  <AttakData>k__BackingField:
+  - <AttackName>k__BackingField: BaseAttack
+    <AttackInfoDatas>k__BackingField:
+    - <AttackInfoName>k__BackingField: "\uAE30\uBCF8 1\uD0C0"
+      <ComboStateIndex>k__BackingField: 0
+      <ComboTransitionTime>k__BackingField: 0.8
+      <Damage>k__BackingField: 5
+    - <AttackInfoName>k__BackingField: "\uAE30\uBCF8 2\uD0C0"
+      <ComboStateIndex>k__BackingField: 0
+      <ComboTransitionTime>k__BackingField: 0.8
+      <Damage>k__BackingField: 10
+    - <AttackInfoName>k__BackingField: "\uAE30\uBCF8 3\uD0C0"
+      <ComboStateIndex>k__BackingField: 0
+      <ComboTransitionTime>k__BackingField: 0.8
+      <Damage>k__BackingField: 15
+    <Effects>k__BackingField:
+    - Effect: {fileID: 1003445430884636, guid: 5f0ccaa603e3d6d459ebddc5267257ef, type: 3}
+      EffectNum: 0
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1514118954617016, guid: 8ab0c24e220c01e47aa412f3d83028c3, type: 3}
+      EffectNum: 1
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1003445430884636, guid: 5f0ccaa603e3d6d459ebddc5267257ef, type: 3}
+      EffectNum: 2
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1514118954617016, guid: 8ab0c24e220c01e47aa412f3d83028c3, type: 3}
+      EffectNum: 3
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1003445430884636, guid: 5f0ccaa603e3d6d459ebddc5267257ef, type: 3}
+      EffectNum: 4
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1399728257479852, guid: 9dd86e50d1377fb47be3dbbe58c77ddc, type: 3}
+      EffectNum: 5
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 8
+      UseLocalPosition: 0
