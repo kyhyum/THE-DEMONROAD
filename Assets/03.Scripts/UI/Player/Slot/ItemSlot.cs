@@ -65,6 +65,12 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         return item;
     }
+    public Item RemoveItem()
+    {
+        Item removedItem = item;
+        SetItem(null);
+        return removedItem;
+    }
 
     public void AddItem(int count)
     {

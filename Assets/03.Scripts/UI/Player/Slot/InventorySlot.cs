@@ -51,11 +51,7 @@ public class InventorySlot : ItemSlot, IDropHandler, IPointerDownHandler
 
             if (result.gameObject.TryGetComponent<Shop>(out Shop shop))
             {
-                ItemSO clickedItem = GetItem().itemSO;
-                shop.ShowSellConfirmationPopup(clickedItem);
-
-                UIManager.Instance.GetInventory().inventorySlots[slotID].Clear();
-                return;
+                shop.ShowConfirmationPop();
             }
         }
     }
