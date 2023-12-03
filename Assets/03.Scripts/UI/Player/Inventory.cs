@@ -10,7 +10,9 @@ public class Inventory : MonoBehaviour
     [field: SerializeField] private Transform slots;
     public ItemSlot[] inventorySlots;
     public EquipSlot[] equipSlots;
+    public ItemSlot iSlot;
     SlotItem data;
+    
     private int gold;
     public int Gold
     {
@@ -81,6 +83,10 @@ public class Inventory : MonoBehaviour
 
         inventorySlots[index].SetItem(item);
         return true;
+    }
+    public Item RemoveItem(int slot)
+    { 
+        return inventorySlots[slot].RemoveItem();
     }
 
     public Item GetItem(int slot)
@@ -220,4 +226,6 @@ public class Inventory : MonoBehaviour
     {
         UIManager.Instance.ClickInventory();
     }
+
+   
 }

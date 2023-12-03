@@ -21,8 +21,7 @@ public class ShopManager : Singleton<ShopManager>
 
     //Pop
     public GameObject confirmationPopUp;
-    public GameObject sellconfirmationPopup;
-    public GameObject equipsellconfirmationPopUp;
+    public GameObject sellConfirmationPopup;
     public GameObject outofGoldPop;
 
     //Text
@@ -37,7 +36,8 @@ public class ShopManager : Singleton<ShopManager>
     public Button decreaseButton;
 
     private int itemCountToBuy = 1;
-    
+
+    Shop shop;
     ItemSO item;
     public List<ItemSO> itemList;
 
@@ -49,8 +49,7 @@ public class ShopManager : Singleton<ShopManager>
         equipShop.SetActive(false);
 
         confirmationPopUp.SetActive(false);
-        sellconfirmationPopup.SetActive(false);
-        equipsellconfirmationPopUp.SetActive(false);
+        sellConfirmationPopup.SetActive(false);
         outofGoldPop.SetActive(false);
 
         increaseButton.onClick.AddListener(IncreaseItemCount);
@@ -138,24 +137,49 @@ public class ShopManager : Singleton<ShopManager>
             Debug.Log("Inventory가 null입니다.");
         }
     }
-    public void SellItem()
+    public void SellItem(int slotIndex)
     {
         Inventory inventory = UIManager.Instance.GetInventory();
+        Item itemToSell = inventory.GetItem(slotIndex);
+        
 
-        if (inventory != null && item != null)
+        if (itemToSell != null)
         {
-            int sellPrice = item.itemPrice; 
+            string itemToSellName = itemToSell.itemName;
 
-            
-            inventory.Gold += sellPrice;
+            foreach (ItemSO itemSO in itemList)
+            {
+                if (itemSO.itemName == itemToSellName)
+                {
+                    int sellPrice = itemSO.itemPrice;
 
-            sellconfirmationPopup.SetActive(false);
+                    inventory.Gold += sellPrice;
+                    inventory.RemoveItem(slotIndex);
+
+                    Debug.Log(itemToSellName + "을(를) 판매했습니다. 획득한 골드: " + sellPrice);
+
+                    if (sellConfirmationPopup != null)
+                    {
+                        sellConfirmationPopup.SetActive(false);
+                    }
+                    else
+                    {
+                        Debug.LogError("sellConfirmationPopup이 null입니다.");
+                    }
+                    return; 
+                }
+            }
+
+           
+            Debug.LogError("판매하려는 아이템의 정보를 찾을 수 없습니다.");
         }
         else
         {
-            Debug.LogWarning("인벤토리가 없거나 판매할 아이템이 선택되지 않았습니다.");
+            Debug.LogError("해당 슬롯에 아이템이 없습니다.");
         }
+        
     }
+
 
     public void IncreaseItemCount()
     {
