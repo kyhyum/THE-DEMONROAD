@@ -8,23 +8,50 @@ public class Shop : MonoBehaviour
     public TMP_Text sellConfirmationText;
     public Button sellConfirmButton;
 
-    private ItemSO currentItem;
+    private void Start()
+    {
+        sellConfirmationPopup.SetActive(false);
+    }
 
-    
     public void SellItem()
     {
-        ShopManager.Instance.SellItem();
-        
+        int slotIndex = 0; 
+
+        Inventory inventory = UIManager.Instance.GetInventory(); 
+        if (inventory != null)
+        {
+            ShopManager.Instance.SellItem(slotIndex);
+        }
+        else
+        {
+            Debug.LogError("Inventory 스크립트를 가져올 수 없습니다.");
+        }
+
     }
-   
-
-    
-    public void ShowSellConfirmationPopup(ItemSO item)
+    public void ShowConfirmationPop()
     {
-        currentItem = item; 
+        int slotIndex = 0; 
 
-        
-        sellConfirmationPopup.SetActive(true);
-        sellConfirmationText.text = item.itemName + "아이템을 판매하시겠습니까?"; 
+        Inventory inventory = UIManager.Instance.GetInventory();
+        if (inventory != null)
+        {
+            Item itemToSell = inventory.GetItem(slotIndex);
+            if (itemToSell != null)
+            {
+                string itemName = itemToSell.itemName;
+                int sellPrice = itemToSell.itemSO.itemPrice; 
+
+                sellConfirmationText.text = itemName + "을(를) " + sellPrice + " 골드에 판매하시겠습니까?";
+                sellConfirmationPopup.SetActive(true);
+            }
+            else
+            {
+                Debug.LogError("해당 슬롯에 아이템이 없습니다.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Inventory 스크립트를 가져올 수 없습니다.");
+        }
     }
 }

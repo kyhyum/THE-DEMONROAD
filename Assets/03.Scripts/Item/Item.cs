@@ -31,4 +31,9 @@ public class Item
             Debug.LogError("ItemSO가 null입니다.");
         }
     }
+    public ItemSO GetItemSO()
+    {
+        return itemSO;
+    }
+    
 }
