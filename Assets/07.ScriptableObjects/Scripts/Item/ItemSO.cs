@@ -17,7 +17,7 @@ public class ItemSO : ScriptableObject
 
     public virtual GameObject CreateItem()
     {
-        GameObject gameObject = Instantiate(prefab);
+        GameObject itemObj = Instantiate(prefab);
         Item item;
 
         if (type == Define.ItemType.Resources || type == Define.ItemType.Gold)
@@ -33,7 +33,7 @@ public class ItemSO : ScriptableObject
             item = new EquipItem(this);
         }
 
-        GameObject canvas = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UI_ItemLabel"), gameObject.transform);
+        GameObject canvas = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UI_ItemLabel"), itemObj.transform);
         TMP_Text text = canvas.GetComponentInChildren<TMP_Text>();
         text.text = itemName;
 
@@ -42,7 +42,7 @@ public class ItemSO : ScriptableObject
         Color textColor = new Color();
 
         canvas.GetComponentInChildren<ItemLabel>().SetItem(item);
-        canvas.GetComponentInChildren<ItemLabel>().SetObject(gameObject);
+        canvas.GetComponentInChildren<ItemLabel>().SetObject(itemObj);
 
         switch (rank)
         {
@@ -70,6 +70,6 @@ public class ItemSO : ScriptableObject
         image.color = imageColor;
         text.color = textColor;
 
-        return gameObject;
+        return itemObj;
     }
 }
