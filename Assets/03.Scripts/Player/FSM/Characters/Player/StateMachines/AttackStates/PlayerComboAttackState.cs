@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerComboAttackState : PlayerAttackState
 {
-    private bool alreadyAppliedForce;
     private bool alreadyApplyCombo;
 
     AttackInfoData attackInfoData;
@@ -19,7 +18,6 @@ public class PlayerComboAttackState : PlayerAttackState
         StartAnimation(stateMachine.Player.AnimationData.ComboAttackParameterHash);
 
         alreadyApplyCombo = false;
-        alreadyAppliedForce = false;
 
         int comboIndex = stateMachine.ComboIndex;
         attackInfoData = stateMachine.Player.playerSO.AttakData[0].GetAttackInfo(comboIndex);
