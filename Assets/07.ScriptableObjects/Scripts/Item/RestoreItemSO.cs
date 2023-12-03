@@ -11,10 +11,10 @@ public class RestoreItemSO : UseItemSO
     public override GameObject CreateItem()
     {
 
-        GameObject gameObject = base.CreateItem();
+        GameObject itemObj = base.CreateItem();
 
-        gameObject.GetComponentInChildren<ItemLabel>().SetItem(new RestoreItem(this));
+        itemObj.GetComponentInChildren<ItemLabel>().SetItem(new RestoreItem(this));
 
-        return gameObject;
+        return itemObj;
     }
 }

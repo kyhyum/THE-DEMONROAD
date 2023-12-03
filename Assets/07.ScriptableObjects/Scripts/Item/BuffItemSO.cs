@@ -12,10 +12,10 @@ public class BuffItemSO : UseItemSO
     public override GameObject CreateItem()
     {
 
-        GameObject gameObject = base.CreateItem();
+        GameObject itemObj = base.CreateItem();
 
-        gameObject.GetComponentInChildren<ItemLabel>().SetItem(new BuffItem(this));
+        itemObj.GetComponentInChildren<ItemLabel>().SetItem(new BuffItem(this));
 
-        return gameObject;
+        return itemObj;
     }
 }

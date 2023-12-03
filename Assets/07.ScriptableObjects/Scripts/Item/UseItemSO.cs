@@ -9,10 +9,11 @@ public class UseItemSO : ItemSO
 
     public override GameObject CreateItem()
     {
-        GameObject gameObject = base.CreateItem();
-        gameObject.GetComponentInChildren<ItemLabel>().SetItem(new UseItem(this));
+        GameObject itemObj = base.CreateItem();
 
-        return gameObject;
+        itemObj.GetComponentInChildren<ItemLabel>().SetItem(new UseItem(this));
+
+        return itemObj;
     }
 
 }

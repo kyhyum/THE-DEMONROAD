@@ -10,15 +10,15 @@ public class UIManager : Singleton<UIManager>
     [field: SerializeField] private Transform canvas;
     private List<GameObject> EnableUI;
 
-    private GameObject inventoryObject;
-    private GameObject storageObject;
-    private GameObject skillObject;
+    private GameObject inventoryObj;
+    private GameObject storageObj;
+    private GameObject skillObj;
     private GameObject questLogObject;
-    private GameObject questProgressObject;
+    private GameObject questProgressObj;
 
 
-    public GameObject settingObject;
-    public GameObject playerUIObject;
+    public GameObject settingObj;
+    public GameObject playerUIObj;
 
     private Inventory inventory;
     private Storage storage;
@@ -33,7 +33,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private AudioClip[] clips;
     [SerializeField] public PopUpUI popUpUI;
     private AudioSource audioSource;
-    public bool storageOpen => storageObject.activeSelf;
+    public bool storageOpen => storageObj.activeSelf;
     private Vector2 pos;
 
     private void Awake()
@@ -56,29 +56,29 @@ public class UIManager : Singleton<UIManager>
         inputAction.Player.Escape.Enable();
         inputAction.Player.Escape.started += OnEscapeKey;
 
-        playerUI = playerUIObject.GetComponent<PlayerUI>();
+        playerUI = playerUIObj.GetComponent<PlayerUI>();
 
     }
 
     private void CreateInventory()
     {
-        inventoryObject = Instantiate(Resources.Load<GameObject>(StringManager.InventoryPrefabPath), canvas);
-        inventory = inventoryObject.GetComponentInChildren<Inventory>();
-        inventoryObject.SetActive(false);
+        inventoryObj = Instantiate(Resources.Load<GameObject>(StringManager.InventoryPrefabPath), canvas);
+        inventory = inventoryObj.GetComponentInChildren<Inventory>();
+        inventoryObj.SetActive(false);
     }
 
     private void CreateStorage()
     {
-        storageObject = Instantiate(Resources.Load<GameObject>(StringManager.StroagePrefabPath), canvas);
-        storage = storageObject.GetComponentInChildren<Storage>();
-        storageObject.SetActive(false);
+        storageObj = Instantiate(Resources.Load<GameObject>(StringManager.StroagePrefabPath), canvas);
+        storage = storageObj.GetComponentInChildren<Storage>();
+        storageObj.SetActive(false);
     }
 
     private void CreateSkill()
     {
-        skillObject = Instantiate(Resources.Load<GameObject>(StringManager.SKillPrefabPath), transform);
-        skill = skillObject.GetComponentInChildren<SkillUI>();
-        skillObject.SetActive(false);
+        skillObj = Instantiate(Resources.Load<GameObject>(StringManager.SKillPrefabPath), transform);
+        skill = skillObj.GetComponentInChildren<SkillUI>();
+        skillObj.SetActive(false);
     }
 
     public void CreateQuestLog()
@@ -94,13 +94,13 @@ public class UIManager : Singleton<UIManager>
 
     public void CreateQuestProgress()
     {
-        if (questProgressObject != null)
+        if (questProgressObj != null)
         {
             return;
         }
-        questProgressObject = Instantiate(Resources.Load<GameObject>(StringManager.QuestProgressPath), canvas);
-        questProgress = questProgressObject.GetComponentInChildren<QuestProgress>();
-        questProgressObject.SetActive(false);
+        questProgressObj = Instantiate(Resources.Load<GameObject>(StringManager.QuestProgressPath), canvas);
+        questProgress = questProgressObj.GetComponentInChildren<QuestProgress>();
+        questProgressObj.SetActive(false);
     }
     public void DestroyQuestUI()
     {
@@ -109,9 +109,9 @@ public class UIManager : Singleton<UIManager>
             return;
         }
         Destroy(questLogObject);
-        Destroy(questProgressObject);
+        Destroy(questProgressObj);
         questLogObject = null;
-        questProgressObject = null;
+        questProgressObj = null;
         questLog = null;
         questProgress = null;
     }
@@ -207,12 +207,12 @@ public class UIManager : Singleton<UIManager>
 
     public void ActiveSettingWindow()
     {
-        ActiveUIGameObject(settingObject);
+        ActiveUIGameObject(settingObj);
     }
 
     public void ActiveInventory()
     {
-        ActiveUIGameObject(inventoryObject);
+        ActiveUIGameObject(inventoryObj);
     }
 
     private void ActiveInventory(InputAction.CallbackContext context)
@@ -222,7 +222,7 @@ public class UIManager : Singleton<UIManager>
 
     public void ActiveSkill()
     {
-        ActiveUIGameObject(skillObject);
+        ActiveUIGameObject(skillObj);
     }
 
     private void ActiveSkill(InputAction.CallbackContext context)
@@ -236,7 +236,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void ActiveQuesProgress()
     {
-        ActiveUIGameObject(questProgressObject);
+        ActiveUIGameObject(questProgressObj);
     }
 
     private void ActiveQuestLog(InputAction.CallbackContext context)
@@ -252,7 +252,7 @@ public class UIManager : Singleton<UIManager>
 
     public void ActivePlayerUI(bool flag)
     {
-        playerUIObject.SetActive(flag);
+        playerUIObj.SetActive(flag);
     }
 
     public void ActivePopUpUI()
@@ -262,38 +262,38 @@ public class UIManager : Singleton<UIManager>
 
     public void ActiveStorage()
     {
-        if (!storageObject.activeSelf)
+        if (!storageObj.activeSelf)
         {
-            pos = inventoryObject.GetComponent<RectTransform>().anchoredPosition;
+            pos = inventoryObj.GetComponent<RectTransform>().anchoredPosition;
 
-            if (!inventoryObject.activeSelf)
+            if (!inventoryObj.activeSelf)
             {
-                ActiveUIGameObject(inventoryObject);
+                ActiveUIGameObject(inventoryObj);
             }
 
-            inventoryObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(-510, 0);
-            inventoryObject.GetComponentInChildren<DragAndDrop>().enabled = false;
+            inventoryObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(-510, 0);
+            inventoryObj.GetComponentInChildren<DragAndDrop>().enabled = false;
 
             OnUIInputDisable();
         }
         else
         {
-            inventoryObject.GetComponent<RectTransform>().anchoredPosition = pos;
-            inventoryObject.GetComponentInChildren<DragAndDrop>().enabled = true;
+            inventoryObj.GetComponent<RectTransform>().anchoredPosition = pos;
+            inventoryObj.GetComponentInChildren<DragAndDrop>().enabled = true;
 
-            ActiveUIGameObject(inventoryObject);
+            ActiveUIGameObject(inventoryObj);
 
             OnUIInputEnable();
         }
 
-        ActiveUIGameObject(storageObject);
+        ActiveUIGameObject(storageObj);
     }
 
     private void OnEscapeKey(InputAction.CallbackContext context)
     {
         if (EnableUI.Count != 0)
         {
-            if (EnableUI[0].Equals(storageObject))
+            if (EnableUI[0].Equals(storageObj))
             {
                 ActiveStorage();
             }
@@ -341,12 +341,12 @@ public class UIManager : Singleton<UIManager>
 
     public void ClickInventory()
     {
-        UIClick(inventoryObject);
+        UIClick(inventoryObj);
     }
 
     public void ClickSkillUI()
     {
-        UIClick(skillObject);
+        UIClick(skillObj);
     }
 
     private void UIClick(GameObject uiObject)

@@ -13,9 +13,9 @@ public class EquipItemSO : ItemSO
     public override GameObject CreateItem()
     {
 
-        GameObject gameObject = base.CreateItem();
-        gameObject.GetComponentInChildren<ItemLabel>().SetItem(new EquipItem(this));
+        GameObject itemObj = base.CreateItem();
+        itemObj.GetComponentInChildren<ItemLabel>().SetItem(new EquipItem(this));
 
-        return gameObject;
+        return itemObj;
     }
 }
