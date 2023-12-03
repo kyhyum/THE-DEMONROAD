@@ -34,4 +34,12 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             return _instance;
         }
     }
+
+    private void Awake()
+    {
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
