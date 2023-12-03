@@ -17,16 +17,18 @@ public class BossBullet : BossWeapon
         Target = GameManager.Instance.Myplayer.transform;
     }
 
-    public void BulletSpawn()
+    public override void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(BulletUnactive());
-    }
+        if (other == myCollider) return;
+        if (alreadyColliderWith.Contains(other)) return;
 
-    IEnumerator BulletUnactive()
-    {
-        yield return new WaitForSeconds(bulletDuration);
-
-        BulletReturned?.Invoke(this);
+        alreadyColliderWith.Add(other);
+        if (other.TryGetComponent(out Health health))
+        {
+            health.TakeDamage(damage);
+            BulletReturned?.Invoke(this);
+            BulletReturned = null;
+        }
     }
 
     public void Shooting()
@@ -38,6 +40,7 @@ public class BossBullet : BossWeapon
     {
         float elapsedTime = 0f;
         // 플레이어 방향으로 회전
+        Target.position += Vector3.up * 1.2f;
         transform.LookAt(Target.position);
 
         while (elapsedTime < bulletDuration)

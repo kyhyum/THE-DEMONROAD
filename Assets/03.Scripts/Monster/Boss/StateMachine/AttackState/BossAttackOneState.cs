@@ -7,15 +7,17 @@ public class BossAttackOneState : BossBaseState
 {
     private bool alreadyAppliedDealing;
     private bool alreadyAppliedForce;
+    bool isAttack = false;
     public BossAttackOneState(BossStateMachine bossStateMachine) : base(bossStateMachine)
     {
         stateMachine = bossStateMachine;
     }
     public override void Enter()
     {
+        base.Enter();
         alreadyAppliedForce = false;
         alreadyAppliedDealing = false;
-        base.Enter();
+        isAttack = false;
         StartAnimation(stateMachine.Boss.bossAnimationData.Attack1ParameterHash);
     }
 
@@ -30,20 +32,25 @@ public class BossAttackOneState : BossBaseState
         float normalizedTime = GetNormalizedTime(stateMachine.Boss.Animator);
         if (normalizedTime < 1f)
         {
-            if (!alreadyAppliedDealing && normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[0].Dealing_Start_TransitionTime)
+            if (!alreadyAppliedDealing && normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[0].Dealing_Start_TransitionTime && normalizedTime < stateMachine.Boss.Data.AttackPatternInfoDatas[0].Dealing_End_TransitionTime)
             {
-                stateMachine.Boss.Weapon1.SetAttack(stateMachine.Boss.Data.AttackPatternInfoDatas[0].Damage);
-                stateMachine.Boss.Weapon1.gameObject.SetActive(true);
+                if (!stateMachine.Boss.Weapon1.gameObject.activeSelf)
+                {
+                    stateMachine.Boss.Weapon1.gameObject.SetActive(true);
+                }
                 alreadyAppliedDealing = true;
-            }else if (alreadyAppliedDealing && normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[0].Dealing_End_TransitionTime)
+            }else if (alreadyAppliedDealing && normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[0].Dealing_End_TransitionTime && !isAttack)
             {
-                stateMachine.Boss.Weapon1.gameObject.SetActive(false);
-                alreadyAppliedDealing = false; 
-                return;
+                if (stateMachine.Boss.Weapon1.gameObject.activeSelf)
+                {
+                    stateMachine.Boss.Weapon1.gameObject.SetActive(false);
+                }
+                alreadyAppliedDealing = false;
+                isAttack = true;
             }
 
         }
-        else if(normalizedTime > 1f)
+        else if(normalizedTime > 1f && isAttack)
         {
             stateMachine.ChangeState(stateMachine.ChasingState);
             return;

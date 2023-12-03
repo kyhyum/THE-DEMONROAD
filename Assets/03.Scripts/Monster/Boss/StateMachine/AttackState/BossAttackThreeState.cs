@@ -5,11 +5,10 @@ using UnityEngine;
 //일반 원거리 공격
 public class BossAttackThreeState : BossBaseState
 {
-
     private float timer = 0f;
     public float interval = 1.2f;
     private bool isCast = false;
-
+    bool isAttack = false;
     public BossAttackThreeState(BossStateMachine bossStateMachine) : base(bossStateMachine)
     {
         stateMachine = bossStateMachine;
@@ -20,6 +19,7 @@ public class BossAttackThreeState : BossBaseState
         StartAnimation(stateMachine.Boss.bossAnimationData.Attack3ParameterHash);
         timer = 0f;
         isCast = false;
+        isAttack = false;
     }
 
     public override void Exit()
@@ -51,10 +51,11 @@ public class BossAttackThreeState : BossBaseState
                     bossBullet.Shooting();
                     timer = 0;
                 }
+                isAttack = true;
             }
 
         }
-        else
+        else if(normalizedTime > 1f && isAttack)
         {
             stateMachine.Boss.bossBullet1CastSpell.SetActive(false);
             isCast = false;

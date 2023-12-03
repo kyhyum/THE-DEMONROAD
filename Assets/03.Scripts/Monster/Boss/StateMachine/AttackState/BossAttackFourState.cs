@@ -32,15 +32,15 @@ public class BossAttackFourState : BossBaseState
             
             if (normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[3].Dealing_Start_TransitionTime && !isAttack)
             {
-                BossBullet bossBullet = stateMachine.Boss.pattern2Bullet.GetObject();
-                bossBullet.BulletSetEventNull();
-                bossBullet.gameObject.transform.position = stateMachine.Boss.transform.position;
-                bossBullet.BulletReturned += stateMachine.Boss.pattern2Bullet.ReturnObject;
-                bossBullet.BulletSpawn();
+                BossSpell bossSpell = stateMachine.Boss.pattern2Bullet.GetObject();
+                bossSpell.SpellSetEventNull();
+                bossSpell.gameObject.transform.position = stateMachine.Boss.transform.position;
+                bossSpell.BulletReturned += stateMachine.Boss.pattern2Bullet.ReturnObject;
+                bossSpell.BulletSpawn();
                 isAttack = true;
             }
         }
-        else if (normalizedTime > 1f)
+        else if (normalizedTime > 1f && isAttack)
         {
             stateMachine.ChangeState(stateMachine.ChasingState);
             return;

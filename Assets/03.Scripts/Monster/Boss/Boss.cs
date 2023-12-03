@@ -19,7 +19,7 @@ public class Boss : MonoBehaviour
     [field: SerializeField] private GameObject bossBullet2Obj;
 
     public ObjectPool<BossBullet> pattern1Bullet { get; private set; }
-    public ObjectPool<BossBullet> pattern2Bullet { get; private set; }
+    public ObjectPool<BossSpell> pattern2Bullet { get; private set; }
 
     public event Action<Boss> objectPoolReturn;
     [field: SerializeField] public Transform bulletSpawnPoint {get; private set;}
@@ -46,6 +46,9 @@ public class Boss : MonoBehaviour
 
         bossBullet1CastSpell.SetActive(false);
 
+        Weapon1.SetAttack(Data.AttackPatternInfoDatas[0].Damage);
+        Weapon2.SetAttack(Data.AttackPatternInfoDatas[1].Damage);
+
     }
 
     private void Start()
@@ -54,7 +57,7 @@ public class Boss : MonoBehaviour
         Initboss();
         BossHealth.OnDie += OnDie;
         pattern1Bullet = new ObjectPool<BossBullet>(bossBullet1Obj.GetComponent<BossBullet>(), 12);
-        pattern2Bullet = new ObjectPool<BossBullet>(bossBullet2Obj.GetComponent<BossBullet>(), 1);
+        pattern2Bullet = new ObjectPool<BossSpell>(bossBullet2Obj.GetComponent<BossSpell>(), 1);
     }
 
     //NavMeshAent 초기화
