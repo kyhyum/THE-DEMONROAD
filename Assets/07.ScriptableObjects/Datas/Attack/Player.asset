@@ -16,15 +16,15 @@ MonoBehaviour:
   - <AttackName>k__BackingField: BaseAttack
     <AttackInfoDatas>k__BackingField:
     - <AttackInfoName>k__BackingField: "\uAE30\uBCF8 1\uD0C0"
-      <ComboStateIndex>k__BackingField: 0
-      <ComboTransitionTime>k__BackingField: 0.8
+      <ComboStateIndex>k__BackingField: 1
+      <ComboTransitionTime>k__BackingField: 0.396
       <Damage>k__BackingField: 5
     - <AttackInfoName>k__BackingField: "\uAE30\uBCF8 2\uD0C0"
-      <ComboStateIndex>k__BackingField: 0
+      <ComboStateIndex>k__BackingField: 2
       <ComboTransitionTime>k__BackingField: 0.8
       <Damage>k__BackingField: 10
     - <AttackInfoName>k__BackingField: "\uAE30\uBCF8 3\uD0C0"
-      <ComboStateIndex>k__BackingField: 0
+      <ComboStateIndex>k__BackingField: -1
       <ComboTransitionTime>k__BackingField: 0.8
       <Damage>k__BackingField: 15
     <Effects>k__BackingField:
