@@ -3,18 +3,16 @@ using System.Collections;
 
 public class QuestController : MonoBehaviour
 {
-    public GameObject questLogPanel;
-    public GameObject questProgressPanel;
+    
     public GameObject completeUI; 
 
     public float fadeDuration = 1f; 
 
-    private bool isLogVisible = false;
+    
 
     private void Start()
     {
-        //questLogPanel.SetActive(false);
-        questProgressPanel.SetActive(false);
+        
 
         if (completeUI.activeSelf)
         {
@@ -22,11 +20,7 @@ public class QuestController : MonoBehaviour
         }
     }
     
-    public void OpenProgressUI()
-    {
-        questLogPanel.SetActive(false);
-        questProgressPanel.SetActive(true);
-    }
+    
     public void ShowPopup()
     {
         StartCoroutine(FadeIn());
