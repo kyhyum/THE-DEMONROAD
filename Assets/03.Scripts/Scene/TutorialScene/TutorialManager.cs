@@ -22,17 +22,14 @@ public class TutorialManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             npc.QuestClear(npc.quest[1]);
-            Debug.Log("Q");
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
             npc.QuestClear(npc.quest[3]);
-            Debug.Log("I");
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             npc.QuestClear(npc.quest[4]);
-            Debug.Log("E");
         }
 
         if (npc.dialogueUI.gameObject.activeSelf)

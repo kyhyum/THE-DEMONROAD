@@ -24,6 +24,8 @@ public class TutorialNPC : MonoBehaviour
 
     [SerializeField] bool isClear = false;
 
+    bool isTalk = false;
+
     [SerializeField] float activationDistance;
     float distance;
 
@@ -82,6 +84,11 @@ public class TutorialNPC : MonoBehaviour
     }
     private void Update()
     {
+        if (isTalk)
+        {
+            return;
+        }
+
         distance = Vector3.Distance(this.gameObject.transform.position, player.position);
 
         if (distance > activationDistance)
@@ -108,7 +115,7 @@ public class TutorialNPC : MonoBehaviour
         {
             yield break;
         }
-
+        isTalk = true;
         DialogueUISetActive(true);
 
         dialogueText.text = null;
@@ -187,6 +194,11 @@ public class TutorialNPC : MonoBehaviour
     }
     private void DialogueUISetActive(bool active)
     {
+        if (!active)
+        {
+            isTalk = false;
+        }
+
         dialogueUI.SetActive(active);
         UIManager.Instance.ActivePlayerUI(!active);
     }
@@ -251,6 +263,7 @@ public class TutorialNPC : MonoBehaviour
                 {
                     lastTalkIndex++;
                     ClearQuestEvent(quest);
+                    StartTalk();
                 }
                 break;
         }

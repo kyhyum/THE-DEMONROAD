@@ -10,7 +10,6 @@ public class TutorialMob : MonoBehaviour
         if(collider.tag == "Player")
         {
             npc.QuestClear(npc.quest[2]);
-            Debug.Log("h");
         }
     }
 }
