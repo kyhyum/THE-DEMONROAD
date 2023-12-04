@@ -37,6 +37,13 @@ public class GameManager : Singleton<GameManager>
         if (data.baseObjectPath != null && scene.buildIndex != (int)Define.SceneType.Start && scene.buildIndex != (int)Define.SceneType.Loading)
         {
             CameraSetActive(true);
+
+            if (Myplayer != null)
+            {
+                Myplayer.transform.position = data.currentPlayerPos;
+                Myplayer.SetActive(true);
+                return;
+            }
             obj = Resources.Load<GameObject>(data.baseObjectPath);
             Myplayer = Instantiate<GameObject>(obj, data.currentPlayerPos, data.currentPlayerRot);
             player = Myplayer.GetComponent<Player>();
@@ -49,6 +56,12 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
             UIManager.Instance.CreateQuestLog();
             UIManager.Instance.CreateQuestProgress();
+            DontDestroyOnLoad(Myplayer);
+        }
+
+        else if (scene.buildIndex == (int)Define.SceneType.Loading)
+        {
+            Myplayer.SetActive(false);
         }
         else
         {
@@ -143,7 +156,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void Save()
     {
-        if(data.name == string.Empty)
+        if(data == null)
         {
             return;
         }
@@ -172,11 +185,11 @@ public class GameManager : Singleton<GameManager>
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Start)
         {
-            Debug.Log("HomeButton Active");
             SceneLoadManager.LoadScene((int)Define.SceneType.Start);
             Save();
             UIManager.Instance.ActivePlayerUI(false);
             UIManager.Instance.DestroyQuestUI();
+            Destroy(Myplayer);
             player = null;
             data = null;
             Myplayer = null;
