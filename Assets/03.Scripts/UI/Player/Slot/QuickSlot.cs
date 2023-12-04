@@ -179,12 +179,13 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
             SetCooltime(5f);
         }
 
-        if (usable is Skill)
-        {
-            if (GameManager.Instance.player.IsAttack())
-                return;
-            Skill skill = (Skill)usable;
-        }
+        //Attack Test
+        //if (usable is Skill)
+        //{
+        //    if (GameManager.Instance.player.IsAttack())
+        //        return;
+        //    Skill skill = (Skill)usable;
+        //}
 
         usable.Use();
     }

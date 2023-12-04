@@ -33,16 +33,16 @@ public class PlayerBaseState : IState, IUsable
     {
         RemoveInputActionsCallbacks();
     }
+    public virtual void Update()
+    {
+        //PerformedMove();
+    }
 
     public virtual void PhysicsUpdate()
     {
         
     }
 
-    public virtual void Update()
-    {
-        PerformedMove();
-    }
 
     public virtual void LateUpdate()
     {

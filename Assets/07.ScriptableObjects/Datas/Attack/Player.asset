@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9766a236593e65c498e3004032e24e88, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  <AttakData>k__BackingField:
+  - <AttackName>k__BackingField: BaseAttack
+    <AttackInfoDatas>k__BackingField:
+    - <AttackInfoName>k__BackingField: "\uAE30\uBCF8 1\uD0C0"
+      <ComboStateIndex>k__BackingField: 1
+      <ComboTransitionTime>k__BackingField: 0.2
+      <Damage>k__BackingField: 5
+    - <AttackInfoName>k__BackingField: "\uAE30\uBCF8 2\uD0C0"
+      <ComboStateIndex>k__BackingField: -1
+      <ComboTransitionTime>k__BackingField: 0.8
+      <Damage>k__BackingField: 10
+    <Effects>k__BackingField:
+    - Effect: {fileID: 1003445430884636, guid: 5f0ccaa603e3d6d459ebddc5267257ef, type: 3}
+      EffectNum: 0
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1514118954617016, guid: 8ab0c24e220c01e47aa412f3d83028c3, type: 3}
+      EffectNum: 1
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+  - <AttackName>k__BackingField: Skill1
+    <AttackInfoDatas>k__BackingField: []
+    <Effects>k__BackingField:
+    - Effect: {fileID: 1683321806259216, guid: 170cd7184503c124895727d3348aa99a, type: 3}
+      EffectNum: 0
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1648509489993130, guid: 8a0c2ade089d4c44fbdf861f7bcd7be6, type: 3}
+      EffectNum: 1
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1184443940743768, guid: 6f0dcb0cbac32e147aaa2047bff67f61, type: 3}
+      EffectNum: 2
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+  - <AttackName>k__BackingField: Skill2
+    <AttackInfoDatas>k__BackingField: []
+    <Effects>k__BackingField:
+    - Effect: {fileID: 1819066416490906, guid: f71e64e1ba018eb419bd5e9e3ca8a65c, type: 3}
+      EffectNum: 0
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1107296871017770, guid: 82a583916db5b7842a722df7756825eb, type: 3}
+      EffectNum: 1
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1819066416490906, guid: f71e64e1ba018eb419bd5e9e3ca8a65c, type: 3}
+      EffectNum: 2
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1107296871017770, guid: 82a583916db5b7842a722df7756825eb, type: 3}
+      EffectNum: 3
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1819066416490906, guid: f71e64e1ba018eb419bd5e9e3ca8a65c, type: 3}
+      EffectNum: 4
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 6
+      UseLocalPosition: 0
+    - Effect: {fileID: 1115641076847360, guid: 73ccedaa8ed8dc14594ca7cc04041f4c, type: 3}
+      EffectNum: 5
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+  - <AttackName>k__BackingField: Skill3
+    <AttackInfoDatas>k__BackingField: []
+    <Effects>k__BackingField:
+    - Effect: {fileID: 1935082409722074, guid: d2910e4d9472c8843a387bdd9a51d879, type: 3}
+      EffectNum: 0
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1935082409722074, guid: 73c5905a45ba2d841a54b3c5468d23a6, type: 3}
+      EffectNum: 1
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1935082409722074, guid: d2910e4d9472c8843a387bdd9a51d879, type: 3}
+      EffectNum: 2
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1935082409722074, guid: 73c5905a45ba2d841a54b3c5468d23a6, type: 3}
+      EffectNum: 3
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 1935082409722074, guid: d2910e4d9472c8843a387bdd9a51d879, type: 3}
+      EffectNum: 4
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 6
+      UseLocalPosition: 0
+    - Effect: {fileID: 1115641076847360, guid: 9a16638939e243d4d9f9c0ee07466c8b, type: 3}
+      EffectNum: 5
+      StartPositionRotation: {fileID: 0}
+      DestroyAfter: 10
+      UseLocalPosition: 0

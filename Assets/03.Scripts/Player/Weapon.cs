@@ -11,7 +11,8 @@ public class Weapon : MonoBehaviour
     // 이미 충돌한 상태
     private List<Collider> alreadyColliderWith = new List<Collider>();
 
-    [field: SerializeField] public ParticleSystem AttackSlash { get; private set; }
+    //Attack Test
+    //[field: SerializeField] public ParticleSystem AttackSlash { get; private set; }
 
     private void OnEnable()
     {
@@ -35,10 +36,6 @@ public class Weapon : MonoBehaviour
         //    monster.GetStun(10f);
         //}
         // Component.TryGetComponent(): 지정된 타입의 컴포넌트(있는 경우)를 가져온다.
-        if (other.TryGetComponent(out Health health))
-        {
-            health.TakeDamage(damage);
-        }
     }
 
     public void SetAttack(int damage)
