@@ -23,17 +23,21 @@ public class ShopManager : Singleton<ShopManager>
     public GameObject confirmationPopUp;
     public GameObject sellConfirmationPopup;
     public GameObject outofGoldPop;
+    public GameObject outofSpace;
 
     //Text
     public TMP_Text confirmationText;
 
     public TMP_Text itemCountText;
+    public TMP_Text sellitemCountText;
 
     //Button
     public Button confirmationButton;
 
     public Button increaseButton;
     public Button decreaseButton;
+    public Button sellincreaseCountBtn;
+    public Button selldecreaseCountBtn;
 
     private int itemCountToBuy = 1;
 
@@ -51,10 +55,12 @@ public class ShopManager : Singleton<ShopManager>
         confirmationPopUp.SetActive(false);
         sellConfirmationPopup.SetActive(false);
         outofGoldPop.SetActive(false);
+        outofSpace.SetActive(false);
 
         increaseButton.onClick.AddListener(IncreaseItemCount);
         decreaseButton.onClick.AddListener(DecreaseItemCount);
-
+        sellincreaseCountBtn.onClick.AddListener(IncreaseSellItemCount);
+        selldecreaseCountBtn.onClick.AddListener(DecreaseSellItemCount);
 
         confirmationButton.onClick.AddListener(BuyItem);
 
@@ -96,6 +102,8 @@ public class ShopManager : Singleton<ShopManager>
             if (inventory.GetSize() == 30)
             {
                 // TODO: 인벤토리 자리 부족 팝업처리
+                outofSpace.SetActive(true);
+                return;
             }
 
             int totalPrice = item.itemPrice * itemCountToBuy;
@@ -210,7 +218,6 @@ public class ShopManager : Singleton<ShopManager>
 
     public void IncreaseItemCount()
     {
-
         itemCountToBuy++;
         UpdateItemCount();
     }
@@ -230,11 +237,33 @@ public class ShopManager : Singleton<ShopManager>
         }
 
     }
+    public void IncreaseSellItemCount()
+    {
+        itemCountToBuy++;
+        UpdateSellItemCount();
+    }
+    public void DecreaseSellItemCount()
+    {
+
+        itemCountToBuy = Mathf.Max(itemCountToBuy - 1, 1);
+        UpdateSellItemCount();
+    }
+    private void UpdateSellItemCount()
+    {
+        if(sellitemCountText != null)
+        {
+            sellitemCountText.text = itemCountToBuy.ToString() + " 개";
+        }
+    }
 
 
-    public void ClosePop()
+    public void CloseOutofGoldPop()
     {
         outofGoldPop.SetActive(false);
+    }
+    public void CloseOutofSpacePop()
+    {
+        outofSpace.SetActive(false);
     }
 
 
