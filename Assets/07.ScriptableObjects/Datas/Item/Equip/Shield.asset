@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b20325add8ddd499cec4a095215636, type: 3}
+  m_Script: {fileID: 11500000, guid: 5465422b473d15e4f9dad66afecb25dc, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
   <itemName>k__BackingField: "\uAC15\uCCA0 \uBC29\uD328"
@@ -21,3 +21,7 @@ MonoBehaviour:
   <prefab>k__BackingField: {fileID: 1000010501181352, guid: 0784dde4296a0c5468b8320a2ebd9a39,
     type: 3}
   <itemPrice>k__BackingField: 10
+  equipType: 4
+  options: []
+  Attack: 0
+  Deffence: 0
