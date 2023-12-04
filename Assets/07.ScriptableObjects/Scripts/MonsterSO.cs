@@ -12,6 +12,7 @@ public class MonsterSO : ScriptableObject
     [field: SerializeField] public int Health { get; private set; } = 100;
 
     [field: Header("AttackData")]
+    [field: SerializeField] public int AttackDamage { get; private set; } = 10;
     [field: SerializeField] public bool IsLongRanged { get; private set; } = false;
     [field: SerializeField] public float PlayerChasingRange { get; private set; } = 10f;
     [field: SerializeField] public float AttackRange { get; private set; } = 1.5f;

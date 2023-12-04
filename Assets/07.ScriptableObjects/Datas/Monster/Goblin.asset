@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Goblin
   <MonsterType>k__BackingField: 0
-  <Health>k__BackingField: 100
+  <Health>k__BackingField: 25
+  <AttackDamage>k__BackingField: 5
   <IsLongRanged>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 10
   <AttackRange>k__BackingField: 3
