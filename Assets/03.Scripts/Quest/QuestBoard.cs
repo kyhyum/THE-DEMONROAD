@@ -98,8 +98,8 @@ public class QuestBoard : MonoBehaviour
                 questProgress.questProgmainName.fontStyle |= FontStyles.Strikethrough;
 
                 questProgress.questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;
-
                 questProgress.MainQuestReward(selectedQuest);
+                
             }
         }
         else

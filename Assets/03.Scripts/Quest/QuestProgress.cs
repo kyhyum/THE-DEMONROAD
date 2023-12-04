@@ -66,12 +66,15 @@ public class QuestProgress : MonoBehaviour
             questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
             board.UpdateMainQuestProgress(selectedQuest);
 
+            
+
 
         }
     }
 
     public void MainQuestReward(QuestSO selectedQuest)
     {
+        Debug.Log("mainquest리워드를 받습니다");
         if (controller != null)
         {
             controller.ShowPopup();
