@@ -2747,6 +2747,7 @@ MonoBehaviour:
     skilllevels: 000000000000000000000000
     baseObjectPath: 
     playerIndex: 0
+    QuickSlots: []
     scene: 3
     currentPlayerPos: {x: 0, y: 0, z: 0}
     currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
@@ -5411,6 +5412,7 @@ MonoBehaviour:
     skilllevels: 000000000000000000000000
     baseObjectPath: 
     playerIndex: 0
+    QuickSlots: []
     scene: 3
     currentPlayerPos: {x: 0, y: 0, z: 0}
     currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
@@ -6908,6 +6910,7 @@ MonoBehaviour:
     skilllevels: 000000000000000000000000
     baseObjectPath: 
     playerIndex: 0
+    QuickSlots: []
     scene: 3
     currentPlayerPos: {x: 0, y: 0, z: 0}
     currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
@@ -18701,6 +18704,12 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1946241868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7666749680497955468, guid: 4936f5e6443ad0b43951c3c611f9005f,
+    type: 3}
+  m_PrefabInstance: {fileID: 997064872083453178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1948409603
 GameObject:
   m_ObjectHideFlags: 0
@@ -31832,6 +31841,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1131402574899710677, guid: 4936f5e6443ad0b43951c3c611f9005f,
+        type: 3}
+      propertyPath: settingObj
+      value: 
+      objectReference: {fileID: 1973285402}
+    - target: {fileID: 1131402574899710677, guid: 4936f5e6443ad0b43951c3c611f9005f,
+        type: 3}
+      propertyPath: playerUIObj
+      value: 
+      objectReference: {fileID: 1946241868}
     - target: {fileID: 1736569979814519159, guid: 4936f5e6443ad0b43951c3c611f9005f,
         type: 3}
       propertyPath: m_RootOrder
