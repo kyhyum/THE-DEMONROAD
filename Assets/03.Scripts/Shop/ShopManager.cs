@@ -9,7 +9,7 @@ public class ShopManager : Singleton<ShopManager>
     //potionShop
     public GameObject potionShop;
     public GameObject potionNPCtalk;
-    
+
 
     //EquipShop
     public GameObject equipShop;
@@ -26,13 +26,13 @@ public class ShopManager : Singleton<ShopManager>
 
     //Text
     public TMP_Text confirmationText;
-    
+
     public TMP_Text itemCountText;
 
     //Button
     public Button confirmationButton;
-    
-    public Button increaseButton; 
+
+    public Button increaseButton;
     public Button decreaseButton;
 
     private int itemCountToBuy = 1;
@@ -55,10 +55,10 @@ public class ShopManager : Singleton<ShopManager>
         increaseButton.onClick.AddListener(IncreaseItemCount);
         decreaseButton.onClick.AddListener(DecreaseItemCount);
 
-        
+
         confirmationButton.onClick.AddListener(BuyItem);
 
-        
+
     }
 
     private void Update()
@@ -76,16 +76,16 @@ public class ShopManager : Singleton<ShopManager>
         if (item != null)
         {
             confirmationPopUp.SetActive(true);
-            confirmationText.text = "구매하시겠습니까? " + "\n" + item.itemName;                                       
+            confirmationText.text = "구매하시겠습니까? " + "\n" + item.itemName;
         }
         else
         {
             Debug.Log("Item이 null입니다.");
         }
-        
-    }  
-    
-    
+
+    }
+
+
 
     public void BuyItem()
     {
@@ -93,16 +93,21 @@ public class ShopManager : Singleton<ShopManager>
 
         if (inventory != null && item != null)
         {
+            if (inventory.GetSize() == 30)
+            {
+                // TODO: 인벤토리 자리 부족 팝업처리
+            }
+
             int totalPrice = item.itemPrice * itemCountToBuy;
             ItemSO foundItemSO = null;
 
-            
+
             foreach (ItemSO itemSO in itemList)
             {
                 if (itemSO.itemName == item.itemName)
                 {
                     foundItemSO = itemSO;
-                    break; 
+                    break;
                 }
             }
 
@@ -110,13 +115,35 @@ public class ShopManager : Singleton<ShopManager>
             {
                 if (inventory.Gold >= totalPrice)
                 {
-                    for (int i = 0; i < itemCountToBuy; i++)
+                    switch (foundItemSO.type)
                     {
-                        Item itemToAdd = new Item(foundItemSO);
-                        inventory.AddItem(itemToAdd);
+                        case Define.ItemType.Equip:
+                            for (int i = 0; i < itemCountToBuy; i++)
+                            {
+                                EquipItem itemToAdd = new EquipItem(foundItemSO);
+                                inventory.AddItem(itemToAdd);
+                            }
+                            break;
+                        case Define.ItemType.Consumes:
+                            if (foundItemSO is BuffItemSO)
+                            {
+                                BuffItem itemToAdd = new BuffItem(foundItemSO);
+                                itemToAdd.Add(itemCountToBuy);
+                                inventory.AddItem(itemToAdd);
+                            }
+                            else if (foundItemSO is RestoreItemSO)
+                            {
+                                RestoreItem itemToAdd = new RestoreItem(foundItemSO);
+                                itemToAdd.Add(itemCountToBuy);
+                                inventory.AddItem(itemToAdd);
+                            }
+                            break;
+                        case Define.ItemType.Resources:
+                            break;
+                        default:
+                            break;
                     }
 
-                    
                     inventory.Gold -= totalPrice;
                     confirmationPopUp.SetActive(false);
                 }
@@ -141,7 +168,7 @@ public class ShopManager : Singleton<ShopManager>
     {
         Inventory inventory = UIManager.Instance.GetInventory();
         Item itemToSell = inventory.GetItem(slotIndex);
-        
+
 
         if (itemToSell != null)
         {
@@ -166,56 +193,56 @@ public class ShopManager : Singleton<ShopManager>
                     {
                         Debug.LogError("sellConfirmationPopup이 null입니다.");
                     }
-                    return; 
+                    return;
                 }
             }
 
-           
+
             Debug.LogError("판매하려는 아이템의 정보를 찾을 수 없습니다.");
         }
         else
         {
             Debug.LogError("해당 슬롯에 아이템이 없습니다.");
         }
-        
+
     }
 
 
     public void IncreaseItemCount()
     {
-        
+
         itemCountToBuy++;
         UpdateItemCount();
     }
     public void DecreaseItemCount()
     {
-        
+
         itemCountToBuy = Mathf.Max(itemCountToBuy - 1, 1);
         UpdateItemCount();
     }
 
     private void UpdateItemCount()
     {
-        if(itemCountText != null)
+        if (itemCountText != null)
         {
             itemCountText.text = itemCountToBuy.ToString() + " 개";
-            
+
         }
-       
+
     }
 
 
     public void ClosePop()
     {
         outofGoldPop.SetActive(false);
-    }    
-   
+    }
+
 
     public void OpenShopUI()
     {
         potionShop.SetActive(true);
         potionNPCtalk.SetActive(false);
-        
+
         isPotionShopOpen = true;
         isEquipShopOpen = false;
 
@@ -234,11 +261,11 @@ public class ShopManager : Singleton<ShopManager>
 
     private void CloseShopUI()
     {
-        if (isPotionShopOpen) 
+        if (isPotionShopOpen)
         {
             potionShop.SetActive(false);
         }
-        else if(isEquipShopOpen) 
+        else if (isEquipShopOpen)
         {
             equipShop.SetActive(false);
         }
