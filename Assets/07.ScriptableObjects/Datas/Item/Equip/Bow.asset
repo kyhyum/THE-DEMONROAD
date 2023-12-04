@@ -22,6 +22,8 @@ MonoBehaviour:
   <prefab>k__BackingField: {fileID: 0}
   <itemPrice>k__BackingField: 15
   equipType: 4
-  options: []
+  options:
+  - type: 0
+    value: 0
   Attack: 0
   Deffence: 0

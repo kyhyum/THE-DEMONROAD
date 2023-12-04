@@ -39,9 +39,9 @@ public class Shop : MonoBehaviour
             if (itemToSell != null)
             {
                 string itemName = itemToSell.itemName;
-                int sellPrice = itemToSell.itemSO.itemPrice; 
+                int sellPrice = itemToSell.itemPrice; 
 
-                sellConfirmationText.text = itemName + "을(를) " + sellPrice + " 골드에 판매하시겠습니까?";
+                sellConfirmationText.text = itemName + "을(를) 판매하시겠습니까?";
                 sellConfirmationPopup.SetActive(true);
             }
             else
