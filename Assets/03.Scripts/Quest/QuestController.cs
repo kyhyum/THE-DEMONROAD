@@ -21,14 +21,7 @@ public class QuestController : MonoBehaviour
             completeUI.SetActive(false); 
         }
     }
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            isLogVisible = !isLogVisible;
-            questLogPanel.SetActive(isLogVisible);
-        }   
-    }
+    
     public void OpenProgressUI()
     {
         questLogPanel.SetActive(false);
