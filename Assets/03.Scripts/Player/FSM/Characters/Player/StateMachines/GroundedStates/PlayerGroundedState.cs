@@ -99,7 +99,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     protected virtual void OnAttack()
     {
-        stateMachine.ChangeState(stateMachine.AttackState);
+        stateMachine.ChangeState(stateMachine.ComboAttackState);
     }
 
     protected virtual void OnAttackSkill1()

@@ -10,6 +10,8 @@ public class BossChaseState : BossBaseState
 
     bool isAttackPattern2 = false;
     bool isAttackPattern4 = false;
+    bool setPattern = false;
+    List<BossAttackPattern> availablePatterns = new List<BossAttackPattern>();
     public BossChaseState(BossStateMachine bossStateMachine) : base(bossStateMachine)
     {
         stateMachine = bossStateMachine;
@@ -18,7 +20,8 @@ public class BossChaseState : BossBaseState
     public override void Enter()
     {
         base.Enter();
-        previousAttackPattern = GetRandomAttackPattern();
+        previousAttackPattern = GetRandomAttackPattern(); 
+        setPattern = true;
         StartAnimation(stateMachine.Boss.bossAnimationData.ChaseParameterHash);
     }
 
@@ -32,26 +35,30 @@ public class BossChaseState : BossBaseState
     {
         base.Update();
         stateMachine.Boss.BossNavMeshAgent.SetDestination(stateMachine.Target.transform.position);
-        if (IsInAttackRange())
+        if (setPattern)
         {
-            stateMachine.Boss.BossNavMeshAgent.ResetPath();
-            switch (previousAttackPattern)
+            if (IsInAttackRange())
             {
-                case BossAttackPattern.Pattern1:
-                    stateMachine.ChangeState(stateMachine.AttackOneState);
-                    break;
-                case BossAttackPattern.Pattern2:
-                    stateMachine.ChangeState(stateMachine.AttackTwoState);
-                    break;
-                case BossAttackPattern.Pattern3:
-                    stateMachine.ChangeState(stateMachine.AttackThreeState);
-                    break;
-                case BossAttackPattern.Pattern4:
-                    stateMachine.ChangeState(stateMachine.AttackFourState);
-                    break;
+                setPattern = false;
+                stateMachine.Boss.BossNavMeshAgent.ResetPath();
+                switch (previousAttackPattern)
+                {
+                    case BossAttackPattern.Pattern1:
+                        stateMachine.ChangeState(stateMachine.AttackOneState);
+                        break;
+                    case BossAttackPattern.Pattern2:
+                        stateMachine.ChangeState(stateMachine.AttackTwoState);
+                        break;
+                    case BossAttackPattern.Pattern3:
+                        stateMachine.ChangeState(stateMachine.AttackThreeState);
+                        break;
+                    case BossAttackPattern.Pattern4:
+                        stateMachine.ChangeState(stateMachine.AttackFourState);
+                        break;
 
+                }
+                return;
             }
-            return;
         }
     }
     private bool IsInAttackRange()
@@ -69,8 +76,7 @@ public class BossChaseState : BossBaseState
         // 현재 보스의 체력을 가져옴
         float currentHealthPercentage = (float)stateMachine.Boss.BossHealth.health / stateMachine.Boss.BossHealth.maxHealth;
 
-        List<BossAttackPattern> availablePatterns = new List<BossAttackPattern>();
-
+        availablePatterns.Clear();
 
         availablePatterns.Add(BossAttackPattern.Pattern1);
         availablePatterns.Add(BossAttackPattern.Pattern3);

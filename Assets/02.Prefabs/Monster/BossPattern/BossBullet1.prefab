@@ -14538,6 +14538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b783f04b34ada6c4ab3367ab94ff63c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
+  alreadyColliderWith: []
   bulletSpeed: 10
   bulletDuration: 5
 --- !u!136 &4072920773660488221

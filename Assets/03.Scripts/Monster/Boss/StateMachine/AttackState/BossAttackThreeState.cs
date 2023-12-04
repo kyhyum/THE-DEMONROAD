@@ -5,10 +5,10 @@ using UnityEngine;
 //일반 원거리 공격
 public class BossAttackThreeState : BossBaseState
 {
-
     private float timer = 0f;
     public float interval = 1.2f;
-
+    private bool isCast = false;
+    bool isAttack = false;
     public BossAttackThreeState(BossStateMachine bossStateMachine) : base(bossStateMachine)
     {
         stateMachine = bossStateMachine;
@@ -16,8 +16,10 @@ public class BossAttackThreeState : BossBaseState
     public override void Enter()
     {
         base.Enter();
-        timer = 0f;
         StartAnimation(stateMachine.Boss.bossAnimationData.Attack3ParameterHash);
+        timer = 0f;
+        isCast = false;
+        isAttack = false;
     }
 
     public override void Exit()
@@ -32,23 +34,31 @@ public class BossAttackThreeState : BossBaseState
         float normalizedTime = GetNormalizedTime(stateMachine.Boss.Animator);
         if (normalizedTime < 1f)
         {
-            Debug.Log(normalizedTime);
-            if (normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[2].Dealing_Start_TransitionTime)
+            if (normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[2].Dealing_Start_TransitionTime && !isCast)
+            {
+                stateMachine.Boss.bossBullet1CastSpell.SetActive(true);
+                isCast = true;
+            }
+            else if (normalizedTime >= stateMachine.Boss.Data.AttackPatternInfoDatas[2].Dealing_End_TransitionTime && normalizedTime <= 0.9f)
             {
                 timer += Time.deltaTime;
-                if (timer >= interval)
+                if(timer > 0.5f)
                 {
                     BossBullet bossBullet = stateMachine.Boss.pattern1Bullet.GetObject();
                     bossBullet.BulletSetEventNull();
                     bossBullet.gameObject.transform.position = stateMachine.Boss.bulletSpawnPoint.position;
                     bossBullet.BulletReturned += stateMachine.Boss.pattern1Bullet.ReturnObject;
                     bossBullet.Shooting();
-                    timer = 0f; // 타이머 초기화
+                    timer = 0;
                 }
+                isAttack = true;
             }
+
         }
-        else
+        else if(normalizedTime > 1f && isAttack)
         {
+            stateMachine.Boss.bossBullet1CastSpell.SetActive(false);
+            isCast = false;
             stateMachine.ChangeState(stateMachine.ChasingState);
             return;
         }

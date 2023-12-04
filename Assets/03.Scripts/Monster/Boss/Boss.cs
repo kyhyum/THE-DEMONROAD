@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class Boss : MonoBehaviour
 {
-    
+
     [field: Header("References")]
     [field: SerializeField] public BossSO Data { get; private set; }
 
@@ -14,21 +14,23 @@ public class Boss : MonoBehaviour
     [field: SerializeField] public BossAnimationData bossAnimationData { get; private set; }
 
     [field: Header("Bullet")]
+    [field: SerializeField] public GameObject bossBullet1CastSpell { get; private set; }
     [field: SerializeField] private GameObject bossBullet1Obj;
     [field: SerializeField] private GameObject bossBullet2Obj;
+
     public ObjectPool<BossBullet> pattern1Bullet { get; private set; }
-    public ObjectPool<BossBullet> pattern2Bullet { get; private set; }
+    public ObjectPool<BossSpell> pattern2Bullet { get; private set; }
 
     public event Action<Boss> objectPoolReturn;
     [field: SerializeField] public Transform bulletSpawnPoint {get; private set;}
 
 
     public NavMeshAgent BossNavMeshAgent { get; private set; }
-    public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
 
     private BossStateMachine stateMachine;        
-    [field: SerializeField] public BossWeapon Weapon { get; private set; }
+    [field: SerializeField] public BossWeapon Weapon1 { get; private set; }
+    [field: SerializeField] public BossWeapon Weapon2 { get; private set; }
     public BossHealth BossHealth { get; private set; }
 
 
@@ -36,15 +38,26 @@ public class Boss : MonoBehaviour
     {
         bossAnimationData.Initialize();
 
-        Rigidbody = GetComponent<Rigidbody>();
         Animator = GetComponent<Animator>();
         BossNavMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new BossStateMachine(this);
         BossHealth = GetComponent<BossHealth>();
         BossHealth.InitEnemyHealth(Data.Health, Data.Name);
 
-        pattern1Bullet = new ObjectPool<BossBullet>(bossBullet1Obj.GetComponent<BossBullet>(), 6);
-        pattern2Bullet = new ObjectPool<BossBullet>(bossBullet2Obj.GetComponent<BossBullet>(), 1);
+        bossBullet1CastSpell.SetActive(false);
+
+        Weapon1.SetAttack(Data.AttackPatternInfoDatas[0].Damage);
+        Weapon2.SetAttack(Data.AttackPatternInfoDatas[1].Damage);
+
+    }
+
+    private void Start()
+    {
+        InitNavMesh();
+        Initboss();
+        BossHealth.OnDie += OnDie;
+        pattern1Bullet = new ObjectPool<BossBullet>(bossBullet1Obj.GetComponent<BossBullet>(), 12);
+        pattern2Bullet = new ObjectPool<BossSpell>(bossBullet2Obj.GetComponent<BossSpell>(), 1);
     }
 
     //NavMeshAent 초기화
@@ -53,14 +66,6 @@ public class Boss : MonoBehaviour
         BossNavMeshAgent.speed = Data.BaseSpeed;
         BossNavMeshAgent.autoBraking = false;
     }
-
-    private void Start()
-    {
-        InitNavMesh();
-        Initboss();
-        BossHealth.OnDie += OnDie;
-    }
-    
     private void Initboss()
     {
         BossHealth.InitEnemyHealth(Data.Health, Data.Name);

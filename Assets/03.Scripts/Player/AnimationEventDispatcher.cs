@@ -50,8 +50,9 @@ public class AnimationEventDispatcher : MonoBehaviour
 
     private void Start()
     {
-        trails1 = GameManager.Instance.player.ParticleSystem_Trails1;
-        trails2 = GameManager.Instance.player.ParticleSystem_Trails2;
+        //Attack Test
+        //trails1 = GameManager.Instance.player.ParticleSystem_Trails1;
+        //trails2 = GameManager.Instance.player.ParticleSystem_Trails2;
     }
 
     public void AnimationStartHandler(string name)
