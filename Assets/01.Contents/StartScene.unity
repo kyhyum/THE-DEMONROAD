@@ -471,7 +471,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f6b8b85cbdc82ce439a41ae3d56d57ee, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -550,7 +550,7 @@ MonoBehaviour:
   m_text: "\uAD81\uC218"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
-  m_sharedMaterial: {fileID: -7291355761078618880, guid: b1b04a7235e2caa49ad0678679c366cd,
+  m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1534,7 +1534,7 @@ MonoBehaviour:
   m_text: "\uBC95\uC0AC\uAC00 \uC5BC\uC74C\uC758 \uBE44\uB97C \uB0B4\uB9BD\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
-  m_sharedMaterial: {fileID: -7291355761078618880, guid: b1b04a7235e2caa49ad0678679c366cd,
+  m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1670,7 +1670,7 @@ MonoBehaviour:
   m_text: "\uC8FC\uC694 \uB2A5\uB825\uCE58 : \uC9C0\uB2A5"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
-  m_sharedMaterial: {fileID: -7291355761078618880, guid: b1b04a7235e2caa49ad0678679c366cd,
+  m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1803,7 +1803,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBC29\uD328\uAC00 \uC804\uC0AC\uC758 \uBAB8\uC744 \uB9C9\uC544\uC90D\uB2C8\uB2E4."
+  m_text: "\uD68C\uC804\uD558\uBA74\uC11C \uAC80\uC744 \uD718\uB450\uB978\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
   m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
@@ -1870,7 +1870,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &184144546
@@ -1942,7 +1942,7 @@ MonoBehaviour:
   m_text: "\uAD81\uC218\uC758 \uD654\uC0B4\uC774 \uB354\uC6B1 \uAC15\uB825 \uD574\uC9D1\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
-  m_sharedMaterial: {fileID: -7291355761078618880, guid: b1b04a7235e2caa49ad0678679c366cd,
+  m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2948,7 +2948,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 9725fb87facc42a4984598500f76e0fb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3171,6 +3171,22 @@ MonoBehaviour:
   characterLevel: {fileID: 1581339962}
   characterJob: {fileID: 554580391}
   character: {fileID: 0}
+  data:
+    name: 
+    level: 0
+    exp: 0
+    job: 0
+    stats: []
+    skillPoint: 0
+    skilllevels: 
+    baseObjectPath: 
+    playerIndex: 0
+    QuickSlots: []
+    scene: 0
+    currentPlayerPos: {x: 0, y: 0, z: 0}
+    currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
+    isDead: 0
+    acceptQuest: []
 --- !u!114 &328583917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4619,7 +4635,7 @@ MonoBehaviour:
   m_text: "\uC8FC\uC694 \uB2A5\uB825\uCE58 : \uBBFC\uCCA9"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
-  m_sharedMaterial: {fileID: -7291355761078618880, guid: b1b04a7235e2caa49ad0678679c366cd,
+  m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5280,7 +5296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3a88d46ed00b9214a8cc55ba6e67ab09, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a556d76f8136b444fad34d65e39fc0e1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5751,7 +5767,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC804\uC0AC\uAC00 \uAC80\uC744 \uAC15\uD558\uAC8C \uB0B4\uB9AC\uCE69\uB2C8\uB2E4."
+  m_text: "\uC801\uC744 \uBC29\uD328\uB85C \uAC00\uACA9\uD558\uC5EC \uAE30\uC808\uC2DC\uD0A8\uB2E4. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
   m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
@@ -5818,7 +5834,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &537322947
@@ -7701,7 +7717,7 @@ MonoBehaviour:
   m_text: "\uBC95\uC0AC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
-  m_sharedMaterial: {fileID: -7291355761078618880, guid: b1b04a7235e2caa49ad0678679c366cd,
+  m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -8871,7 +8887,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4184495d79c523148bd19006e6e88b2d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9388,7 +9404,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4b5c3887b0bad8548a4414947f05a7ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e3d08d1ce8f113b4ab7cc9c33252499f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9602,7 +9618,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 37de44bcb59b8174497def1957cc490b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9995,7 +10011,7 @@ MonoBehaviour:
   m_text: "\uAD81\uC218\uAC00 \uD55C\uCE35 \uB354 \uC2E0\uC18D\uD574 \uC9D1\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
-  m_sharedMaterial: {fileID: -7291355761078618880, guid: b1b04a7235e2caa49ad0678679c366cd,
+  m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -12952,6 +12968,22 @@ MonoBehaviour:
   characterLevel: {fileID: 1636931605}
   characterJob: {fileID: 1499680520}
   character: {fileID: 0}
+  data:
+    name: 
+    level: 0
+    exp: 0
+    job: 0
+    stats: []
+    skillPoint: 0
+    skilllevels: 
+    baseObjectPath: 
+    playerIndex: 0
+    QuickSlots: []
+    scene: 0
+    currentPlayerPos: {x: 0, y: 0, z: 0}
+    currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
+    isDead: 0
+    acceptQuest: []
 --- !u!114 &1372909681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13171,7 +13203,7 @@ MonoBehaviour:
   m_text: "\uBC95\uC0AC\uAC00 \uC790\uC2E0\uC758 \uBAB8\uC744 \uC9C0\uD0B5\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
-  m_sharedMaterial: {fileID: -7291355761078618880, guid: b1b04a7235e2caa49ad0678679c366cd,
+  m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -13592,6 +13624,22 @@ MonoBehaviour:
   characterLevel: {fileID: 410194945}
   characterJob: {fileID: 2101479877}
   character: {fileID: 0}
+  data:
+    name: 
+    level: 0
+    exp: 0
+    job: 0
+    stats: []
+    skillPoint: 0
+    skilllevels: 
+    baseObjectPath: 
+    playerIndex: 0
+    QuickSlots: []
+    scene: 0
+    currentPlayerPos: {x: 0, y: 0, z: 0}
+    currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
+    isDead: 0
+    acceptQuest: []
 --- !u!114 &1400770975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16239,6 +16287,22 @@ MonoBehaviour:
   characterLevel: {fileID: 624909301}
   characterJob: {fileID: 1631483220}
   character: {fileID: 0}
+  data:
+    name: 
+    level: 0
+    exp: 0
+    job: 0
+    stats: []
+    skillPoint: 0
+    skilllevels: 
+    baseObjectPath: 
+    playerIndex: 0
+    QuickSlots: []
+    scene: 0
+    currentPlayerPos: {x: 0, y: 0, z: 0}
+    currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
+    isDead: 0
+    acceptQuest: []
 --- !u!114 &1596438917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17576,7 +17640,7 @@ MonoBehaviour:
   m_text: "\uBC95\uC0AC\uAC00 \uAC15\uB825\uD55C \uD654\uC5FC\uC744 \uBC1C\uC0AC\uD569\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
-  m_sharedMaterial: {fileID: -7291355761078618880, guid: b1b04a7235e2caa49ad0678679c366cd,
+  m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -17710,7 +17774,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0825dfa25de4551469e65496af7b3c71, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17787,7 +17851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 125bb49b217257347be09ede099b888d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18769,7 +18833,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a42b3b2bb82524b4c9e97aca1cb294fe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae2c02e5fe128b946becedc35a2bc85b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18854,7 +18918,7 @@ MonoBehaviour:
   m_text: "\uAD81\uC218\uAC00 \uD654\uC0B4\uC744 \uB9C8\uAD6C\uC7A1\uC774\uB85C \uC3E9\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
-  m_sharedMaterial: {fileID: -7291355761078618880, guid: b1b04a7235e2caa49ad0678679c366cd,
+  m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -18987,7 +19051,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC804\uC0AC\uAC00 \uD55C\uCE35 \uB354 \uAC15\uB825\uD574 \uC9D1\uB2C8\uB2E4."
+  m_text: "\uC801\uC744 \uD5A5\uD574 \uBB34\uAE30\uB97C \uAC15\uB825\uD558\uAC8C
+    \uD718\uB450\uB978\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19a3017d3a771644bd155ffc375f6a7, type: 2}
   m_sharedMaterial: {fileID: 6717252555948951664, guid: b19a3017d3a771644bd155ffc375f6a7,
@@ -19054,7 +19119,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1986981176
