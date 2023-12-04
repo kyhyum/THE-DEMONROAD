@@ -13,6 +13,7 @@ public static class StringManager
     private static string skillPrefabPath = "Prefabs/UI/UI_SKill";
     private static string questLogPrefabPath = "Prefabs/UI/UI_QuestLog";
     private static string questProgressPath = "Prefabs/UI/UI_QuestProgress";
+    private static string gameoverPath = "Prefabs/UI/UI_GameOver";
     public static string JsonPath { get { return jsonPath; } }
     public static string ItemJsonPath { get { return itemJsonPath; } }
     public static string StorageName { get { return storageName; } }
@@ -22,4 +23,5 @@ public static class StringManager
     public static string SKillPrefabPath { get { return skillPrefabPath; } }
     public static string QuestLogPrefabPath { get { return questLogPrefabPath; } }
     public static string QuestProgressPath { get { return questProgressPath; } }
+    public static string GameOverPrefabPath { get { return gameoverPath; } }
 }
