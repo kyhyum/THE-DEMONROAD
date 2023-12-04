@@ -13,7 +13,7 @@ public class QuestController : MonoBehaviour
 
     private void Start()
     {
-        questLogPanel.SetActive(false);
+        //questLogPanel.SetActive(false);
         questProgressPanel.SetActive(false);
 
         if (completeUI.activeSelf)

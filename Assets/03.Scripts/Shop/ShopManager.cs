@@ -101,7 +101,7 @@ public class ShopManager : Singleton<ShopManager>
         {
             if (inventory.GetSize() == 30)
             {
-                // TODO: 인벤토리 자리 부족 팝업처리
+                
                 outofSpace.SetActive(true);
                 return;
             }
@@ -171,6 +171,8 @@ public class ShopManager : Singleton<ShopManager>
         {
             Debug.Log("Inventory가 null입니다.");
         }
+        itemCountToBuy = 1;
+        UpdateItemCount();
     }
     public void SellItem(int slotIndex)
     {
@@ -212,6 +214,8 @@ public class ShopManager : Singleton<ShopManager>
         {
             Debug.LogError("해당 슬롯에 아이템이 없습니다.");
         }
+        itemCountToBuy = 1;
+        UpdateItemCount();
 
     }
 
