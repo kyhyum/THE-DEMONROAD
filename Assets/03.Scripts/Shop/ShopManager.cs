@@ -188,7 +188,7 @@ public class ShopManager : Singleton<ShopManager>
                 {
                     int sellPrice = itemSO.itemPrice;
 
-                    inventory.Gold += sellPrice;
+                    inventory.Gold += sellPrice *itemCountToBuy;
                     inventory.RemoveItem(slotIndex);
 
                     Debug.Log(itemToSellName + "을(를) 판매했습니다. 획득한 골드: " + sellPrice);

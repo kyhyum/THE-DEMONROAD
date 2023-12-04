@@ -40998,7 +40998,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1128782626}
+      - m_Target: {fileID: 2143062900}
         m_TargetAssemblyTypeName: Shop, Assembly-CSharp
         m_MethodName: SellItem
         m_Mode: 1
@@ -80149,7 +80149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1765981502
 RectTransform:
   m_ObjectHideFlags: 0
@@ -96416,9 +96416,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cca8ad3e3079284fa514ee01a9eca12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sellConfirmationPopup: {fileID: 1196817746}
-  sellConfirmationText: {fileID: 932363500}
-  sellConfirmButton: {fileID: 865049851}
+  sellConfirmationPopup: {fileID: 1765981501}
+  sellConfirmationText: {fileID: 1882341607}
+  sellConfirmButton: {fileID: 824620454}
 --- !u!1001 &2146209206
 PrefabInstance:
   m_ObjectHideFlags: 0
