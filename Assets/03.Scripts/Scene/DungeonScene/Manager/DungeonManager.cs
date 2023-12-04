@@ -38,9 +38,9 @@ public class DungeonManager : Singleton<DungeonManager>
 
         SetSpawnNum();
 
-        monsterObjectPool = new ObjectPool<Monster>(monsterPrefab.GetComponent<Monster>(), 20);
-        goblinObjectPool = new ObjectPool<Monster>(goblinPrefab.GetComponent<Monster>(), 10);
-        swordGoblinObjectPool = new ObjectPool<Monster>(swordGoblinPrefab.GetComponent<Monster>(), 20);
+        monsterObjectPool = new ObjectPool<Monster>(monsterPrefab.GetComponent<Monster>(), 30);
+        goblinObjectPool = new ObjectPool<Monster>(goblinPrefab.GetComponent<Monster>(), 20);
+        swordGoblinObjectPool = new ObjectPool<Monster>(swordGoblinPrefab.GetComponent<Monster>(), 10);
         orkberserkerObjectPool = new ObjectPool<Monster>(orkberserkerPrefab.GetComponent<Monster>(), 10);
         necrmanserObjectPool = new ObjectPool<Boss>(necromanserPrefab.GetComponent<Boss>(), 1);
 

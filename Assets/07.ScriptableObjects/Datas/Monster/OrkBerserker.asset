@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: OrkBerserker
   <MonsterType>k__BackingField: 3
-  <Health>k__BackingField: 100
+  <Health>k__BackingField: 80
+  <AttackDamage>k__BackingField: 13
   <IsLongRanged>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 12
   <AttackRange>k__BackingField: 2

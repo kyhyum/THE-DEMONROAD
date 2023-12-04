@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.IO;
 
 public class SelectCanvasManager : MonoBehaviour
 {
@@ -38,21 +38,27 @@ public class SelectCanvasManager : MonoBehaviour
 
     private void Start()
     {
-        TextAsset[] jsons = Resources.LoadAll<TextAsset>("MyCharacter/");
-
-        if (jsons.Length > 0)
+        if (Directory.Exists(StringManager.JsonPath))
         {
-            for (int i = 0; i < jsons.Length; i++)
+            string[] jsons = Directory.GetFiles(StringManager.JsonPath, "*.json");
+            for(int i = 0; i < jsons.Length; i++)
             {
-                playerName.Add(jsons[i].name);
+                Debug.Log(Path.GetFileName(jsons[i]));
             }
-            if (playerName.Count > 0)
+            if (jsons.Length > 0)
             {
-                foreach (string one in playerName)
+                for (int i = 0; i < jsons.Length; i++)
                 {
-                    PlayerData data = GameManager.Instance.LoadPlayerDataFromJson(StringManager.JsonPath, one);
-                    playerDatas[data.playerIndex] = data;
-                    characterSlots[data.playerIndex].CreateCharacter(baseCharacters[(int)data.job], data);
+                    playerName.Add(Path.GetFileNameWithoutExtension(jsons[i]));
+                }
+                if (playerName.Count > 0)
+                {
+                    foreach (string one in playerName)
+                    {
+                        PlayerData data = GameManager.Instance.LoadPlayerDataFromJson(StringManager.JsonPath, one);
+                        playerDatas[data.playerIndex] = data;
+                        characterSlots[data.playerIndex].CreateCharacter(baseCharacters[(int)data.job], data);
+                    }
                 }
             }
         }
@@ -100,6 +106,11 @@ public class SelectCanvasManager : MonoBehaviour
             playerDatas[slotIndex - 1] = playerDatas[slotIndex];
             playerDatas[slotIndex] = data;
         }
+        for(int i = 0; i < characterSlots.Length; i++)
+        {
+            characterSlots[i].data = playerDatas[i];
+        }
+        SlotDataReboot();
     }
     public void ClickDownButton(int slotIndex)
     {
@@ -117,6 +128,14 @@ public class SelectCanvasManager : MonoBehaviour
             changerSlots[slotIndex].SetData(slotIndex, data);
             playerDatas[slotIndex + 1] = playerDatas[slotIndex];
             playerDatas[slotIndex] = data;
+        }
+        SlotDataReboot();
+    }
+    void SlotDataReboot()
+    {
+        for (int i = 0; i < characterSlots.Length; i++)
+        {
+            characterSlots[i].data = playerDatas[i];
         }
     }
     public void SelectSlot(int slotIndex)
@@ -140,15 +159,16 @@ public class SelectCanvasManager : MonoBehaviour
             UIManager.Instance.ActivePopUpUI("캐릭터 생성", "이름은 최대 6자 까지입니다.", null);
             return;
         }
+
         if (!playerName.Contains(name))
         {
             data.name = name;
             data.playerIndex = selectedSlot;
             data.level = 1;
             GameManager.Instance.SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
-            PlayerData thisdata = GameManager.Instance.LoadPlayerDataFromJson(StringManager.JsonPath, data.name);
-            characterSlots[selectedSlot].CreateCharacter(baseCharacters[(int)data.job], thisdata);
-            playerDatas[thisdata.playerIndex] = thisdata;
+            PlayerData characterData = GameManager.Instance.LoadPlayerDataFromJson(StringManager.JsonPath, data.name);
+            characterSlots[selectedSlot].CreateCharacter(baseCharacters[(int)data.job], characterData);
+            playerDatas[data.playerIndex] = characterData;
             playerName.Add(name);
             StartSceneManager.Instance.OpenSelectCanvas();
         }

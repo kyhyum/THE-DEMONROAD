@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Monster
   <MonsterType>k__BackingField: 2
-  <Health>k__BackingField: 100
+  <Health>k__BackingField: 50
   <IsLongRanged>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 12
   <AttackRange>k__BackingField: 2

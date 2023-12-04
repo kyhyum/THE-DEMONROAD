@@ -64,9 +64,14 @@ public class GameManager : Singleton<GameManager>
     #region DataManagement
     public void SavePlayerDataToJson(string jsonPath, string characterName, PlayerData data)
     {
-
         string jsonData = JsonUtility.ToJson(data, true);
 
+        string directoryPath = Path.GetDirectoryName(jsonPath);
+
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
         string path = Path.Combine(jsonPath, $"{characterName}.json");
 
         File.WriteAllText(path, jsonData);
@@ -74,11 +79,10 @@ public class GameManager : Singleton<GameManager>
 
     public PlayerData LoadPlayerDataFromJson(string jsonPath, string characterName)
     {
-
         string path = Path.Combine(jsonPath, $"{characterName}.json");
+
         if (File.Exists(path))
         {
-
             string jsonData = File.ReadAllText(path);
 
             return JsonUtility.FromJson<PlayerData>(jsonData);
@@ -95,6 +99,13 @@ public class GameManager : Singleton<GameManager>
         slot = data;
 
         string jsonData = JsonUtility.ToJson(slot, true);
+
+        string directoryPath = Path.GetDirectoryName(jsonPath);
+
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
 
         string path = Path.Combine(jsonPath, $"{itemArrayName}.json");
 
@@ -132,6 +143,11 @@ public class GameManager : Singleton<GameManager>
     }
     public void Save()
     {
+        if(data.name == string.Empty)
+        {
+            return;
+        }
+
         if (SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Loading)
         {
             data.scene = (Define.SceneType)SceneManager.GetActiveScene().buildIndex;

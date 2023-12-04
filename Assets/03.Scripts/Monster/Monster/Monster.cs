@@ -41,6 +41,26 @@ public class Monster : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        InitNavMesh();
+        InitMonster();
+        MonsterHealth.OnDie += OnDie;
+        MonsterHealth.OnDie += itemDropController.DropItem;
+        Weapon.SetAttack(Data.AttackDamage);
+    }
+    private void Update()
+    {
+        stateMachine.HandleInput();
+        stateMachine.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        stateMachine.PhysicsUpdate();
+    }
+
+
     //NavMeshAent 초기화
     private void InitNavMesh()
     {
@@ -54,13 +74,6 @@ public class Monster : MonoBehaviour
         stateMachine.ChangeState(stateMachine.StunState);
     }
 
-    private void Start()
-    {
-        InitNavMesh();
-        InitMonster();
-        MonsterHealth.OnDie += OnDie;
-        MonsterHealth.OnDie += itemDropController.DropItem;
-    }
 
     public void InitMonster()
     {
@@ -69,16 +82,7 @@ public class Monster : MonoBehaviour
         gameObject.GetComponent<CapsuleCollider>().enabled = true;
     }
 
-    private void Update()
-    {
-        stateMachine.HandleInput();
-        stateMachine.Update();
-    }
 
-    private void FixedUpdate()
-    {
-        stateMachine.PhysicsUpdate();
-    }
 
     void OnDie()
     {

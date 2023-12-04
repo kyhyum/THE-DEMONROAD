@@ -23,8 +23,8 @@ public class PlayerAttackSkill1State : PlayerBaseState
     public override void Exit()
     {
         base.Exit();
-
         StopAnimation(stateMachine.Player.AnimationData.AttackSkill1ParameterHash);
+
     }
 
     public override void Update()
@@ -32,7 +32,8 @@ public class PlayerAttackSkill1State : PlayerBaseState
         base.Update();
 
         float normalizedTime = GetNormalizedTime(stateMachine.Player.Animator, "AttackSkill1");
-        if (normalizedTime < 0.8f)
+        Debug.Log(normalizedTime);
+        if (normalizedTime < 0.9f)
         {
             if (stateMachine.Player.IsAttackSkill[0])
             {

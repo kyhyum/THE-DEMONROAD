@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     public EquipSlot[] equipSlots;
     public ItemSlot iSlot;
     SlotItem data;
-    
+
     private int gold;
     public int Gold
     {
@@ -85,7 +85,7 @@ public class Inventory : MonoBehaviour
         return true;
     }
     public Item RemoveItem(int slot)
-    { 
+    {
         return inventorySlots[slot].RemoveItem();
     }
 
@@ -118,6 +118,21 @@ public class Inventory : MonoBehaviour
         }
 
         return -1;
+    }
+
+    public int GetSize()
+    {
+        int count = 30;
+
+        for (int i = 0; i < 30; i++)
+        {
+            if (inventorySlots[i].GetItem() == null)
+            {
+                count--;
+            }
+        }
+
+        return count;
     }
 
     public void SwapItems(int slotA, int slotB)
@@ -227,5 +242,5 @@ public class Inventory : MonoBehaviour
         UIManager.Instance.ClickInventory();
     }
 
-   
+
 }

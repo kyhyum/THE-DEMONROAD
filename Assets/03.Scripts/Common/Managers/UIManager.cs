@@ -15,7 +15,7 @@ public class UIManager : Singleton<UIManager>
     private GameObject skillObj;
     private GameObject questLogObject;
     private GameObject questProgressObj;
-
+    private GameObject gameOverObj;
 
     public GameObject settingObj;
     public GameObject playerUIObj;
@@ -27,6 +27,8 @@ public class UIManager : Singleton<UIManager>
 
     private QuestLog questLog;
     private QuestProgress questProgress;
+
+    private GameOverUI gameOver;
 
     public PlayerUI playerUI { get; private set; }
 
@@ -47,6 +49,7 @@ public class UIManager : Singleton<UIManager>
         CreateSkill();
         CreateQuestLog();
         CreateQuestProgress();
+        CreateGameOver();
     }
 
     private void Start()
@@ -102,6 +105,14 @@ public class UIManager : Singleton<UIManager>
         questProgress = questProgressObj.GetComponentInChildren<QuestProgress>();
         questProgressObj.SetActive(false);
     }
+
+    public void CreateGameOver()
+    {
+        gameOverObj = Instantiate(Resources.Load<GameObject>(StringManager.GameOverPrefabPath), canvas);
+        gameOver= gameOverObj.GetComponentInChildren<GameOverUI>();
+        gameOverObj.SetActive(false);
+    }
+
     public void DestroyQuestUI()
     {
         if (questLogObject == null)
@@ -332,6 +343,11 @@ public class UIManager : Singleton<UIManager>
         gameObject.SetActive(!gameObject.activeSelf);
     }
 
+    public void ActiveGameOver(bool flag)
+    {
+        gameOverObj.SetActive(flag);
+    }
+
     public void SwapItems(int slotA, int slotB)
     {
         Item item = GetInventory().GetItem(slotA);
@@ -376,4 +392,6 @@ public class UIManager : Singleton<UIManager>
     {
         SoundManager.Instance.SFXPlay(audioSource, clips[1]);
     }
+
+    
 }
