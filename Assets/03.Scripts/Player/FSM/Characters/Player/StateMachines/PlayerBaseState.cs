@@ -35,7 +35,7 @@ public class PlayerBaseState : IState, IUsable
     }
     public virtual void Update()
     {
-        //PerformedMove();
+        PerformedMove();
     }
 
     public virtual void PhysicsUpdate()
