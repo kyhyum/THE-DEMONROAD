@@ -19,9 +19,8 @@ public class PlayerComboAttackState : PlayerAttackState
 
         alreadyApplyCombo = false;
 
-        int comboIndex = stateMachine.ComboIndex;
-        attackInfoData = stateMachine.Player.playerSO.AttakData[0].GetAttackInfo(comboIndex);
-        stateMachine.Player.Animator.SetInteger("BasicAttackCombo", comboIndex);
+        attackInfoData = stateMachine.Player.playerSO.AttakData[0].GetAttackInfo(stateMachine.ComboIndex);
+        stateMachine.Player.Animator.SetInteger("BasicAttackCombo", stateMachine.ComboIndex);
     }
 
     public override void Exit()

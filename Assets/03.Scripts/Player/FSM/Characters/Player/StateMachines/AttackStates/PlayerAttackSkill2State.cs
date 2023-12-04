@@ -10,9 +10,8 @@ public class PlayerAttackSkill2State : PlayerBaseState
 
     public override void Enter()
     {
-        //KnightSkill knightSkill = stateMachine.Player.KnightSkill;
-        //knightSkill.Use(knightSkill.shieldStrikeSO, 1);
 
+        stateMachine.Player.animationEventEffects.SetEffects(stateMachine.Player.playerSkill2Data.Effects);
         stateMachine.Player.Agent.ResetPath();
         base.Enter();
 

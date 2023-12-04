@@ -36,21 +36,18 @@ public class Player : MonoBehaviour
 
     [field: Header("Attack")]
     public PlayerSO playerSO;
-    [field: SerializeField] private List<Transform> basicAttackTransforms;
+    [field: SerializeField] private List<Transform> AttackTransforms;
+    [field: SerializeField] private List<Transform> Skill2Transforms;
     public PlayerAttackData playerBaseAttackData { get; set; }
+    public PlayerAttackData playerSkill1Data { get; set; }
+    public PlayerAttackData playerSkill2Data { get; set; }
+    public PlayerAttackData playerSkill3Data { get; set; }
     [field: SerializeField] public AnimationEventEffects animationEventEffects { get; private set; }
 
     [field: Header("Skill")]
     public SkillSO[] skillSOs;
     public Skill[] skills { get; private set; }
     public AttackRange[] skillRange;
-
-
-    //Attack Test
-    //[field: Header(" ")]
-    //[field: SerializeField] public TrailRenderer TrailRenderer { get; set; }
-    //[field: SerializeField] public GameObject ParticleSystem_Trails1 { get; set; }
-    //[field: SerializeField] public GameObject ParticleSystem_Trails2 { get; set; }
 
     private PlayerStateMachine stateMachine;
 
@@ -71,8 +68,14 @@ public class Player : MonoBehaviour
 
         //기본 공격
         playerBaseAttackData = playerSO.AttakData[0];
+        playerSkill1Data = playerSO.AttakData[1];
+        playerSkill2Data = playerSO.AttakData[2];
+        playerSkill3Data = playerSO.AttakData[3];
         //Attack 위치 설정
-        playerBaseAttackData.SetAttackEffectTransform(basicAttackTransforms);
+        playerBaseAttackData.SetAttackEffectTransform(AttackTransforms);
+        playerSkill1Data.SetAttackEffectTransform(AttackTransforms);
+        playerSkill2Data.SetAttackEffectTransform(Skill2Transforms);
+        playerSkill3Data.SetAttackEffectTransform(AttackTransforms);
     }
 
     private void Start()
@@ -172,16 +175,15 @@ public class Player : MonoBehaviour
         enabled = false;
     }
 
-    //Attack Test 
-    //public bool IsAttack()
-    //{
-    //    bool flag = IsAttacking;
+    public bool IsAttack()
+    {
+        bool flag = IsAttacking;
 
-    //    foreach (bool b in IsAttackSkill)
-    //    {
-    //        flag = flag || b;
-    //    }
+        foreach (bool b in IsAttackSkill)
+        {
+            flag = flag || b;
+        }
 
-    //    return flag;
-    //}
+        return flag;
+    }
 }

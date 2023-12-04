@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackState : PlayerBaseState
+public class PlayerAttackState : PlayerGroundedState
 {
     public PlayerAttackState(PlayerStateMachine playerStateMachine) : base(playerStateMachine)
     {
@@ -23,6 +23,11 @@ public class PlayerAttackState : PlayerBaseState
         base.Exit();
 
         StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
+    }
+
+
+    protected override void OnMove()
+    {
     }
 
     //Attack Test
