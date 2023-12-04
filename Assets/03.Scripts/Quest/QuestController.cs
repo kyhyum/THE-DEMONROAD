@@ -8,7 +8,7 @@ public class QuestController : MonoBehaviour
 
     public float fadeDuration = 1f; 
 
-    private bool isLogVisible = false;
+    
 
     private void Start()
     {

@@ -203,6 +203,8 @@ public class ShopManager : Singleton<ShopManager>
                     {
                         Debug.LogError("sellConfirmationPopup이 null입니다.");
                     }
+                    itemCountToBuy = 1;
+                    UpdateItemCount();
                     return;
                 }
             }
@@ -214,8 +216,7 @@ public class ShopManager : Singleton<ShopManager>
         {
             Debug.LogError("해당 슬롯에 아이템이 없습니다.");
         }
-        itemCountToBuy = 1;
-        UpdateItemCount();
+        
 
     }
 
