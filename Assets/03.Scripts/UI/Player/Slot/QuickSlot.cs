@@ -55,7 +55,6 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
             skill.ApplyCoolTime -= SetCooltime;
         }
 
-
         this.usable = usable;
 
         if (usable == null)
@@ -75,12 +74,15 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
             UseItem useItem = (UseItem)usable;
             useItem.OnCountChanged += SetQuantity;
             icon.sprite = Sprite.Create(useItem.texture, new Rect(0, 0, useItem.texture.width, useItem.texture.height), Vector2.one * 0.5f);
+
+            useItem.ApplyCoolTime += SetCooltime;
         }
 
         if (usable is AttackSkill)
         {
             AttackSkill skill = (AttackSkill)usable;
             icon.sprite = skill.icon;
+            quantity.text = string.Empty;
 
             skill.ApplyCoolTime += SetCooltime;
         }
@@ -176,7 +178,6 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
             if (stackable.Get() == 0)
                 return;
-            SetCooltime(5f);
         }
 
         //Attack Test
@@ -194,5 +195,10 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
     {
         coolTime = f;
         fillAmount = f;
+    }
+
+    private void SetCooltime()
+    {
+        SetCooltime(5f);
     }
 }

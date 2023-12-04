@@ -8,6 +8,8 @@ public class UseItem : Item, IStackable, IUsable
     private int count;
     public event CountChangedDelegate OnCountChanged;
     public delegate void CountChangedDelegate(int count);
+    public event UsedDelegate ApplyCoolTime;
+    public delegate void UsedDelegate();
 
     public UseItem(ItemSO itemSO) : base(itemSO)
     {
@@ -37,5 +39,6 @@ public class UseItem : Item, IStackable, IUsable
     {
         Sub(1);
         OnCountChanged?.Invoke(count);
+        ApplyCoolTime?.Invoke();
     }
 }
