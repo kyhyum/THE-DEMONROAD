@@ -100,6 +100,13 @@ public class GameManager : Singleton<GameManager>
 
         string jsonData = JsonUtility.ToJson(slot, true);
 
+        string directoryPath = Path.GetDirectoryName(jsonPath);
+
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+
         string path = Path.Combine(jsonPath, $"{itemArrayName}.json");
 
         File.WriteAllText(path, jsonData);
