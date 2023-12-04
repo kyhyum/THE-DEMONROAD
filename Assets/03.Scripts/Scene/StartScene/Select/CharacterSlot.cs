@@ -12,11 +12,10 @@ public class CharacterSlot : MonoBehaviour
     [SerializeField] Quaternion look;
     [SerializeField] GameObject createButton;
     [SerializeField] TextMeshProUGUI characterName, characterLevel, characterJob;
-
     [SerializeField] GameObject character;
 
     PlayerCondition conditon;
-    PlayerData data;
+    public PlayerData data;
     VoiceClip clip;
     AudioSource source;
     Animator animator;
@@ -85,6 +84,11 @@ public class CharacterSlot : MonoBehaviour
     }
     public void ClearSlot()
     {
+        if(character == null)
+        {
+            return;
+        }
+
         SelectCanvasManager.Instance.playerName.Remove(character.name);
         Destroy(character);
         TextOpen(false);
