@@ -11,7 +11,7 @@ public class GameOverUI : MonoBehaviour
 
     IEnumerator Return()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(3f);
 
         UIManager.Instance.ActiveGameOver(false);
 

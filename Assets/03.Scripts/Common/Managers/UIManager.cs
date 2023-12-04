@@ -108,8 +108,8 @@ public class UIManager : Singleton<UIManager>
 
     public void CreateGameOver()
     {
-        gameOverObj = Instantiate(Resources.Load<GameObject>(StringManager.GameOverPrefabPath), canvas);
-        gameOver= gameOverObj.GetComponentInChildren<GameOverUI>();
+        gameOverObj = Instantiate(Resources.Load<GameObject>(StringManager.GameOverPrefabPath), transform);
+        gameOver = gameOverObj.GetComponentInChildren<GameOverUI>();
         gameOverObj.SetActive(false);
     }
 
@@ -393,5 +393,5 @@ public class UIManager : Singleton<UIManager>
         SoundManager.Instance.SFXPlay(audioSource, clips[1]);
     }
 
-    
+
 }
