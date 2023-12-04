@@ -4,8 +4,11 @@
     "exp": 0,
     "job": 0,
     "stats": [],
+    "skillPoint": 0,
+    "skilllevels": [],
     "baseObjectPath": "",
     "playerIndex": 0,
+    "QuickSlots": [],
     "scene": 0,
     "currentPlayerPos": {
         "x": 0.0,
