@@ -23,9 +23,9 @@ public class BossBullet : BossWeapon
         if (alreadyColliderWith.Contains(other)) return;
 
         alreadyColliderWith.Add(other);
-        if (other.TryGetComponent(out Health health))
+        if (other.TryGetComponent(out ITakeDamage takeDamage))
         {
-            health.TakeDamage(damage);
+            takeDamage.TakeDamage(damage);
             BulletReturned?.Invoke(this);
             BulletReturned = null;
         }
