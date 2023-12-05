@@ -59,7 +59,7 @@ public class PlayerBaseState : IState, IUsable
     /// </summary>
     protected virtual void AddInputActionsCallbacks()
     {
-        PlayerInput input = stateMachine.Player.Input;
+        PlayerInput input = GameManager.Instance.player.Input;
         // .started: 해당 키가 눌려졌을 때
         
         input.PlayerActions.Move.started += OnMoveStarted;
@@ -78,7 +78,7 @@ public class PlayerBaseState : IState, IUsable
     /// </summary>
     protected virtual void RemoveInputActionsCallbacks()
     {
-        PlayerInput input = stateMachine.Player.Input;
+        PlayerInput input = GameManager.Instance.player.Input;
 
         input.PlayerActions.Move.started -= OnMoveStarted;
         input.PlayerActions.Move.performed -= OnMovePerformed;
@@ -100,14 +100,14 @@ public class PlayerBaseState : IState, IUsable
     {
         //Debug.Log("OnMovePerformed 함수 호출한다.");
 
-        stateMachine.Player.IsMovePerformed = true;
+        GameManager.Instance.player.IsMovePerformed = true;
     }
 
     protected virtual void OnMoveCanceled(InputAction.CallbackContext context)
     {
         //Debug.Log("OnMoveCanceled 함수 호출한다.");
 
-        stateMachine.Player.IsMovePerformed = false;
+        GameManager.Instance.player.IsMovePerformed = false;
     }
 
     protected virtual void OnAttackPerformed(InputAction.CallbackContext context)
@@ -116,20 +116,20 @@ public class PlayerBaseState : IState, IUsable
 
         Rotate();
 
-        stateMachine.Player.IsAttacking = true;
-        stateMachine.Player.IsMovePerformed = false;
+        GameManager.Instance.player.IsAttacking = true;
+        GameManager.Instance.player.IsMovePerformed = false;
     }
 
     protected virtual void OnAttackCanceled(InputAction.CallbackContext context)
     {
         //Debug.Log("OnAttackCanceled 함수 호출한다.");
 
-        stateMachine.Player.IsAttacking = false;
+        GameManager.Instance.player.IsAttacking = false;
     }
 
     protected virtual void OnMouseScrollYPerformed(InputAction.CallbackContext context)
     {
-        CinemachineComponentBase componentBase = stateMachine.Player.ComponentBase;
+        CinemachineComponentBase componentBase = GameManager.Instance.player.ComponentBase;
 
         //Debug.Log("OnMouseScrollYPerformed 함수 호출한다.");
 
@@ -158,17 +158,17 @@ public class PlayerBaseState : IState, IUsable
         {
             //Debug.Log($"hit.collider.name: {hit.collider.name}");
             //Debug.Log($"hit.point: {hit.point}");
-            destPosition = new Vector3(hits[0].point.x, stateMachine.Player.transform.position.y, hits[0].point.z);
-            direction = destPosition - stateMachine.Player.transform.position;
+            destPosition = new Vector3(hits[0].point.x, GameManager.Instance.player.transform.position.y, hits[0].point.z); 
+            direction = destPosition - GameManager.Instance.player.transform.position;
             lookTarget = Quaternion.LookRotation(direction);
-            stateMachine.Player.transform.rotation = lookTarget;
-            stateMachine.Player.Agent.SetDestination(hits[0].point);
+            GameManager.Instance.player.transform.rotation = lookTarget;
+            GameManager.Instance.player.Agent.SetDestination(hits[0].point);
         }
     }
 
     protected void PerformedMove()
     {
-        if (!stateMachine.Player.IsMovePerformed)
+        if (!GameManager.Instance.player.IsMovePerformed)
             return;
 
         RaycastHit[] hits = Physics.RaycastAll(Camera.main.transform.position, Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition).direction.normalized, 100, 1 << LayerMask.NameToLayer("Ground"));
@@ -176,22 +176,22 @@ public class PlayerBaseState : IState, IUsable
         {
             //Debug.Log($"hit.collider.name: {hit.collider.name}");
             //Debug.Log($"hit.point: {hit.point}");
-            destPosition = new Vector3(hits[0].point.x, stateMachine.Player.transform.position.y, hits[0].point.z);
-            direction = destPosition - stateMachine.Player.transform.position;
+            destPosition = new Vector3(hits[0].point.x, GameManager.Instance.player.transform.position.y, hits[0].point.z);
+            direction = destPosition - GameManager.Instance.player.transform.position;
             lookTarget = Quaternion.LookRotation(direction);
-            stateMachine.Player.transform.rotation = lookTarget;
-            stateMachine.Player.Agent.SetDestination(hits[0].point);
+            GameManager.Instance.player.transform.rotation = lookTarget;
+            GameManager.Instance.player.Agent.SetDestination(hits[0].point);
         }
     }
 
     private void LateMove()
     {
-        stateMachine.Player.transform.position = stateMachine.Player.Agent.nextPosition;
+        GameManager.Instance.player.transform.position = GameManager.Instance.player.Agent.nextPosition;
     }
 
     private void Rotate()
     {
-        Player player = stateMachine.Player;
+        Player player = GameManager.Instance.player;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
@@ -207,12 +207,12 @@ public class PlayerBaseState : IState, IUsable
     #region State용 애니메이션 처리 함수
     protected void StartAnimation(int animationHash)
     {
-        stateMachine.Player.Animator.SetBool(animationHash, true);
+        GameManager.Instance.player.Animator.SetBool(animationHash, true);
     }
     
     protected void StopAnimation(int animationHash)
     {
-        stateMachine.Player.Animator.SetBool(animationHash, false);
+        GameManager.Instance.player.Animator.SetBool(animationHash, false);
     }
     #endregion State용 애니메이션 처리 함수
 

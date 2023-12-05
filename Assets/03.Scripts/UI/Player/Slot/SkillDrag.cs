@@ -49,7 +49,7 @@ public class SkillDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
-        rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        clone.transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
