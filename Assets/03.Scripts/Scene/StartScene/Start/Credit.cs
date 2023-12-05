@@ -26,16 +26,13 @@ public class Credit : MonoBehaviour
         content.position = pos;
         tween = content.DOAnchorPos(lastPos, duration);
     }
-    private void Start()
-    {
-        tween.OnComplete(SetActive);
-    }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
             tween.Complete();
         }
+        tween.OnComplete(SetActive);
     }
     private void SetActive()
     {
