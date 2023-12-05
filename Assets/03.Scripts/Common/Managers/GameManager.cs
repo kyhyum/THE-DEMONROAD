@@ -22,13 +22,9 @@ public class GameManager : Singleton<GameManager>
     SlotItem slot;
 
     GameObject obj;
-
-    private void Awake()
-    {
-        slot = new SlotItem();
-    }
     private void Start()
     {
+        slot = new SlotItem();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -157,6 +153,10 @@ public class GameManager : Singleton<GameManager>
     public void Save()
     {
         if(data == null)
+        {
+            return;
+        }
+        if(data.name == string.Empty)
         {
             return;
         }

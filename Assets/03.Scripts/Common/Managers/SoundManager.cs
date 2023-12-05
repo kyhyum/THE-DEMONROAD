@@ -15,12 +15,9 @@ public class SoundManager : Singleton<SoundManager>
     float master;
     float bgm;
     float sfx;
-    private void Awake()
-    {
-        bgmAudioSource.Play();
-    }
     private void Start()
     {
+        bgmAudioSource.Play();
         master = PlayerPrefs.GetFloat("Master");
         masterMixer.SetFloat("Master", master);
         masterSlider.value = master;
@@ -38,7 +35,6 @@ public class SoundManager : Singleton<SoundManager>
     {
         master = masterSlider.value;
         PlayerPrefs.SetFloat("Master", master);
-
 
         if (mute)
         {
