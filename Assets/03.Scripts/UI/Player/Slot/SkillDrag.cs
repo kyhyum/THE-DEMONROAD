@@ -31,16 +31,6 @@ public class SkillDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         rect.sizeDelta = new Vector2(100, 100);
 
-        float canvasWidth = canvas.GetComponent<RectTransform>().rect.width / 2;
-        float canvasHeight = canvas.GetComponent<RectTransform>().rect.height / 2;
-
-        Vector2 mousePosition = Input.mousePosition;
-
-        mousePosition.x -= canvasWidth;
-        mousePosition.y -= canvasHeight;
-
-        rect.anchoredPosition = mousePosition;
-
         Image image = sd.icon;
         Color color = image.color;
         color.a = .8f;
@@ -49,7 +39,7 @@ public class SkillDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
-        rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        clone.transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)

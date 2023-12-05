@@ -125,10 +125,6 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
         rect.sizeDelta = new Vector2(70, 70);
 
-        Vector2 mousePosition = Input.mousePosition;
-
-        rect.anchoredPosition = mousePosition;
-
         RawImage image = itemClone.GetComponentInChildren<RawImage>();
         Color color = image.color;
         color.a = .8f;
@@ -142,9 +138,7 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (itemClone == null)
-            return;
-        rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        itemClone.transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)

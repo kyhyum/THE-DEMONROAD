@@ -16242,6 +16242,9 @@ MonoBehaviour:
   CreditCanvas: {fileID: 395899042}
   rootObject: {fileID: 1054754556}
   mainCamera: {fileID: 1878565557}
+  settingButton: {fileID: 1862177459}
+  exitButton: {fileID: 2060431785}
+  clip: {fileID: 8300000, guid: b7efdd5ef29beaf4094a3509ea04ea64, type: 3}
 --- !u!1 &1596438914
 GameObject:
   m_ObjectHideFlags: 0
@@ -18316,19 +18319,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1862177460}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 172761392927079983}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ActiveSettingWindow
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1862177460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19922,19 +19913,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2060431786}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7380334252180827953}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Finish
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2060431786
 MonoBehaviour:
   m_ObjectHideFlags: 0

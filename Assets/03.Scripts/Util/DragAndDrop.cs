@@ -17,12 +17,12 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler
         canvas = GetComponentInParent<Canvas>();
         width = rect.rect.width / 2;
         height = rect.rect.height / 2;
-        canvasWidth = canvas.GetComponent<RectTransform>().rect.width / 2;
-        canvasHeight = canvas.GetComponent<RectTransform>().rect.height / 2;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        canvasWidth = canvas.GetComponent<RectTransform>().rect.width / 2;
+        canvasHeight = canvas.GetComponent<RectTransform>().rect.height / 2;
     }
 
     public void OnDrag(PointerEventData eventData)

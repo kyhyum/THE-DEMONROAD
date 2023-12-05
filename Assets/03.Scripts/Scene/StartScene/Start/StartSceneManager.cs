@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class StartSceneManager : MonoBehaviour
+public class StartSceneManager : Singleton<StartSceneManager>
 {
-    public static StartSceneManager Instance;
 
     [SerializeField] GameObject selectCanvas, createCanvas, startCanvas, fadeOutCanvas, CreditCanvas, rootObject;
     [SerializeField] Camera mainCamera;
-    private void Awake()
+    [SerializeField] Button settingButton, exitButton;
+    [SerializeField] AudioClip clip;
+    private void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
+        SoundManager.Instance.BGMPlay(clip);
+        settingButton.onClick.AddListener(UIManager.Instance.ActiveSettingWindow);
+        exitButton.onClick.AddListener(GameManager.Instance.FinishPopUp);
     }
     public void OpenStartCanvas()
     {

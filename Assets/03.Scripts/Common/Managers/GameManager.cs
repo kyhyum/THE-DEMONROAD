@@ -46,7 +46,6 @@ public class GameManager : Singleton<GameManager>
             condition = Myplayer.AddComponent<PlayerCondition>();
             condition.playerData = data;
             condition.Initialize();
-            UIManager.Instance.gameObject.SetActive(true);
             UIManager.Instance.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, data.name));
             UIManager.Instance.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
             UIManager.Instance.CreateQuestLog();
@@ -200,7 +199,7 @@ public class GameManager : Singleton<GameManager>
         UIManager.Instance.ActivePopUpUI("게임 종료", "정말 게임을 종료 하시겠습니까?", Finish);
     }
 
-    void Finish()
+    private void Finish()
     {
         Application.Quit();
     }

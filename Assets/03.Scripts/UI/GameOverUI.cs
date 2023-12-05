@@ -15,8 +15,13 @@ public class GameOverUI : MonoBehaviour
 
         UIManager.Instance.ActiveGameOver(false);
 
+        GameManager.Instance.data.currentPlayerPos = Vector3.zero;
+
         SceneLoadManager.LoadScene(3);
 
-        GameManager.Instance.player.transform.position = Vector3.zero;
+        GameManager.Instance.player.enabled = true;
+
+        GameManager.Instance.condition.currentHp = GameManager.Instance.condition.maxHp;
+        UIManager.Instance.playerUI.UpdateHpUI(GameManager.Instance.condition.currentHp, GameManager.Instance.condition.maxHp);
     }
 }
