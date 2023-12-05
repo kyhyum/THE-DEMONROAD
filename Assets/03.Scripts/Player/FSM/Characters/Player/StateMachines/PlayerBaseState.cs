@@ -8,16 +8,20 @@ public class PlayerBaseState : IState, IUsable
 {
     protected PlayerStateMachine stateMachine;
 
-    float cameraDistance;
-    [field: SerializeField] public float minCamDistance = 5.0f;
-    [field: SerializeField] public float maxCamDistance = 15.0f;
-    [field: SerializeField] float sensitivity = 1f;
 
     RaycastHit hit;
 
     Vector3 destPosition;
     Vector3 direction;
     Quaternion lookTarget;
+
+    //Camera
+    float cameraDistance;
+    [field: SerializeField] public float minCamDistance = 5.0f;
+    [field: SerializeField] public float maxCamDistance = 25.0f;
+    [field: SerializeField] float sensitivity = 1f;
+    Vector2 currentCursorPosition;
+
 
     public PlayerBaseState(PlayerStateMachine playerStateMachine)
     {
@@ -35,7 +39,25 @@ public class PlayerBaseState : IState, IUsable
     }
     public virtual void Update()
     {
-        PerformedMove();
+        PerformedMove(); 
+        //if(Input.GetMouseButton(2))
+        //{
+        //    Transform cameraTransform = stateMachine.Player.VirtualCamera.transform;
+        //    Quaternion camerarotation = cameraTransform.rotation;
+        //    Vector2 ChangeCursorPosition = new Vector2(UnityEngine.Input.mousePosition.x, UnityEngine.Input.mousePosition.y);
+        //    Debug.Log("ChangeCursorPosition : " + ChangeCursorPosition);
+        //    float xDistance = currentCursorPosition.x - ChangeCursorPosition.x;
+        //    if (xDistance > 5)
+        //    {
+        //        camerarotation.y -= xDistance / 5;
+        //        cameraTransform.rotation = camerarotation;
+        //    }
+        //    else if (xDistance < -5)
+        //    {
+        //        camerarotation.y += xDistance / 5;
+        //        cameraTransform.rotation = camerarotation;
+        //    }
+        //}
     }
 
     public virtual void PhysicsUpdate()
@@ -69,9 +91,10 @@ public class PlayerBaseState : IState, IUsable
         input.PlayerActions.Attack.performed += OnAttackPerformed;
         // .canceled: (눌려져 있는) 해당 키가 떼어졌을 떄
         input.PlayerActions.Attack.canceled += OnAttackCanceled;
-        // 
+
         input.PlayerActions.MouseScrollY.performed += OnMouseScrollYPerformed;
-    }
+        input.PlayerActions.MouseScrollClick.performed += OnMouseScrollClickPerformed;
+    } 
 
     /// <summary>
     /// Remove
@@ -87,6 +110,7 @@ public class PlayerBaseState : IState, IUsable
         input.PlayerActions.Attack.performed -= OnAttackPerformed;
         input.PlayerActions.Attack.canceled -= OnAttackCanceled;
         input.PlayerActions.MouseScrollY.performed -= OnMouseScrollYPerformed;
+        input.PlayerActions.MouseScrollClick.performed -= OnMouseScrollClickPerformed;
     }
 
     protected virtual void OnMoveStarted(InputAction.CallbackContext context)
@@ -126,6 +150,16 @@ public class PlayerBaseState : IState, IUsable
 
         stateMachine.Player.IsAttacking = false;
     }
+    protected virtual void OnMouseScrollClickPerformed(InputAction.CallbackContext context)
+    {
+
+        if (!Mouse.current.middleButton.isPressed)
+            return;
+
+        float inputValue = context.ReadValue<Vector2>().x;
+        Debug.Log(inputValue);
+        stateMachine.Player.VirtualCamera.transform.rotation = Quaternion.Euler(45f, inputValue + stateMachine.Player.VirtualCamera.transform.rotation.eulerAngles.y, 0f);
+    }
 
     protected virtual void OnMouseScrollYPerformed(InputAction.CallbackContext context)
     {
@@ -141,11 +175,21 @@ public class PlayerBaseState : IState, IUsable
         {
             CinemachineFramingTransposer framingTransposer = componentBase as CinemachineFramingTransposer;
 
-            framingTransposer.m_CameraDistance -= cameraDistance;
+            float currentCameraDistance = framingTransposer.m_CameraDistance;
+            float changeCameraDistance = currentCameraDistance;
+            if (cameraDistance > 0)
+            {
+                changeCameraDistance = (changeCameraDistance - 5 >= minCamDistance) ? changeCameraDistance - 5 : minCamDistance;
 
-            framingTransposer.m_CameraDistance = Mathf.Clamp(framingTransposer.m_CameraDistance, minCamDistance, maxCamDistance);
+                framingTransposer.m_CameraDistance = Mathf.Clamp(currentCameraDistance, currentCameraDistance, changeCameraDistance);
+            }
+            else if(cameraDistance < 0)
+            {
+                changeCameraDistance = (changeCameraDistance + 5 <= maxCamDistance) ? changeCameraDistance + 5 : maxCamDistance;
+
+                framingTransposer.m_CameraDistance = Mathf.Clamp(currentCameraDistance, changeCameraDistance, currentCameraDistance);
+            }
         }
-
     }
 
     /// <summary>
@@ -183,6 +227,8 @@ public class PlayerBaseState : IState, IUsable
             stateMachine.Player.Agent.SetDestination(hits[0].point);
         }
     }
+
+
 
     private void LateMove()
     {

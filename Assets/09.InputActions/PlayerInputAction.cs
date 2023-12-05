@@ -152,6 +152,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseScrollClick"",
+                    ""type"": ""Value"",
+                    ""id"": ""13de8f3c-6458-4b09-a83d-f8fbb6a1ace0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -308,6 +317,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""MouseScrollY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec26143d-57d2-4977-942c-0cc845c1123a"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseScrollClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -330,6 +350,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_QuickSlot5 = m_Player.FindAction("QuickSlot5", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
         m_Player_MouseScrollY = m_Player.FindAction("MouseScrollY", throwIfNotFound: true);
+        m_Player_MouseScrollClick = m_Player.FindAction("MouseScrollClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -405,6 +426,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_QuickSlot5;
     private readonly InputAction m_Player_Escape;
     private readonly InputAction m_Player_MouseScrollY;
+    private readonly InputAction m_Player_MouseScrollClick;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -423,6 +445,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @QuickSlot5 => m_Wrapper.m_Player_QuickSlot5;
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
         public InputAction @MouseScrollY => m_Wrapper.m_Player_MouseScrollY;
+        public InputAction @MouseScrollClick => m_Wrapper.m_Player_MouseScrollClick;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -474,6 +497,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @MouseScrollY.started += instance.OnMouseScrollY;
             @MouseScrollY.performed += instance.OnMouseScrollY;
             @MouseScrollY.canceled += instance.OnMouseScrollY;
+            @MouseScrollClick.started += instance.OnMouseScrollClick;
+            @MouseScrollClick.performed += instance.OnMouseScrollClick;
+            @MouseScrollClick.canceled += instance.OnMouseScrollClick;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -520,6 +546,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @MouseScrollY.started -= instance.OnMouseScrollY;
             @MouseScrollY.performed -= instance.OnMouseScrollY;
             @MouseScrollY.canceled -= instance.OnMouseScrollY;
+            @MouseScrollClick.started -= instance.OnMouseScrollClick;
+            @MouseScrollClick.performed -= instance.OnMouseScrollClick;
+            @MouseScrollClick.canceled -= instance.OnMouseScrollClick;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -553,5 +582,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnQuickSlot5(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
         void OnMouseScrollY(InputAction.CallbackContext context);
+        void OnMouseScrollClick(InputAction.CallbackContext context);
     }
 }
