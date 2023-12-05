@@ -5,9 +5,9 @@ using System.Threading;
 using UnityEngine;
 
 public class DungeonManager : Singleton<DungeonManager>
-{   
+{
     public int spawnIdx;
-    
+
     [field: Header("Audio")]
     [SerializeField] private AudioClip DungeonSound;
 
@@ -36,6 +36,8 @@ public class DungeonManager : Singleton<DungeonManager>
         //사운드 플레이
         SoundManager.Instance.BGMPlay(DungeonSound);
 
+        UIManager.Instance.ActivePlayerUI(true);
+
         SetSpawnNum();
 
         monsterObjectPool = new ObjectPool<Monster>(monsterPrefab.GetComponent<Monster>(), 30);
@@ -58,7 +60,7 @@ public class DungeonManager : Singleton<DungeonManager>
     {
         Vector3 spawnPos = spawnList[spawnListIdx].ReturnRandomPosition();
 
-        if(Define.MonsterType.Necromanser == monsterType)
+        if (Define.MonsterType.Necromanser == monsterType)
         {
             Boss boss = null;
             boss = necrmanserObjectPool.GetObject();
@@ -103,15 +105,15 @@ public class DungeonManager : Singleton<DungeonManager>
     public void DungeonGoblinKilled(Monster Goblin)
     {
         GameManager.Instance.goblinkillCount++;
-        
+
         Debug.Log("잡은 고블린수: " + GameManager.Instance.goblinkillCount);
     }
 
     public void Spawn()
     {
-        for(int i = 0; i < spawnList[spawnIdx].spawnEnemyList.Count; i++)
+        for (int i = 0; i < spawnList[spawnIdx].spawnEnemyList.Count; i++)
         {
-            for(int j = 0; j < spawnList[spawnIdx].spawnEnemyList[i].spawnCount; j++)
+            for (int j = 0; j < spawnList[spawnIdx].spawnEnemyList[i].spawnCount; j++)
             {
                 GameObject spawnedMonster = SpawnMonster(spawnList[spawnIdx].spawnEnemyList[i].monsterType, spawnIdx);
                 if (spawnedMonster == null)
@@ -124,7 +126,7 @@ public class DungeonManager : Singleton<DungeonManager>
 
     public void SetSpawnNum()
     {
-        if(GameManager.Instance.data.currentPlayerPos == new Vector3(0f, 0f, 0f))
+        if (GameManager.Instance.data.currentPlayerPos == new Vector3(0f, 0f, 0f))
         {
             spawnIdx = 0;
         }
