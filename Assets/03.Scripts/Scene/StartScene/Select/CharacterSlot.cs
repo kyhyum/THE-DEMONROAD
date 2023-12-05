@@ -70,6 +70,7 @@ public class CharacterSlot : MonoBehaviour
         {
             if (GameManager.Instance.DeleteCharacter(StringManager.JsonPath, data.name))
             {
+                SelectCanvasManager.Instance.DeleteCharacter(data);
                 ClearSlot();
             }
             else
@@ -79,7 +80,7 @@ public class CharacterSlot : MonoBehaviour
         }
         else
         {
-            Debug.Log("캐릭터 선택해줘");
+            UIManager.Instance.ActivePopUpUI("캐릭터 삭제", "캐릭터를 선택해 주세요", null);
         }
     }
     public void ClearSlot()
@@ -88,10 +89,9 @@ public class CharacterSlot : MonoBehaviour
         {
             return;
         }
-
-        SelectCanvasManager.Instance.playerName.Remove(character.name);
         Destroy(character);
         TextOpen(false);
+        data = null;
         character = null;
     }
     public void ChoiceSlot()
@@ -135,10 +135,11 @@ public class CharacterSlot : MonoBehaviour
         if (character != null)
         {
             GameManager.Instance.data = data;
+            GameManager.Instance.GameStart();
         }
         else
         {
-            Debug.Log("캐릭터 선택해줘");
+            UIManager.Instance.ActivePopUpUI("게임 시작", "캐릭터를 선택해 주세요.", null);
         }
     }
 }

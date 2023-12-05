@@ -7,7 +7,7 @@ public class TutorialMob : MonoBehaviour
     [SerializeField] TutorialNPC npc;
     public void OnTriggerEnter(Collider collider)
     {
-        if(collider.tag == "Player")
+        if(collider == GameManager.Instance.player.WeaponCollider)
         {
             npc.QuestClear(npc.quest[2]);
         }

@@ -2,19 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialManager : MonoBehaviour
+public class TutorialManager : Singleton<TutorialManager>
 {
     [SerializeField] TutorialNPC npc;
-    public static TutorialManager Instance;
-    Player player;
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        Instance = this;
-    }
+
+    PlayerInputAction InputActions;
     void Start()
     {
-        player = GameManager.Instance.Myplayer.GetComponent<Player>();
+        UIManager.Instance.ActivePlayerUI(true);
+        InputActions = GameManager.Instance.Myplayer.GetComponent<PlayerInput>().InputActions;
     }
 
     void Update()
@@ -34,11 +30,11 @@ public class TutorialManager : MonoBehaviour
 
         if (npc.dialogueUI.gameObject.activeSelf)
         {
-            player.enabled = false;
+            InputActions.Disable();
         }
         else
         {
-            player.enabled = true;
+            InputActions.Enable();
         }
     }
 
@@ -48,6 +44,8 @@ public class TutorialManager : MonoBehaviour
     }
     public void EndTutorial()
     {
+        InputActions.Enable();
+        GameManager.Instance.data.acceptQuest.Clear();
         GameManager.Instance.data.currentPlayerPos = Vector3.zero;
         SceneLoadManager.LoadScene((int)Define.SceneType.Town);
     }

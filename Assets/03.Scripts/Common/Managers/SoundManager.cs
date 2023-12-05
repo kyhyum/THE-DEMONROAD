@@ -17,7 +17,6 @@ public class SoundManager : Singleton<SoundManager>
     float sfx;
     private void Start()
     {
-        bgmAudioSource.Play();
         master = PlayerPrefs.GetFloat("Master");
         masterMixer.SetFloat("Master", master);
         masterSlider.value = master;

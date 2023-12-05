@@ -90,6 +90,7 @@ public class Monster : MonoBehaviour
         MonsterHealth.OnDie += monsterSound.PlayDeadSound;
         Animator.SetTrigger("Die");
         Invoke("AfterAnimationComplete", Animator.GetCurrentAnimatorStateInfo(0).length);
+        GameManager.Instance.condition.AddExp(Data.Exp);
     }
 
     void AfterAnimationComplete()

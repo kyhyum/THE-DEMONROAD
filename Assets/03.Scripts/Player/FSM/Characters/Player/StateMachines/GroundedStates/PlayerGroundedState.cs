@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class PlayerGroundedState : PlayerBaseState
@@ -12,35 +13,35 @@ public class PlayerGroundedState : PlayerBaseState
     public override void Enter()
     {
         base.Enter();
-        StartAnimation(stateMachine.Player.AnimationData.GroundParameterHash);
+        StartAnimation(GameManager.Instance.player.AnimationData.GroundParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
-        StopAnimation(stateMachine.Player.AnimationData.GroundParameterHash);
+        StopAnimation(GameManager.Instance.player.AnimationData.GroundParameterHash);
     }
 
     public override void Update()
     {
         base.Update();
 
-        if (stateMachine.Player.IsAttacking)
+        if (GameManager.Instance.player.IsAttacking)
         {
             OnAttack();
             return;
         }
-        else if (stateMachine.Player.IsAttackSkill[0])
+        else if (GameManager.Instance.player.IsAttackSkill[0])
         {
             OnAttackSkill1();
             return;
         }
-        else if (stateMachine.Player.IsAttackSkill[1])
+        else if (GameManager.Instance.player.IsAttackSkill[1])
         {
             OnAttackSkill2();
             return;
         }
-        else if (stateMachine.Player.IsAttackSkill[2])
+        else if (GameManager.Instance.player.IsAttackSkill[2])
         {
             OnAttackSkill3();
             return;
@@ -59,7 +60,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     protected override void OnMoveStarted(InputAction.CallbackContext context)
     {
-        if (stateMachine.Player.Agent.velocity != Vector3.zero)
+        if (GameManager.Instance.player.Agent.velocity != Vector3.zero)
         {
             return;
         }
@@ -72,7 +73,7 @@ public class PlayerGroundedState : PlayerBaseState
     protected override void OnMovePerformed(InputAction.CallbackContext context)
     {
 
-        if (stateMachine.Player.Agent.velocity != Vector3.zero)
+        if (GameManager.Instance.player.Agent.velocity != Vector3.zero)
         {
             return;
         }

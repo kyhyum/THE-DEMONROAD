@@ -129,13 +129,22 @@ public class TutorialNPC : MonoBehaviour
             dialogueText.text += npc.npcDialogue[talkIndex][i].ToString();
             yield return new WaitForSeconds(textDelay);
         }
-
         Invoke("UISetActive", 0.5f);
+
+        if (talkIndex == 12)
+        {
+            TutorialManager.Instance.EndTutorial();
+        }
 
         yield break;
     }
     public void ClickTalk()
     {
+        if(talkIndex == 12)
+        {
+            return;
+        }
+
         if (talkCoroutine != null)
         {
             EndTalk();
@@ -160,7 +169,7 @@ public class TutorialNPC : MonoBehaviour
         talkCoroutine = null;
         dialogueText.text = npc.npcDialogue[talkIndex];
 
-        Invoke("UISetActive", 1f);
+        Invoke("UISetActive", 0.5f);
     }
     void UISetActive()
     {
@@ -177,10 +186,6 @@ public class TutorialNPC : MonoBehaviour
         else if ((talkIndex >= 6 && talkIndex <= 9) || talkIndex == 2)
         {
             ButtonSetActive(true);
-        }
-        else if(talkIndex == 12)
-        {
-            TutorialManager.Instance.EndTutorial();
         }
         else
         {

@@ -60,4 +60,8 @@ public class ChangerSlot : MonoBehaviour
         }
         UpdateUI();
     }
+    public void DeleteCharacter()
+    {
+        playerData = null;
+    }
 }

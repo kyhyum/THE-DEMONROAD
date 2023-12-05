@@ -10,27 +10,28 @@ public class PlayerComboAttackState : PlayerAttackState
 
     public PlayerComboAttackState(PlayerStateMachine playerStateMachine) : base(playerStateMachine)
     {
+
     }
 
     public override void Enter()
     {
-        stateMachine.Player.WeaponCollider.enabled = true;
+        GameManager.Instance.player.WeaponCollider.enabled = true;
 
         base.Enter();
-        StartAnimation(stateMachine.Player.AnimationData.ComboAttackParameterHash);
+        StartAnimation(GameManager.Instance.player.AnimationData.ComboAttackParameterHash);
 
         alreadyApplyCombo = false;
 
-        attackInfoData = stateMachine.Player.playerSO.AttakData[0].GetAttackInfo(stateMachine.ComboIndex);
-        stateMachine.Player.Animator.SetInteger("BasicAttackCombo", stateMachine.ComboIndex);
+        attackInfoData = GameManager.Instance.player.playerSO.AttakData[0].GetAttackInfo(stateMachine.ComboIndex);
+        GameManager.Instance.player.Animator.SetInteger("BasicAttackCombo", stateMachine.ComboIndex);
     }
 
     public override void Exit()
     {
-        stateMachine.Player.WeaponCollider.enabled = false;
+        GameManager.Instance.player.WeaponCollider.enabled = false;
 
         base.Exit();
-        StopAnimation(stateMachine.Player.AnimationData.ComboAttackParameterHash);
+        StopAnimation(GameManager.Instance.player.AnimationData.ComboAttackParameterHash);
 
         if (!alreadyApplyCombo)
             stateMachine.ComboIndex = 0;
@@ -42,7 +43,7 @@ public class PlayerComboAttackState : PlayerAttackState
 
         if (attackInfoData.ComboStateIndex == -1) return;
 
-        if (!stateMachine.Player.IsAttacking) return;
+        if (!GameManager.Instance.player.IsAttacking) return;
 
         alreadyApplyCombo = true;
     }
@@ -52,7 +53,7 @@ public class PlayerComboAttackState : PlayerAttackState
         base.Update();
 
 
-        float normalizedTime = GetNormalizedTime(stateMachine.Player.Animator, "Attack");
+        float normalizedTime = GetNormalizedTime(GameManager.Instance.player.Animator, "Attack");
         if (normalizedTime < 1f)
         {
 

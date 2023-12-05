@@ -8,6 +8,8 @@ public class MonsterSO : ScriptableObject
     [field: Header("MonsterData")]
     [field: SerializeField] public string Name { get; private set; }
     [field: SerializeField] public Define.MonsterType MonsterType { get; private set; }
+    [field: SerializeField] public int Exp { get; private set; }
+
     [field: Header("HealthData")]
     [field: SerializeField] public int Health { get; private set; } = 100;
 
@@ -21,7 +23,6 @@ public class MonsterSO : ScriptableObject
     [field: SerializeField] public int Damage { get; private set; }
     [field: SerializeField][field: Range(0f, 1f)] public float Dealing_Start_TransitionTime { get; private set; }
     [field: SerializeField][field: Range(0f, 1f)] public float Dealing_End_TransitionTime { get; private set; }
-
 
     [field: Header("MoveData")]
     [field: SerializeField][field: Range(0f, 25f)] public float BaseSpeed { get; private set; } = 5f;

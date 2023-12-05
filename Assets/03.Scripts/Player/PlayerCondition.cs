@@ -63,14 +63,17 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
         RaitoSet(playerData.job);
         StatSynchronization();
     }
+
     public void LevelUp()
     {
-        playerData.exp -= (playerData.level * 100);
+        playerData.exp -= levelExp;
+        levelExp += 100;
         playerData.level++;
         playerData.skillPoint++;
         StatUp();
         StatSynchronization();
         OnSkillPointChanged?.Invoke(playerData.skillPoint);
+        OnExpChanged?.Invoke(playerData.exp, levelExp);
     }
 
     public void SkillLevelChange(int index, bool flag)
@@ -164,6 +167,17 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
             OnDie?.Invoke();
 
         Debug.Log(currentHp);
+    }
+    public void AddExp(int exp)
+    {
+        playerData.exp += exp;
+
+        OnExpChanged?.Invoke(playerData.exp, levelExp);
+
+        if (playerData.exp >= levelExp)
+        {
+            LevelUp();
+        }
     }
 
     public bool ConsumeMp(float value)

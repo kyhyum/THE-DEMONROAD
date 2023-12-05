@@ -26,4 +26,9 @@ public class SkillUI : MonoBehaviour
     {
         skillPoint.text = sp.ToString();
     }
+
+    public void CloseBtn()
+    {
+        UIManager.Instance.ActiveSkill();
+    }
 }

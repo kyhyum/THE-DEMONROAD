@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class CharacterCreate : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class CharacterCreate : MonoBehaviour
         animator = jobCharacter.GetComponent<Animator>();
         voiceClip = jobCharacter.GetComponent<VoiceClip>();
         audioSource = jobCharacter.GetComponent<AudioSource>();
-        playerData.baseObjectPath = StringManager.BaseObjectPath + this.gameObject.name;
+        playerData.baseObjectPath = Path.Combine(StringManager.BaseObjectPath,this.gameObject.name);
     }
     public void ChoiceJob()
     {
