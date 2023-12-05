@@ -161,6 +161,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Recall"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e8319d8-ea99-4036-b48f-abc3ef2cbd1a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -328,6 +337,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""MouseScrollClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16585eef-1217-4cab-9ba9-ac02c0b27a62"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Recall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -351,6 +371,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
         m_Player_MouseScrollY = m_Player.FindAction("MouseScrollY", throwIfNotFound: true);
         m_Player_MouseScrollClick = m_Player.FindAction("MouseScrollClick", throwIfNotFound: true);
+        m_Player_Recall = m_Player.FindAction("Recall", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -427,6 +448,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Escape;
     private readonly InputAction m_Player_MouseScrollY;
     private readonly InputAction m_Player_MouseScrollClick;
+    private readonly InputAction m_Player_Recall;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -446,6 +468,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
         public InputAction @MouseScrollY => m_Wrapper.m_Player_MouseScrollY;
         public InputAction @MouseScrollClick => m_Wrapper.m_Player_MouseScrollClick;
+        public InputAction @Recall => m_Wrapper.m_Player_Recall;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -500,6 +523,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @MouseScrollClick.started += instance.OnMouseScrollClick;
             @MouseScrollClick.performed += instance.OnMouseScrollClick;
             @MouseScrollClick.canceled += instance.OnMouseScrollClick;
+            @Recall.started += instance.OnRecall;
+            @Recall.performed += instance.OnRecall;
+            @Recall.canceled += instance.OnRecall;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -549,6 +575,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @MouseScrollClick.started -= instance.OnMouseScrollClick;
             @MouseScrollClick.performed -= instance.OnMouseScrollClick;
             @MouseScrollClick.canceled -= instance.OnMouseScrollClick;
+            @Recall.started -= instance.OnRecall;
+            @Recall.performed -= instance.OnRecall;
+            @Recall.canceled -= instance.OnRecall;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -583,5 +612,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnEscape(InputAction.CallbackContext context);
         void OnMouseScrollY(InputAction.CallbackContext context);
         void OnMouseScrollClick(InputAction.CallbackContext context);
+        void OnRecall(InputAction.CallbackContext context);
     }
 }

@@ -135,14 +135,22 @@ public class UIManager : Singleton<UIManager>
         {
             if (data[i].index == -1)
                 continue;
+            Debug.Log(data[i].index);
 
             switch (data[i].type)
             {
                 case Define.QuickSlotType.Skill:
-                    quickSlots[i].SetSlot((IUsable)skill.slots[data[i].index].GetSkill());
+                    if (inventory.inventorySlots[data[i].index].GetItem() is IUsable)
+                    {
+                        quickSlots[i].SetSlot((IUsable)skill.slots[data[i].index].GetSkill());
+
+                    }
                     break;
                 case Define.QuickSlotType.Item:
-                    quickSlots[i].SetSlot((IUsable)inventory.inventorySlots[data[i].index].GetItem());
+                    if (inventory.inventorySlots[data[i].index].GetItem() is IUsable)
+                    {
+                        quickSlots[i].SetSlot((IUsable)inventory.inventorySlots[data[i].index].GetItem());
+                    }
                     break;
                 default:
                     break;
