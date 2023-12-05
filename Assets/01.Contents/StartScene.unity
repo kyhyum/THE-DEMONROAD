@@ -58280,22 +58280,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  data:
-    name: 
-    level: 0
-    exp: 0
-    job: 0
-    stats: []
-    skillPoint: 0
-    skilllevels: 
-    baseObjectPath: 
-    playerIndex: 0
-    QuickSlots: []
-    scene: 0
-    currentPlayerPos: {x: 0, y: 0, z: 0}
-    currentPlayerRot: {x: 0, y: 0, z: 0, w: 0}
-    isDead: 0
-    acceptQuest: []
   condition: {fileID: 0}
   goblinkillCount: 0
   Myplayer: {fileID: 0}
