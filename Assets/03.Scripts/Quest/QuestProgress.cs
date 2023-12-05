@@ -17,60 +17,100 @@ public class QuestProgress : MonoBehaviour
     public QuestBoard board;
     private QuestController controller;
     
-    public void ShowQuestProgress(QuestSO selectedQuest) 
+    void OnEnable()
     {
-        if (selectedQuest.questType == Define.QuestType.ConversationQuest) 
+        
+        GameManager.OnGoblinKillCountChanged += UpdateGoblinKillCountUI;
+    }
+
+    void OnDisable()
+    {
+        
+        GameManager.OnGoblinKillCountChanged -= UpdateGoblinKillCountUI;
+    }
+    void UpdateGoblinKillCountUI(int newGoblinKillCount)
+    {
+        Debug.Log("UI 업데이트");
+        int goblinKills = newGoblinKillCount;
+        QuestSO quest = board.selectQuest;
+        if(quest.questType == Define.QuestType.MonsterQuest)
         {
-            foreach (var npc in selectedQuest.relatedNPCs)
-            {
+            questProgmonsterName.text = quest.questName + "\n - " + goblinKills + " / " + quest.questComplete;
 
-                questProgconverseName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
 
-            }
-        }
-        else if (selectedQuest.questType == Define.QuestType.ItemQuest) 
-        {
-            questProgitemName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
-        }
-        else if (selectedQuest.questType == Define.QuestType.MonsterQuest)  
-        {
-            int goblinKills = GameManager.Instance.goblinkillCount;
-
-            questProgmonsterName.text = selectedQuest.questName + "\n - " + goblinKills + " / " + selectedQuest.questComplete;
-
-            if (goblinKills >= selectedQuest.questComplete)
+            if (goblinKills >= quest.questComplete)
             {
                 questProgmonsterName.color = Color.red;
                 questProgmonsterName.fontStyle |= FontStyles.Italic;
                 questProgmonsterName.fontStyle |= FontStyles.Strikethrough;
-                MonsterQuestReward(selectedQuest);
+
             }
         }
-        else if (selectedQuest.questType == Define.QuestType.InfiniteMonsterQuest) 
+        else if (quest.questType == Define.QuestType.InfiniteMonsterQuest)
         {
-            int goblinKills = GameManager.Instance.goblinkillCount;
-            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " + goblinKills + " / " + selectedQuest.questComplete;
-            if (goblinKills >= selectedQuest.questComplete)
+            questProgInfinitemonsterName.text = quest.questName + "\n - " + goblinKills + " / " + quest.questComplete;
+
+            if (goblinKills >= quest.questComplete)
             {
                 questProgInfinitemonsterName.color = Color.red;
                 questProgInfinitemonsterName.fontStyle |= FontStyles.Italic;
                 questProgInfinitemonsterName.fontStyle |= FontStyles.Strikethrough;
-                InfiniteMonsterQuestReward(selectedQuest);
-                
+            }
+        }
+
+
+    }
+    public void ShowQuestProgress(QuestSO selectedquest) 
+    {
+        board.selectQuest = selectedquest;
+
+        if (selectedquest.questType == Define.QuestType.ConversationQuest) 
+        {
+            foreach (var npc in selectedquest.relatedNPCs)
+            {
+
+                questProgconverseName.text = selectedquest.questName + "\n - " + npc.conversationCount + " / " + selectedquest.questComplete;
 
             }
         }
-        else if (selectedQuest.questType == Define.QuestType.MainQuest)  
+        else if (selectedquest.questType == Define.QuestType.ItemQuest) 
+        {
+            questProgitemName.text = selectedquest.questName + "\n - " + "0 / " + selectedquest.questComplete;
+        }
+        else if (selectedquest.questType == Define.QuestType.MonsterQuest)  
+        {
+            int goblinKills = GameManager.Instance.goblinkillCount;
+
+            questProgmonsterName.text = selectedquest.questName + "\n - " + goblinKills + " / " + selectedquest.questComplete;
+            if (goblinKills >= selectedquest.questComplete)
+            {
+                MonsterQuestReward(selectedquest);
+
+            }
+
+        }
+        else if (selectedquest.questType == Define.QuestType.InfiniteMonsterQuest) 
+        {
+            int goblinKills = GameManager.Instance.goblinkillCount;
+            questProgInfinitemonsterName.text = selectedquest.questName + "\n - " + goblinKills + " / " + selectedquest.questComplete;
+            if (goblinKills >= selectedquest.questComplete)
+            {
+                InfiniteMonsterQuestReward(selectedquest);
+
+            }
+        }
+        else if (selectedquest.questType == Define.QuestType.MainQuest)  
         {
 
-            questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
-            board.UpdateMainQuestProgress(selectedQuest);
+            questProgmainName.text = selectedquest.questName + "\n - " + "0 / " + selectedquest.questComplete;
+            board.UpdateMainQuestProgress(board.selectQuest);
 
             
 
 
         }
     }
+
 
     public void MainQuestReward(QuestSO selectedQuest)
     {

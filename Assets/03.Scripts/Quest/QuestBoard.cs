@@ -31,7 +31,7 @@ public class QuestBoard : MonoBehaviour
     public ItemSO golditem;
     QuestProgress questProgress;
     QuestLog questLog;
-    QuestSO selectQuest;
+    public QuestSO selectQuest;
     PlayerData player;
 
     public void Start()
