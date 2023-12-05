@@ -41,6 +41,9 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     public delegate void ValueChangedDelegate(int value);
     public event ValueChangedDelegate OnSkillPointChanged;
 
+    Coroutine hpRegen;
+    Coroutine mpRegen;
+
     public bool IsDead => currentHp == 0;
     public void Initialize()
     {
@@ -127,8 +130,7 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     }
     void StatSynchronization()
     {
-        StopCoroutine(CGenerator(Define.RestoreType.HP));
-        StopCoroutine(CGenerator(Define.RestoreType.MP));
+        StopGenerate();
         atk = myStats[mainStat] * atkRatio;
         def = myStats[Define.StatType.DEX] * defRatio;
         speed = myStats[Define.StatType.DEX] * speedRatio;
@@ -143,8 +145,19 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
         {
             playerData.stats[i].statValue = myStats[playerData.stats[i].type];
         }
-        StartCoroutine(CGenerator(Define.RestoreType.HP));
-        StartCoroutine(CGenerator(Define.RestoreType.MP));
+        GenerateResource();
+    }
+    private void StopGenerate()
+    {
+        if (hpRegen != null)
+            StopCoroutine(hpRegen);
+        if (mpRegen != null)
+            StopCoroutine(mpRegen);
+    }
+    public void GenerateResource()
+    {
+        hpRegen = StartCoroutine(CGenerator(Define.RestoreType.HP));
+        mpRegen = StartCoroutine(CGenerator(Define.RestoreType.MP));
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -153,7 +166,6 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
             other.GetComponent<ITakeDamage>().TakeDamage(atk);
         }
     }
-
     public void TakeDamage(float damage)
     {
         if (currentHp == 0) return;
@@ -179,7 +191,6 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
             LevelUp();
         }
     }
-
     public bool ConsumeMp(float value)
     {
         if (value > currentMp)
@@ -191,13 +202,26 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
 
         return true;
     }
-
     public void Buff(Define.BuffType buffType, float duration, int value)
     {
         StartCoroutine(CBuff(buffType, duration, value));
     }
-
-
+    public void Restore(Define.RestoreType type, float value)
+    {
+        switch (type)
+        {
+            case Define.RestoreType.HP:
+                currentHp += value;
+                currentHp = currentHp > maxHp ? maxHp : currentHp;
+                OnHpChanged?.Invoke(currentHp, maxHp);
+                break;
+            case Define.RestoreType.MP:
+                currentMp += value;
+                currentMp = currentMp > maxMp ? maxMp : currentMp;
+                OnMpChanged?.Invoke(currentMp, maxMp);
+                break;
+        }
+    }
     IEnumerator CGenerator(Define.RestoreType type)
     {
         while (true)
@@ -205,14 +229,10 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
             switch (type)
             {
                 case Define.RestoreType.HP:
-                    currentHp += regenHp;
-                    currentHp = currentHp > maxHp ? maxHp : currentHp;
-                    OnHpChanged?.Invoke(currentHp, maxHp);
+                    Restore(type, regenHp);
                     break;
                 case Define.RestoreType.MP:
-                    currentMp += regenMp;
-                    currentMp = currentMp > maxMp ? maxMp : currentMp;
-                    OnMpChanged?.Invoke(currentMp, maxMp);
+                    Restore(type, regenMp);
                     break;
             }
             yield return new WaitForSecondsRealtime(.2f);

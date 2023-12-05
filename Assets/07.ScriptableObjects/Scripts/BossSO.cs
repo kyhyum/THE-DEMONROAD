@@ -22,6 +22,7 @@ public class BossSO : ScriptableObject
 {
     [field: Header("MonsterData")]
     [field: SerializeField] public string Name { get; private set; }
+    [field: SerializeField] public int Exp { get; private set; }
 
     [field: Header("HealthData")]
     [field: SerializeField] public int Health { get; private set; } = 100;
