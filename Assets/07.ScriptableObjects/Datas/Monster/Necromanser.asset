@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Necromanser
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Necromanser
+  <Exp>k__BackingField: 200
   <Health>k__BackingField: 500
   <PlayerChasingRange>k__BackingField: 13
   <AttackPatternInfoDatas>k__BackingField:
