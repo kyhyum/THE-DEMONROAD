@@ -6,11 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
-public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
+public class QuickSlot : MonoBehaviour
 {
-    private GameObject itemClone;
-    private Canvas canvas;
-    private RectTransform rect;
     private IUsable usable;
     [field: SerializeField] private Image icon;
     [field: SerializeField] private TMP_Text keyBinding;
@@ -23,7 +20,6 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
     private void Awake()
     {
-        canvas = GetComponentInParent<Canvas>();
         UIManager.Instance.quickSlots[slotID] = this;
         SetSlot(null);
     }
@@ -101,62 +97,6 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         return usable;
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        if (usable == null)
-            return;
-        itemClone = Instantiate(gameObject, canvas.GetComponent<Transform>());
-        rect = itemClone.GetComponent<RectTransform>();
-
-        rect.sizeDelta = new Vector2(70, 70);
-
-        Vector2 mousePosition = Input.mousePosition;
-
-        rect.anchoredPosition = mousePosition;
-
-        RawImage image = itemClone.GetComponentInChildren<RawImage>();
-        Color color = image.color;
-        color.a = .8f;
-        image.color = color;
-
-        TMP_Text text = itemClone.GetComponentInChildren<TMP_Text>();
-        color = text.color;
-        color.a = .8f;
-        text.color = color;
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (itemClone == null)
-            return;
-        rect.anchoredPosition += eventData.delta / canvas.scaleFactor;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        if (itemClone == null)
-            return;
-        Destroy(itemClone);
-    }
-
-    public void OnDrop(PointerEventData eventData)
-    {
-        // 이벤트 데이터를 이용해 드롭 지점에서의 Raycast를 수행
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);
-
-        foreach (RaycastResult result in results)
-        {
-            if (result.gameObject.TryGetComponent<QuickSlot>(out QuickSlot quickSlot))
-            {
-
-                return;
-            }
-        }
-
-        SetSlot(null);
-    }
-
     private void SetQuantity(int count)
     {
         quantity.text = count.ToString();
@@ -179,13 +119,11 @@ public class QuickSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
             SetCooltime(5f);
         }
 
-        //Attack Test
-        //if (usable is Skill)
-        //{
-        //    if (GameManager.Instance.player.IsAttack())
-        //        return;
-        //    Skill skill = (Skill)usable;
-        //}
+        if (usable is Skill)
+        {
+            if (GameManager.Instance.player.IsAttack())
+                return;
+        }
 
         usable.Use();
     }
