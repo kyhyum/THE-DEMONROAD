@@ -8,6 +8,7 @@ public class RecallSlot : MonoBehaviour
 {
     [field: SerializeField] private InputActionReference inputActionReference;
     [field: SerializeField] private Image cooltimeImg;
+    [field: SerializeField] private GameObject effect;
     private float coolTime;
     private float fillAmount;
     private void FixedUpdate()
@@ -44,8 +45,12 @@ public class RecallSlot : MonoBehaviour
 
     IEnumerator CRecall()
     {
+        GameObject obj = Instantiate(effect);
+        obj.transform.position = GameManager.Instance.Myplayer.transform.position;
+
         yield return new WaitForSecondsRealtime(3f);
 
+        Destroy(obj);
         GameManager.Instance.data.currentPlayerPos = new Vector3(0f, 0f, 0f);
         SceneLoadManager.LoadScene("NewTownScene");
         SetCooltime();

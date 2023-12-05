@@ -4548,6 +4548,7 @@ MonoBehaviour:
   inputActionReference: {fileID: 9093264307389698523, guid: 5a4027c8807ffae4c83ace15aec3f380,
     type: 3}
   cooltimeImg: {fileID: 1479875432535804685}
+  effect: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
 --- !u!1 &8269178840697388527
 GameObject:
   m_ObjectHideFlags: 0
