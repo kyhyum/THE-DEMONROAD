@@ -20,7 +20,6 @@ public class GameManager : Singleton<GameManager>
     public CinemachineVirtualCamera virtualCamera;
 
     SlotItem slot;
-
     GameObject obj;
 
     private void Start()
@@ -28,6 +27,8 @@ public class GameManager : Singleton<GameManager>
         slot = new SlotItem();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -44,6 +45,7 @@ public class GameManager : Singleton<GameManager>
             }
             obj = Resources.Load<GameObject>(data.baseObjectPath);
             Myplayer = Instantiate<GameObject>(obj, data.currentPlayerPos, data.currentPlayerRot);
+            Debug.Log(Myplayer);
             player = Myplayer.GetComponent<Player>();
             condition = Myplayer.AddComponent<PlayerCondition>();
             condition.playerData = data;
@@ -153,6 +155,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void Save()
     {
+
         if (data == null)
         {
             return;

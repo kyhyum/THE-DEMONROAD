@@ -26,7 +26,6 @@ public class AttackSkill : Skill, IUsable
     // TODO: 이펙트, 범위, 대미지
     public void Use()
     {
-
         if (GameManager.Instance.condition.ConsumeMp(manaCost))
         {
             float totalDamage = damage + level * increasedDamagePerLevel;

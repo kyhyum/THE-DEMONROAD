@@ -14,9 +14,12 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     public float speed;
     public float currentHp;
     public float maxHp;
+    public float regenHp;
     public float currentMp;
     public float maxMp;
+    public float regenMp;
     public int levelExp;
+
 
     float atkRatio;
     float defRatio;
@@ -121,18 +124,24 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     }
     void StatSynchronization()
     {
+        StopCoroutine(CGenerator(Define.RestoreType.HP));
+        StopCoroutine(CGenerator(Define.RestoreType.MP));
         atk = myStats[mainStat] * atkRatio;
         def = myStats[Define.StatType.DEX] * defRatio;
         speed = myStats[Define.StatType.DEX] * speedRatio;
         maxHp = myStats[Define.StatType.CON] + myStats[Define.StatType.STR] * hpRatio;
+        regenHp = maxHp * 0.001f;
         currentHp = maxHp;
         maxMp = myStats[Define.StatType.INT] * mpRatio;
+        regenMp = maxMp * 0.01f; ;
         currentMp = maxMp;
         levelExp = playerData.level * 100;
         for (int i = 0; i < playerData.stats.Count; i++)
         {
             playerData.stats[i].statValue = myStats[playerData.stats[i].type];
         }
+        StartCoroutine(CGenerator(Define.RestoreType.HP));
+        StartCoroutine(CGenerator(Define.RestoreType.MP));
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -174,11 +183,25 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
         StartCoroutine(CBuff(buffType, duration, value));
     }
 
-    IEnumerator CGenerator(Define.RestoreType type, float value)
+
+    IEnumerator CGenerator(Define.RestoreType type)
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(.5f);
+            switch (type)
+            {
+                case Define.RestoreType.HP:
+                    currentHp += regenHp;
+                    currentHp = currentHp > maxHp ? maxHp : currentHp;
+                    OnHpChanged?.Invoke(currentHp, maxHp);
+                    break;
+                case Define.RestoreType.MP:
+                    currentMp += regenMp;
+                    currentMp = currentMp > maxMp ? maxMp : currentMp;
+                    OnMpChanged?.Invoke(currentMp, maxMp);
+                    break;
+            }
+            yield return new WaitForSecondsRealtime(.2f);
         }
     }
 
