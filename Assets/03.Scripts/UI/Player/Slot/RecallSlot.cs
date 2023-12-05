@@ -38,6 +38,13 @@ public class RecallSlot : MonoBehaviour
     {
         if (fillAmount != 0)
             return;
+
+    }
+
+    IEnumerator CRecall()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+
         GameManager.Instance.data.currentPlayerPos = new Vector3(0f, 0f, 0f);
         SceneLoadManager.LoadScene("NewTownScene");
         SetCooltime();
