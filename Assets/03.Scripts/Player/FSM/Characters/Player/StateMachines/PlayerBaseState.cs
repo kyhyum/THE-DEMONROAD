@@ -40,24 +40,6 @@ public class PlayerBaseState : IState, IUsable
     public virtual void Update()
     {
         PerformedMove(); 
-        //if(Input.GetMouseButton(2))
-        //{
-        //    Transform cameraTransform = stateMachine.Player.VirtualCamera.transform;
-        //    Quaternion camerarotation = cameraTransform.rotation;
-        //    Vector2 ChangeCursorPosition = new Vector2(UnityEngine.Input.mousePosition.x, UnityEngine.Input.mousePosition.y);
-        //    Debug.Log("ChangeCursorPosition : " + ChangeCursorPosition);
-        //    float xDistance = currentCursorPosition.x - ChangeCursorPosition.x;
-        //    if (xDistance > 5)
-        //    {
-        //        camerarotation.y -= xDistance / 5;
-        //        cameraTransform.rotation = camerarotation;
-        //    }
-        //    else if (xDistance < -5)
-        //    {
-        //        camerarotation.y += xDistance / 5;
-        //        cameraTransform.rotation = camerarotation;
-        //    }
-        //}
     }
 
     public virtual void PhysicsUpdate()
