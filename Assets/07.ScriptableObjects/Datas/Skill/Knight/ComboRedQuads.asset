@@ -15,7 +15,7 @@ MonoBehaviour:
   skillName: ComboRedQuads
   description: "\uAF43\uC78E\uC744 \uD769\uBFCC\uB9AC\uBA74\uC11C \uC5F0\uC18D\uC73C\uB85C
     \uBCA4\uB2E4."
-  icon: {fileID: 21300000, guid: 0756f487b28b75047bbd4e201429c103, type: 3}
+  icon: {fileID: 21300000, guid: 49a2945164f198446a4e34997fcb2ee7, type: 3}
   type: 0
   manaCost: 5
   cooltime: 5
