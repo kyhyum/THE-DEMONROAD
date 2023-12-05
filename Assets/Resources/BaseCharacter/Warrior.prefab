@@ -262,6 +262,7 @@ MonoBehaviour:
   <VirtualCamera>k__BackingField: {fileID: 0}
   <ComponentBase>k__BackingField: {fileID: 0}
   cameraLookPoint: {fileID: 8219408792071906567}
+  <WeaponCollider>k__BackingField: {fileID: 6642813808563170296}
   playerSO: {fileID: 11400000, guid: e2a2c4b872744794ebaac68f5c7803fe, type: 2}
   AttackTransforms:
   - {fileID: 4055328800548736781}
