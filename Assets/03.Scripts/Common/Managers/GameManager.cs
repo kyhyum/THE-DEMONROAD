@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     public PlayerData data;
     public PlayerCondition condition;
 
-    public int goblinkillCount = 0; // 고블린 잡은 횟수
+    public int goblinkillCount = 0; 
     public GameObject Myplayer;
     public EventSystem eventSystem;
 
@@ -20,10 +20,13 @@ public class GameManager : Singleton<GameManager>
     public CinemachineVirtualCamera virtualCamera;
 
     SlotItem slot;
-
     GameObject obj;
+
+    public delegate void GoblinKillCountChanged(int newCount);
+    public static event GoblinKillCountChanged OnGoblinKillCountChanged;
     private void Start()
     {
+        
         slot = new SlotItem();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -210,6 +213,14 @@ public class GameManager : Singleton<GameManager>
 
         StopAllCoroutines();
         Save();
+    }
+    public void UpdateGoblinKillCount(int newCount)
+    {
+        Debug.Log("고블린 카운트 호출" + newCount);
+        goblinkillCount = newCount;
+
+        
+        OnGoblinKillCountChanged?.Invoke(goblinkillCount);
     }
     #endregion GamePlay
 }
