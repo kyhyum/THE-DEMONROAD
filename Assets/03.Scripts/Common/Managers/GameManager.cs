@@ -51,7 +51,6 @@ public class GameManager : Singleton<GameManager>
             condition.playerData = data;
             condition.Initialize();
             UIManager.Instance.gameObject.SetActive(true);
-            UIManager.Instance.ActivePlayerUI(true);
             UIManager.Instance.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, data.name));
             UIManager.Instance.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
             UIManager.Instance.CreateQuestLog();
