@@ -4086,7 +4086,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 22
   m_TargetDisplay: 0
 --- !u!224 &117446168
 RectTransform:
@@ -32790,7 +32790,7 @@ GameObject:
   - component: {fileID: 615616261}
   - component: {fileID: 615616260}
   m_Layer: 0
-  m_Name: Goblin_Ranger_R1
+  m_Name: TutorialMob
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

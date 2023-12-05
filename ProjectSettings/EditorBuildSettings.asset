@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/01.Contents/LoadingScene.unity
     guid: 3a9a2b3da50c1f54d9c76f955464b1d7
   - enabled: 1
-    path: Assets/00.Test/TutorialScene.unity
+    path: Assets/01.Contents/TutorialScene.unity
     guid: 0c594742a0c7faa46aa785009f8bbd86
   - enabled: 1
     path: Assets/01.Contents/NewTownScene.unity
