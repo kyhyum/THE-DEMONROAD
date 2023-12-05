@@ -7,6 +7,11 @@ public class PlayerObstacleTransparencyController : MonoBehaviour
 
     void LateUpdate()
     {
+        if(GameManager.Instance.Myplayer == null)
+        {
+            return;
+        }
+
         Vector3 direction = (GameManager.Instance.Myplayer.transform.position - transform.position).normalized;
         RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, Mathf.Infinity,
                             1 << LayerMask.NameToLayer("TransparentObject"));
