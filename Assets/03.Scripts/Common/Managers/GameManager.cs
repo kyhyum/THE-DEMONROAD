@@ -9,11 +9,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public Player player;
-    public PlayerData data
-    {
-        get;
-        set;
-    }
+    public PlayerData data;
     public PlayerCondition condition;
 
     public int goblinkillCount = 0; // 고블린 잡은 횟수

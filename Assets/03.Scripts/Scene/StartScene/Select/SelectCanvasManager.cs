@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.TextCore.Text;
 
 public class SelectCanvasManager : Singleton<SelectCanvasManager>
 {
@@ -25,10 +26,6 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
         if (Directory.Exists(StringManager.JsonPath))
         {
             string[] jsons = Directory.GetFiles(StringManager.JsonPath, "*.json");
-            for (int i = 0; i < jsons.Length; i++)
-            {
-                Debug.Log(Path.GetFileName(jsons[i]));
-            }
 
             if (jsons.Length > 0)
             {
@@ -54,6 +51,11 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
             characterSlots[i].SlotSetting();
         }
     }
+    public void SelectSlot(int slotIndex)
+    {
+        selectedSlot = slotIndex;
+        characterSlots[selectedSlot].ChoiceSlot();
+    }
 
     public void StartButon()
     {
@@ -63,16 +65,34 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
             return;
         }
         characterSlots[selectedSlot].StartCharacter();
-        GameManager.Instance.GameStart();
     }
-    public void DeleteButton()
+
+
+    #region SlotChangeSystem
+    public void SlotPopUpOpen()
     {
-        if (selectedSlot == -1)
+        UIManager.Instance.ActivePopUpUI("캐릭터 슬롯 변경", "정말 변경 하시겠습니까?", SlotChangeButton);
+    }
+    void SlotChangeButton()
+    {
+        for (int i = 0; i < playerDatas.Length; i++)
         {
-            Debug.Log("캐릭터를 선택해주세요");
-            return;
+            if (playerDatas[i] != null)
+            {
+                GameManager.Instance.SavePlayerDataToJson(StringManager.JsonPath, playerDatas[i].name, playerDatas[i]);
+            }
         }
-        characterSlots[selectedSlot].DeleteCharacter();
+        for (int i = 0; i < characterSlots.Length; i++)
+        {
+            if (playerDatas[i] != null)
+            {
+                characterSlots[i].ChangeSlot(baseCharacters[(int)playerDatas[i].job], playerDatas[i]);
+            }
+            else
+            {
+                characterSlots[i].ClearSlot();
+            }
+        }
     }
     public void ClickUpButton(int slotIndex)
     {
@@ -123,11 +143,8 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
             characterSlots[i].data = playerDatas[i];
         }
     }
-    public void SelectSlot(int slotIndex)
-    {
-        selectedSlot = slotIndex;
-        characterSlots[selectedSlot].ChoiceSlot();
-    }
+    #endregion SlotChangeSystem
+    #region CreateCharacterSystem
     public void CreateButton(int slotIndex)
     {
         selectedSlot = slotIndex;
@@ -162,29 +179,20 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
             UIManager.Instance.ActivePopUpUI("캐릭터 생성", "이미 있는 이름입니다.", null);
         }
     }
-    public void PopUpOpen()
+    public void DeleteButton()
     {
-        UIManager.Instance.ActivePopUpUI("캐릭터 슬롯 변경", "정말 변경 하시겠습니까?", SlotChangeButton);
+        if (selectedSlot == -1)
+        {
+            Debug.Log("캐릭터를 선택해주세요");
+            return;
+        }
+        characterSlots[selectedSlot].DeleteCharacter();
     }
-    void SlotChangeButton()
+    public void DeleteCharacter(PlayerData data)
     {
-        for (int i = 0; i < playerDatas.Length; i++)
-        {
-            if (playerDatas[i] != null)
-            {
-                GameManager.Instance.SavePlayerDataToJson(StringManager.JsonPath, playerDatas[i].name, playerDatas[i]);
-            }
-        }
-        for (int i = 0; i < characterSlots.Length; i++)
-        {
-            if (playerDatas[i] != null)
-            {
-                characterSlots[i].ChangeSlot(baseCharacters[(int)playerDatas[i].job], playerDatas[i]);
-            }
-            else
-            {
-                characterSlots[i].ClearSlot();
-            }
-        }
+        changerSlots[data.playerIndex].DeleteCharacter();
+        playerDatas[data.playerIndex] = null;
+        playerName.Remove(data.name);
     }
+    #endregion CreateCharacterSystem
 }
