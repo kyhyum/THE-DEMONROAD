@@ -91,12 +91,6 @@ public class TutorialNPC : MonoBehaviour
 
         distance = Vector3.Distance(this.gameObject.transform.position, player.position);
 
-        if (distance > activationDistance)
-        {
-            npcCanvas.SetActive(false);
-            DialogueUISetActive(false);
-        }
-
         if (distance <= activationDistance)
         {
             npcCanvas.SetActive(true);
