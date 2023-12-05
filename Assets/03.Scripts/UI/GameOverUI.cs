@@ -18,5 +18,6 @@ public class GameOverUI : MonoBehaviour
         SceneLoadManager.LoadScene(3);
 
         GameManager.Instance.player.transform.position = Vector3.zero;
+        GameManager.Instance.player.enabled = true;
     }
 }
