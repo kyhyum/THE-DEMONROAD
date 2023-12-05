@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class RestoreItem : UseItem
 {
     Define.RestoreType restoreType;
@@ -9,23 +11,14 @@ public class RestoreItem : UseItem
         {
             RestoreItemSO restoreItemSO = (RestoreItemSO)itemSO;
             restoreType = restoreItemSO.restoreType;
+            value = restoreItemSO.value;
         }
     }
 
     public override void Use()
     {
-        PlayerCondition condition = GameManager.Instance.condition;
-
-        switch (restoreType)
-        {
-            case Define.RestoreType.HP:
-                condition.currentHp = condition.currentHp + value > condition.maxHp ? condition.maxHp : condition.currentHp + value;
-                break;
-            case Define.RestoreType.MP:
-                condition.currentHp = condition.currentMp + value > condition.maxMp ? condition.maxMp : condition.currentMp + value;
-                break;
-        }
-
+        GameManager.Instance.condition.Restore(restoreType, value);
+        Debug.Log(restoreType + ": " + value);
         base.Use();
     }
 }

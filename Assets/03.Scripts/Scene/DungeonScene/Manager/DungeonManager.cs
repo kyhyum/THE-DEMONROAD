@@ -37,6 +37,7 @@ public class DungeonManager : Singleton<DungeonManager>
         SoundManager.Instance.BGMPlay(DungeonSound);
 
         UIManager.Instance.ActivePlayerUI(true);
+        GameManager.Instance.condition.GenerateResource();
 
         SetSpawnNum();
 

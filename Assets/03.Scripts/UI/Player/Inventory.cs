@@ -49,8 +49,7 @@ public class Inventory : MonoBehaviour
     {
         if (item.type == Define.ItemType.Gold)
         {
-            IStackable stackableItem = (IStackable)item;
-            gold += stackableItem.Get();
+            gold += item.itemPrice;
 
             return true;
         }

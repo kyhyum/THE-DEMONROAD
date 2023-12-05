@@ -133,6 +133,9 @@ public class UIManager : Singleton<UIManager>
     {
         for (int i = 0; i < data.Length; i++)
         {
+            if (data[i].index == -1)
+                continue;
+
             switch (data[i].type)
             {
                 case Define.QuickSlotType.Skill:

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: SwordGoblin
   <MonsterType>k__BackingField: 1
+  <Exp>k__BackingField: 3
   <Health>k__BackingField: 40
   <AttackDamage>k__BackingField: 7
   <IsLongRanged>k__BackingField: 0
