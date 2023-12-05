@@ -9,7 +9,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public Player player;
-    public PlayerData data;
+    public PlayerData data
+    {
+        get;
+        set;
+    }
     public PlayerCondition condition;
 
     public int goblinkillCount = 0; // 고블린 잡은 횟수
@@ -54,8 +58,7 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.CreateQuestProgress();
             DontDestroyOnLoad(Myplayer);
         }
-
-        else if (scene.buildIndex == (int)Define.SceneType.Loading)
+        else if (Myplayer != null && scene.buildIndex == (int)Define.SceneType.Loading)
         {
             Myplayer.SetActive(false);
         }
@@ -152,11 +155,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void Save()
     {
-        if(data == null)
-        {
-            return;
-        }
-        if(data.name == string.Empty)
+        if (data == null)
         {
             return;
         }
@@ -171,6 +170,13 @@ public class GameManager : Singleton<GameManager>
             SaveItemArrayToJson(StringManager.ItemJsonPath, StringManager.StorageName, UIManager.Instance.GetStorage().Get());
         }
         SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
+    }
+    void DataNull()
+    {
+        player = null;
+        data = null;
+        Myplayer = null;
+        condition = null;
     }
     #endregion DataManagement
 
@@ -190,9 +196,8 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.ActivePlayerUI(false);
             UIManager.Instance.DestroyQuestUI();
             Destroy(Myplayer);
-            player = null;
-            data = null;
-            Myplayer = null;
+
+            DataNull();
         }
     }
     public void FinishPopUp()
@@ -207,6 +212,8 @@ public class GameManager : Singleton<GameManager>
 
     private void OnApplicationQuit()
     {
+        DataNull();
+
         StopAllCoroutines();
         Save();
     }

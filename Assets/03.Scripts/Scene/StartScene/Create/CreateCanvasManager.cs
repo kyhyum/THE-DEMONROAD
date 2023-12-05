@@ -4,10 +4,8 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 
-public class CreateCanvasManager : MonoBehaviour
+public class CreateCanvasManager : Singleton<CreateCanvasManager>
 {
-    public static CreateCanvasManager Instance;
-    
     int selectJobIndex;
 
     [SerializeField] TMP_InputField nameCreate;
@@ -15,17 +13,6 @@ public class CreateCanvasManager : MonoBehaviour
     [SerializeField] GameObject empty;
     [SerializeField] Camera mainCamera;
     Tween tween;
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
     private void OnEnable()
     {
         nameCreate.text = null;

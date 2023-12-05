@@ -16,12 +16,10 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
 
     private PlayerData[] playerDatas = new PlayerData[4];
     public PlayerData[] PlayerDatas { get { return playerDatas; } }
-
     private void OnEnable()
     {
         selectedSlot = -1;
     }
-
     private void Start()
     {
         if (Directory.Exists(StringManager.JsonPath))
@@ -42,7 +40,6 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
                 {
                     foreach (string one in playerName)
                     {
-                        Debug.Log(GameManager.Instance);
                         PlayerData data = GameManager.Instance.LoadPlayerDataFromJson(StringManager.JsonPath, one);
                         playerDatas[data.playerIndex] = data;
                         characterSlots[data.playerIndex].CreateCharacter(baseCharacters[(int)data.job], data);
@@ -155,8 +152,8 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
             data.level = 1;
             GameManager.Instance.SavePlayerDataToJson(StringManager.JsonPath, data.name, data);
             PlayerData characterData = GameManager.Instance.LoadPlayerDataFromJson(StringManager.JsonPath, data.name);
-            characterSlots[selectedSlot].CreateCharacter(baseCharacters[(int)data.job], characterData);
-            playerDatas[data.playerIndex] = characterData;
+            characterSlots[characterData.playerIndex].CreateCharacter(baseCharacters[(int)characterData.job], characterData);
+            playerDatas[characterData.playerIndex] = characterData;
             playerName.Add(name);
             StartSceneManager.Instance.OpenSelectCanvas();
         }

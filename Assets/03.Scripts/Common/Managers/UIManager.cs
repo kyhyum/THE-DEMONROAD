@@ -38,8 +38,10 @@ public class UIManager : Singleton<UIManager>
     public bool storageOpen => storageObj.activeSelf;
     private Vector2 pos;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         quickSlots = new QuickSlot[5];
         EnableUI = new List<GameObject>();
         audioSource = GetComponent<AudioSource>();
@@ -129,7 +131,7 @@ public class UIManager : Singleton<UIManager>
 
     public void SetQuickSlot(QuickSlotData[] data)
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < data.Length; i++)
         {
             switch (data[i].type)
             {
