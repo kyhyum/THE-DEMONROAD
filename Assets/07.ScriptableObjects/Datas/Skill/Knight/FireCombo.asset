@@ -15,7 +15,7 @@ MonoBehaviour:
   skillName: FireCombo
   description: "\uBB34\uAE30\uC5D0 \uBD88 \uC18D\uC131\uC744 \uBD80\uC5EC\uD558\uC5EC
     \uC5F0\uC18D\uC73C\uB85C \uBCA4\uB2E4."
-  icon: {fileID: 21300000, guid: a493b59d53f5f064db1c6b21441580be, type: 3}
+  icon: {fileID: 21300000, guid: 47ec1af9cf817b74b9431da449d8bc14, type: 3}
   type: 0
   manaCost: 15
   cooltime: 20
