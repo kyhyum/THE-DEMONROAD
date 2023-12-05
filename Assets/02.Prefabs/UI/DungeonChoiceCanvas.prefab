@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7411541873125373597}
   - component: {fileID: 6259645460932078653}
   - component: {fileID: 4369517137545803681}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DungeonImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 7866503939510102941}
   - component: {fileID: 4577742502658409157}
   - component: {fileID: 9150738208096664549}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 2415692466892714518}
   - component: {fileID: 9019223972052563993}
   - component: {fileID: 4651204323690263383}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: InButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 3572320969246821262}
   - component: {fileID: 8303790231201466548}
   - component: {fileID: 5252288046803393034}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 5584211852911169591}
   - component: {fileID: 2581417751243426001}
   - component: {fileID: 7967788735837688933}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DungeonName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 5670898185383400488}
   - component: {fileID: 7802705834625099940}
   - component: {fileID: 1759085237545591444}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DungeonExplan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -779,13 +779,13 @@ GameObject:
   - component: {fileID: 7655719844222050749}
   - component: {fileID: 7612669071702477164}
   - component: {fileID: 93285179648618362}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DungeonChoiceCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5016137046212486453
 RectTransform:
   m_ObjectHideFlags: 0
@@ -801,7 +801,7 @@ RectTransform:
   - {fileID: 8019619650102115492}
   - {fileID: 1833896838174188592}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -829,7 +829,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_TargetDisplay: 0
 --- !u!114 &7612669071702477164
 MonoBehaviour:
@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 663086586154770091}
   - component: {fileID: 2894580283252394687}
   - component: {fileID: 7423979480214502134}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DungeonExplanUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -980,7 +980,7 @@ GameObject:
   - component: {fileID: 5674132705081325028}
   - component: {fileID: 4523036625921366018}
   - component: {fileID: 2074157874381177638}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DungeonApproLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1118,7 +1118,7 @@ GameObject:
   - component: {fileID: 2817430120414209970}
   - component: {fileID: 434502823640489614}
   - component: {fileID: 8958425017628838795}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Dungeon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1264,7 +1264,7 @@ GameObject:
   - component: {fileID: 8019619650102115492}
   - component: {fileID: 7504142736552668058}
   - component: {fileID: 5986897870781213863}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DungeonUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
