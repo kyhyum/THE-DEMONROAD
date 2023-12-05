@@ -39,6 +39,7 @@ public class RecallSlot : MonoBehaviour
         if (fillAmount != 0)
             return;
 
+        StartCoroutine(CRecall());
     }
 
     IEnumerator CRecall()
