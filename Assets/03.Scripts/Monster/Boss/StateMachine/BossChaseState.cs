@@ -52,9 +52,9 @@ public class BossChaseState : BossBaseState
                     case BossAttackPattern.Pattern3:
                         stateMachine.ChangeState(stateMachine.AttackThreeState);
                         break;
-                    case BossAttackPattern.Pattern4:
-                        stateMachine.ChangeState(stateMachine.AttackFourState);
-                        break;
+                    //case BossAttackPattern.Pattern4:
+                    //    stateMachine.ChangeState(stateMachine.AttackFourState);
+                    //    break;
 
                 }
                 return;
@@ -94,16 +94,16 @@ public class BossChaseState : BossBaseState
         }
 
 
-        // 체력이 30% 이하이면 Pattern4를 추가하고 고정으로 한 번 실행
-        if (currentHealthPercentage <= 0.3f)
-        {
-            if (!isAttackPattern4)
-            {
-                isAttackPattern4 = true;
-                return BossAttackPattern.Pattern4;
-            }
-            availablePatterns.Add(BossAttackPattern.Pattern4);
-        }
+        //// 체력이 30% 이하이면 Pattern4를 추가하고 고정으로 한 번 실행
+        //if (currentHealthPercentage <= 0.3f)
+        //{
+        //    if (!isAttackPattern4)
+        //    {
+        //        isAttackPattern4 = true;
+        //        return BossAttackPattern.Pattern4;
+        //    }
+        //    availablePatterns.Add(BossAttackPattern.Pattern4);
+        //}
 
         // 이전에 사용한 패턴 제거
         availablePatterns.Remove(previousAttackPattern);
