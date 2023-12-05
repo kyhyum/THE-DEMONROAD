@@ -11,7 +11,8 @@ public class PlayerAttackState : PlayerGroundedState
     public override void Enter()
     {
         //Debug.Log("PlayerAttackState 클래스 Enter 함수 호출한다.");
-        
+        stateMachine.Player.WeaponCollider.enabled = true;
+
         stateMachine.Player.Agent.ResetPath();
         stateMachine.Player.animationEventEffects.SetEffects(stateMachine.Player.playerBaseAttackData.Effects);
         base.Enter();
@@ -20,6 +21,8 @@ public class PlayerAttackState : PlayerGroundedState
 
     public override void Exit()
     {
+        stateMachine.Player.WeaponCollider.enabled = false;
+
         base.Exit();
 
         StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);

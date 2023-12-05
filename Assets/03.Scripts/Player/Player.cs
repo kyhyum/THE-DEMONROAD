@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     public bool[] IsAttackSkill { get; set; }
 
     [field: Header("Attack")]
+    [field: SerializeField] public Collider WeaponCollider { get; set; }
     public PlayerSO playerSO;
     [field: SerializeField] private List<Transform> AttackTransforms;
     [field: SerializeField] private List<Transform> Skill2Transforms;
@@ -82,6 +83,8 @@ public class Player : MonoBehaviour
     {
         Agent.updatePosition = false;
         Agent.updateRotation = true;
+
+        WeaponCollider.enabled = false;
 
         playerCondition = GetComponent<PlayerCondition>();
 
