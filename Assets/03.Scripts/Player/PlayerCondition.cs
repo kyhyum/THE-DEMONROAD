@@ -89,16 +89,22 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
 
     void StatUp()
     {
-        foreach (var stat in myStats.Keys)
+        foreach (Stat stat in playerData.stats)
         {
-            if (stat == mainStat)
+            if (stat.type == mainStat)
             {
-                myStats[stat] += mainStatRatio;
+                stat.statValue += mainStatRatio;
             }
             else
             {
-                myStats[stat] += statRatio;
+                stat.statValue += statRatio;
             }
+        }
+
+        for (int i = 0; i < playerData.stats.Count; i++)
+        {
+
+            myStats[playerData.stats[i].type] = playerData.stats[i].statValue;
         }
     }
     void RaitoSet(Define.Job job)
