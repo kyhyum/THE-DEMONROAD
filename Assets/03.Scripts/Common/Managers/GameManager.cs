@@ -36,7 +36,6 @@ public class GameManager : Singleton<GameManager>
         if (data.baseObjectPath != null && scene.buildIndex != (int)Define.SceneType.Start && scene.buildIndex != (int)Define.SceneType.Loading)
         {
             CameraSetActive(true);
-
             if (Myplayer != null)
             {
                 Myplayer.transform.position = data.currentPlayerPos;
@@ -204,14 +203,14 @@ public class GameManager : Singleton<GameManager>
 
     private void Finish()
     {
+        Save();
         Application.Quit();
     }
 
     private void OnApplicationQuit()
     {
-        StopAllCoroutines();
-        Save();
         DataNull();
+        StopAllCoroutines();
     }
     public void UpdateGoblinKillCount(int newCount)
     {
