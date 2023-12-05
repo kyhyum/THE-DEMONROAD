@@ -15,11 +15,9 @@ public class SoundManager : Singleton<SoundManager>
     float master;
     float bgm;
     float sfx;
-
     private void Start()
     {
         bgmAudioSource.Play();
-
         master = PlayerPrefs.GetFloat("Master");
         masterMixer.SetFloat("Master", master);
         masterSlider.value = master;
@@ -38,7 +36,6 @@ public class SoundManager : Singleton<SoundManager>
         master = masterSlider.value;
         PlayerPrefs.SetFloat("Master", master);
 
-
         if (mute)
         {
             return;
@@ -48,11 +45,11 @@ public class SoundManager : Singleton<SoundManager>
         {
             masterMixer.SetFloat("Master", -80);
         }
-        else
+        else 
         {
             masterMixer.SetFloat("Master", master);
         }
-
+        
     }
     public void BGMControl()
     {
@@ -68,11 +65,11 @@ public class SoundManager : Singleton<SoundManager>
         {
             masterMixer.SetFloat("BGM", -80);
         }
-        else
+        else 
         {
             masterMixer.SetFloat("BGM", bgm);
         }
-
+        
     }
     public void SFXControl()
     {
@@ -88,11 +85,11 @@ public class SoundManager : Singleton<SoundManager>
         {
             masterMixer.SetFloat("SFX", -80f);
         }
-        else
+        else 
         {
             masterMixer.SetFloat("SFX", sfx);
         }
-
+        
     }
     public void MuteCheck(bool isMute)
     {
