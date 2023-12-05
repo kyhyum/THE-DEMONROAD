@@ -44,48 +44,48 @@ public class QuestProgress : MonoBehaviour
             
         }
     }
-    public void ShowQuestProgress(QuestSO selectedQuest) 
+    public void ShowQuestProgress() 
     {
-        if (selectedQuest.questType == Define.QuestType.ConversationQuest) 
+        if (board.selectQuest.questType == Define.QuestType.ConversationQuest) 
         {
-            foreach (var npc in selectedQuest.relatedNPCs)
+            foreach (var npc in board.selectQuest.relatedNPCs)
             {
 
-                questProgconverseName.text = selectedQuest.questName + "\n - " + npc.conversationCount + " / " + selectedQuest.questComplete;
+                questProgconverseName.text = board.selectQuest.questName + "\n - " + npc.conversationCount + " / " + board.selectQuest.questComplete;
 
             }
         }
-        else if (selectedQuest.questType == Define.QuestType.ItemQuest) 
+        else if (board.selectQuest.questType == Define.QuestType.ItemQuest) 
         {
-            questProgitemName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
+            questProgitemName.text = board.selectQuest.questName + "\n - " + "0 / " + board.selectQuest.questComplete;
         }
-        else if (selectedQuest.questType == Define.QuestType.MonsterQuest)  
+        else if (board.selectQuest.questType == Define.QuestType.MonsterQuest)  
         {
             int goblinKills = GameManager.Instance.goblinkillCount;
 
-            questProgmonsterName.text = selectedQuest.questName + "\n - " + goblinKills + " / " + selectedQuest.questComplete;
-            if (goblinKills >= selectedQuest.questComplete)
+            questProgmonsterName.text = board.selectQuest.questName + "\n - " + goblinKills + " / " + board.selectQuest.questComplete;
+            if (goblinKills >= board.selectQuest.questComplete)
             {
-                MonsterQuestReward(selectedQuest);
+                MonsterQuestReward();
 
             }
 
         }
-        else if (selectedQuest.questType == Define.QuestType.InfiniteMonsterQuest) 
+        else if (board.selectQuest.questType == Define.QuestType.InfiniteMonsterQuest) 
         {
             int goblinKills = GameManager.Instance.goblinkillCount;
-            questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " + goblinKills + " / " + selectedQuest.questComplete;
-            if (goblinKills >= selectedQuest.questComplete)
+            questProgInfinitemonsterName.text = board.selectQuest.questName + "\n - " + goblinKills + " / " + board.selectQuest.questComplete;
+            if (goblinKills >= board.selectQuest.questComplete)
             {
-                InfiniteMonsterQuestReward(selectedQuest);
+                InfiniteMonsterQuestReward();
 
             }
         }
-        else if (selectedQuest.questType == Define.QuestType.MainQuest)  
+        else if (board.selectQuest.questType == Define.QuestType.MainQuest)  
         {
 
-            questProgmainName.text = selectedQuest.questName + "\n - " + "0 / " + selectedQuest.questComplete;
-            board.UpdateMainQuestProgress(selectedQuest);
+            questProgmainName.text = board.selectQuest.questName + "\n - " + "0 / " + board.selectQuest.questComplete;
+            board.UpdateMainQuestProgress(board.selectQuest);
 
             
 
@@ -94,7 +94,7 @@ public class QuestProgress : MonoBehaviour
     }
 
 
-    public void MainQuestReward(QuestSO selectedQuest)
+    public void MainQuestReward()
     {
         Debug.Log("mainquest리워드를 받습니다");
         if (controller != null)
@@ -107,16 +107,16 @@ public class QuestProgress : MonoBehaviour
         {
             Debug.Log("Null입니다");
         }
-        if (selectedQuest != null)
+        if (board.selectQuest != null)
         {
-            if (selectedQuest.questType == Define.QuestType.MainQuest)
+            if (board.selectQuest.questType == Define.QuestType.MainQuest)
             {
                 Inventory inventory = UIManager.Instance.GetInventory();
 
                 if (inventory != null)
                 {
-                    inventory.Gold += selectedQuest.questRewardCoin;
-                    Debug.Log(selectedQuest.questName + "보상으로 " + selectedQuest.questRewardCoin + "개의 금화를 획득했습니다!");
+                    inventory.Gold += board.selectQuest.questRewardCoin;
+                    Debug.Log(board.selectQuest.questName + "보상으로 " + board.selectQuest.questRewardCoin + "개의 금화를 획득했습니다!");
                 }
                 else
                 {
@@ -135,7 +135,7 @@ public class QuestProgress : MonoBehaviour
 
 
     }
-    public void MonsterQuestReward(QuestSO selectedQuest)
+    public void MonsterQuestReward()
     {
         if (controller != null)
         {
@@ -148,16 +148,16 @@ public class QuestProgress : MonoBehaviour
             Debug.Log("Null입니다");
         }
 
-        if (selectedQuest != null)
+        if (board.selectQuest != null)
         {
-            if (selectedQuest.questType == Define.QuestType.MonsterQuest)
+            if (board.selectQuest.questType == Define.QuestType.MonsterQuest)
             {
                 Inventory inventory = UIManager.Instance.GetInventory();
 
                 if (inventory != null)
                 {
-                    inventory.Gold += selectedQuest.questRewardCoin;
-                    Debug.Log(selectedQuest.questName + "보상으로 " + selectedQuest.questRewardCoin + "개의 금화를 획득했습니다!");
+                    inventory.Gold += board.selectQuest.questRewardCoin;
+                    Debug.Log(board.selectQuest.questName + "보상으로 " + board.selectQuest.questRewardCoin + "개의 금화를 획득했습니다!");
                 }
                 else
                 {
@@ -174,7 +174,7 @@ public class QuestProgress : MonoBehaviour
             Debug.Log("selectQuest가 null입니다.");
         }
     }
-    public void InfiniteMonsterQuestReward(QuestSO selectedQuest)
+    public void InfiniteMonsterQuestReward()
     {
         if (controller != null)
         {
@@ -187,16 +187,16 @@ public class QuestProgress : MonoBehaviour
             Debug.Log("Null입니다");
         }
 
-        if (selectedQuest != null)
+        if (board.selectQuest != null)
         {
-            if (selectedQuest.questType == Define.QuestType.InfiniteMonsterQuest)
+            if (board.selectQuest.questType == Define.QuestType.InfiniteMonsterQuest)
             {
                 Inventory inventory = UIManager.Instance.GetInventory();
 
                 if (inventory != null)
                 {
-                    inventory.Gold += selectedQuest.questRewardCoin;
-                    Debug.Log(selectedQuest.questName + "보상으로 " + selectedQuest.questRewardCoin + "개의 금화를 획득했습니다!");
+                    inventory.Gold += board.selectQuest.questRewardCoin;
+                    Debug.Log(board.selectQuest.questName + "보상으로 " + board.selectQuest.questRewardCoin + "개의 금화를 획득했습니다!");
                 }
                 else
                 {
