@@ -15,7 +15,6 @@ public class GameOverUI : MonoBehaviour
 
         UIManager.Instance.ActiveGameOver(false);
 
-        // 씬 마을로 이동
         SceneLoadManager.LoadScene(3);
 
         GameManager.Instance.player.transform.position = Vector3.zero;
