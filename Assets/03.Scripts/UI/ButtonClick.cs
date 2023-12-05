@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class ButtonClick : MonoBehaviour
 {
     Button button;
-    SoundManager soundManager;
     private void Start()
     {
-        button = this.gameObject.GetComponent<Button>();
-        soundManager = SoundManager.Instance;
-        button.onClick.AddListener(soundManager.ButtonClick);
+        button = gameObject.GetComponent<Button>();
+        Debug.Log(SoundManager.Instance);
+        button.onClick.AddListener(SoundManager.Instance.ButtonClick);
     }
 }
