@@ -9,7 +9,6 @@ public class ButtonClick : MonoBehaviour
     private void Start()
     {
         button = gameObject.GetComponent<Button>();
-        Debug.Log(SoundManager.Instance);
         button.onClick.AddListener(SoundManager.Instance.ButtonClick);
     }
 }

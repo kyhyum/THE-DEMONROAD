@@ -174,6 +174,14 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
         StartCoroutine(CBuff(buffType, duration, value));
     }
 
+    IEnumerator CGenerator(Define.RestoreType type, float value)
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(.5f);
+        }
+    }
+
     IEnumerator CBuff(Define.BuffType buffType, float duration, int value)
     {
         switch (buffType)

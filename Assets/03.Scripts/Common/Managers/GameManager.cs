@@ -23,12 +23,10 @@ public class GameManager : Singleton<GameManager>
 
     GameObject obj;
 
-    private void Awake()
-    {
-        slot = new SlotItem();
-    }
     private void Start()
     {
+        slot = new SlotItem();
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -58,8 +56,7 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.CreateQuestProgress();
             DontDestroyOnLoad(Myplayer);
         }
-
-        else if (scene.buildIndex == (int)Define.SceneType.Loading)
+        else if (Myplayer != null && scene.buildIndex == (int)Define.SceneType.Loading)
         {
             Myplayer.SetActive(false);
         }
@@ -156,7 +153,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void Save()
     {
-        if(data == null)
+        if (data == null)
         {
             return;
         }

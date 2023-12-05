@@ -4,32 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class SelectCanvasManager : MonoBehaviour
+public class SelectCanvasManager : Singleton<SelectCanvasManager>
 {
-    public static SelectCanvasManager Instance;
-    
     public ChangerSlot[] changerSlots;
 
     int selectedSlot;
     [SerializeField] CharacterSlot[] characterSlots;
     [SerializeField] GameObject[] baseCharacters;
-    
+
     public List<string> playerName = new List<string>();
 
     private PlayerData[] playerDatas = new PlayerData[4];
     public PlayerData[] PlayerDatas { get { return playerDatas; } }
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
 
     private void OnEnable()
     {
@@ -41,10 +27,11 @@ public class SelectCanvasManager : MonoBehaviour
         if (Directory.Exists(StringManager.JsonPath))
         {
             string[] jsons = Directory.GetFiles(StringManager.JsonPath, "*.json");
-            for(int i = 0; i < jsons.Length; i++)
+            for (int i = 0; i < jsons.Length; i++)
             {
                 Debug.Log(Path.GetFileName(jsons[i]));
             }
+
             if (jsons.Length > 0)
             {
                 for (int i = 0; i < jsons.Length; i++)
@@ -55,6 +42,7 @@ public class SelectCanvasManager : MonoBehaviour
                 {
                     foreach (string one in playerName)
                     {
+                        Debug.Log(GameManager.Instance);
                         PlayerData data = GameManager.Instance.LoadPlayerDataFromJson(StringManager.JsonPath, one);
                         playerDatas[data.playerIndex] = data;
                         characterSlots[data.playerIndex].CreateCharacter(baseCharacters[(int)data.job], data);
@@ -106,7 +94,7 @@ public class SelectCanvasManager : MonoBehaviour
             playerDatas[slotIndex - 1] = playerDatas[slotIndex];
             playerDatas[slotIndex] = data;
         }
-        for(int i = 0; i < characterSlots.Length; i++)
+        for (int i = 0; i < characterSlots.Length; i++)
         {
             characterSlots[i].data = playerDatas[i];
         }
@@ -154,7 +142,7 @@ public class SelectCanvasManager : MonoBehaviour
     }
     public void CreateCharacter(string name, PlayerData data)
     {
-        if(name.Length > 6)
+        if (name.Length > 6)
         {
             UIManager.Instance.ActivePopUpUI("캐릭터 생성", "이름은 최대 6자 까지입니다.", null);
             return;
@@ -179,18 +167,18 @@ public class SelectCanvasManager : MonoBehaviour
     }
     public void PopUpOpen()
     {
-       UIManager.Instance.ActivePopUpUI("캐릭터 슬롯 변경", "정말 변경 하시겠습니까?", SlotChangeButton);
+        UIManager.Instance.ActivePopUpUI("캐릭터 슬롯 변경", "정말 변경 하시겠습니까?", SlotChangeButton);
     }
     void SlotChangeButton()
     {
-        for(int i = 0; i< playerDatas.Length; i++)
+        for (int i = 0; i < playerDatas.Length; i++)
         {
             if (playerDatas[i] != null)
             {
                 GameManager.Instance.SavePlayerDataToJson(StringManager.JsonPath, playerDatas[i].name, playerDatas[i]);
             }
         }
-        for(int i = 0; i < characterSlots.Length; i++)
+        for (int i = 0; i < characterSlots.Length; i++)
         {
             if (playerDatas[i] != null)
             {

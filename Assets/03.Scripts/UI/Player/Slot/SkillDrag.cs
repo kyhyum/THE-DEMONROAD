@@ -66,10 +66,8 @@ public class SkillDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             if (result.gameObject.TryGetComponent<QuickSlot>(out QuickSlot quickSlot))
             {
-                Debug.Log(skill);
                 if (skill is IUsable)
                 {
-                    Debug.Log("Skill is IUsable");
                     quickSlot.SetSlot((IUsable)skill);
                 }
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class StringManager
 {
-    private static string baseObjcetPath = "BaseCharacter/";
+    private static string baseObjcetPath = "Prefabs/BaseCharacter/";
     private static string jsonPath = $"{Application.persistentDataPath}/MyCharacter/";
     private static string itemJsonPath = $"{Application.persistentDataPath}/MyInventory/";
     private static string storageName = "Storage";
