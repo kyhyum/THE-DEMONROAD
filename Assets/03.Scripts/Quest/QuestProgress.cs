@@ -16,7 +16,34 @@ public class QuestProgress : MonoBehaviour
 
     public QuestBoard board;
     private QuestController controller;
-    
+    void OnEnable()
+    {
+        
+        GameManager.OnGoblinKillCountChanged += UpdateGoblinKillCountUI;
+    }
+
+    void OnDisable()
+    {
+        
+        GameManager.OnGoblinKillCountChanged -= UpdateGoblinKillCountUI;
+    }
+    void UpdateGoblinKillCountUI(int newGoblinKillCount)
+    {
+        Debug.Log("UI 업데이트");
+        int goblinKills = newGoblinKillCount;
+        
+        
+        questProgmonsterName.text = board.selectQuest.questName + "\n - " + goblinKills + " / " + board.selectQuest.questComplete;
+
+        
+        if (goblinKills >= board.selectQuest.questComplete)
+        {
+            questProgmonsterName.color = Color.red;
+            questProgmonsterName.fontStyle |= FontStyles.Italic;
+            questProgmonsterName.fontStyle |= FontStyles.Strikethrough;
+            
+        }
+    }
     public void ShowQuestProgress(QuestSO selectedQuest) 
     {
         if (selectedQuest.questType == Define.QuestType.ConversationQuest) 
@@ -37,14 +64,12 @@ public class QuestProgress : MonoBehaviour
             int goblinKills = GameManager.Instance.goblinkillCount;
 
             questProgmonsterName.text = selectedQuest.questName + "\n - " + goblinKills + " / " + selectedQuest.questComplete;
-
             if (goblinKills >= selectedQuest.questComplete)
             {
-                questProgmonsterName.color = Color.red;
-                questProgmonsterName.fontStyle |= FontStyles.Italic;
-                questProgmonsterName.fontStyle |= FontStyles.Strikethrough;
                 MonsterQuestReward(selectedQuest);
+
             }
+
         }
         else if (selectedQuest.questType == Define.QuestType.InfiniteMonsterQuest) 
         {
@@ -52,11 +77,7 @@ public class QuestProgress : MonoBehaviour
             questProgInfinitemonsterName.text = selectedQuest.questName + "\n - " + goblinKills + " / " + selectedQuest.questComplete;
             if (goblinKills >= selectedQuest.questComplete)
             {
-                questProgInfinitemonsterName.color = Color.red;
-                questProgInfinitemonsterName.fontStyle |= FontStyles.Italic;
-                questProgInfinitemonsterName.fontStyle |= FontStyles.Strikethrough;
                 InfiniteMonsterQuestReward(selectedQuest);
-                
 
             }
         }
@@ -71,6 +92,7 @@ public class QuestProgress : MonoBehaviour
 
         }
     }
+
 
     public void MainQuestReward(QuestSO selectedQuest)
     {

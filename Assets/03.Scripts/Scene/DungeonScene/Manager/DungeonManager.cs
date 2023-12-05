@@ -104,8 +104,9 @@ public class DungeonManager : Singleton<DungeonManager>
     }
     public void DungeonGoblinKilled(Monster Goblin)
     {
-        GameManager.Instance.goblinkillCount++;
-
+        int kill = GameManager.Instance.goblinkillCount;
+        kill++;
+        GameManager.Instance.UpdateGoblinKillCount(kill);
         Debug.Log("잡은 고블린수: " + GameManager.Instance.goblinkillCount);
     }
 
