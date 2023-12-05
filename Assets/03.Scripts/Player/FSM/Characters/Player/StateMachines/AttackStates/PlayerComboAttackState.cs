@@ -14,6 +14,8 @@ public class PlayerComboAttackState : PlayerAttackState
 
     public override void Enter()
     {
+        stateMachine.Player.WeaponCollider.enabled = true;
+
         base.Enter();
         StartAnimation(stateMachine.Player.AnimationData.ComboAttackParameterHash);
 
@@ -25,6 +27,8 @@ public class PlayerComboAttackState : PlayerAttackState
 
     public override void Exit()
     {
+        stateMachine.Player.WeaponCollider.enabled = false;
+
         base.Exit();
         StopAnimation(stateMachine.Player.AnimationData.ComboAttackParameterHash);
 
