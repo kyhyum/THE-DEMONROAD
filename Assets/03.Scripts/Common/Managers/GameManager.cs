@@ -152,7 +152,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void Save()
     {
-        if (data == null)
+        if (data.name == null)
         {
             return;
         }
@@ -209,10 +209,9 @@ public class GameManager : Singleton<GameManager>
 
     private void OnApplicationQuit()
     {
-        DataNull();
-
         StopAllCoroutines();
         Save();
+        DataNull();
     }
     public void UpdateGoblinKillCount(int newCount)
     {
