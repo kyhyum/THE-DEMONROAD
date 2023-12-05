@@ -20,3 +20,4 @@ MonoBehaviour:
     type: 3}
   <prefab>k__BackingField: {fileID: 1950871307682000, guid: 701d9974d3d5c66479056b54b4917e95,
     type: 3}
+  <itemPrice>k__BackingField: 10
