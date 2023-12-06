@@ -184,11 +184,12 @@ public class Player : MonoBehaviour
 
     void OnDie()
     {
+        GameManager.Instance.player.Input.enabled = false;
+
         Animator.SetTrigger("Die");
 
         UIManager.Instance.ActiveGameOver(true);
 
-        // Player.cs를 false로 만든다.
         enabled = false;
     }
 
