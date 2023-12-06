@@ -147,7 +147,7 @@ public class PlayerBaseState : IState
             return;
 
         float inputValue = context.ReadValue<Vector2>().x;
-        GameManager.Instance.player.VirtualCamera.transform.rotation = Quaternion.Euler(45f, inputValue * 0.7f + GameManager.Instance.player.VirtualCamera.transform.rotation.eulerAngles.y, 0f);
+        GameManager.Instance.player.VirtualCamera.transform.rotation = Quaternion.Euler(45f, inputValue * 0.2f + GameManager.Instance.player.VirtualCamera.transform.rotation.eulerAngles.y, 0f);
     }
 
     protected virtual void OnMouseScrollYPerformed(InputAction.CallbackContext context)
