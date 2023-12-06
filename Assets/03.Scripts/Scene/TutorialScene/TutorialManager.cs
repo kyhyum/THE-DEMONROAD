@@ -22,7 +22,7 @@ public class TutorialManager : Singleton<TutorialManager>
         {
             npc.QuestClear(npc.quest[3]);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (UIManager.Instance.settingObj.activeSelf)
         {
             npc.QuestClear(npc.quest[4]);
         }
@@ -31,6 +31,7 @@ public class TutorialManager : Singleton<TutorialManager>
         {
             GameManager.Instance.player.enabled = false;
         }
+
         else
         {
             GameManager.Instance.player.enabled = true;
@@ -39,6 +40,11 @@ public class TutorialManager : Singleton<TutorialManager>
 
     public void EndTutorialPopUpUI()
     {
+        if (npc.dialogueUI.gameObject.activeSelf)
+        {
+            return;
+        }
+
         UIManager.Instance.ActivePopUpUI("튜토리얼", "튜토리얼을 종료 하시겠습니까?", EndTutorial);
     }
     public void EndTutorial()

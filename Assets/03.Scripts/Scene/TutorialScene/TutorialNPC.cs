@@ -275,13 +275,14 @@ public class TutorialNPC : MonoBehaviour
     }
     void QuestAccept(QuestSO quest)
     {
+        DialogueUISetActive(false);
+
         if (data.acceptQuest.Contains(quest))
         {
             return;
         }
-
         data.acceptQuest.Add(quest);
-        DialogueUISetActive(false);
+        
     }
     void ClearQuestEvent(QuestSO quest)
     {
