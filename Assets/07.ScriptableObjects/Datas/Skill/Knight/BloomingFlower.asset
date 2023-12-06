@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06fc962458934c246bc46d40564cf6b5, type: 3}
-  m_Name: FireCombo
+  m_Name: BloomingFlower
   m_EditorClassIdentifier: 
-  skillName: FireCombo
-  description: "\uBB34\uAE30\uC5D0 \uBD88 \uC18D\uC131\uC744 \uBD80\uC5EC\uD558\uC5EC
-    \uC5F0\uC18D\uC73C\uB85C \uBCA4\uB2E4."
-  icon: {fileID: 21300000, guid: 47ec1af9cf817b74b9431da449d8bc14, type: 3}
+  skillName: "\uBE14\uB8E8\uBC0D\uD50C\uB77C\uC6CC"
+  description: "\uAF43\uC78E\uC744 \uD769\uBFCC\uB9AC\uBA74\uC11C \uC5F0\uC18D\uC73C\uB85C
+    \uBCA4\uB2E4."
+  icon: {fileID: 21300000, guid: 49a2945164f198446a4e34997fcb2ee7, type: 3}
   type: 0
-  manaCost: 15
-  cooltime: 20
-  damage: 0
-  increasedDamagePerLevel: 0
+  manaCost: 5
+  cooltime: 5
+  damage: 10
+  increasedDamagePerLevel: 3
