@@ -331,7 +331,20 @@ public class UIManager : Singleton<UIManager>
             ActiveSettingWindow();
         }
     }
+    public void SceneLoadDisableUI()
+    {
+        ActivePlayerUI(false);
 
+        if (EnableUI.Count == 0)
+        {
+            return;
+        }
+
+        for(int i = 0; i < EnableUI.Count; i++)
+        {
+            ActiveUIGameObject(EnableUI[i]);
+        }
+    }
     private void ActiveUIGameObject(GameObject gameObject)
     {
         if (EnableUI.Contains(gameObject))

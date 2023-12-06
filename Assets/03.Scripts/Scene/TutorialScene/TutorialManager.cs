@@ -5,9 +5,11 @@ using UnityEngine;
 public class TutorialManager : Singleton<TutorialManager>
 {
     [SerializeField] TutorialNPC npc;
+    [SerializeField] AudioClip clip;
     void Start()
     {
         UIManager.Instance.ActivePlayerUI(true);
+        SoundManager.Instance.BGMPlay(clip);
     }
 
     void Update()

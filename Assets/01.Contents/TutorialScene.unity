@@ -614,6 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 1576416797}
+  clip: {fileID: 8300000, guid: 90d9bc7d6fd3bdf4b8cbc7e61183848f, type: 3}
 --- !u!4 &35378147
 Transform:
   m_ObjectHideFlags: 0
