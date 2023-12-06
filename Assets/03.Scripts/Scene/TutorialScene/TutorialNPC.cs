@@ -135,7 +135,7 @@ public class TutorialNPC : MonoBehaviour
     }
     public void ClickTalk()
     {
-        if(talkIndex == 12)
+        if (talkIndex == 12)
         {
             return;
         }
@@ -201,6 +201,7 @@ public class TutorialNPC : MonoBehaviour
 
         dialogueUI.SetActive(active);
         UIManager.Instance.ActivePlayerUI(!active);
+        UIManager.Instance.DisableRecall();
     }
     private void ButtonSetActive(bool active)
     {

@@ -34,6 +34,7 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField] private AudioClip[] clips;
     [SerializeField] public PopUpUI popUpUI;
+    [SerializeField] private RecallSlot recallSlot;
     private AudioSource audioSource;
     public bool storageOpen => storageObj.activeSelf;
     private Vector2 pos;
@@ -127,6 +128,11 @@ public class UIManager : Singleton<UIManager>
         questProgressObj = null;
         questLog = null;
         questProgress = null;
+    }
+
+    public void DisableRecall()
+    {
+        recallSlot.Disable();
     }
 
     public void SetQuickSlot(QuickSlotData[] data)
@@ -340,7 +346,7 @@ public class UIManager : Singleton<UIManager>
             return;
         }
 
-        for(int i = 0; i < EnableUI.Count; i++)
+        for (int i = 0; i < EnableUI.Count; i++)
         {
             ActiveUIGameObject(EnableUI[i]);
         }

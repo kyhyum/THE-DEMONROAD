@@ -16,7 +16,7 @@ MonoBehaviour:
   description: "\uD798\uC744 \uBAA8\uC544\uC11C \uD68C\uC804\uD558\uBA74\uC11C \uD718\uB450\uB978\uB2E4."
   icon: {fileID: 21300000, guid: 9eca34054668a93439a683deba72dc4d, type: 3}
   type: 0
-  manaCost: 10
+  manaCost: 15
   cooltime: 20
-  damage: 0
-  increasedDamagePerLevel: 0
+  damage: 30
+  increasedDamagePerLevel: 10
