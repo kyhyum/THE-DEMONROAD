@@ -43,11 +43,11 @@ public class UIManager : Singleton<UIManager>
     protected override void Awake()
     {
         base.Awake();
+
         data = new QuickSlotData[5];
         quickSlots = new QuickSlot[5];
         EnableUI = new List<GameObject>();
         audioSource = GetComponent<AudioSource>();
-
         CreateStorage();
         CreateInventory();
         CreateSkill();
@@ -136,22 +136,31 @@ public class UIManager : Singleton<UIManager>
         recallSlot.Disable();
     }
 
-    public void SetQuickSlot(QuickSlotData[] data)
+    public void SetQuickSlot(QuickSlotData[] slotData)
     {
-        for (int i = 0; i < data.Length; i++)
+        if (slotData.Length == 0)
         {
-            if (data[i].index == -1)
+            for(int i = 0; i < quickSlots.Length; i++)
+            {
+                quickSlots[i].SetSlot(null);
+            }
+            return;
+        }
+
+        for (int i = 0; i < slotData.Length; i++)
+        {
+            if (slotData[i].index == -1)
                 continue;
 
-            switch (data[i].type)
+            switch (slotData[i].type)
             {
                 case Define.QuickSlotType.Skill:
-                    quickSlots[i].SetSlot((IUsable)skill.slots[data[i].index].GetSkill());
+                    quickSlots[i].SetSlot((IUsable)skill.slots[slotData[i].index].GetSkill());
                     break;
                 case Define.QuickSlotType.Item:
-                    if (inventory.inventorySlots[data[i].index].GetItem() is IUsable)
+                    if (inventory.inventorySlots[slotData[i].index].GetItem() is IUsable)
                     {
-                        quickSlots[i].SetSlot((IUsable)inventory.inventorySlots[data[i].index].GetItem());
+                        quickSlots[i].SetSlot((IUsable)inventory.inventorySlots[slotData[i].index].GetItem());
                     }
                     break;
                 default:

@@ -194,7 +194,7 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
             Debug.Log("캐릭터를 선택해주세요");
             return;
         }
-        characterSlots[selectedSlot].DeleteCharacter();
+        characterSlots[selectedSlot].DeleteButton();
     }
     public void DeleteCharacter(PlayerData data)
     {

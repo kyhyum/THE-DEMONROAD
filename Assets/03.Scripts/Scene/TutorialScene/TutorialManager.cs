@@ -14,6 +14,11 @@ public class TutorialManager : Singleton<TutorialManager>
 
     void Update()
     {
+        if(GameManager.Instance.player == null)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             npc.QuestClear(npc.quest[1]);

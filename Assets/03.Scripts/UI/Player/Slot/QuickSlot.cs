@@ -21,12 +21,19 @@ public class QuickSlot : MonoBehaviour
     {
         UIManager.Instance.quickSlots[slotID] = this;
     }
-
+    private void OnEnable()
+    {
+        inputActionReference.action.Enable();
+        inputActionReference.action.started += Use;
+    }
     private void Start()
     {
         keyBinding.text = InputManager.GetBindingName(inputActionReference.action.name);
-        inputActionReference.action.Enable();
-        inputActionReference.action.started += Use;
+    }
+    private void OnDisable()
+    {
+        inputActionReference.action.Disable();
+        inputActionReference.action.started -= Use;
     }
 
     private void FixedUpdate()

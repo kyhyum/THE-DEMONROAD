@@ -52,6 +52,7 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
             UIManager.Instance.CreateQuestLog();
             UIManager.Instance.CreateQuestProgress();
+            
             DontDestroyOnLoad(Myplayer);
         }
         else if (Myplayer != null && scene.buildIndex == (int)Define.SceneType.Loading)
@@ -188,11 +189,10 @@ public class GameManager : Singleton<GameManager>
         if (SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Start)
         {
             Save();
+            Destroy(Myplayer);
             SceneLoadManager.LoadScene((int)Define.SceneType.Start);
             UIManager.Instance.ActivePlayerUI(false);
             UIManager.Instance.DestroyQuestUI();
-            Destroy(Myplayer);
-
             DataNull();
         }
     }

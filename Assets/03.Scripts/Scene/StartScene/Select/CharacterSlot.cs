@@ -64,19 +64,23 @@ public class CharacterSlot : MonoBehaviour
         }
         character.SetActive(false);
     }
-    public void DeleteCharacter()
+    private void DeleteCharacter()
+    {
+        if (GameManager.Instance.DeleteCharacter(StringManager.JsonPath, data.name))
+        {
+            SelectCanvasManager.Instance.DeleteCharacter(data);
+            ClearSlot();
+        }
+        else
+        {
+            Debug.Log("실패했습니다");
+        }
+    }
+    public void DeleteButton()
     {
         if (character != null)
         {
-            if (GameManager.Instance.DeleteCharacter(StringManager.JsonPath, data.name))
-            {
-                SelectCanvasManager.Instance.DeleteCharacter(data);
-                ClearSlot();
-            }
-            else
-            {
-                Debug.Log("실패했습니다");
-            }
+            UIManager.Instance.ActivePopUpUI("캐릭터 삭제", "정말 삭제 하시겠습니까?", DeleteCharacter);
         }
         else
         {
