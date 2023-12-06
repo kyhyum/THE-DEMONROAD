@@ -49,7 +49,7 @@ public class Inventory : MonoBehaviour
     {
         if (item.type == Define.ItemType.Gold)
         {
-            gold += item.itemPrice;
+            Gold += item.itemPrice;
 
             return true;
         }

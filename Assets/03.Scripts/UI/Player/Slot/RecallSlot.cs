@@ -25,14 +25,12 @@ public class RecallSlot : MonoBehaviour
 
     private void OnEnable()
     {
-        inputActionReference.action.Enable();
-        inputActionReference.action.started += Recall;
+        Enable();
     }
 
     private void OnDisable()
     {
-        inputActionReference.action.Disable();
-        inputActionReference.action.started -= Recall;
+        Disable();
     }
 
     private void Recall(InputAction.CallbackContext context)
@@ -63,5 +61,17 @@ public class RecallSlot : MonoBehaviour
     {
         coolTime = 60;
         fillAmount = 60;
+    }
+
+    public void Enable()
+    {
+        inputActionReference.action.Enable();
+        inputActionReference.action.started += Recall;
+    }
+
+    public void Disable()
+    {
+        inputActionReference.action.Disable();
+        inputActionReference.action.started -= Recall;
     }
 }
