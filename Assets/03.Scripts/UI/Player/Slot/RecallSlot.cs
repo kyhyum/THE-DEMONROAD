@@ -45,15 +45,18 @@ public class RecallSlot : MonoBehaviour
 
     IEnumerator CRecall()
     {
+        GameManager.Instance.player.Agent.SetDestination(GameManager.Instance.player.transform.position);
+        GameManager.Instance.player.Agent.velocity = Vector3.zero;
         GameObject obj = Instantiate(effect);
         obj.transform.position = GameManager.Instance.Myplayer.transform.position;
+        GameManager.Instance.player.isRecall = true;
 
         yield return new WaitForSecondsRealtime(3f);
 
-        Destroy(obj);
         GameManager.Instance.data.currentPlayerPos = new Vector3(0f, 0f, 0f);
         SceneLoadManager.LoadScene("NewTownScene");
         SetCooltime();
+        GameManager.Instance.player.isRecall = false;
     }
 
     private void SetCooltime()

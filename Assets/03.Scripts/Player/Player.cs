@@ -55,6 +55,8 @@ public class Player : MonoBehaviour
 
     private PlayerStateMachine stateMachine;
 
+    public bool isRecall;
+
     private void Awake()
     {
         AnimationData.Initialize();
@@ -142,8 +144,13 @@ public class Player : MonoBehaviour
     /// </summary>
     void MousePointerOverUI()
     {
+        if (isRecall)
+        {
+            InputManager.inputActions.Player.Move.Disable();
+            InputManager.inputActions.Player.Attack.Disable();
+        }
         // 마우스 포인터가 UI 위에 있으면
-        if (EventSystem.current.IsPointerOverGameObject())
+        else if (EventSystem.current.IsPointerOverGameObject())
         {
             //Debug.Log("마우스 포인터가 UI 위에 있다.");
 
