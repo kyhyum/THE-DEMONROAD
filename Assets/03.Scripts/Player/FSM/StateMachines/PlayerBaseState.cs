@@ -140,15 +140,14 @@ public class PlayerBaseState : IState
     #endregion Attack
 
 
-    #region ScrollClick
+    #region Scroll
     protected virtual void OnMouseScrollClickPerformed(InputAction.CallbackContext context)
     {
         if (!Mouse.current.middleButton.isPressed)
             return;
 
         float inputValue = context.ReadValue<Vector2>().x;
-        Debug.Log(inputValue);
-        GameManager.Instance.player.VirtualCamera.transform.rotation = Quaternion.Euler(45f, inputValue + GameManager.Instance.player.VirtualCamera.transform.rotation.eulerAngles.y, 0f);
+        GameManager.Instance.player.VirtualCamera.transform.rotation = Quaternion.Euler(45f, inputValue * 0.7f + GameManager.Instance.player.VirtualCamera.transform.rotation.eulerAngles.y, 0f);
     }
 
     protected virtual void OnMouseScrollYPerformed(InputAction.CallbackContext context)
@@ -182,7 +181,7 @@ public class PlayerBaseState : IState
         }
     }
 
-    #endregion ScrollClick
+    #endregion Scroll
 
     #region Dodge
     protected virtual void OnDodgeStarted(InputAction.CallbackContext context)

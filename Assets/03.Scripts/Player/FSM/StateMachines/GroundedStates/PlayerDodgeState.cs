@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerDodgeState : PlayerGroundedState
 {
@@ -26,25 +27,33 @@ public class PlayerDodgeState : PlayerGroundedState
         base.Update();
 
         float normalizedTime = GetNormalizedTime(GameManager.Instance.player.Animator, "Dodge");
+        Debug.Log(normalizedTime);
         if(normalizedTime < 1f)
         {
             GameManager.Instance.player.playerCollider.enabled = false;
         }
-        else
+        else if(normalizedTime > 1f)
         {
             GameManager.Instance.player.Agent.ResetPath();
-            GameManager.Instance.player.playerCollider.enabled = true;
-            if (GameManager.Instance.player.Agent.velocity != Vector3.zero)
-            {
-                OnMove();
-                return;
-            }
-            else
-            {
-                OnStand();
-                return;
-            }
+            OnStand();
         }
         
+    }
+
+    protected override void OnMove()
+    {
+
+    }
+
+    protected override void OnMoveStarted(InputAction.CallbackContext context)
+    {
+    }
+
+    protected override void OnMovePerformed(InputAction.CallbackContext context)
+    {
+    }
+
+    protected override void OnMoveCanceled(InputAction.CallbackContext context)
+    {
     }
 }
