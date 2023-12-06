@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RecallSlot : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class RecallSlot : MonoBehaviour
     [field: SerializeField] private GameObject effect;
     private float coolTime;
     private float fillAmount;
+    Coroutine recall;
     private void FixedUpdate()
     {
         if (fillAmount < 0)
@@ -35,10 +37,10 @@ public class RecallSlot : MonoBehaviour
 
     private void Recall(InputAction.CallbackContext context)
     {
-        if (fillAmount != 0)
+        if (fillAmount != 0 || SceneManager.GetActiveScene().buildIndex == (int)Define.SceneType.Tutorial)
             return;
 
-        StartCoroutine(CRecall());
+        recall = StartCoroutine(CRecall());
     }
 
     IEnumerator CRecall()
@@ -52,7 +54,8 @@ public class RecallSlot : MonoBehaviour
         yield return new WaitForSecondsRealtime(3f);
 
         GameManager.Instance.data.currentPlayerPos = new Vector3(0f, 0f, 0f);
-        SceneLoadManager.LoadScene("NewTownScene");
+        GameManager.Instance.data.scene = Define.SceneType.Town;
+        SceneLoadManager.LoadScene((int)GameManager.Instance.data.scene);
         SetCooltime();
         GameManager.Instance.player.isRecall = false;
     }
@@ -71,7 +74,11 @@ public class RecallSlot : MonoBehaviour
 
     public void Disable()
     {
+        if(recall != null)
+        {
+            StopCoroutine(recall);
+            recall = null;
+        }
         inputActionReference.action.Disable();
-        inputActionReference.action.started -= Recall;
     }
 }

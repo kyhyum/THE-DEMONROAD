@@ -201,7 +201,6 @@ public class TutorialNPC : MonoBehaviour
 
         dialogueUI.SetActive(active);
         UIManager.Instance.ActivePlayerUI(!active);
-        UIManager.Instance.DisableRecall();
     }
     private void ButtonSetActive(bool active)
     {
