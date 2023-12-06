@@ -12,8 +12,6 @@ public class PlayerAttackSkill1State : PlayerBaseState
 
     public override void Enter()
     {
-        GameManager.Instance.player.WeaponCollider.enabled = true;
-
         GameManager.Instance.player.animationEventEffects.SetEffects(GameManager.Instance.player.playerSkill1Data.Effects);
 
         GameManager.Instance.player.Agent.ResetPath();
@@ -24,8 +22,6 @@ public class PlayerAttackSkill1State : PlayerBaseState
 
     public override void Exit()
     {
-        GameManager.Instance.player.WeaponCollider.enabled = false;
-
         base.Exit();
         StopAnimation(GameManager.Instance.player.AnimationData.AttackSkill1ParameterHash);
     }
