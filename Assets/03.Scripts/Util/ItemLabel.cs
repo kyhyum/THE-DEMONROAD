@@ -5,13 +5,8 @@ using UnityEngine;
 
 public class ItemLabel : MonoBehaviour
 {
-    AudioClip audioClip;
     Item item;
     GameObject itemObject;
-    private void Awake()
-    {
-        audioClip = GetComponentInParent<AudioClip>();
-    }
 
     public void SetObject(GameObject gameObject)
     {
