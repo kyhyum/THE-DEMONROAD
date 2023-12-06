@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class ItemLabel : MonoBehaviour
 {
+    AudioClip audioClip;
     Item item;
     GameObject itemObject;
+    private void Awake()
+    {
+        audioClip = GetComponentInParent<AudioClip>();
+    }
 
     public void SetObject(GameObject gameObject)
     {
@@ -24,7 +29,7 @@ public class ItemLabel : MonoBehaviour
         {
             if (item.type == Define.ItemType.Gold)
             {
-
+                SoundManager.Instance.ItemSFXPlay(item.audioClip);
             }
             Destroy(itemObject);
         }

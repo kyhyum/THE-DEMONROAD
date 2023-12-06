@@ -13,6 +13,7 @@ public class ItemSO : ScriptableObject
     [field: SerializeField] public Texture2D texture { get; private set; }
     [field: SerializeField] public GameObject prefab { get; private set; }
     [field: SerializeField] public int itemPrice { get; private set; }
+    [field: SerializeField] public AudioClip audioClip { get; private set; }
 
 
     public virtual GameObject CreateItem()

@@ -21,3 +21,5 @@ MonoBehaviour:
   <prefab>k__BackingField: {fileID: 1498403948531744, guid: 7b433c9397fed354683d2c36fcebe69c,
     type: 3}
   <itemPrice>k__BackingField: 1
+  <audioClip>k__BackingField: {fileID: 8300000, guid: a8bf5362500f24033b16af6a460b2f3f,
+    type: 3}
