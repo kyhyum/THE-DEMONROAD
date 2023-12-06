@@ -142,6 +142,14 @@ public class GameManager : Singleton<GameManager>
         }
         return result;
     }
+    void PlayerPosSave()
+    {
+        if(SceneManager.GetActiveScene().buildIndex >= 4)
+        {
+            return;
+        }
+        data.currentPlayerPos = Myplayer.transform.position;
+    }
     public void Save()
     {
         if (data == null || data.level == 0)
@@ -152,7 +160,7 @@ public class GameManager : Singleton<GameManager>
         if (SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Loading)
         {
             data.scene = (Define.SceneType)SceneManager.GetActiveScene().buildIndex;
-            data.currentPlayerPos = Myplayer.transform.position;
+            PlayerPosSave();
             data.currentPlayerRot = Myplayer.transform.rotation;
             data.QuickSlots = UIManager.Instance.GetQuickSlot();
             SaveItemArrayToJson(StringManager.ItemJsonPath, data.name, UIManager.Instance.GetInventory().Get());
