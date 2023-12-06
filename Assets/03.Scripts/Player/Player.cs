@@ -186,6 +186,8 @@ public class Player : MonoBehaviour
     {
         GameManager.Instance.player.Input.enabled = false;
 
+        stateMachine.ChangeState(stateMachine.IdleState);
+
         Animator.SetTrigger("Die");
 
         UIManager.Instance.ActiveGameOver(true);
