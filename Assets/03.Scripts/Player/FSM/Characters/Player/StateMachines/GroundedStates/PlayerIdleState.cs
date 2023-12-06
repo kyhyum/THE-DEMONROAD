@@ -12,13 +12,13 @@ public class PlayerIdleState : PlayerGroundedState
     {
         stateMachine.MovementSpeedModifier = 0f;
         base.Enter();
-        StartAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
+        StartAnimation(GameManager.Instance.player.AnimationData.IdleParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
-        StopAnimation(stateMachine.Player.AnimationData.IdleParameterHash);
+        StopAnimation(GameManager.Instance.player.AnimationData.IdleParameterHash);
     }
 
     public override void Update()
@@ -26,7 +26,7 @@ public class PlayerIdleState : PlayerGroundedState
         base.Update();
 
         // 이동이 일어나면
-        if (stateMachine.Player.Agent.velocity != Vector3.zero)
+        if (GameManager.Instance.player.Agent.velocity != Vector3.zero)
         {
             OnMove();
             return;

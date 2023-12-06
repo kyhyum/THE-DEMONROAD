@@ -12,72 +12,42 @@ public class PlayerAttackSkill1State : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.Player.WeaponCollider.enabled = true;
+        GameManager.Instance.player.WeaponCollider.enabled = true;
 
-        stateMachine.Player.animationEventEffects.SetEffects(stateMachine.Player.playerSkill1Data.Effects);
+        GameManager.Instance.player.animationEventEffects.SetEffects(GameManager.Instance.player.playerSkill1Data.Effects);
 
-        stateMachine.Player.Agent.ResetPath();
+        GameManager.Instance.player.Agent.ResetPath();
         base.Enter();
 
-        StartAnimation(stateMachine.Player.AnimationData.AttackSkill1ParameterHash);
+        StartAnimation(GameManager.Instance.player.AnimationData.AttackSkill1ParameterHash);
     }
 
     public override void Exit()
     {
-        stateMachine.Player.WeaponCollider.enabled = false;
+        GameManager.Instance.player.WeaponCollider.enabled = false;
 
         base.Exit();
-        StopAnimation(stateMachine.Player.AnimationData.AttackSkill1ParameterHash);
-
+        StopAnimation(GameManager.Instance.player.AnimationData.AttackSkill1ParameterHash);
     }
 
     public override void Update()
     {
         base.Update();
 
-        float normalizedTime = GetNormalizedTime(stateMachine.Player.Animator, "AttackSkill1");
+        float normalizedTime = GetNormalizedTime(GameManager.Instance.player.Animator, "AttackSkill1");
 
         if (normalizedTime < 0.9f)
         {
-            if (stateMachine.Player.IsAttackSkill[0])
+            if (GameManager.Instance.player.IsAttackSkill[0])
             {
-                stateMachine.Player.skillRange[0].gameObject.SetActive(true);
+                GameManager.Instance.player.skillRange[0].gameObject.SetActive(true);
             }
         }
         else
         {
-            stateMachine.Player.skillRange[0].gameObject.SetActive(false);
-            stateMachine.Player.IsAttackSkill[0] = false;
+            GameManager.Instance.player.skillRange[0].gameObject.SetActive(false);
+            GameManager.Instance.player.IsAttackSkill[0] = false;
             stateMachine.ChangeState(stateMachine.IdleState);
         }
     }
-
-    //public override void OnTriggerEnter(Collider other)
-    //{
-    //    base.OnTriggerEnter(other);
-    //
-    //    KnightSkill knightSkill = stateMachine.Player.KnightSkill;
-    //
-    //    Debug.Log("PlayerAttackSkill1State 클래스 OnTriggerEnter 함수 호출한다.");
-    //
-    //    //if (other.CompareTag("Enemy"))
-    //    if (other.gameObject.tag == "Enemy")
-    //    {
-    //        Debug.Log("적을 공격했다.");
-    //
-    //        //if (other.TryGetComponent(out Health health))
-    //        //{
-    //        //    Debug.Log($"데미지 {knightSkill.totalDamage}를 입혔다.");
-    //        //
-    //        //    health.TakeDamage(knightSkill.totalDamage);
-    //        //}
-    //
-    //        if (other.TryGetComponent(out EnemyHealth enemyHealth))
-    //        {
-    //            Debug.Log($"데미지 {knightSkill.totalDamage}를 입혔다.");
-    //
-    //            enemyHealth.TakeDamage(knightSkill.totalDamage);
-    //        }
-    //    }
-    //}
 }

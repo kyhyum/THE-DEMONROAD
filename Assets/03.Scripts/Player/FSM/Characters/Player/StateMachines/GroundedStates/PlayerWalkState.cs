@@ -12,13 +12,13 @@ public class PlayerWalkState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        StartAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
+        StartAnimation(GameManager.Instance.player.AnimationData.WalkParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
-        StopAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
+        StopAnimation(GameManager.Instance.player.AnimationData.WalkParameterHash);
     }
 
     public override void Update()
@@ -26,7 +26,7 @@ public class PlayerWalkState : PlayerGroundedState
         base.Update();
 
         // 멈추면
-        if (stateMachine.Player.Agent.velocity == Vector3.zero)
+        if (GameManager.Instance.player.Agent.velocity == Vector3.zero)
         {
             OnStand();
             return;

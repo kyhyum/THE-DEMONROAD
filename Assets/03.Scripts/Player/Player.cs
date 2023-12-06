@@ -60,7 +60,8 @@ public class Player : MonoBehaviour
         Controller = GetComponent<CharacterController>();
         Agent = GetComponent<NavMeshAgent>();
 
-        stateMachine = new PlayerStateMachine(this);
+        //stateMachine = new PlayerStateMachine(this);
+        stateMachine = new PlayerStateMachine();
 
         IsAttackSkill = new bool[skillSOs.Length];
         skills = new Skill[skillSOs.Length];

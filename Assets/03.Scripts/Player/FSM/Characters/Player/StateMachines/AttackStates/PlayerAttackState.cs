@@ -11,46 +11,25 @@ public class PlayerAttackState : PlayerGroundedState
     public override void Enter()
     {
         //Debug.Log("PlayerAttackState 클래스 Enter 함수 호출한다.");
-        stateMachine.Player.WeaponCollider.enabled = true;
+        GameManager.Instance.player.WeaponCollider.enabled = true;
 
-        stateMachine.Player.Agent.ResetPath();
-        stateMachine.Player.animationEventEffects.SetEffects(stateMachine.Player.playerBaseAttackData.Effects);
+        GameManager.Instance.player.Agent.ResetPath();
+        GameManager.Instance.player.animationEventEffects.SetEffects(GameManager.Instance.player.playerBaseAttackData.Effects);
         base.Enter();
-        StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
+        StartAnimation(GameManager.Instance.player.AnimationData.AttackParameterHash);
     }
 
     public override void Exit()
     {
-        stateMachine.Player.WeaponCollider.enabled = false;
+        GameManager.Instance.player.WeaponCollider.enabled = false;
 
         base.Exit();
 
-        StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
+        StopAnimation(GameManager.Instance.player.AnimationData.AttackParameterHash);
     }
 
 
     protected override void OnMove()
     {
     }
-
-    //Attack Test
-    //public override void Update()
-    //{
-    //    base.Update();
-
-    //    float normalizedTime = GetNormalizedTime(stateMachine.Player.Animator, "Attack");
-    //    if (normalizedTime < 0.8f)
-    //    {
-    //        if (stateMachine.Player.IsAttacking)
-    //        {
-    //            //Debug.Log("PlayerAttackState 클래스 Update 함수 호출한다.");
-    //        }
-
-    //        //Debug.Log("PlayerAttackState 클래스 Update2 함수 호출한다. 2");
-    //    }
-    //    else
-    //    {
-    //        stateMachine.ChangeState(stateMachine.IdleState);
-    //    }
-    //}
 }

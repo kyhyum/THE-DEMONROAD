@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerStateMachine : StateMachine
 {
-    public Player Player { get; }
-
     #region States
     public PlayerIdleState IdleState { get; }
     public PlayerWalkState WalkState { get; }
@@ -27,10 +25,8 @@ public class PlayerStateMachine : StateMachine
 
     public Transform MainCameraTransform { get; set; }
 
-    public PlayerStateMachine(Player player)
+    public PlayerStateMachine()
     {
-        this.Player = player;
-
         IdleState = new PlayerIdleState(this);
         WalkState = new PlayerWalkState(this);
 

@@ -10,41 +10,41 @@ public class PlayerAttackSkill3State : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.Player.WeaponCollider.enabled = true;
+        GameManager.Instance.player.WeaponCollider.enabled = true;
 
-        stateMachine.Player.animationEventEffects.SetEffects(stateMachine.Player.playerSkill3Data.Effects);
+        GameManager.Instance.player.animationEventEffects.SetEffects(GameManager.Instance.player.playerSkill3Data.Effects);
 
-        stateMachine.Player.Agent.ResetPath();
+        GameManager.Instance.player.Agent.ResetPath();
         base.Enter();
 
-        StartAnimation(stateMachine.Player.AnimationData.AttackSkill3ParameterHash);
+        StartAnimation(GameManager.Instance.player.AnimationData.AttackSkill3ParameterHash);
     }
 
     public override void Exit()
     {
-        stateMachine.Player.WeaponCollider.enabled = false;
+        GameManager.Instance.player.WeaponCollider.enabled = false;
 
         base.Exit();
 
-        StopAnimation(stateMachine.Player.AnimationData.AttackSkill3ParameterHash);
+        StopAnimation(GameManager.Instance.player.AnimationData.AttackSkill3ParameterHash);
     }
 
     public override void Update()
     {
         base.Update();
 
-        float normalizedTime = GetNormalizedTime(stateMachine.Player.Animator, "AttackSkill3");
+        float normalizedTime = GetNormalizedTime(GameManager.Instance.player.Animator, "AttackSkill3");
         if (normalizedTime < 0.8f)
         {
-            if (stateMachine.Player.IsAttackSkill[2])
+            if (GameManager.Instance.player.IsAttackSkill[2])
             {
-                stateMachine.Player.skillRange[2].gameObject.SetActive(true);
+                GameManager.Instance.player.skillRange[2].gameObject.SetActive(true);
             }
         }
         else
         {
-            stateMachine.Player.skillRange[2].gameObject.SetActive(false);
-            stateMachine.Player.IsAttackSkill[2] = false;
+            GameManager.Instance.player.skillRange[2].gameObject.SetActive(false);
+            GameManager.Instance.player.IsAttackSkill[2] = false;
             stateMachine.ChangeState(stateMachine.IdleState);
         }
     }

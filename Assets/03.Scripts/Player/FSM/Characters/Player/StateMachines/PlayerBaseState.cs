@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [Serializable]
-public class PlayerBaseState : IState, IUsable
+public class PlayerBaseState : IState
 {
     protected PlayerStateMachine stateMachine;
 
@@ -265,10 +265,5 @@ public class PlayerBaseState : IState, IUsable
         {
             return 0f;
         }
-    }
-
-    public void Use()
-    {
-        
     }
 }
