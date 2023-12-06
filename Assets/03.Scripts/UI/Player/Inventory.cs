@@ -8,7 +8,6 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [field: SerializeField] private Transform slots;
-    [field: SerializeField] private AudioSource audioSource;
     public ItemSlot[] inventorySlots;
     public EquipSlot[] equipSlots;
     SlotItem data;
@@ -51,7 +50,6 @@ public class Inventory : MonoBehaviour
         if (item.type == Define.ItemType.Gold)
         {
             Gold = Gold + item.itemPrice;
-            SoundManager.Instance.SFXPlay(audioSource, audioSource.clip);
 
             return true;
         }
