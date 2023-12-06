@@ -138,7 +138,7 @@ public class UIManager : Singleton<UIManager>
 
     public void SetQuickSlot(QuickSlotData[] slotData)
     {
-        if (slotData.Length == 0)
+        if (slotData == null || slotData.Length == 0)
         {
             for(int i = 0; i < quickSlots.Length; i++)
             {

@@ -189,6 +189,7 @@ public class GameManager : Singleton<GameManager>
         if (SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Start)
         {
             Save();
+            UIManager.Instance.SetQuickSlot(null);
             Destroy(Myplayer);
             SceneLoadManager.LoadScene((int)Define.SceneType.Start);
             UIManager.Instance.ActivePlayerUI(false);

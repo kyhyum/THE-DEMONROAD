@@ -50,6 +50,13 @@ public class QuickSlot : MonoBehaviour
 
     public void SetSlot(IUsable usable)
     {
+        if (usable == null)
+        {
+            SetAlpha(0);
+            this.usable = usable;
+            return;
+        }
+
         if (this.usable is AttackSkill)
         {
             AttackSkill skill = (AttackSkill)usable;
@@ -58,11 +65,7 @@ public class QuickSlot : MonoBehaviour
 
         this.usable = usable;
 
-        if (usable == null)
-        {
-            SetAlpha(0);
-            return;
-        }
+        
 
         if (usable is IStackable)
         {
