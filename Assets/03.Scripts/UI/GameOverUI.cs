@@ -20,6 +20,7 @@ public class GameOverUI : MonoBehaviour
         SceneLoadManager.LoadScene(3);
 
         GameManager.Instance.player.enabled = true;
+        GameManager.Instance.player.Input.enabled = true;
 
         GameManager.Instance.condition.currentHp = GameManager.Instance.condition.maxHp;
         UIManager.Instance.playerUI.UpdateHpUI(GameManager.Instance.condition.currentHp, GameManager.Instance.condition.maxHp);
