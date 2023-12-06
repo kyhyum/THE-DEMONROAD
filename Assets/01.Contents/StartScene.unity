@@ -16221,7 +16221,7 @@ MonoBehaviour:
   mainCamera: {fileID: 1878565557}
   settingButton: {fileID: 1862177459}
   exitButton: {fileID: 2060431785}
-  clip: {fileID: 8300000, guid: 20bd0d3e45d282e4dbdb717d5de8b025, type: 3}
+  clip: {fileID: 8300000, guid: 4304dd4b364e06e449416a8e89ce2a86, type: 3}
 --- !u!1 &1596438914
 GameObject:
   m_ObjectHideFlags: 0
