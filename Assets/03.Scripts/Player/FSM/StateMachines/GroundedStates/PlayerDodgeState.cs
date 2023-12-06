@@ -11,13 +11,13 @@ public class PlayerDodgeState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        StartAnimation(stateMachine.Player.AnimationData.DodgeParameterHash);
+        StartAnimation(GameManager.Instance.player.AnimationData.DodgeParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
-        StopAnimation(stateMachine.Player.AnimationData.DodgeParameterHash);
+        StopAnimation(GameManager.Instance.player.AnimationData.DodgeParameterHash);
         GameManager.Instance.player.playerCollider.enabled = true;
     }
 
@@ -26,7 +26,7 @@ public class PlayerDodgeState : PlayerGroundedState
         base.Update();
 
         float normalizedTime = GetNormalizedTime(GameManager.Instance.player.Animator, "Dodge");
-        if(normalizedTime < 0.9f)
+        if(normalizedTime < 1f)
         {
             GameManager.Instance.player.playerCollider.enabled = false;
         }
@@ -34,7 +34,7 @@ public class PlayerDodgeState : PlayerGroundedState
         {
             GameManager.Instance.player.Agent.ResetPath();
             GameManager.Instance.player.playerCollider.enabled = true;
-            if (stateMachine.Player.Agent.velocity != Vector3.zero)
+            if (GameManager.Instance.player.Agent.velocity != Vector3.zero)
             {
                 OnMove();
                 return;
