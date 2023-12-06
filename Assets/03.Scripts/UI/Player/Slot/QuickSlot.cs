@@ -20,7 +20,6 @@ public class QuickSlot : MonoBehaviour
     private void Awake()
     {
         UIManager.Instance.quickSlots[slotID] = this;
-        SetSlot(null);
     }
 
     private void Start()

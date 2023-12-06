@@ -52,7 +52,6 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
             UIManager.Instance.CreateQuestLog();
             UIManager.Instance.CreateQuestProgress();
-            UIManager.Instance.SetQuickSlot(data.QuickSlots);
             DontDestroyOnLoad(Myplayer);
         }
         else if (Myplayer != null && scene.buildIndex == (int)Define.SceneType.Loading)

@@ -24,6 +24,7 @@ public class UIManager : Singleton<UIManager>
     private Storage storage;
     private SkillUI skill;
     public QuickSlot[] quickSlots;
+    QuickSlotData[] data;
 
     private QuestLog questLog;
     private QuestProgress questProgress;
@@ -42,7 +43,7 @@ public class UIManager : Singleton<UIManager>
     protected override void Awake()
     {
         base.Awake();
-
+        data = new QuickSlotData[5];
         quickSlots = new QuickSlot[5];
         EnableUI = new List<GameObject>();
         audioSource = GetComponent<AudioSource>();
@@ -145,11 +146,7 @@ public class UIManager : Singleton<UIManager>
             switch (data[i].type)
             {
                 case Define.QuickSlotType.Skill:
-                    if (inventory.inventorySlots[data[i].index].GetItem() is IUsable)
-                    {
-                        quickSlots[i].SetSlot((IUsable)skill.slots[data[i].index].GetSkill());
-
-                    }
+                    quickSlots[i].SetSlot((IUsable)skill.slots[data[i].index].GetSkill());
                     break;
                 case Define.QuickSlotType.Item:
                     if (inventory.inventorySlots[data[i].index].GetItem() is IUsable)
@@ -158,6 +155,7 @@ public class UIManager : Singleton<UIManager>
                     }
                     break;
                 default:
+                    quickSlots[i].SetSlot(null);
                     break;
             }
         }
@@ -165,7 +163,6 @@ public class UIManager : Singleton<UIManager>
 
     public QuickSlotData[] GetQuickSlot()
     {
-        QuickSlotData[] data = new QuickSlotData[5];
         for (int i = 0; i < 5; i++)
         {
             IUsable usable = quickSlots[i].Get();
@@ -182,10 +179,9 @@ public class UIManager : Singleton<UIManager>
             }
             else
             {
-                data[i] = new QuickSlotData(Define.QuickSlotType.None, 0); ;
+                data[i] = new QuickSlotData(Define.QuickSlotType.None, 0);
             }
         }
-
         return data;
     }
 
@@ -265,7 +261,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void ActiveQuesProgress()
     {
-        ActiveUIGameObject(questProgressObj);
+        questProgressObj.SetActive(!questProgressObj.activeSelf);
     }
 
     private void ActiveQuestLog(InputAction.CallbackContext context)
