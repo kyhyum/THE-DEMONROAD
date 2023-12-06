@@ -24,6 +24,7 @@ public class Item
             rank = itemSO.rank;
             type = itemSO.type;
             prefab = itemSO.prefab;
+            itemPrice = itemSO.itemPrice;
         }
         else
         {
@@ -35,5 +36,5 @@ public class Item
     {
         return itemSO;
     }
-    
+
 }

@@ -141,7 +141,6 @@ public class UIManager : Singleton<UIManager>
         {
             if (data[i].index == -1)
                 continue;
-            Debug.Log(data[i].index);
 
             switch (data[i].type)
             {
