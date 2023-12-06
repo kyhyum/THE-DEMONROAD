@@ -11,11 +11,19 @@ public class SceneLoadManager : MonoBehaviour
     public static int nextSceneNumber = -1;
     [SerializeField] Image progressBar;
     [SerializeField] Image pivot;
+    [SerializeField] Image background;
     [SerializeField] TMP_Text barText;
+    [SerializeField] List<Sprite> images;
 
     private void Start()
     {
+        SelectBackground();
         StartCoroutine(LoadScene());
+    }
+
+    public void SelectBackground()
+    {
+        background.sprite = images[Random.Range(0, images.Count - 1)];
     }
 
     public static void LoadScene(string sceneName)
