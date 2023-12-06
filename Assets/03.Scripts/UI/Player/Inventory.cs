@@ -8,9 +8,9 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [field: SerializeField] private Transform slots;
+    [field: SerializeField] private AudioSource audioSource;
     public ItemSlot[] inventorySlots;
     public EquipSlot[] equipSlots;
-    public ItemSlot iSlot;
     SlotItem data;
 
     private int gold;
@@ -28,6 +28,7 @@ public class Inventory : MonoBehaviour
         }
     }
     public TMP_Text text;
+
     private void Awake()
     {
         Gold = 0;
@@ -50,6 +51,7 @@ public class Inventory : MonoBehaviour
         if (item.type == Define.ItemType.Gold)
         {
             Gold = Gold + item.itemPrice;
+            SoundManager.Instance.SFXPlay(audioSource, audioSource.clip);
 
             return true;
         }
