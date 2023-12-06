@@ -17,11 +17,13 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
 
     public Animator Animator { get; private set; }
+
+    [field: Header("Player")]
     public PlayerInput Input { get; private set; }
     public CharacterController Controller { get; private set; }
     public NavMeshAgent Agent { get; private set; }
+    public CapsuleCollider playerCollider { get; private set; }
 
-    [field: SerializeField] public Weapon Weapon { get; private set; }
     public PlayerCondition playerCondition { get; private set; }
 
     [field: Header("Camera")]
@@ -31,10 +33,12 @@ public class Player : MonoBehaviour
 
     public bool IsMovePerformed { get; set; }
     public bool IsAttacking { get; set; }
+    public bool IsDodging { get; set; }
     public bool[] IsAttackSkill { get; set; }
 
     [field: Header("Attack")]
     [field: SerializeField] public Collider WeaponCollider { get; set; }
+    [field: SerializeField] public Weapon Weapon { get; private set; }
     public PlayerSO playerSO;
     [field: SerializeField] private List<Transform> AttackTransforms;
     [field: SerializeField] private List<Transform> Skill2Transforms;
@@ -59,6 +63,7 @@ public class Player : MonoBehaviour
         Input = GetComponent<PlayerInput>();
         Controller = GetComponent<CharacterController>();
         Agent = GetComponent<NavMeshAgent>();
+        playerCollider = GetComponent<CapsuleCollider>();
 
         stateMachine = new PlayerStateMachine(this);
 

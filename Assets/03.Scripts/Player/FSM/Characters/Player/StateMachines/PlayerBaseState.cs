@@ -76,6 +76,8 @@ public class PlayerBaseState : IState, IUsable
 
         input.PlayerActions.MouseScrollY.performed += OnMouseScrollYPerformed;
         input.PlayerActions.MouseScrollClick.performed += OnMouseScrollClickPerformed;
+        input.PlayerActions.Dodge.started += OnDodgeStarted;
+        input.PlayerActions.Dodge.canceled += OnDodgeCanceled;
     } 
 
     /// <summary>
@@ -93,8 +95,12 @@ public class PlayerBaseState : IState, IUsable
         input.PlayerActions.Attack.canceled -= OnAttackCanceled;
         input.PlayerActions.MouseScrollY.performed -= OnMouseScrollYPerformed;
         input.PlayerActions.MouseScrollClick.performed -= OnMouseScrollClickPerformed;
+        input.PlayerActions.Dodge.started -= OnDodgeStarted;
+        input.PlayerActions.Dodge.canceled -= OnDodgeCanceled;
     }
 
+
+    #region Move
     protected virtual void OnMoveStarted(InputAction.CallbackContext context)
     {
         //Debug.Log("OnMoveStarted 함수 호출한다.");
@@ -116,6 +122,9 @@ public class PlayerBaseState : IState, IUsable
         GameManager.Instance.player.IsMovePerformed = false;
     }
 
+    #endregion Move
+
+    #region Attack
     protected virtual void OnAttackPerformed(InputAction.CallbackContext context)
     {
         //Debug.Log("OnAttackPerformed 함수 호출한다.");
@@ -132,6 +141,11 @@ public class PlayerBaseState : IState, IUsable
 
         GameManager.Instance.player.IsAttacking = false;
     }
+
+    #endregion Attack
+
+
+    #region ScrollClick
     protected virtual void OnMouseScrollClickPerformed(InputAction.CallbackContext context)
     {
         if (!Mouse.current.middleButton.isPressed)
@@ -172,6 +186,21 @@ public class PlayerBaseState : IState, IUsable
             }
         }
     }
+
+    #endregion ScrollClick
+
+    #region Dodge
+    protected virtual void OnDodgeStarted(InputAction.CallbackContext context)
+    {
+        Move();
+        GameManager.Instance.player.IsDodging = true;
+    }
+    protected virtual void OnDodgeCanceled(InputAction.CallbackContext context)
+    {
+        GameManager.Instance.player.IsDodging = false;
+    }
+
+    #endregion Dodge
 
     /// <summary>
     /// 실제 이동하는 처리를 한다.

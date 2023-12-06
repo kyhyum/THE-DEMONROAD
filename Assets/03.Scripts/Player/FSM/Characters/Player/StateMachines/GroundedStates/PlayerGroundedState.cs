@@ -25,8 +25,11 @@ public class PlayerGroundedState : PlayerBaseState
     public override void Update()
     {
         base.Update();
-
-        if (GameManager.Instance.player.IsAttacking)
+        if (GameManager.Instance.player.IsDodging)
+        {
+            OnDodge();
+        }
+        else if (GameManager.Instance.player.IsAttacking)
         {
             OnAttack();
             return;
@@ -96,6 +99,11 @@ public class PlayerGroundedState : PlayerBaseState
     protected virtual void OnMove()
     {
         stateMachine.ChangeState(stateMachine.WalkState);
+    }
+
+    protected virtual void OnDodge()
+    {
+        stateMachine.ChangeState(stateMachine.DodgeState);
     }
 
     protected virtual void OnAttack()
