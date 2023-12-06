@@ -22,6 +22,10 @@ public class ItemLabel : MonoBehaviour
     {
         if (UIManager.Instance.GetInventory().AddItem(item))
         {
+            if (item.type == Define.ItemType.Gold)
+            {
+
+            }
             Destroy(itemObject);
         }
     }
