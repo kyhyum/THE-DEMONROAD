@@ -56,7 +56,7 @@ public class Define
 
     public enum Job
     {
-        WARRIOR,
+        KNIGHT,
         ARCHOR,
         WIZZARD
     }

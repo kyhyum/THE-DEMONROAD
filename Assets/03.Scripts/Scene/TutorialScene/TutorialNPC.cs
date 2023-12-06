@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -212,9 +213,12 @@ public class TutorialNPC : MonoBehaviour
         switch (talkIndex)
         {
             case 2:
-                data.acceptQuest.Add(quest[0]);
-                talkIndex++;
-                Talk();
+                if (!data.acceptQuest.Contains(quest[0]))
+                {
+                    data.acceptQuest.Add(quest[0]);
+                    talkIndex++;
+                    Talk();
+                }
                 break;
             case 6:
                 QuestAccept(quest[1]);
@@ -270,6 +274,11 @@ public class TutorialNPC : MonoBehaviour
     }
     void QuestAccept(QuestSO quest)
     {
+        if (data.acceptQuest.Contains(quest))
+        {
+            return;
+        }
+
         data.acceptQuest.Add(quest);
         DialogueUISetActive(false);
     }
