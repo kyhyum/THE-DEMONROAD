@@ -8,9 +8,7 @@ public class PlayerBaseState : IState
 {
     protected PlayerStateMachine stateMachine;
 
-
     RaycastHit hit;
-
     Vector3 destPosition;
     Vector3 direction;
     Quaternion lookTarget;
@@ -22,7 +20,6 @@ public class PlayerBaseState : IState
     [field: SerializeField] float sensitivity = 1f;
     Vector2 currentCursorPosition;
 
-
     public PlayerBaseState(PlayerStateMachine playerStateMachine)
     {
         stateMachine = playerStateMachine;
@@ -30,7 +27,7 @@ public class PlayerBaseState : IState
 
     public virtual void Enter()
     {
-        AddInputActionsCallbacks();    
+        AddInputActionsCallbacks();
     }
 
     public virtual void Exit()
@@ -39,14 +36,13 @@ public class PlayerBaseState : IState
     }
     public virtual void Update()
     {
-        PerformedMove(); 
+        PerformedMove();
     }
 
     public virtual void PhysicsUpdate()
     {
-        
-    }
 
+    }
 
     public virtual void LateUpdate()
     {
@@ -65,7 +61,7 @@ public class PlayerBaseState : IState
     {
         PlayerInput input = GameManager.Instance.player.Input;
         // .started: 해당 키가 눌려졌을 때
-        
+
         input.PlayerActions.Move.started += OnMoveStarted;
         input.PlayerActions.Move.performed += OnMovePerformed;
         input.PlayerActions.Move.canceled += OnMoveCanceled;
@@ -78,7 +74,7 @@ public class PlayerBaseState : IState
         input.PlayerActions.MouseScrollClick.performed += OnMouseScrollClickPerformed;
         input.PlayerActions.Dodge.started += OnDodgeStarted;
         input.PlayerActions.Dodge.canceled += OnDodgeCanceled;
-    } 
+    }
 
     /// <summary>
     /// Remove
@@ -98,7 +94,6 @@ public class PlayerBaseState : IState
         input.PlayerActions.Dodge.started -= OnDodgeStarted;
         input.PlayerActions.Dodge.canceled -= OnDodgeCanceled;
     }
-
 
     #region Move
     protected virtual void OnMoveStarted(InputAction.CallbackContext context)
@@ -163,7 +158,7 @@ public class PlayerBaseState : IState
         //Debug.Log("OnMouseScrollYPerformed 함수 호출한다.");
 
         cameraDistance = context.ReadValue<float>() * sensitivity;
-        
+
         //Debug.Log($"cameraDistance : {cameraDistance}");
 
         if (componentBase is CinemachineFramingTransposer)
@@ -178,7 +173,7 @@ public class PlayerBaseState : IState
 
                 framingTransposer.m_CameraDistance = Mathf.Clamp(currentCameraDistance, currentCameraDistance, changeCameraDistance);
             }
-            else if(cameraDistance < 0)
+            else if (cameraDistance < 0)
             {
                 changeCameraDistance = (changeCameraDistance + 5 <= maxCamDistance) ? changeCameraDistance + 5 : maxCamDistance;
 
@@ -212,7 +207,7 @@ public class PlayerBaseState : IState
         {
             //Debug.Log($"hit.collider.name: {hit.collider.name}");
             //Debug.Log($"hit.point: {hit.point}");
-            destPosition = new Vector3(hits[0].point.x, GameManager.Instance.player.transform.position.y, hits[0].point.z); 
+            destPosition = new Vector3(hits[0].point.x, GameManager.Instance.player.transform.position.y, hits[0].point.z);
             direction = destPosition - GameManager.Instance.player.transform.position;
             lookTarget = Quaternion.LookRotation(direction);
             GameManager.Instance.player.transform.rotation = lookTarget;
@@ -237,8 +232,6 @@ public class PlayerBaseState : IState
             GameManager.Instance.player.Agent.SetDestination(hits[0].point);
         }
     }
-
-
 
     private void LateMove()
     {
@@ -265,7 +258,7 @@ public class PlayerBaseState : IState
     {
         GameManager.Instance.player.Animator.SetBool(animationHash, true);
     }
-    
+
     protected void StopAnimation(int animationHash)
     {
         GameManager.Instance.player.Animator.SetBool(animationHash, false);

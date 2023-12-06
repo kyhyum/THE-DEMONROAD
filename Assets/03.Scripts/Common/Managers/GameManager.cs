@@ -52,6 +52,7 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
             UIManager.Instance.CreateQuestLog();
             UIManager.Instance.CreateQuestProgress();
+            UIManager.Instance.SetQuickSlot(data.QuickSlots);
             DontDestroyOnLoad(Myplayer);
         }
         else if (Myplayer != null && scene.buildIndex == (int)Define.SceneType.Loading)
@@ -141,17 +142,9 @@ public class GameManager : Singleton<GameManager>
         }
         return result;
     }
-    void PlayerPosSave()
-    {
-        if (SceneManager.GetActiveScene().buildIndex >= 4)
-        {
-            return;
-        }
-        data.currentPlayerPos = Myplayer.transform.position;
-    }
     public void Save()
     {
-        if (data.name == null)
+        if (data == null || data.level == 0)
         {
             return;
         }
@@ -159,7 +152,7 @@ public class GameManager : Singleton<GameManager>
         if (SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Start && SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Loading)
         {
             data.scene = (Define.SceneType)SceneManager.GetActiveScene().buildIndex;
-            PlayerPosSave();
+            data.currentPlayerPos = Myplayer.transform.position;
             data.currentPlayerRot = Myplayer.transform.rotation;
             data.QuickSlots = UIManager.Instance.GetQuickSlot();
             SaveItemArrayToJson(StringManager.ItemJsonPath, data.name, UIManager.Instance.GetInventory().Get());
@@ -187,8 +180,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Start)
         {
-            SceneLoadManager.LoadScene((int)Define.SceneType.Start);
             Save();
+            SceneLoadManager.LoadScene((int)Define.SceneType.Start);
             UIManager.Instance.ActivePlayerUI(false);
             UIManager.Instance.DestroyQuestUI();
             Destroy(Myplayer);
@@ -209,6 +202,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnApplicationQuit()
     {
+        Save();
         DataNull();
         StopAllCoroutines();
     }
