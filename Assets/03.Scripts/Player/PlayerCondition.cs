@@ -49,7 +49,7 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     {
         switch (playerData.job)
         {
-            case Define.Job.WARRIOR:
+            case Define.Job.KNIGHT:
                 mainStat = Define.StatType.STR;
                 break;
             case Define.Job.ARCHOR:
@@ -111,7 +111,7 @@ public class PlayerCondition : MonoBehaviour, ITakeDamage
     {
         switch (job)
         {
-            case Define.Job.WARRIOR:
+            case Define.Job.KNIGHT:
                 atkRatio = 4f;
                 defRatio = 0.7f;
                 speedRatio = 1.8f;
