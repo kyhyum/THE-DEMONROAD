@@ -16221,7 +16221,7 @@ MonoBehaviour:
   mainCamera: {fileID: 1878565557}
   settingButton: {fileID: 1862177459}
   exitButton: {fileID: 2060431785}
-  clip: {fileID: 8300000, guid: b7efdd5ef29beaf4094a3509ea04ea64, type: 3}
+  clip: {fileID: 8300000, guid: 20bd0d3e45d282e4dbdb717d5de8b025, type: 3}
 --- !u!1 &1596438914
 GameObject:
   m_ObjectHideFlags: 0
@@ -45116,7 +45116,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3537238175213671951, guid: 24beef04c10a4d74cb2f48df4b9ccd76,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: b7efdd5ef29beaf4094a3509ea04ea64, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 20bd0d3e45d282e4dbdb717d5de8b025, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

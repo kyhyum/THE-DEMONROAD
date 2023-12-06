@@ -5,12 +5,9 @@ using UnityEngine;
 public class TutorialManager : Singleton<TutorialManager>
 {
     [SerializeField] TutorialNPC npc;
-
-    PlayerInputAction InputActions;
     void Start()
     {
         UIManager.Instance.ActivePlayerUI(true);
-        InputActions = GameManager.Instance.Myplayer.GetComponent<PlayerInput>().InputActions;
     }
 
     void Update()
@@ -30,11 +27,11 @@ public class TutorialManager : Singleton<TutorialManager>
 
         if (npc.dialogueUI.gameObject.activeSelf)
         {
-            InputActions.Disable();
+            GameManager.Instance.player.enabled = false;
         }
         else
         {
-            InputActions.Enable();
+            GameManager.Instance.player.enabled = true;
         }
     }
 
@@ -44,7 +41,7 @@ public class TutorialManager : Singleton<TutorialManager>
     }
     public void EndTutorial()
     {
-        InputActions.Enable();
+        GameManager.Instance.player.enabled = true;
         GameManager.Instance.data.acceptQuest.Clear();
         GameManager.Instance.data.currentPlayerPos = Vector3.zero;
         SceneLoadManager.LoadScene((int)Define.SceneType.Town);
