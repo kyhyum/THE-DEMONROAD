@@ -26,7 +26,7 @@ public class PlayerDodgeState : PlayerGroundedState
         base.Update();
 
         float normalizedTime = GetNormalizedTime(GameManager.Instance.player.Animator, "Dodge");
-        if (normalizedTime < 0.9f)
+        if(normalizedTime < 1f)
         {
             GameManager.Instance.player.playerCollider.enabled = false;
         }
@@ -45,6 +45,6 @@ public class PlayerDodgeState : PlayerGroundedState
                 return;
             }
         }
-
+        
     }
 }
