@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 
-public class npcInteraction : MonoBehaviour
+public class NpcInteraction : MonoBehaviour
 {
     public NPCSO npc;
     public QuestSO quest;
@@ -147,13 +147,7 @@ public class npcInteraction : MonoBehaviour
             questProgress.questProgconverseName.fontStyle = FontStyles.Italic | FontStyles.Strikethrough;
             questProgress.questProgconverseName.text = selectedQuest.questName + "\n - " + " 1 / " + selectedQuest.questComplete;
 
-            //foreach (var npc in selectedQuest.relatedNPCs)
-            //{
-            //    questProgName.color = Color.red;
-            //    questProgName.fontStyle = FontStyles.Italic | FontStyles.Strikethrough;
-            //    questProgName.text = selectedQuest.questName + "\n - " + " 1 / " + selectedQuest.questComplete;
-
-            //}
+            
         }
 
     }
