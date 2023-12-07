@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class ItemSO : ScriptableObject
 {
     [field: SerializeField] public string itemName { get; private set; }

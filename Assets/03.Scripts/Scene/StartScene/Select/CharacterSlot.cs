@@ -66,7 +66,7 @@ public class CharacterSlot : MonoBehaviour
     }
     private void DeleteCharacter()
     {
-        if (GameManager.Instance.DeleteCharacter(StringManager.JsonPath, data.name))
+        if (GameManager.Instance.DeleteCharacter(data.name))
         {
             SelectCanvasManager.Instance.DeleteCharacter(data);
             ClearSlot();

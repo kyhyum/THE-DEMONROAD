@@ -44,6 +44,10 @@ public class Inventory : MonoBehaviour
             inventorySlots[i].Clear();
         }
     }
+    private void Start()
+    {
+        Set(GameManager.Instance.LoadItemArrayFromJson(StringManager.ItemJsonPath, GameManager.Instance.data.name));
+    }
 
     public bool AddItem(Item item)
     {
@@ -207,7 +211,7 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        gold = data.gold;
+        Gold = data.gold;
 
         for (int i = 0; i < 37; i++)
         {

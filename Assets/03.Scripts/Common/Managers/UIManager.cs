@@ -48,11 +48,11 @@ public class UIManager : Singleton<UIManager>
         quickSlots = new QuickSlot[5];
         EnableUI = new List<GameObject>();
         audioSource = GetComponent<AudioSource>();
-        CreateStorage();
-        CreateInventory();
+        /*CreateStorage();
+        CreateInventory();*/
         CreateSkill();
-        CreateQuestLog();
-        CreateQuestProgress();
+        /*CreateQuestLog();
+        CreateQuestProgress();*/
         CreateGameOver();
     }
 
@@ -67,15 +67,25 @@ public class UIManager : Singleton<UIManager>
 
     }
 
-    private void CreateInventory()
+    public void CreateInventory()
     {
+        if(inventoryObj != null)
+        {
+            return;
+        }
+
         inventoryObj = Instantiate(Resources.Load<GameObject>(StringManager.InventoryPrefabPath), canvas);
         inventory = inventoryObj.GetComponentInChildren<Inventory>();
         inventoryObj.SetActive(false);
     }
 
-    private void CreateStorage()
+    public void CreateStorage()
     {
+        if (storageObj != null)
+        {
+            return;
+        }
+
         storageObj = Instantiate(Resources.Load<GameObject>(StringManager.StroagePrefabPath), canvas);
         storage = storageObj.GetComponentInChildren<Storage>();
         storageObj.SetActive(false);
@@ -115,6 +125,19 @@ public class UIManager : Singleton<UIManager>
         gameOverObj = Instantiate(Resources.Load<GameObject>(StringManager.GameOverPrefabPath), transform);
         gameOver = gameOverObj.GetComponentInChildren<GameOverUI>();
         gameOverObj.SetActive(false);
+    }
+    public void DestroyInventoryUI()
+    {
+        if (storageObj == null)
+        {
+            return;
+        }
+        Destroy(inventoryObj);
+        Destroy(storageObj);
+        inventoryObj = null;
+        storageObj = null;
+        inventory = null;
+        storage = null;
     }
 
     public void DestroyQuestUI()
