@@ -58358,6 +58358,7 @@ MonoBehaviour:
   eventSystem: {fileID: 2629027612018033380}
   playerCamera: {fileID: 1098994417}
   virtualCamera: {fileID: 1407512355}
+  minimapCamera: {fileID: 0}
 --- !u!1 &7401509998842515436
 GameObject:
   m_ObjectHideFlags: 0
