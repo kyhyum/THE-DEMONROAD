@@ -105,45 +105,57 @@ public class PlayerBaseState : IState
     {
         //Debug.Log("OnMovePerformed 함수 호출한다.");
 
-        GameManager.Instance.player.IsMovePerformed = true;
+        Player player = GameManager.Instance.player;
+
+        player.IsMovePerformed = true;
     }
 
     protected virtual void OnMoveCanceled(InputAction.CallbackContext context)
     {
         //Debug.Log("OnMoveCanceled 함수 호출한다.");
 
-        GameManager.Instance.player.IsMovePerformed = false;
+        Player player = GameManager.Instance.player;
+
+        player.IsMovePerformed = false;
     }
 
     protected virtual void OnAttackPerformed(InputAction.CallbackContext context)
     {
         //Debug.Log("OnAttackPerformed 함수 호출한다.");
 
+        Player player = GameManager.Instance.player;
+
         Rotate();
 
-        GameManager.Instance.player.IsAttacking = true;
-        GameManager.Instance.player.IsMovePerformed = false;
+        player.IsAttacking = true;
+        player.IsMovePerformed = false;
     }
 
     protected virtual void OnAttackCanceled(InputAction.CallbackContext context)
     {
         //Debug.Log("OnAttackCanceled 함수 호출한다.");
 
-        GameManager.Instance.player.IsAttacking = false;
+        Player player = GameManager.Instance.player;
+
+        player.IsAttacking = false;
     }
     protected virtual void OnMouseScrollClickPerformed(InputAction.CallbackContext context)
     {
+        Player player = GameManager.Instance.player;
+
         if (!Mouse.current.middleButton.isPressed)
             return;
 
         float inputValue = context.ReadValue<Vector2>().x;
         Debug.Log(inputValue);
-        GameManager.Instance.player.VirtualCamera.transform.rotation = Quaternion.Euler(45f, inputValue + GameManager.Instance.player.VirtualCamera.transform.rotation.eulerAngles.y, 0f);
+        player.VirtualCamera.transform.rotation = Quaternion.Euler(45f, inputValue + player.VirtualCamera.transform.rotation.eulerAngles.y, 0f);
     }
 
     protected virtual void OnMouseScrollYPerformed(InputAction.CallbackContext context)
     {
-        CinemachineComponentBase componentBase = GameManager.Instance.player.ComponentBase;
+        Player player = GameManager.Instance.player;
+
+        CinemachineComponentBase componentBase = player.ComponentBase;
 
         //Debug.Log("OnMouseScrollYPerformed 함수 호출한다.");
 
@@ -177,16 +189,18 @@ public class PlayerBaseState : IState
     /// </summary>
     protected void Move()
     {
+        Player player = GameManager.Instance.player;
+
         RaycastHit[] hits = Physics.RaycastAll(Camera.main.transform.position, Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition).direction.normalized, 100, 1 << LayerMask.NameToLayer("Ground"));
         if (hits.Length > 0)
         {
             //Debug.Log($"hit.collider.name: {hit.collider.name}");
             //Debug.Log($"hit.point: {hit.point}");
-            destPosition = new Vector3(hits[0].point.x, GameManager.Instance.player.transform.position.y, hits[0].point.z); 
-            direction = destPosition - GameManager.Instance.player.transform.position;
+            destPosition = new Vector3(hits[0].point.x, player.transform.position.y, hits[0].point.z); 
+            direction = destPosition - player.transform.position;
             lookTarget = Quaternion.LookRotation(direction);
-            GameManager.Instance.player.transform.rotation = lookTarget;
-            GameManager.Instance.player.Agent.SetDestination(hits[0].point);
+            player.transform.rotation = lookTarget;
+            player.Agent.SetDestination(hits[0].point);
         }
     }
 
@@ -195,16 +209,18 @@ public class PlayerBaseState : IState
         if (!GameManager.Instance.player.IsMovePerformed)
             return;
 
+        Player player = GameManager.Instance.player;
+
         RaycastHit[] hits = Physics.RaycastAll(Camera.main.transform.position, Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition).direction.normalized, 100, 1 << LayerMask.NameToLayer("Ground"));
         if (hits.Length > 0)
         {
             //Debug.Log($"hit.collider.name: {hit.collider.name}");
             //Debug.Log($"hit.point: {hit.point}");
-            destPosition = new Vector3(hits[0].point.x, GameManager.Instance.player.transform.position.y, hits[0].point.z);
-            direction = destPosition - GameManager.Instance.player.transform.position;
+            destPosition = new Vector3(hits[0].point.x, player.transform.position.y, hits[0].point.z);
+            direction = destPosition - player.transform.position;
             lookTarget = Quaternion.LookRotation(direction);
-            GameManager.Instance.player.transform.rotation = lookTarget;
-            GameManager.Instance.player.Agent.SetDestination(hits[0].point);
+            player.transform.rotation = lookTarget;
+            player.Agent.SetDestination(hits[0].point);
         }
     }
 
@@ -212,7 +228,9 @@ public class PlayerBaseState : IState
 
     private void LateMove()
     {
-        GameManager.Instance.player.transform.position = GameManager.Instance.player.Agent.nextPosition;
+        Player player = GameManager.Instance.player;
+
+        player.transform.position = player.Agent.nextPosition;
     }
 
     private void Rotate()
