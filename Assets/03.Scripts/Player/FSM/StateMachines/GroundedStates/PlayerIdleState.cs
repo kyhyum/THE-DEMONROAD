@@ -10,23 +10,30 @@ public class PlayerIdleState : PlayerGroundedState
 
     public override void Enter()
     {
-        stateMachine.MovementSpeedModifier = 0f;
         base.Enter();
-        StartAnimation(GameManager.Instance.player.AnimationData.IdleParameterHash);
+
+        Player player = GameManager.Instance.player;
+
+        StartAnimation(player.AnimationData.IdleParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
-        StopAnimation(GameManager.Instance.player.AnimationData.IdleParameterHash);
+
+        Player player = GameManager.Instance.player;
+
+        StopAnimation(player.AnimationData.IdleParameterHash);
     }
 
     public override void Update()
     {
         base.Update();
 
+        Player player = GameManager.Instance.player;
+
         // 이동이 일어나면
-        if (GameManager.Instance.player.Agent.velocity != Vector3.zero)
+        if (player.Agent.velocity != Vector3.zero)
         {
             OnMove();
             return;
