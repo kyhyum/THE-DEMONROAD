@@ -20,7 +20,6 @@ public class PlayerBaseState : IState
     [field: SerializeField] public float minCamDistance = 5.0f;
     [field: SerializeField] public float maxCamDistance = 25.0f;
     [field: SerializeField] float sensitivity = 1f;
-    Vector2 currentCursorPosition;
 
 
     public PlayerBaseState(PlayerStateMachine playerStateMachine)
