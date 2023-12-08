@@ -13,35 +13,43 @@ public class PlayerGroundedState : PlayerBaseState
     public override void Enter()
     {
         base.Enter();
-        StartAnimation(GameManager.Instance.player.AnimationData.GroundParameterHash);
+
+        Player player = GameManager.Instance.player;
+
+        StartAnimation(player.AnimationData.GroundParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
-        StopAnimation(GameManager.Instance.player.AnimationData.GroundParameterHash);
+
+        Player player = GameManager.Instance.player;
+
+        StopAnimation(player.AnimationData.GroundParameterHash);
     }
 
     public override void Update()
     {
         base.Update();
 
-        if (GameManager.Instance.player.IsAttacking)
+        Player player = GameManager.Instance.player;
+
+        if (player.IsAttacking)
         {
             OnAttack();
             return;
         }
-        else if (GameManager.Instance.player.IsAttackSkill[0])
+        else if (player.IsAttackSkill[0])
         {
             OnAttackSkill1();
             return;
         }
-        else if (GameManager.Instance.player.IsAttackSkill[1])
+        else if (player.IsAttackSkill[1])
         {
             OnAttackSkill2();
             return;
         }
-        else if (GameManager.Instance.player.IsAttackSkill[2])
+        else if (player.IsAttackSkill[2])
         {
             OnAttackSkill3();
             return;
@@ -60,7 +68,9 @@ public class PlayerGroundedState : PlayerBaseState
 
     protected override void OnMoveStarted(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.player.Agent.velocity != Vector3.zero)
+        Player player = GameManager.Instance.player;
+
+        if (player.Agent.velocity != Vector3.zero)
         {
             return;
         }
@@ -72,8 +82,9 @@ public class PlayerGroundedState : PlayerBaseState
 
     protected override void OnMovePerformed(InputAction.CallbackContext context)
     {
+        Player player = GameManager.Instance.player;
 
-        if (GameManager.Instance.player.Agent.velocity != Vector3.zero)
+        if (player.Agent.velocity != Vector3.zero)
         {
             return;
         }
