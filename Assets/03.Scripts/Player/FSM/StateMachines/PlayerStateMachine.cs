@@ -17,13 +17,7 @@ public class PlayerStateMachine : StateMachine
 
     // 
     public int ComboIndex;
-    // 움직임을 받는다.
-    public Vector3 MovementInput { get; set; }
-    // 이동 속도이다.
-    public float MovementSpeed { get; private set; }
-    public float MovementSpeedModifier { get; set; } = 1f;
 
-    public Transform MainCameraTransform { get; set; }
 
     public PlayerStateMachine()
     {

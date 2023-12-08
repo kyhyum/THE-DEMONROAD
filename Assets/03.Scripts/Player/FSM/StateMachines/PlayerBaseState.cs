@@ -63,14 +63,13 @@ public class PlayerBaseState : IState
     protected virtual void AddInputActionsCallbacks()
     {
         PlayerInput input = GameManager.Instance.player.Input;
-        // .started: 해당 키가 눌려졌을 때
         
         input.PlayerActions.Move.started += OnMoveStarted;
         input.PlayerActions.Move.performed += OnMovePerformed;
         input.PlayerActions.Move.canceled += OnMoveCanceled;
-        // .performed: 해당 키가 눌려지고 있는 동안에
+        
         input.PlayerActions.Attack.performed += OnAttackPerformed;
-        // .canceled: (눌려져 있는) 해당 키가 떼어졌을 떄
+        
         input.PlayerActions.Attack.canceled += OnAttackCanceled;
 
         input.PlayerActions.MouseScrollY.performed += OnMouseScrollYPerformed;
