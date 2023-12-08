@@ -5,16 +5,20 @@ using UnityEngine;
 public class TutorialManager : Singleton<TutorialManager>
 {
     [SerializeField] TutorialNPC npc;
-
-    PlayerInputAction InputActions;
+    [SerializeField] AudioClip clip;
     void Start()
     {
         UIManager.Instance.ActivePlayerUI(true);
-        InputActions = GameManager.Instance.Myplayer.GetComponent<PlayerInput>().InputActions;
+        SoundManager.Instance.BGMPlay(clip);
     }
 
     void Update()
     {
+        if(GameManager.Instance.player == null)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             npc.QuestClear(npc.quest[1]);
@@ -23,28 +27,34 @@ public class TutorialManager : Singleton<TutorialManager>
         {
             npc.QuestClear(npc.quest[3]);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (UIManager.Instance.settingObj.activeSelf)
         {
             npc.QuestClear(npc.quest[4]);
         }
 
         if (npc.dialogueUI.gameObject.activeSelf)
         {
-            InputActions.Disable();
+            GameManager.Instance.player.enabled = false;
         }
+
         else
         {
-            InputActions.Enable();
+            GameManager.Instance.player.enabled = true;
         }
     }
 
     public void EndTutorialPopUpUI()
     {
+        if (npc.dialogueUI.gameObject.activeSelf)
+        {
+            return;
+        }
+
         UIManager.Instance.ActivePopUpUI("튜토리얼", "튜토리얼을 종료 하시겠습니까?", EndTutorial);
     }
     public void EndTutorial()
     {
-        InputActions.Enable();
+        GameManager.Instance.player.enabled = true;
         GameManager.Instance.data.acceptQuest.Clear();
         GameManager.Instance.data.currentPlayerPos = Vector3.zero;
         SceneLoadManager.LoadScene((int)Define.SceneType.Town);

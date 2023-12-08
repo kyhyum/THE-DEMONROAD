@@ -109,6 +109,11 @@ public class PlayerGroundedState : PlayerBaseState
         stateMachine.ChangeState(stateMachine.WalkState);
     }
 
+    protected virtual void OnDodge()
+    {
+        stateMachine.ChangeState(stateMachine.DodgeState);
+    }
+
     protected virtual void OnAttack()
     {
         stateMachine.ChangeState(stateMachine.ComboAttackState);

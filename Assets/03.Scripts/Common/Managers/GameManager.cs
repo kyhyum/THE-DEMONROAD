@@ -48,10 +48,11 @@ public class GameManager : Singleton<GameManager>
             condition = Myplayer.AddComponent<PlayerCondition>();
             condition.playerData = data;
             condition.Initialize();
-            UIManager.Instance.GetInventory().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, data.name));
-            UIManager.Instance.GetStorage().Set(LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
+            UIManager.Instance.CreateInventory();
+            UIManager.Instance.CreateStorage();
             UIManager.Instance.CreateQuestLog();
             UIManager.Instance.CreateQuestProgress();
+            
             DontDestroyOnLoad(Myplayer);
         }
         else if (Myplayer != null && scene.buildIndex == (int)Define.SceneType.Loading)
@@ -73,7 +74,8 @@ public class GameManager : Singleton<GameManager>
     public void SavePlayerDataToJson(string jsonPath, string characterName, PlayerData data)
     {
         string jsonData = JsonUtility.ToJson(data, true);
-
+        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
+        string encodingJson = System.Convert.ToBase64String(bytes);
         string directoryPath = Path.GetDirectoryName(jsonPath);
 
         if (!Directory.Exists(directoryPath))
@@ -82,7 +84,7 @@ public class GameManager : Singleton<GameManager>
         }
         string path = Path.Combine(jsonPath, $"{characterName}.json");
 
-        File.WriteAllText(path, jsonData);
+        File.WriteAllText(path, encodingJson);
     }
 
     public PlayerData LoadPlayerDataFromJson(string jsonPath, string characterName)
@@ -92,8 +94,9 @@ public class GameManager : Singleton<GameManager>
         if (File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
-
-            return JsonUtility.FromJson<PlayerData>(jsonData);
+            byte[] bytes = System.Convert.FromBase64String(jsonData);
+            string decodingJson = System.Text.Encoding.UTF8.GetString(bytes);
+            return JsonUtility.FromJson<PlayerData>(decodingJson);
         }
         else
         {
@@ -131,19 +134,29 @@ public class GameManager : Singleton<GameManager>
         }
         return null;
     }
-    public bool DeleteCharacter(string jsonPath, string characterName)
+    public bool DeleteCharacter(string characterName)
     {
-        string path = Path.Combine(jsonPath, $"{characterName}.json");
+        string path = Path.Combine(StringManager.JsonPath, $"{characterName}.json");
+        bool result = File.Exists(path);
+        if (result)
+        {
+            File.Delete(path);
+            DeleteInventory(characterName);
+        }
+        return result;
+    }
+    private void DeleteInventory(string characterName)
+    {
+        string path = Path.Combine(StringManager.ItemJsonPath, $"{characterName}.json");
         bool result = File.Exists(path);
         if (result)
         {
             File.Delete(path);
         }
-        return result;
     }
     void PlayerPosSave()
     {
-        if (SceneManager.GetActiveScene().buildIndex >= 4)
+        if(SceneManager.GetActiveScene().buildIndex >= 4)
         {
             return;
         }
@@ -151,7 +164,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void Save()
     {
-        if (data.name == null)
+        if (data == null || data.level == 0)
         {
             return;
         }
@@ -187,13 +200,14 @@ public class GameManager : Singleton<GameManager>
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)Define.SceneType.Start)
         {
-            SceneLoadManager.LoadScene((int)Define.SceneType.Start);
             Save();
+            UIManager.Instance.DestroyInventoryUI();
+            UIManager.Instance.SetQuickSlot(null);
             UIManager.Instance.ActivePlayerUI(false);
             UIManager.Instance.DestroyQuestUI();
             Destroy(Myplayer);
-
             DataNull();
+            SceneLoadManager.LoadScene((int)Define.SceneType.Start);
         }
     }
     public void FinishPopUp()
@@ -209,6 +223,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnApplicationQuit()
     {
+        Save();
         DataNull();
         StopAllCoroutines();
     }

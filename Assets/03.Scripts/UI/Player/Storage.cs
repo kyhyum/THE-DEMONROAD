@@ -40,7 +40,10 @@ public class Storage : MonoBehaviour
             storageSlots[i].Clear();
         }
     }
-
+    private void Start()
+    {
+        Set(GameManager.Instance.LoadItemArrayFromJson(StringManager.ItemJsonPath, StringManager.StorageName));
+    }
     public bool AddItem(Item item)
     {
         if (item.type == Define.ItemType.Gold)

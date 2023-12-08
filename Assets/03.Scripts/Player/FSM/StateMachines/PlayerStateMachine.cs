@@ -7,6 +7,7 @@ public class PlayerStateMachine : StateMachine
     #region States
     public PlayerIdleState IdleState { get; }
     public PlayerWalkState WalkState { get; }
+    public PlayerDodgeState DodgeState { get; }
 
     public PlayerAttackState AttackState { get; }
     public PlayerComboAttackState ComboAttackState { get; }
@@ -23,6 +24,7 @@ public class PlayerStateMachine : StateMachine
     {
         IdleState = new PlayerIdleState(this);
         WalkState = new PlayerWalkState(this);
+        DodgeState = new PlayerDodgeState(this);
 
         AttackState = new PlayerAttackState(this);
         ComboAttackState = new PlayerComboAttackState(this);

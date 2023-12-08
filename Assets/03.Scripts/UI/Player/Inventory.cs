@@ -10,7 +10,6 @@ public class Inventory : MonoBehaviour
     [field: SerializeField] private Transform slots;
     public ItemSlot[] inventorySlots;
     public EquipSlot[] equipSlots;
-    public ItemSlot iSlot;
     SlotItem data;
 
     private int gold;
@@ -28,6 +27,7 @@ public class Inventory : MonoBehaviour
         }
     }
     public TMP_Text text;
+
     private void Awake()
     {
         Gold = 0;
@@ -44,12 +44,16 @@ public class Inventory : MonoBehaviour
             inventorySlots[i].Clear();
         }
     }
+    private void Start()
+    {
+        Set(GameManager.Instance.LoadItemArrayFromJson(StringManager.ItemJsonPath, GameManager.Instance.data.name));
+    }
 
     public bool AddItem(Item item)
     {
         if (item.type == Define.ItemType.Gold)
         {
-            gold += item.itemPrice;
+            Gold = Gold + item.itemPrice;
 
             return true;
         }
@@ -207,7 +211,7 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        gold = data.gold;
+        Gold = data.gold;
 
         for (int i = 0; i < 37; i++)
         {

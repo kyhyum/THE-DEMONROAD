@@ -1871,7 +1871,6 @@ MonoBehaviour:
   - {fileID: 2016733804167851042}
   - {fileID: 6670079495750274435}
   - {fileID: 4804132920871211364}
-  iSlot: {fileID: 0}
   text: {fileID: 2677485087272168116}
 --- !u!222 &3203002714005260308
 CanvasRenderer:

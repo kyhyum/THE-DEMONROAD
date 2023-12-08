@@ -19,7 +19,7 @@ MonoBehaviour:
   <AttackPatternInfoDatas>k__BackingField:
   - <IsLongRanged>k__BackingField: 0
     <AttackName>k__BackingField: Attack1
-    <Damage>k__BackingField: 0
+    <Damage>k__BackingField: 10
     <ForceTransitionTime>k__BackingField: 0
     <Force>k__BackingField: 0
     <Dealing_Start_TransitionTime>k__BackingField: 0.148
@@ -27,7 +27,7 @@ MonoBehaviour:
     <AttackRange>k__BackingField: 5
   - <IsLongRanged>k__BackingField: 0
     <AttackName>k__BackingField: Attack2
-    <Damage>k__BackingField: 0
+    <Damage>k__BackingField: 15
     <ForceTransitionTime>k__BackingField: 0
     <Force>k__BackingField: 0
     <Dealing_Start_TransitionTime>k__BackingField: 0.157
@@ -35,7 +35,7 @@ MonoBehaviour:
     <AttackRange>k__BackingField: 10
   - <IsLongRanged>k__BackingField: 1
     <AttackName>k__BackingField: Attack3
-    <Damage>k__BackingField: 0
+    <Damage>k__BackingField: 15
     <ForceTransitionTime>k__BackingField: 0
     <Force>k__BackingField: 0
     <Dealing_Start_TransitionTime>k__BackingField: 0.4

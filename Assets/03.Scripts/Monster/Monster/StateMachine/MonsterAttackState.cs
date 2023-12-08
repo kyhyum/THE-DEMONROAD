@@ -38,20 +38,20 @@ public class MonsterAttackState : MonsterBaseState
         float normalizedTime = GetNormalizedTime(stateMachine.Monster.Animator, "Attack");
         if (normalizedTime < 1f)
         {
-            if (!alreadyAppliedDealing && normalizedTime >= stateMachine.Monster.Data.Dealing_Start_TransitionTime)
+            if (!alreadyAppliedDealing && normalizedTime >= stateMachine.Monster.Data.Dealing_Start_TransitionTime && normalizedTime < stateMachine.Monster.Data.Dealing_End_TransitionTime)
             {
-                stateMachine.Monster.Weapon.SetAttack(stateMachine.Monster.Data.Damage);
                 stateMachine.Monster.Weapon.gameObject.SetActive(true);
                 alreadyAppliedDealing = true;
             }else if (alreadyAppliedDealing && normalizedTime >= stateMachine.Monster.Data.Dealing_End_TransitionTime)
             {
-                stateMachine.Monster.Weapon.gameObject.SetActive(false);
                 alreadyAppliedDealing = false;
+                stateMachine.Monster.Weapon.gameObject.SetActive(false);
             }
 
         }
         else
         {
+            alreadyAppliedDealing = false;
             if (IsInAttackRange())
             {
                 stateMachine.ChangeState(stateMachine.AttackState);

@@ -24,6 +24,7 @@ public class UIManager : Singleton<UIManager>
     private Storage storage;
     private SkillUI skill;
     public QuickSlot[] quickSlots;
+    QuickSlotData[] data;
 
     private QuestLog questLog;
     private QuestProgress questProgress;
@@ -34,6 +35,7 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField] private AudioClip[] clips;
     [SerializeField] public PopUpUI popUpUI;
+    [SerializeField] private RecallSlot recallSlot;
     private AudioSource audioSource;
     public bool storageOpen => storageObj.activeSelf;
     private Vector2 pos;
@@ -42,15 +44,15 @@ public class UIManager : Singleton<UIManager>
     {
         base.Awake();
 
+        data = new QuickSlotData[5];
         quickSlots = new QuickSlot[5];
         EnableUI = new List<GameObject>();
         audioSource = GetComponent<AudioSource>();
-
-        CreateStorage();
-        CreateInventory();
+        /*CreateStorage();
+        CreateInventory();*/
         CreateSkill();
-        CreateQuestLog();
-        CreateQuestProgress();
+        /*CreateQuestLog();
+        CreateQuestProgress();*/
         CreateGameOver();
     }
 
@@ -65,15 +67,25 @@ public class UIManager : Singleton<UIManager>
 
     }
 
-    private void CreateInventory()
+    public void CreateInventory()
     {
+        if(inventoryObj != null)
+        {
+            return;
+        }
+
         inventoryObj = Instantiate(Resources.Load<GameObject>(StringManager.InventoryPrefabPath), canvas);
         inventory = inventoryObj.GetComponentInChildren<Inventory>();
         inventoryObj.SetActive(false);
     }
 
-    private void CreateStorage()
+    public void CreateStorage()
     {
+        if (storageObj != null)
+        {
+            return;
+        }
+
         storageObj = Instantiate(Resources.Load<GameObject>(StringManager.StroagePrefabPath), canvas);
         storage = storageObj.GetComponentInChildren<Storage>();
         storageObj.SetActive(false);
@@ -114,6 +126,19 @@ public class UIManager : Singleton<UIManager>
         gameOver = gameOverObj.GetComponentInChildren<GameOverUI>();
         gameOverObj.SetActive(false);
     }
+    public void DestroyInventoryUI()
+    {
+        if (storageObj == null)
+        {
+            return;
+        }
+        Destroy(inventoryObj);
+        Destroy(storageObj);
+        inventoryObj = null;
+        storageObj = null;
+        inventory = null;
+        storage = null;
+    }
 
     public void DestroyQuestUI()
     {
@@ -129,30 +154,40 @@ public class UIManager : Singleton<UIManager>
         questProgress = null;
     }
 
-    public void SetQuickSlot(QuickSlotData[] data)
+    public void DisableRecall()
     {
-        for (int i = 0; i < data.Length; i++)
-        {
-            if (data[i].index == -1)
-                continue;
-            Debug.Log(data[i].index);
+        recallSlot.Disable();
+    }
 
-            switch (data[i].type)
+    public void SetQuickSlot(QuickSlotData[] slotData)
+    {
+        if (slotData == null || slotData.Length == 0)
+        {
+            for(int i = 0; i < quickSlots.Length; i++)
+            {
+                quickSlots[i].SetSlot(null);
+            }
+            return;
+        }
+
+        for (int i = 0; i < slotData.Length; i++)
+        {
+            if (slotData[i].index == -1)
+                continue;
+
+            switch (slotData[i].type)
             {
                 case Define.QuickSlotType.Skill:
-                    if (inventory.inventorySlots[data[i].index].GetItem() is IUsable)
-                    {
-                        quickSlots[i].SetSlot((IUsable)skill.slots[data[i].index].GetSkill());
-
-                    }
+                    quickSlots[i].SetSlot((IUsable)skill.slots[slotData[i].index].GetSkill());
                     break;
                 case Define.QuickSlotType.Item:
-                    if (inventory.inventorySlots[data[i].index].GetItem() is IUsable)
+                    if (inventory.inventorySlots[slotData[i].index].GetItem() is IUsable)
                     {
-                        quickSlots[i].SetSlot((IUsable)inventory.inventorySlots[data[i].index].GetItem());
+                        quickSlots[i].SetSlot((IUsable)inventory.inventorySlots[slotData[i].index].GetItem());
                     }
                     break;
                 default:
+                    quickSlots[i].SetSlot(null);
                     break;
             }
         }
@@ -160,7 +195,6 @@ public class UIManager : Singleton<UIManager>
 
     public QuickSlotData[] GetQuickSlot()
     {
-        QuickSlotData[] data = new QuickSlotData[5];
         for (int i = 0; i < 5; i++)
         {
             IUsable usable = quickSlots[i].Get();
@@ -177,10 +211,9 @@ public class UIManager : Singleton<UIManager>
             }
             else
             {
-                data[i] = new QuickSlotData(Define.QuickSlotType.None, 0); ;
+                data[i] = new QuickSlotData(Define.QuickSlotType.None, 0);
             }
         }
-
         return data;
     }
 
@@ -260,7 +293,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void ActiveQuesProgress()
     {
-        ActiveUIGameObject(questProgressObj);
+        questProgressObj.SetActive(!questProgressObj.activeSelf);
     }
 
     private void ActiveQuestLog(InputAction.CallbackContext context)
@@ -331,7 +364,20 @@ public class UIManager : Singleton<UIManager>
             ActiveSettingWindow();
         }
     }
+    public void SceneLoadDisableUI()
+    {
+        ActivePlayerUI(false);
 
+        if (EnableUI.Count == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < EnableUI.Count; i++)
+        {
+            ActiveUIGameObject(EnableUI[i]);
+        }
+    }
     private void ActiveUIGameObject(GameObject gameObject)
     {
         if (EnableUI.Contains(gameObject))

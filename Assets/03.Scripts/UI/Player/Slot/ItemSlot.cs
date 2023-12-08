@@ -27,20 +27,28 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void SetItem(Item newItem)
     {
-        if (item is UseItem)
-        {
-            UseItem useItem = (UseItem)item;
-            useItem.OnCountChanged -= SetQuantity;
-        }
-
         if (newItem == null)
         {
             Clear();
             item = null;
             return;
         }
-
         item = newItem;
+
+        if (item is UseItem && !isClone)
+        {
+            UseItem useItem = (UseItem)item;
+            useItem.OnCountChanged += SetQuantity;
+        }
+        else if (item is UseItem)
+        {
+            UseItem useItem = (UseItem)item;
+            useItem.OnCountChanged -= SetQuantity;
+        }
+        else if(item is EquipItem)
+        {
+            EquipItem equipItem = (EquipItem)item;
+        }
 
         if (item is IStackable)
         {
@@ -49,12 +57,6 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         else
         {
             quantity.text = string.Empty;
-        }
-
-        if (item is UseItem && !isClone)
-        {
-            UseItem useItem = (UseItem)item;
-            useItem.OnCountChanged += SetQuantity;
         }
 
         icon.texture = item.texture;

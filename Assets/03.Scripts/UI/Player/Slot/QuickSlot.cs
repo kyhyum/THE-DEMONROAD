@@ -20,14 +20,20 @@ public class QuickSlot : MonoBehaviour
     private void Awake()
     {
         UIManager.Instance.quickSlots[slotID] = this;
-        SetSlot(null);
     }
-
+    private void OnEnable()
+    {
+        inputActionReference.action.Enable();
+        inputActionReference.action.started += Use;
+    }
     private void Start()
     {
         keyBinding.text = InputManager.GetBindingName(inputActionReference.action.name);
-        inputActionReference.action.Enable();
-        inputActionReference.action.started += Use;
+    }
+    private void OnDisable()
+    {
+        inputActionReference.action.Disable();
+        inputActionReference.action.started -= Use;
     }
 
     private void FixedUpdate()
@@ -44,6 +50,13 @@ public class QuickSlot : MonoBehaviour
 
     public void SetSlot(IUsable usable)
     {
+        if (usable == null)
+        {
+            SetAlpha(0);
+            this.usable = usable;
+            return;
+        }
+
         if (this.usable is AttackSkill)
         {
             AttackSkill skill = (AttackSkill)usable;
@@ -52,11 +65,7 @@ public class QuickSlot : MonoBehaviour
 
         this.usable = usable;
 
-        if (usable == null)
-        {
-            SetAlpha(0);
-            return;
-        }
+        
 
         if (usable is IStackable)
         {

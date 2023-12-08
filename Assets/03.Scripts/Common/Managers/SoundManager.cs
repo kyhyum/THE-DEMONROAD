@@ -6,6 +6,7 @@ public class SoundManager : Singleton<SoundManager>
 {
     [SerializeField] AudioSource bgmAudioSource;
     [SerializeField] AudioSource buttonClickSource;
+    [SerializeField] AudioSource itemSFXSource;
     [SerializeField] AudioMixer masterMixer;
     [SerializeField] Slider masterSlider;
     [SerializeField] Slider bgmSlider;
@@ -110,5 +111,9 @@ public class SoundManager : Singleton<SoundManager>
     public void ButtonClick()
     {
         buttonClickSource.Play();
+    }
+    public void ItemSFXPlay(AudioClip clip)
+    {
+        SFXPlay(itemSFXSource, clip);
     }
 }

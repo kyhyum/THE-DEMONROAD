@@ -40,6 +40,7 @@ public class ShopManager : Singleton<ShopManager>
     public Button selldecreaseCountBtn;
 
     private int itemCountToBuy = 1;
+    private int itemCountToSell = 1;
 
     Shop shop;
     ItemSO item;
@@ -151,7 +152,7 @@ public class ShopManager : Singleton<ShopManager>
                         default:
                             break;
                     }
-
+                    
                     inventory.Gold -= totalPrice;
                     confirmationPopUp.SetActive(false);
                 }
@@ -171,7 +172,7 @@ public class ShopManager : Singleton<ShopManager>
         {
             Debug.Log("Inventory가 null입니다.");
         }
-        itemCountToBuy = 1;
+        //itemCountToBuy = 1;
         UpdateItemCount();
     }
     public void SellItem(int slotIndex)
@@ -190,10 +191,10 @@ public class ShopManager : Singleton<ShopManager>
                 {
                     int sellPrice = itemSO.itemPrice;
 
-                    inventory.Gold += sellPrice *itemCountToBuy;
+                    inventory.Gold += sellPrice * itemCountToSell;
                     inventory.RemoveItem(slotIndex);
 
-                    Debug.Log(itemToSellName + "을(를) 판매했습니다. 획득한 골드: " + sellPrice);
+                    Debug.Log(itemToSellName + "을(를)" + itemCountToSell + "개 판매했습니다. 획득한 골드: " + sellPrice * itemCountToSell);
 
                     if (sellConfirmationPopup != null)
                     {
@@ -203,7 +204,7 @@ public class ShopManager : Singleton<ShopManager>
                     {
                         Debug.LogError("sellConfirmationPopup이 null입니다.");
                     }
-                    itemCountToBuy = 1;
+                    //itemCountToSell = 1;
                     UpdateItemCount();
                     return;
                 }
@@ -225,6 +226,7 @@ public class ShopManager : Singleton<ShopManager>
     {
         itemCountToBuy++;
         UpdateItemCount();
+        
     }
     public void DecreaseItemCount()
     {
@@ -240,25 +242,37 @@ public class ShopManager : Singleton<ShopManager>
             itemCountText.text = itemCountToBuy.ToString() + " 개";
 
         }
+        
 
     }
     public void IncreaseSellItemCount()
     {
-        itemCountToBuy++;
-        UpdateSellItemCount();
+        Debug.Log("현재판매가능: " + itemCountToSell);
+        Debug.Log(itemCountToBuy);
+        if (itemCountToSell < itemCountToBuy) 
+        {
+            itemCountToSell++;
+            UpdateSellItemCount();
+        }
+        else
+        {
+            Debug.Log("최대 판매 갯수에 도달했습니다.");
+            
+        }
     }
     public void DecreaseSellItemCount()
     {
 
-        itemCountToBuy = Mathf.Max(itemCountToBuy - 1, 1);
+        itemCountToSell = Mathf.Max(itemCountToSell - 1, 1);
         UpdateSellItemCount();
     }
     private void UpdateSellItemCount()
     {
         if(sellitemCountText != null)
         {
-            sellitemCountText.text = itemCountToBuy.ToString() + " 개";
+            sellitemCountText.text = itemCountToSell.ToString() + " 개";
         }
+        
     }
 
 

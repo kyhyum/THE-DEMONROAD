@@ -8,9 +8,7 @@ public class PlayerBaseState : IState
 {
     protected PlayerStateMachine stateMachine;
 
-
     RaycastHit hit;
-
     Vector3 destPosition;
     Vector3 direction;
     Quaternion lookTarget;
@@ -21,7 +19,6 @@ public class PlayerBaseState : IState
     [field: SerializeField] public float maxCamDistance = 25.0f;
     [field: SerializeField] float sensitivity = 1f;
 
-
     public PlayerBaseState(PlayerStateMachine playerStateMachine)
     {
         stateMachine = playerStateMachine;
@@ -29,7 +26,7 @@ public class PlayerBaseState : IState
 
     public virtual void Enter()
     {
-        AddInputActionsCallbacks();    
+        AddInputActionsCallbacks();
     }
 
     public virtual void Exit()
@@ -38,14 +35,13 @@ public class PlayerBaseState : IState
     }
     public virtual void Update()
     {
-        PerformedMove(); 
+        PerformedMove();
     }
 
     public virtual void PhysicsUpdate()
     {
-        
-    }
 
+    }
 
     public virtual void LateUpdate()
     {
@@ -63,7 +59,7 @@ public class PlayerBaseState : IState
     protected virtual void AddInputActionsCallbacks()
     {
         PlayerInput input = GameManager.Instance.player.Input;
-        
+
         input.PlayerActions.Move.started += OnMoveStarted;
         input.PlayerActions.Move.performed += OnMovePerformed;
         input.PlayerActions.Move.canceled += OnMoveCanceled;
@@ -74,7 +70,9 @@ public class PlayerBaseState : IState
 
         input.PlayerActions.MouseScrollY.performed += OnMouseScrollYPerformed;
         input.PlayerActions.MouseScrollClick.performed += OnMouseScrollClickPerformed;
-    } 
+        input.PlayerActions.Dodge.started += OnDodgeStarted;
+        input.PlayerActions.Dodge.canceled += OnDodgeCanceled;
+    }
 
     /// <summary>
     /// Remove
@@ -91,8 +89,11 @@ public class PlayerBaseState : IState
         input.PlayerActions.Attack.canceled -= OnAttackCanceled;
         input.PlayerActions.MouseScrollY.performed -= OnMouseScrollYPerformed;
         input.PlayerActions.MouseScrollClick.performed -= OnMouseScrollClickPerformed;
+        input.PlayerActions.Dodge.started -= OnDodgeStarted;
+        input.PlayerActions.Dodge.canceled -= OnDodgeCanceled;
     }
 
+    #region Move
     protected virtual void OnMoveStarted(InputAction.CallbackContext context)
     {
         //Debug.Log("OnMoveStarted 함수 호출한다.");
@@ -118,6 +119,9 @@ public class PlayerBaseState : IState
         player.IsMovePerformed = false;
     }
 
+    #endregion Move
+
+    #region Attack
     protected virtual void OnAttackPerformed(InputAction.CallbackContext context)
     {
         //Debug.Log("OnAttackPerformed 함수 호출한다.");
@@ -138,6 +142,11 @@ public class PlayerBaseState : IState
 
         player.IsAttacking = false;
     }
+
+    #endregion Attack
+
+
+    #region Scroll
     protected virtual void OnMouseScrollClickPerformed(InputAction.CallbackContext context)
     {
         Player player = GameManager.Instance.player;
@@ -146,6 +155,7 @@ public class PlayerBaseState : IState
             return;
 
         float inputValue = context.ReadValue<Vector2>().x;
+
         Debug.Log(inputValue);
         player.VirtualCamera.transform.rotation = Quaternion.Euler(45f, inputValue + player.VirtualCamera.transform.rotation.eulerAngles.y, 0f);
     }
@@ -159,7 +169,7 @@ public class PlayerBaseState : IState
         //Debug.Log("OnMouseScrollYPerformed 함수 호출한다.");
 
         cameraDistance = context.ReadValue<float>() * sensitivity;
-        
+
         //Debug.Log($"cameraDistance : {cameraDistance}");
 
         if (componentBase is CinemachineFramingTransposer)
@@ -174,7 +184,7 @@ public class PlayerBaseState : IState
 
                 framingTransposer.m_CameraDistance = Mathf.Clamp(currentCameraDistance, currentCameraDistance, changeCameraDistance);
             }
-            else if(cameraDistance < 0)
+            else if (cameraDistance < 0)
             {
                 changeCameraDistance = (changeCameraDistance + 5 <= maxCamDistance) ? changeCameraDistance + 5 : maxCamDistance;
 
@@ -182,6 +192,21 @@ public class PlayerBaseState : IState
             }
         }
     }
+
+    #endregion Scroll
+
+    #region Dodge
+    protected virtual void OnDodgeStarted(InputAction.CallbackContext context)
+    {
+        Move();
+        GameManager.Instance.player.IsDodging = true;
+    }
+    protected virtual void OnDodgeCanceled(InputAction.CallbackContext context)
+    {
+        GameManager.Instance.player.IsDodging = false;
+    }
+
+    #endregion Dodge
 
     /// <summary>
     /// 실제 이동하는 처리를 한다.
@@ -195,6 +220,9 @@ public class PlayerBaseState : IState
         {
             //Debug.Log($"hit.collider.name: {hit.collider.name}");
             //Debug.Log($"hit.point: {hit.point}");
+            
+            Player player = GameManager.Instance.player;
+
             destPosition = new Vector3(hits[0].point.x, player.transform.position.y, hits[0].point.z); 
             direction = destPosition - player.transform.position;
             lookTarget = Quaternion.LookRotation(direction);
@@ -223,8 +251,6 @@ public class PlayerBaseState : IState
         }
     }
 
-
-
     private void LateMove()
     {
         Player player = GameManager.Instance.player;
@@ -252,7 +278,7 @@ public class PlayerBaseState : IState
     {
         GameManager.Instance.player.Animator.SetBool(animationHash, true);
     }
-    
+
     protected void StopAnimation(int animationHash)
     {
         GameManager.Instance.player.Animator.SetBool(animationHash, false);

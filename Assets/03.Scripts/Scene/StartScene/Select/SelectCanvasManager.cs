@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.TextCore.Text;
+using System.Linq;
 
 public class SelectCanvasManager : Singleton<SelectCanvasManager>
 {
@@ -25,7 +26,9 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
     {
         if (Directory.Exists(StringManager.JsonPath))
         {
-            string[] jsons = Directory.GetFiles(StringManager.JsonPath, "*.json");
+            string[] jsons = Directory.GetFiles(StringManager.JsonPath, "*.json")
+                            .Where(file => !string.IsNullOrEmpty(Path.GetFileName(file)))
+                            .ToArray();
 
             if (jsons.Length > 0)
             {
@@ -156,6 +159,11 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
     }
     public void CreateCharacter(string name, PlayerData data)
     {
+        if(name.Length <= 1)
+        {
+            UIManager.Instance.ActivePopUpUI("캐릭터 생성", "이름은 최소 2자 입니다.", null);
+            return;
+        }
         if (name.Length > 6)
         {
             UIManager.Instance.ActivePopUpUI("캐릭터 생성", "이름은 최대 6자 까지입니다.", null);
@@ -186,7 +194,7 @@ public class SelectCanvasManager : Singleton<SelectCanvasManager>
             Debug.Log("캐릭터를 선택해주세요");
             return;
         }
-        characterSlots[selectedSlot].DeleteCharacter();
+        characterSlots[selectedSlot].DeleteButton();
     }
     public void DeleteCharacter(PlayerData data)
     {
