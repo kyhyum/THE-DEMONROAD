@@ -220,8 +220,6 @@ public class PlayerBaseState : IState
         {
             //Debug.Log($"hit.collider.name: {hit.collider.name}");
             //Debug.Log($"hit.point: {hit.point}");
-            
-            Player player = GameManager.Instance.player;
 
             destPosition = new Vector3(hits[0].point.x, player.transform.position.y, hits[0].point.z); 
             direction = destPosition - player.transform.position;
