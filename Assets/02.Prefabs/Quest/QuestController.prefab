@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1837dd30fb6774799f4d1e0feda82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questLogPanel: {fileID: 0}
-  questProgressPanel: {fileID: 0}
-  completeUI: {fileID: 0}
+  completeUI: {fileID: 1702599107392067099, guid: 53790ee4c83b2834cb3735df0b79453b,
+    type: 3}
   fadeDuration: 1
