@@ -24,7 +24,7 @@ public class QuestBoard : MonoBehaviour
 
     //메인퀘스트 관련
     private ChoiceDungeon choiceDungeon;
-    public QuestController qcontroller;
+    //public QuestController qcontroller;
 
 
     public List<QuestSO> Quests { get { return quests; } }

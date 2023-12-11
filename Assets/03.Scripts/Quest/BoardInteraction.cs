@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardInteraction : MonoBehaviour
@@ -7,6 +5,8 @@ public class BoardInteraction : MonoBehaviour
     
     public GameObject questUI;
     public GameObject interactionPop;
+    public GameObject acceptPopup;
+    public GameObject cancelPopup;
     
 
     private bool isUIVisible = false;
@@ -43,6 +43,12 @@ public class BoardInteraction : MonoBehaviour
             questUI.SetActive(false);
             interactionPop.SetActive(false);
             
+        }
+
+        if(distance >= activationDistance)
+        {
+            acceptPopup.SetActive(false);
+            cancelPopup.SetActive(false);
         }
     }
 }

@@ -8198,6 +8198,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questUI: {fileID: 1995877989}
   interactionPop: {fileID: 289769704}
+  acceptPopup: {fileID: 1171808132718077147}
+  cancelPopup: {fileID: 1171808132718077146}
   activationDistance: 5
 --- !u!1001 &200751750
 PrefabInstance:
@@ -97287,6 +97289,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuestBoardUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4568075361985477481, guid: 090173fcc3e500840b3b85ba272874a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5259388774087203770, guid: 090173fcc3e500840b3b85ba272874a3,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -97322,11 +97329,28 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6394569703827096072, guid: 090173fcc3e500840b3b85ba272874a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 090173fcc3e500840b3b85ba272874a3, type: 3}
+--- !u!1 &1171808132718077146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4568075361985477481, guid: 090173fcc3e500840b3b85ba272874a3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1171808132718077145}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1171808132718077147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6394569703827096072, guid: 090173fcc3e500840b3b85ba272874a3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1171808132718077145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7776284355294811907
 PrefabInstance:
   m_ObjectHideFlags: 0
