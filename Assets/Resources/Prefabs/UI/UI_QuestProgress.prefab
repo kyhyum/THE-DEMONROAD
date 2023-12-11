@@ -932,6 +932,8 @@ MonoBehaviour:
   questProgInfinitemonsterName: {fileID: 2933715130458776758}
   questProgmainName: {fileID: 2987962315908614648}
   board: {fileID: 3355939698923844257, guid: 090173fcc3e500840b3b85ba272874a3, type: 3}
+  controller: {fileID: 8243316258452708899, guid: 6ee9113740e1c6546aa32e33a0c72e35,
+    type: 3}
 --- !u!1 &9036748599202550582
 GameObject:
   m_ObjectHideFlags: 0

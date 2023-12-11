@@ -7,6 +7,7 @@ public class BoardInteraction : MonoBehaviour
     
     public GameObject questUI;
     public GameObject interactionPop;
+    
 
     private bool isUIVisible = false;
     Transform player;
@@ -41,6 +42,7 @@ public class BoardInteraction : MonoBehaviour
             
             questUI.SetActive(false);
             interactionPop.SetActive(false);
+            
         }
     }
 }
