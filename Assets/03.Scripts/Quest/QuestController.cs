@@ -6,74 +6,63 @@ public class QuestController : MonoBehaviour
     
     public GameObject completeUI; 
 
-    public float fadeDuration = 1f; 
+    public float fadeDuration = 1f;
 
+    private Coroutine fadeInCoroutine;
+    private Coroutine fadeOutCoroutine;
     
 
     private void Start()
     {
-        
-
-        if (gameObject.activeSelf && completeUI != null && completeUI.activeSelf)
+        if (completeUI != null && completeUI.activeSelf)
         {
-            completeUI.SetActive(false); 
+            completeUI.SetActive(false);
         }
     }
     
     
     public void ShowPopup()
     {
-        if (gameObject.activeSelf)
+        if (gameObject.activeSelf && fadeInCoroutine == null)
         {
-            StartCoroutine(FadeIn());
+            fadeInCoroutine = StartCoroutine(FadeIn());
         }
     }
 
     public void HidePopup()
     {
-        if (gameObject.activeSelf)
+        if (gameObject.activeSelf && fadeOutCoroutine == null)
         {
-            StartCoroutine(FadeOut());
+            fadeOutCoroutine = StartCoroutine(FadeOut());
         }
     }
 
     IEnumerator FadeIn()
     {
-        if (gameObject.activeSelf)
-        {
-            completeUI.SetActive(true);
-            CanvasGroup canvasGroup = completeUI.GetComponent<CanvasGroup>();
-            canvasGroup.alpha = 0f;
+        completeUI.SetActive(true);
+        CanvasGroup canvasGroup = completeUI.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0f;
 
-            while (canvasGroup.alpha < 1)
-            {
-                canvasGroup.alpha += Time.deltaTime / fadeDuration;
-                yield return null;
-            }
-        }
-        else
+        while (canvasGroup.alpha < 1)
         {
-            Debug.LogWarning("QuestController is inactive. Cannot start coroutine.");
+            canvasGroup.alpha += Time.deltaTime / fadeDuration;
+            yield return null;
         }
+
+        fadeInCoroutine = null;
     }
 
     IEnumerator FadeOut()
     {
-        if (gameObject.activeSelf)
-        {
-            CanvasGroup canvasGroup = completeUI.GetComponent<CanvasGroup>();
+        CanvasGroup canvasGroup = completeUI.GetComponent<CanvasGroup>();
 
-            while (canvasGroup.alpha > 0)
-            {
-                canvasGroup.alpha -= Time.deltaTime / fadeDuration;
-                yield return null;
-            }
-
-            completeUI.SetActive(false);
-        }
-        else
+        while (canvasGroup.alpha > 0)
         {
-            Debug.LogWarning("QuestController is inactive. Cannot start coroutine.");
+            canvasGroup.alpha -= Time.deltaTime / fadeDuration;
+            yield return null;
         }
+
+        completeUI.SetActive(false);
+        fadeOutCoroutine = null;
     }
 }

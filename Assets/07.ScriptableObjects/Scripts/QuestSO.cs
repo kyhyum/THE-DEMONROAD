@@ -13,5 +13,7 @@ public class QuestSO : ScriptableObject
     [field: SerializeField] public string questReward { get; private set; }
     [field: SerializeField] public int questRewardCoin { get; private set; }
 
+    [field: SerializeField] public bool isCompleted = false;
+
     public List<NPCSO> relatedNPCs = new List<NPCSO>();
 }

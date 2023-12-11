@@ -91,14 +91,19 @@ public class QuestBoard : MonoBehaviour
         {
             if (choiceDungeon != null && choiceDungeon.IsDungeonInteractionPopupActive())
             {
-                Debug.Log("UpdateMainQuest이 null이 아니다");
+                if (IsQuestAlreadyAccepted(selectedQuest)&& !selectedQuest.isCompleted)
+                {
+                    Debug.Log("UpdateMainQuest이 null이 아니다");
 
-                questProgress.questProgmainName.color = Color.red;
-                questProgress.questProgmainName.fontStyle |= FontStyles.Italic;
-                questProgress.questProgmainName.fontStyle |= FontStyles.Strikethrough;
+                    questProgress.questProgmainName.color = Color.red;
+                    questProgress.questProgmainName.fontStyle |= FontStyles.Italic;
+                    questProgress.questProgmainName.fontStyle |= FontStyles.Strikethrough;
 
-                questProgress.questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;
-                questProgress.MainQuestReward(selectedQuest);
+                    questProgress.questProgmainName.text = selectedQuest.questName + "\n - " + "1 / " + selectedQuest.questComplete;
+                    questProgress.MainQuestReward(selectedQuest);
+
+                    selectedQuest.isCompleted = true;
+                }
                 
             }
         }
