@@ -13,7 +13,9 @@ public class TutorialNPC : MonoBehaviour
     public List<QuestSO> quest;
 
     public GameObject dialogueUI;
+    public GameObject navUI;
     [SerializeField] GameObject npcCanvas;
+    
 
     [SerializeField] Button acceptButton;
     [SerializeField] Button cancelButton;
@@ -225,6 +227,7 @@ public class TutorialNPC : MonoBehaviour
                 break;
             case 7:
                 QuestAccept(quest[2]);
+                navUI.SetActive(true);
                 break;
             case 8:
                 QuestAccept(quest[3]);
