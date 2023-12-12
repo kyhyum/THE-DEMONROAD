@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
-using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
 public class QuestProgress : MonoBehaviour
