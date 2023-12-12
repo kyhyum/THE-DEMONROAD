@@ -239,11 +239,4 @@ public class Inventory : MonoBehaviour
             UIManager.Instance.ActiveInventory();
         }
     }
-
-    public void ClickUI()
-    {
-        UIManager.Instance.ClickInventory();
-    }
-
-
 }

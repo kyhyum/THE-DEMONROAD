@@ -6,8 +6,8 @@ public class EquipItem : Item
 {
     public Define.EquipItemType equipType;
     public List<Option> options;
-    public float Attack;
-    public float Deffence;
+    public float attack;
+    public float deffence;
     public EquipItem(ItemSO itemSO) : base(itemSO)
     {
         options = new List<Option>();
@@ -22,8 +22,8 @@ public class EquipItem : Item
                 options.Add(option);
             }
 
-            Attack = equipItemSO.Attack;
-            Deffence = equipItemSO.Deffence;
+            attack = equipItemSO.attack;
+            deffence = equipItemSO.deffence;
         }
     }
 

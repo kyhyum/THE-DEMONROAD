@@ -7,8 +7,8 @@ public class EquipItemSO : ItemSO
 {
     public Define.EquipItemType equipType;
     public List<Option> options;
-    public float Attack;
-    public float Deffence;
+    public float attack;
+    public float deffence;
 
     public override GameObject CreateItem()
     {
