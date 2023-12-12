@@ -74,17 +74,17 @@ public class GameManager : Singleton<GameManager>
     public void SavePlayerDataToJson(string jsonPath, string characterName, PlayerData data)
     {
         string jsonData = JsonUtility.ToJson(data, true);
-        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
-        string encodingJson = System.Convert.ToBase64String(bytes);
+        string encryptedJson = AESManager.EncryptString(jsonData);
         string directoryPath = Path.GetDirectoryName(jsonPath);
 
         if (!Directory.Exists(directoryPath))
         {
             Directory.CreateDirectory(directoryPath);
         }
+
         string path = Path.Combine(jsonPath, $"{characterName}.json");
 
-        File.WriteAllText(path, encodingJson);
+        File.WriteAllText(path, encryptedJson);
     }
 
     public PlayerData LoadPlayerDataFromJson(string jsonPath, string characterName)
@@ -93,10 +93,9 @@ public class GameManager : Singleton<GameManager>
 
         if (File.Exists(path))
         {
-            string jsonData = File.ReadAllText(path);
-            byte[] bytes = System.Convert.FromBase64String(jsonData);
-            string decodingJson = System.Text.Encoding.UTF8.GetString(bytes);
-            return JsonUtility.FromJson<PlayerData>(decodingJson);
+            string encryptedJson = File.ReadAllText(path);
+            string jsonData = AESManager.DecryptString(encryptedJson);
+            return JsonUtility.FromJson<PlayerData>(jsonData);
         }
         else
         {
