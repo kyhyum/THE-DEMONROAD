@@ -6,34 +6,40 @@ public class QuestController : MonoBehaviour
     
     public GameObject completeUI; 
 
-    public float fadeDuration = 1f; 
+    public float fadeDuration = 1f;
 
+    private Coroutine fadeInCoroutine;
+    private Coroutine fadeOutCoroutine;
     
 
     private void Start()
     {
-        
-
-        if (completeUI.activeSelf)
+        if (completeUI != null && completeUI.activeSelf)
         {
-            completeUI.SetActive(false); 
+            completeUI.SetActive(false);
         }
     }
     
     
     public void ShowPopup()
     {
-        StartCoroutine(FadeIn());
+        if (gameObject.activeSelf && fadeInCoroutine == null)
+        {
+            fadeInCoroutine = StartCoroutine(FadeIn());
+        }
     }
 
     public void HidePopup()
     {
-        StartCoroutine(FadeOut());
+        if (gameObject.activeSelf && fadeOutCoroutine == null)
+        {
+            fadeOutCoroutine = StartCoroutine(FadeOut());
+        }
     }
 
     IEnumerator FadeIn()
     {
-        completeUI.SetActive(true); 
+        completeUI.SetActive(true);
         CanvasGroup canvasGroup = completeUI.GetComponent<CanvasGroup>();
         canvasGroup.alpha = 0f;
 
@@ -42,6 +48,8 @@ public class QuestController : MonoBehaviour
             canvasGroup.alpha += Time.deltaTime / fadeDuration;
             yield return null;
         }
+
+        fadeInCoroutine = null;
     }
 
     IEnumerator FadeOut()
@@ -54,6 +62,7 @@ public class QuestController : MonoBehaviour
             yield return null;
         }
 
-        completeUI.SetActive(false); 
+        completeUI.SetActive(false);
+        fadeOutCoroutine = null;
     }
 }

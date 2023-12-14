@@ -306,16 +306,17 @@ public class UIManager : Singleton<UIManager>
         ActiveUIGameObject(popUpUI.gameObject);
         popUpUI.OpenPopUpUI(title, explan, action);
     }
+    public void ActivePopUpUI()
+    {
+        ActiveUIGameObject(popUpUI.gameObject);
+    }
 
     public void ActivePlayerUI(bool flag)
     {
         playerUIObj.SetActive(flag);
     }
 
-    public void ActivePopUpUI()
-    {
-        ActiveUIGameObject(popUpUI.gameObject);
-    }
+    
 
     public void ActiveStorage()
     {

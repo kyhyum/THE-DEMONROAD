@@ -10,6 +10,7 @@ public class TutorialMob : MonoBehaviour
         if(collider == GameManager.Instance.player.WeaponCollider)
         {
             npc.QuestClear(npc.quest[2]);
+            npc.navUI.SetActive(false);
         }
     }
 }

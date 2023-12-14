@@ -4,7 +4,14 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+public enum TutorialQuest
+{
+    Talk = 2,
+    Quest,
+    Attack = 5,
+    Setting = 9,
+    Finiish = 12
+}
 public class TutorialNPC : MonoBehaviour
 {
     Transform player;
@@ -13,7 +20,9 @@ public class TutorialNPC : MonoBehaviour
     public List<QuestSO> quest;
 
     public GameObject dialogueUI;
+    public GameObject navUI;
     [SerializeField] GameObject npcCanvas;
+    
 
     [SerializeField] Button acceptButton;
     [SerializeField] Button cancelButton;
@@ -31,6 +40,7 @@ public class TutorialNPC : MonoBehaviour
     float distance;
 
     const float textDelay = 0.05f;
+    const float invokeDelay = 0.5f;
 
     int lastTalkIndex;
 
@@ -104,6 +114,7 @@ public class TutorialNPC : MonoBehaviour
             }
         }
     }
+    #region NpcSystem
     private IEnumerator textPrint()
     {
         if (talkIndex >= npc.npcDialogue.Length)
@@ -124,7 +135,7 @@ public class TutorialNPC : MonoBehaviour
             dialogueText.text += npc.npcDialogue[talkIndex][i].ToString();
             yield return new WaitForSeconds(textDelay);
         }
-        Invoke("UISetActive", 0.5f);
+        Invoke("UISetActive", invokeDelay);
 
         if (talkIndex == 12)
         {
@@ -135,7 +146,7 @@ public class TutorialNPC : MonoBehaviour
     }
     public void ClickTalk()
     {
-        if (talkIndex == 12)
+        if (talkIndex == (int)TutorialQuest.Finiish)
         {
             return;
         }
@@ -146,7 +157,8 @@ public class TutorialNPC : MonoBehaviour
         }
         else
         {
-            if (talkIndex == 2 || talkIndex == 3 || (talkIndex >= 5 && talkIndex <= 9))
+            if (talkIndex == (int)TutorialQuest.Talk || talkIndex == (int)TutorialQuest.Quest || 
+                (talkIndex >= (int)TutorialQuest.Attack && talkIndex <= (int)TutorialQuest.Setting))
             {
                 return;
             }
@@ -164,7 +176,7 @@ public class TutorialNPC : MonoBehaviour
         talkCoroutine = null;
         dialogueText.text = npc.npcDialogue[talkIndex];
 
-        Invoke("UISetActive", 0.5f);
+        Invoke("UISetActive", invokeDelay);
     }
     void UISetActive()
     {
@@ -202,12 +214,13 @@ public class TutorialNPC : MonoBehaviour
         dialogueUI.SetActive(active);
         UIManager.Instance.ActivePlayerUI(!active);
     }
+    #endregion NpcSystem
     private void ButtonSetActive(bool active)
     {
         acceptButton.gameObject.SetActive(active);
         cancelButton.gameObject.SetActive(active);
     }
-
+    #region QuestSystem
     private void Accept()
     {
         switch (talkIndex)
@@ -225,6 +238,7 @@ public class TutorialNPC : MonoBehaviour
                 break;
             case 7:
                 QuestAccept(quest[2]);
+                navUI.SetActive(true);
                 break;
             case 8:
                 QuestAccept(quest[3]);
@@ -287,4 +301,5 @@ public class TutorialNPC : MonoBehaviour
     {
         data.acceptQuest.Remove(quest);
     }
+    #endregion QuestSystem
 }

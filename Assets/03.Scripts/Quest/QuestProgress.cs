@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
 public class QuestProgress : MonoBehaviour
@@ -15,7 +14,7 @@ public class QuestProgress : MonoBehaviour
     public TMP_Text questProgmainName;
 
     public QuestBoard board;
-    private QuestController controller;
+    public QuestController controller;
     
     void OnEnable()
     {
@@ -44,19 +43,20 @@ public class QuestProgress : MonoBehaviour
                 questProgmonsterName.fontStyle |= FontStyles.Italic;
                 questProgmonsterName.fontStyle |= FontStyles.Strikethrough;
 
+                MonsterQuestReward(quest);
             }
         }
-        else if (quest.questType == Define.QuestType.InfiniteMonsterQuest)
-        {
-            questProgInfinitemonsterName.text = quest.questName + "\n - " + goblinKills + " / " + quest.questComplete;
+        //else if (quest.questType == Define.QuestType.InfiniteMonsterQuest)
+        //{
+        //    questProgInfinitemonsterName.text = quest.questName + "\n - " + goblinKills + " / " + quest.questComplete;
 
-            if (goblinKills >= quest.questComplete)
-            {
-                questProgInfinitemonsterName.color = Color.red;
-                questProgInfinitemonsterName.fontStyle |= FontStyles.Italic;
-                questProgInfinitemonsterName.fontStyle |= FontStyles.Strikethrough;
-            }
-        }
+        //    if (goblinKills >= quest.questComplete)
+        //    {
+        //        questProgInfinitemonsterName.color = Color.red;
+        //        questProgInfinitemonsterName.fontStyle |= FontStyles.Italic;
+        //        questProgInfinitemonsterName.fontStyle |= FontStyles.Strikethrough;
+        //    }
+        //}
 
 
     }
@@ -82,11 +82,7 @@ public class QuestProgress : MonoBehaviour
             int goblinKills = GameManager.Instance.goblinkillCount;
 
             questProgmonsterName.text = selectedquest.questName + "\n - " + goblinKills + " / " + selectedquest.questComplete;
-            if (goblinKills >= selectedquest.questComplete)
-            {
-                MonsterQuestReward(selectedquest);
-
-            }
+            
 
         }
         else if (selectedquest.questType == Define.QuestType.InfiniteMonsterQuest) 
@@ -110,11 +106,9 @@ public class QuestProgress : MonoBehaviour
 
         }
     }
-
-
-    public void MainQuestReward(QuestSO selectedQuest)
+    public void CompletePopup()
     {
-        Debug.Log("mainquest리워드를 받습니다");
+        Debug.Log("CompletePop 불림");
         if (controller != null)
         {
             controller.ShowPopup();
@@ -125,6 +119,14 @@ public class QuestProgress : MonoBehaviour
         {
             Debug.Log("Null입니다");
         }
+    }
+
+
+    public void MainQuestReward(QuestSO selectedQuest)
+    {
+        Debug.Log("mainquest리워드를 받습니다");
+
+        CompletePopup();
         if (selectedQuest != null)
         {
             if (selectedQuest.questType == Define.QuestType.MainQuest)
@@ -135,6 +137,7 @@ public class QuestProgress : MonoBehaviour
                 {
                     inventory.Gold += selectedQuest.questRewardCoin;
                     Debug.Log(selectedQuest.questName + "보상으로 " + selectedQuest.questRewardCoin + "개의 금화를 획득했습니다!");
+
                 }
                 else
                 {
@@ -155,16 +158,8 @@ public class QuestProgress : MonoBehaviour
     }
     public void MonsterQuestReward(QuestSO selectedQuest)
     {
-        if (controller != null)
-        {
-            controller.ShowPopup();
-            controller.Invoke("HidePopup", 2f);
-
-        }
-        else if (controller == null)
-        {
-            Debug.Log("Null입니다");
-        }
+        Debug.Log("MonsterQuestreward를 받는다");
+        CompletePopup();
 
         if (selectedQuest != null)
         {
@@ -184,7 +179,7 @@ public class QuestProgress : MonoBehaviour
             }
             else
             {
-                Debug.Log("MainQuest가 아닙니다.");
+                Debug.Log("MonsterQuest가 아닙니다.");
             }
         }
         else
@@ -194,16 +189,7 @@ public class QuestProgress : MonoBehaviour
     }
     public void InfiniteMonsterQuestReward(QuestSO selectedQuest)
     {
-        if (controller != null)
-        {
-            controller.ShowPopup();
-            controller.Invoke("HidePopup", 2f);
-
-        }
-        else if (controller == null)
-        {
-            Debug.Log("Null입니다");
-        }
+        CompletePopup();
 
         if (selectedQuest != null)
         {
